@@ -1,17 +1,15 @@
-// src/App.jsx
+// src/backups/pure_minimal/App.jsx (Backup 240408)
 import React, { useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route, Link, useLocation } from 'react-router-dom';
 import { FaInstagram, FaYoutube, FaSoundcloud } from 'react-icons/fa';
 import './index.css';
 
-import Home from './pages/Home';
-import Members from './pages/Members';
-import Music from './pages/Music';
-import History from './pages/History';
-import PhotoSorterTool from './pages/PhotoSorterTool';
+import Home from '../../pages/Home';
+import Members from '../../pages/Members';
+import Music from '../../pages/Music';
+import History from '../../pages/History';
+import PhotoSorterTool from '../../pages/PhotoSorterTool';
 
-// Pexels 대신 통신 에러가 단 한 번도 나지 않는 유튜브를 사용합니다!
-// Lofi 밴드음악 스트리밍(항상 라이브중) 또는 분위기있는 공연 영상을 iframe으로 겁니다.
 const YOUTUBE_VIDEO_ID = "jfKfPfyJRdk"; 
 
 function Navigation() {
@@ -58,7 +56,6 @@ function MainPage() {
 
   return (
     <>
-      {/* 📌 Pexels CORS 차단을 회피하는 유튜브 iframe 배경 */}
       <div className="youtube-bg-container">
         <iframe 
           src={`https://www.youtube.com/embed/${YOUTUBE_VIDEO_ID}?autoplay=1&mute=1&controls=0&showinfo=0&rel=0&loop=1&playlist=${YOUTUBE_VIDEO_ID}`} 
@@ -68,19 +65,15 @@ function MainPage() {
         </iframe>
       </div>
 
-      {/* 실질적인 페이지 컨텐츠 */}
       <div style={{ position: 'relative', zIndex: 10 }}>
         <div id="home"><Home /></div>
         <div id="members"><Members /></div>
         <div id="music"><Music /></div>
         <div id="history"><History /></div>
         
-        {/* 아주 미니멀한 퓨어 화이트 풋터 */}
         <footer id="contact" style={{ backgroundColor: '#ffffff', borderTop: '1px solid #000', color: '#000', textAlign: 'center', padding: '8rem 2rem 5rem' }}>
-          
           <h2 style={{ fontSize: '3rem', letterSpacing: '2px', marginBottom: '1rem', fontWeight: 900, textTransform: 'uppercase' }}>MAGPIENTIGER<span style={{color: 'var(--primary-orange)'}}>.</span></h2>
           <p style={{ color: 'var(--text-muted)', fontSize: '1.2rem', marginBottom: '5rem', fontWeight: 400 }}>우리의 다음 무대를 기대해 주세요.</p>
-          
           <div style={{ display: 'inline-block', padding: '3rem 5rem', marginBottom: '5rem', textAlign: 'left', border: '1px solid #000', backgroundColor: '#fff' }}>
             <h3 style={{ color: '#000', fontSize: '1.1rem', marginBottom: '2rem', letterSpacing: '2px', fontWeight: 800, textTransform: 'uppercase' }}>
               <span style={{display: 'inline-block', width: '8px', height: '8px', backgroundColor: 'var(--primary-orange)', marginRight: '10px', verticalAlign: 'middle'}}></span>
@@ -93,7 +86,6 @@ function MainPage() {
               ✉️ size132@naver.com
             </p>
           </div>
-
           <p style={{ color: 'var(--text-muted)', fontSize: '0.9rem', fontWeight: 400 }}>© 2025 Magpientiger. All rights reserved.</p>
         </footer>
       </div>
