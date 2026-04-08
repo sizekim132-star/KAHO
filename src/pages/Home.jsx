@@ -2,10 +2,10 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-// 💡 마법의 엔드포인트(/@fs/)를 통해 AI가 생성한 외부 폴더의 이미지를 억지로 끌고 들어옵니다.
-const MINHWA_IMG_URL = "/@fs/C:/Users/PC2506/.gemini/antigravity/brain/0aafa077-c4b7-4c2b-83a4-84810761697a/minhwa_illustration_tiger_1775633197100.png";
+import minhwaImg from '../assets/minhwa_tiger.png';
 
 export default function Home() {
+  const MINHWA_IMG_URL = minhwaImg;
   return (
     <main style={{ backgroundColor: 'transparent' }}>
       
