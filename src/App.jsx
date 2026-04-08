@@ -20,29 +20,31 @@ function Navigation() {
 
   return (
     <nav style={{ 
-      padding: 'max(1.5vw, 16px) var(--spacing-main)', display: 'flex', justifyContent: 'space-between', 
+      padding: '1.5rem var(--spacing-main)', display: 'flex', justifyContent: 'space-between', 
       alignItems: 'center', position: 'sticky', top: 0, zIndex: 1000, 
-      backgroundColor: '#ffffff', borderBottom: '1px solid #e5e5e5' 
+      backgroundColor: '#ffffff', borderBottom: '1px solid #000' 
     }}>
-      <a href="#home">
-        <h2 style={{ fontSize: '1.4rem', fontWeight: 900, letterSpacing: '-0.05em', display: 'flex', alignItems: 'center', gap: '0.5rem', color: '#000' }}>
-          MAGPIENTIGER<span style={{color: 'var(--primary-orange)'}}>.</span>
+      {/* 1번 레퍼런스 로고 스타일 */}
+      <a href="#home" style={{ flex: 1 }}>
+        <h2 style={{ fontSize: '1.2rem', fontWeight: 900, color: '#000', letterSpacing: '2px', textTransform: 'uppercase' }}>
+          MAGPIE & TIGER
         </h2>
       </a>
       
-      <div style={{ display: 'flex', gap: '3rem', alignItems: 'center', fontWeight: 600, color: '#000', fontSize: '0.95rem', letterSpacing: '1px', textTransform: 'uppercase' }}>
-        <a href="#members" style={{ transition: 'color 0.2s' }} onMouseOver={e=>e.target.style.color='var(--primary-orange)'} onMouseOut={e=>e.target.style.color='#000'}>Members</a>
-        <a href="#music" style={{ transition: 'color 0.2s' }} onMouseOver={e=>e.target.style.color='var(--primary-orange)'} onMouseOut={e=>e.target.style.color='#000'}>Music</a>
-        <a href="#history" style={{ transition: 'color 0.2s' }} onMouseOver={e=>e.target.style.color='var(--primary-orange)'} onMouseOut={e=>e.target.style.color='#000'}>History</a>
-        <Link to="/sorter" style={{ color: 'var(--primary-orange)', fontWeight: 800 }}>Admin</Link>
-        
-        <div style={{ width: '1px', height: '16px', backgroundColor: '#e5e5e5', margin: '0 0.5rem' }}></div>
+      {/* 중앙 네비게이션 메뉴 */}
+      <div style={{ display: 'flex', gap: '2.5rem', alignItems: 'center', fontWeight: 800, color: '#000', fontSize: '0.85rem', letterSpacing: '1px', textTransform: 'uppercase', flex: 2, justifyContent: 'center' }}>
+        <a href="#home" style={{ borderBottom: '2px solid #000', paddingBottom: '2px' }}>Home</a>
+        <a href="#music" style={{ transition: 'opacity 0.2s', opacity: 0.6 }} onMouseOver={e=>e.target.style.opacity='1'} onMouseOut={e=>e.target.style.opacity='0.6'}>Music</a>
+        <a href="#history" style={{ transition: 'opacity 0.2s', opacity: 0.6 }} onMouseOver={e=>e.target.style.opacity='1'} onMouseOut={e=>e.target.style.opacity='0.6'}>Tour</a>
+        <Link to="/sorter" style={{ transition: 'opacity 0.2s', opacity: 0.6 }} onMouseOver={e=>e.target.style.opacity='1'} onMouseOut={e=>e.target.style.opacity='0.6'}>Store</Link>
+        <a href="#contact" style={{ transition: 'opacity 0.2s', opacity: 0.6 }} onMouseOver={e=>e.target.style.opacity='1'} onMouseOut={e=>e.target.style.opacity='0.6'}>About</a>
+      </div>
 
-        <div style={{ display: 'flex', gap: '1.5rem', alignItems: 'center' }}>
-          <a href="https://www.instagram.com/magpientiger/" target="_blank" rel="noreferrer" style={{color: '#000', transition: 'color 0.2s'}} onMouseOver={e=>e.currentTarget.style.color='#E1306C'} onMouseOut={e=>e.currentTarget.style.color='#000'}><FaInstagram size={20} /></a>
-          <a href="https://www.youtube.com/@magpientiger" target="_blank" rel="noreferrer" style={{color: '#000', transition: 'color 0.2s'}} onMouseOver={e=>e.currentTarget.style.color='#FF0000'} onMouseOut={e=>e.currentTarget.style.color='#000'}><FaYoutube size={22} /></a>
-          <a href="https://soundcloud.com/size_kim" target="_blank" rel="noreferrer" style={{color: '#000', transition: 'color 0.2s'}} onMouseOver={e=>e.currentTarget.style.color='#FF5500'} onMouseOut={e=>e.currentTarget.style.color='#000'}><FaSoundcloud size={28} /></a>
-        </div>
+      {/* 우측 포인트 버튼 */}
+      <div style={{ flex: 1, display: 'flex', justifyContent: 'flex-end' }}>
+        <button className="btn btn-primary" style={{ padding: '10px 24px', fontSize: '0.8rem' }}>
+          Listen Now
+        </button>
       </div>
     </nav>
   );
