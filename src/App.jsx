@@ -1,65 +1,57 @@
 // src/App.jsx
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import { FaInstagram, FaYoutube, FaSoundcloud } from 'react-icons/fa';
 import './index.css';
 import Home from './pages/Home';
 import PhotoSorterTool from './pages/PhotoSorterTool';
 
-function Navigation() {
-  const location = useLocation();
+const LINKS = [
+  { label: 'About',   href: '#about' },
+  { label: 'Music',   href: '#music' },
+  { label: 'Members', href: '#members' },
+  { label: 'Shows',   href: '#shows' },
+  { label: 'Contact', href: '#contact' },
+];
+
+function Nav() {
+  const { pathname } = useLocation();
   const [scrolled, setScrolled] = useState(false);
-
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 20);
-    window.addEventListener('scroll', onScroll);
-    return () => window.removeEventListener('scroll', onScroll);
+    const fn = () => setScrolled(window.scrollY > 10);
+    window.addEventListener('scroll', fn);
+    return () => window.removeEventListener('scroll', fn);
   }, []);
-
-  if (location.pathname === '/sorter') return null;
-
-  const links = [
-    { label: 'Home', href: '#home' },
-    { label: 'Music', href: '#music' },
-    { label: 'Members', href: '#members' },
-    { label: 'History', href: '#history' },
-    { label: 'Contact', href: '#contact' },
-  ];
+  if (pathname === '/sorter') return null;
 
   return (
-    <nav className="nav" style={{ boxShadow: scrolled ? '0 2px 24px rgba(15,23,42,0.07)' : 'none' }}>
-      <a href="#home" style={{ fontWeight: 900, fontSize: '1rem', letterSpacing: '2px', color: '#0F172A' }}>
-        MAGPIE&amp;TIGER<span style={{ color: '#FF5500' }}>.</span>
+    <nav className={`nav${scrolled ? ' scrolled' : ''}`}>
+      <a href="#home" className="nav-logo">
+        MAGPIENTIGER <em>·</em> 까치와호랑이
       </a>
-      <div style={{ display: 'flex', gap: '2rem' }}>
-        {links.map(l => (
-          <a key={l.label} href={l.href}
-            style={{ fontSize: '0.82rem', fontWeight: 700, color: '#0F172A', opacity: 0.6, letterSpacing: '0.05em', transition: 'opacity 0.2s' }}
-            onMouseOver={e => e.currentTarget.style.opacity = '1'}
-            onMouseOut={e => e.currentTarget.style.opacity = '0.6'}
-          >{l.label}</a>
-        ))}
-      </div>
-      <div style={{ display: 'flex', gap: '16px', alignItems: 'center' }}>
+      <ul className="nav-links">
+        {LINKS.map(l => <li key={l.label}><a href={l.href}>{l.label}</a></li>)}
+      </ul>
+      <div style={{ display: 'flex', gap: 12, alignItems: 'center' }}>
         <a href="https://www.instagram.com/magpientiger/" target="_blank" rel="noreferrer"
-          style={{ color: '#0F172A', opacity: 0.5, transition: 'all 0.2s' }}
-          onMouseOver={e => { e.currentTarget.style.opacity='1'; e.currentTarget.style.color='#E1306C'; }}
-          onMouseOut={e => { e.currentTarget.style.opacity='0.5'; e.currentTarget.style.color='#0F172A'; }}>
-          <FaInstagram size={18} />
+          style={{ color:'#9CA3AF', transition:'color .15s' }}
+          onMouseOver={e=>e.currentTarget.style.color='#E1306C'}
+          onMouseOut={e=>e.currentTarget.style.color='#9CA3AF'}>
+          <FaInstagram size={17} />
         </a>
         <a href="https://www.youtube.com/@magpientiger" target="_blank" rel="noreferrer"
-          style={{ color: '#0F172A', opacity: 0.5, transition: 'all 0.2s' }}
-          onMouseOver={e => { e.currentTarget.style.opacity='1'; e.currentTarget.style.color='#FF0000'; }}
-          onMouseOut={e => { e.currentTarget.style.opacity='0.5'; e.currentTarget.style.color='#0F172A'; }}>
-          <FaYoutube size={20} />
+          style={{ color:'#9CA3AF', transition:'color .15s' }}
+          onMouseOver={e=>e.currentTarget.style.color='#FF0000'}
+          onMouseOut={e=>e.currentTarget.style.color='#9CA3AF'}>
+          <FaYoutube size={18} />
         </a>
         <a href="https://soundcloud.com/size_kim" target="_blank" rel="noreferrer"
-          style={{ color: '#0F172A', opacity: 0.5, transition: 'all 0.2s' }}
-          onMouseOver={e => { e.currentTarget.style.opacity='1'; e.currentTarget.style.color='#FF5500'; }}
-          onMouseOut={e => { e.currentTarget.style.opacity='0.5'; e.currentTarget.style.color='#0F172A'; }}>
-          <FaSoundcloud size={22} />
+          style={{ color:'#9CA3AF', transition:'color .15s' }}
+          onMouseOver={e=>e.currentTarget.style.color='#FF5500'}
+          onMouseOut={e=>e.currentTarget.style.color='#9CA3AF'}>
+          <FaSoundcloud size={20} />
         </a>
-        <a href="https://soundcloud.com/size_kim" target="_blank" rel="noreferrer" className="btn btn-primary" style={{ padding: '9px 22px', fontSize: '0.78rem' }}>
+        <a href="https://soundcloud.com/size_kim" target="_blank" rel="noreferrer" className="nav-cta">
           Listen Now
         </a>
       </div>
@@ -70,7 +62,7 @@ function Navigation() {
 function App() {
   return (
     <Router>
-      <Navigation />
+      <Nav />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/sorter" element={<PhotoSorterTool onBack={() => window.history.back()} />} />
@@ -78,5 +70,4 @@ function App() {
     </Router>
   );
 }
-
 export default App;
