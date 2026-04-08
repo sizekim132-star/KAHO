@@ -1,118 +1,154 @@
 // src/App.jsx
-import React, { useEffect } from 'react';
+import React from 'react';
 import { BrowserRouter as Router, Routes, Route, Link, useLocation } from 'react-router-dom';
-import { FaInstagram, FaYoutube, FaSoundcloud } from 'react-icons/fa';
+import { FaInstagram, FaYoutube, FaSoundcloud, FaFacebook, FaTwitter, FaTiktok } from 'react-icons/fa';
 import './index.css';
 
 import Home from './pages/Home';
-import Members from './pages/Members';
-import Music from './pages/Music';
-import History from './pages/History';
 import PhotoSorterTool from './pages/PhotoSorterTool';
 
-// Pexels 대신 통신 에러가 단 한 번도 나지 않는 유튜브를 사용합니다!
-// Lofi 밴드음악 스트리밍(항상 라이브중) 또는 분위기있는 공연 영상을 iframe으로 겁니다.
-const YOUTUBE_VIDEO_ID = "jfKfPfyJRdk"; 
+const NAV_ITEMS = ['HOME', 'MUSIC', 'TOUR', 'STORE', 'ABOUT'];
 
 function Navigation() {
   const location = useLocation();
   if (location.pathname === '/sorter') return null;
 
   return (
-    <nav style={{ 
-      padding: '1.5rem var(--spacing-main)', display: 'flex', justifyContent: 'space-between', 
-      alignItems: 'center', position: 'sticky', top: 0, zIndex: 1000, 
-      backgroundColor: '#ffffff', borderBottom: '1px solid #000' 
+    <nav style={{
+      padding: '1.4rem var(--spacing-main)',
+      display: 'flex',
+      justifyContent: 'space-between',
+      alignItems: 'center',
+      position: 'sticky',
+      top: 0,
+      zIndex: 1000,
+      backgroundColor: '#ffffff',
+      borderBottom: '1px solid var(--border)',
     }}>
-      {/* 1번 레퍼런스 로고 스타일 */}
-      <a href="#home" style={{ flex: 1 }}>
-        <h2 style={{ fontSize: '1.2rem', fontWeight: 900, color: '#000', letterSpacing: '2px', textTransform: 'uppercase' }}>
+      <a href="#home" style={{ flex: 1, textDecoration: 'none' }}>
+        <span style={{ fontSize: '1.05rem', fontWeight: 900, color: '#0F172A', letterSpacing: '3px', textTransform: 'uppercase' }}>
           MAGPIE & TIGER
-        </h2>
+        </span>
       </a>
-      
-      {/* 중앙 네비게이션 메뉴 */}
-      <div style={{ display: 'flex', gap: '2.5rem', alignItems: 'center', fontWeight: 800, color: '#000', fontSize: '0.85rem', letterSpacing: '1px', textTransform: 'uppercase', flex: 2, justifyContent: 'center' }}>
-        <a href="#home" style={{ borderBottom: '2px solid #000', paddingBottom: '2px' }}>Home</a>
-        <a href="#music" style={{ transition: 'opacity 0.2s', opacity: 0.6 }} onMouseOver={e=>e.target.style.opacity='1'} onMouseOut={e=>e.target.style.opacity='0.6'}>Music</a>
-        <a href="#history" style={{ transition: 'opacity 0.2s', opacity: 0.6 }} onMouseOver={e=>e.target.style.opacity='1'} onMouseOut={e=>e.target.style.opacity='0.6'}>Tour</a>
-        <Link to="/sorter" style={{ transition: 'opacity 0.2s', opacity: 0.6 }} onMouseOver={e=>e.target.style.opacity='1'} onMouseOut={e=>e.target.style.opacity='0.6'}>Store</Link>
-        <a href="#contact" style={{ transition: 'opacity 0.2s', opacity: 0.6 }} onMouseOver={e=>e.target.style.opacity='1'} onMouseOut={e=>e.target.style.opacity='0.6'}>About</a>
+
+      <div style={{ display: 'flex', gap: '2.5rem', flex: 2, justifyContent: 'center' }}>
+        {NAV_ITEMS.map((item, i) => (
+          <a
+            key={item}
+            href={`#${item.toLowerCase()}`}
+            style={{
+              fontSize: '0.8rem',
+              fontWeight: 800,
+              letterSpacing: '1px',
+              color: i === 0 ? '#0F172A' : '#94a3b8',
+              borderBottom: i === 0 ? '2px solid #0F172A' : 'none',
+              paddingBottom: '2px',
+              textDecoration: 'none',
+              transition: 'color 0.2s',
+            }}
+            onMouseOver={e => e.currentTarget.style.color = '#0F172A'}
+            onMouseOut={e => { if (i !== 0) e.currentTarget.style.color = '#94a3b8'; }}
+          >
+            {item}
+          </a>
+        ))}
       </div>
 
-      {/* 우측 포인트 버튼 */}
       <div style={{ flex: 1, display: 'flex', justifyContent: 'flex-end' }}>
-        <button className="btn btn-primary" style={{ padding: '10px 24px', fontSize: '0.8rem' }}>
-          Listen Now
-        </button>
+        <a href="https://soundcloud.com/size_kim" target="_blank" rel="noreferrer" className="btn btn-primary" style={{ padding: '10px 24px', fontSize: '0.78rem' }}>
+          LISTEN NOW
+        </a>
       </div>
     </nav>
   );
 }
 
-function MainPage() {
-  useEffect(() => {
-    if (window.location.hash) {
-      const el = document.querySelector(window.location.hash);
-      if (el) el.scrollIntoView({ behavior: 'smooth' });
-    }
-  }, []);
+function Footer() {
+  const socials = [
+    { icon: <FaFacebook size={20} />, href: '#' },
+    { icon: <FaTwitter size={20} />, href: '#' },
+    { icon: <FaInstagram size={20} />, href: 'https://www.instagram.com/magpientiger/' },
+    { icon: <FaYoutube size={20} />, href: 'https://www.youtube.com/@magpientiger' },
+    { icon: <FaSoundcloud size={22} />, href: 'https://soundcloud.com/size_kim' },
+    { icon: <FaTiktok size={20} />, href: '#' },
+  ];
 
   return (
-    <>
-      {/* 📌 Pexels CORS 차단을 회피하는 유튜브 iframe 배경 */}
-      <div className="youtube-bg-container">
-        <iframe 
-          src={`https://www.youtube.com/embed/${YOUTUBE_VIDEO_ID}?autoplay=1&mute=1&controls=0&showinfo=0&rel=0&loop=1&playlist=${YOUTUBE_VIDEO_ID}`} 
-          frameBorder="0" 
-          allow="autoplay; encrypted-media" 
-          allowFullScreen>
-        </iframe>
-      </div>
+    <footer id="about" style={{ backgroundColor: '#ffffff', borderTop: '1px solid #e2e8f0', padding: '5rem var(--spacing-main) 3rem' }}>
+      <div style={{ maxWidth: '1400px', margin: '0 auto', display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: '4rem', alignItems: 'start' }}>
 
-      {/* 실질적인 페이지 컨텐츠 */}
-      <div style={{ position: 'relative', zIndex: 10 }}>
-        <div id="home"><Home /></div>
-        <div id="members"><Members /></div>
-        <div id="music"><Music /></div>
-        <div id="history"><History /></div>
-        
-        {/* 아주 미니멀한 퓨어 화이트 풋터 */}
-        <footer id="contact" style={{ backgroundColor: '#ffffff', borderTop: '1px solid #000', color: '#000', textAlign: 'center', padding: '8rem 2rem 5rem' }}>
-          
-          <h2 style={{ fontSize: '3rem', letterSpacing: '2px', marginBottom: '1rem', fontWeight: 900, textTransform: 'uppercase' }}>MAGPIENTIGER<span style={{color: 'var(--primary-orange)'}}>.</span></h2>
-          <p style={{ color: 'var(--text-muted)', fontSize: '1.2rem', marginBottom: '5rem', fontWeight: 400 }}>우리의 다음 무대를 기대해 주세요.</p>
-          
-          <div style={{ display: 'inline-block', padding: '3rem 5rem', marginBottom: '5rem', textAlign: 'left', border: '1px solid #000', backgroundColor: '#fff' }}>
-            <h3 style={{ color: '#000', fontSize: '1.1rem', marginBottom: '2rem', letterSpacing: '2px', fontWeight: 800, textTransform: 'uppercase' }}>
-              <span style={{display: 'inline-block', width: '8px', height: '8px', backgroundColor: 'var(--primary-orange)', marginRight: '10px', verticalAlign: 'middle'}}></span>
-              Booking & Contact
-            </h3>
-            <p style={{ fontSize: '1.4rem', marginBottom: '1.2rem', fontWeight: 800, display: 'flex', alignItems: 'center', gap: '1rem' }}>
-              📞 +82 10-5532-0456 <span style={{fontSize:'1rem', color:'var(--text-muted)', fontWeight: 400, marginLeft:'0.5rem'}}>(김치수)</span>
-            </p>
-            <p style={{ fontSize: '1.4rem', fontWeight: 800, display: 'flex', alignItems: 'center', gap: '1rem' }}>
-              ✉️ size132@naver.com
-            </p>
+        {/* About Links */}
+        <div>
+          <h3 style={{ fontSize: '0.85rem', fontWeight: 800, letterSpacing: '2px', marginBottom: '1.5rem', textTransform: 'uppercase', color: '#0F172A' }}>About</h3>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '0.8rem' }}>
+            {['About', 'Contact', 'Press'].map(item => (
+              <a key={item} href="#" style={{ fontSize: '0.95rem', color: '#94a3b8', fontWeight: 500, textDecoration: 'none', transition: 'color 0.2s' }}
+                onMouseOver={e => e.currentTarget.style.color = '#0F172A'}
+                onMouseOut={e => e.currentTarget.style.color = '#94a3b8'}>{item}</a>
+            ))}
           </div>
+        </div>
 
-          <p style={{ color: 'var(--text-muted)', fontSize: '0.9rem', fontWeight: 400 }}>© 2025 Magpientiger. All rights reserved.</p>
-        </footer>
+        {/* Social */}
+        <div style={{ textAlign: 'center' }}>
+          <h3 style={{ fontSize: '0.85rem', fontWeight: 800, letterSpacing: '2px', marginBottom: '1.5rem', textTransform: 'uppercase', color: '#0F172A' }}>Social</h3>
+          <div style={{ display: 'flex', gap: '1.2rem', justifyContent: 'center', alignItems: 'center' }}>
+            {socials.map((s, i) => (
+              <a key={i} href={s.href} target="_blank" rel="noreferrer"
+                style={{ color: '#0F172A', opacity: 0.5, transition: 'all 0.2s', textDecoration: 'none' }}
+                onMouseOver={e => { e.currentTarget.style.opacity = '1'; e.currentTarget.style.color = '#FF5500'; }}
+                onMouseOut={e => { e.currentTarget.style.opacity = '0.5'; e.currentTarget.style.color = '#0F172A'; }}>
+                {s.icon}
+              </a>
+            ))}
+          </div>
+        </div>
+
+        {/* Newsletter */}
+        <div>
+          <h3 style={{ fontSize: '0.85rem', fontWeight: 800, letterSpacing: '2px', marginBottom: '1.5rem', textTransform: 'uppercase', textAlign: 'right', color: '#0F172A' }}>Newsletter</h3>
+          <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
+            <input
+              type="email"
+              placeholder="Email"
+              style={{ padding: '10px 16px', border: '1px solid #e2e8f0', borderRight: 'none', fontSize: '0.9rem', outline: 'none', width: '180px', fontFamily: 'var(--font-sans)' }}
+            />
+            <button style={{ padding: '10px 20px', backgroundColor: '#0F172A', color: '#fff', border: 'none', fontWeight: 800, fontSize: '0.8rem', letterSpacing: '1px', cursor: 'pointer' }}>
+              Subscribe
+            </button>
+          </div>
+        </div>
       </div>
-    </>
+
+      {/* Bottom bar */}
+      <div style={{ borderTop: '1px solid #e2e8f0', marginTop: '4rem', paddingTop: '2rem', maxWidth: '1400px', margin: '4rem auto 0', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+        <div>
+          <p style={{ fontSize: '1rem', fontWeight: 900, letterSpacing: '2px', marginBottom: '0.3rem', color: '#0F172A' }}>BOOKING & CONTACT</p>
+          <p style={{ fontSize: '0.85rem', color: '#94a3b8' }}>010-5532-0456 (김치수) &nbsp;·&nbsp; size132@naver.com</p>
+        </div>
+        <p style={{ fontSize: '0.8rem', color: '#94a3b8' }}>© 2024 MAGPIE & TIGER</p>
+      </div>
+    </footer>
+  );
+}
+
+function MainPage() {
+  return (
+    <div style={{ backgroundColor: '#ffffff', minHeight: '100vh' }}>
+      <div id="home"><Home /></div>
+      <Footer />
+    </div>
   );
 }
 
 function App() {
   return (
     <Router>
-      <div className="app-container">
-        <Navigation />
-        <Routes>
-          <Route path="/" element={<MainPage />} />
-          <Route path="/sorter" element={<PhotoSorterTool onBack={() => window.history.back()} />} />
-        </Routes>
-      </div>
+      <Navigation />
+      <Routes>
+        <Route path="/" element={<MainPage />} />
+        <Route path="/sorter" element={<PhotoSorterTool onBack={() => window.history.back()} />} />
+      </Routes>
     </Router>
   );
 }

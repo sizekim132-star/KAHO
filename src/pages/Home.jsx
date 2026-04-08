@@ -1,88 +1,95 @@
 // src/pages/Home.jsx
 import React from 'react';
-import { Link } from 'react-router-dom';
+import minhwaImg from '../assets/minhwa_lineart.png';
 import Music from './Music';
 import History from './History';
-import minhwaImg from '../assets/minhwa_tiger.png';
+import Members from './Members';
 
 export default function Home() {
   return (
-    <main style={{ backgroundColor: 'transparent', width: '100%' }}>
-      
-      {/* 📌 Hero Section: 1번 레퍼런스 스타일 (이미지 좌 / 타이포 우) */}
-      <section style={{ 
-        backgroundColor: '#ffffff', 
-        padding: '8rem var(--spacing-main)', 
-        borderBottom: '1px solid #000',
+    <main style={{ backgroundColor: '#ffffff' }}>
+
+      {/* ── HERO: 레퍼런스 1번 그대로 (이미지 좌 / 텍스트 우) ── */}
+      <section style={{
+        padding: '6rem var(--spacing-main) 4rem',
         display: 'flex',
         alignItems: 'center',
-        justifyContent: 'space-between',
+        gap: '6rem',
+        maxWidth: '1400px',
+        margin: '0 auto',
         minHeight: '80vh',
-        gap: '6rem'
       }}>
-        {/* Left: Illustration */}
-        <div style={{ flex: 1.2, display: 'flex', justifyContent: 'center' }}>
-          <img src={minhwaImg} alt="Magpientiger Classic" style={{ width: '100%', maxWidth: '700px', height: 'auto', mixBlendMode: 'multiply' }} />
+        {/* Left: Line Art */}
+        <div style={{ flex: 1.1, display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+          <img
+            src={minhwaImg}
+            alt="Magpie and Tiger"
+            style={{ width: '100%', maxWidth: '620px', height: 'auto', mixBlendMode: 'multiply' }}
+          />
         </div>
 
         {/* Right: Typography */}
-        <div style={{ flex: 1, textAlign: 'left' }}>
-          <p style={{ fontSize: '1.2rem', color: 'var(--primary-orange)', fontWeight: 800, marginBottom: '2rem', letterSpacing: '4px' }}>EST. 2025</p>
-          <h1 className="serif-title" style={{ fontSize: 'clamp(4rem, 6vw, 7rem)', lineHeight: 1, marginBottom: '2.5rem', color: '#000' }}>
-            WHERE THE<br/>WILDS SING.
+        <div style={{ flex: 1 }}>
+          <p style={{ fontSize: '0.9rem', color: '#FF5500', fontWeight: 800, letterSpacing: '4px', textTransform: 'uppercase', marginBottom: '2rem' }}>
+            Magpie & Tiger | Debut Album
+          </p>
+          <h1 style={{
+            fontFamily: 'var(--font-serif)',
+            fontSize: 'clamp(3.5rem, 5.5vw, 6.5rem)',
+            lineHeight: 1.0,
+            fontWeight: 900,
+            color: '#0F172A',
+            marginBottom: '1.5rem',
+            letterSpacing: '-0.02em',
+          }}>
+            WHERE THE<br />WILDS SING.
           </h1>
-          <p style={{ fontSize: '1.2rem', color: 'var(--text-main)', maxWidth: '450px', marginBottom: '3.5rem', lineHeight: 1.6, fontWeight: 500 }}>
-            Magpientiger | Debut Album<br/>
+          <p style={{ fontSize: '1.1rem', color: '#64748b', marginBottom: '3rem', fontWeight: 500 }}>
             'NIGHT & DAY' out now.
           </p>
-          <div style={{ display: 'flex', gap: '1.5rem' }}>
-            <button className="btn btn-primary">Listen to the Album</button>
-            <button className="btn">Watch Video</button>
+          <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap' }}>
+            <a href="https://soundcloud.com/size_kim" target="_blank" rel="noreferrer" className="btn btn-primary">
+              LISTEN TO THE ALBUM
+            </a>
+            <a href="https://www.youtube.com/@magpientiger" target="_blank" rel="noreferrer" className="btn btn-outline">
+              WATCH VIDEO
+            </a>
           </div>
         </div>
       </section>
 
-      {/* 📌 Combined Section: Latest Music & Upcoming Tour (2단 분할) */}
-      <section style={{ backgroundColor: '#ffffff', padding: '8rem var(--spacing-main)' }}>
-        <div style={{ display: 'grid', gridTemplateColumns: 'minmax(0, 1.2fr) minmax(0, 1.5fr)', gap: '8rem' }}>
-          
-          {/* Left: Latest Music */}
+      <div style={{ width: '100%', height: '1px', backgroundColor: '#e2e8f0' }}></div>
+
+      {/* ── LATEST MUSIC + UPCOMING TOUR (2단 레이아웃) ── */}
+      <section id="music" style={{ padding: '6rem var(--spacing-main)', maxWidth: '1400px', margin: '0 auto' }}>
+        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '6rem' }}>
+          {/* Left: Music */}
           <div>
-            <h2 className="serif-title" style={{ fontSize: '2.2rem', marginBottom: '4rem', textTransform: 'uppercase', fontStyle: 'normal' }}>Latest Music</h2>
+            <h2 style={{ fontSize: '0.85rem', fontWeight: 800, letterSpacing: '3px', textTransform: 'uppercase', color: '#0F172A', marginBottom: '2.5rem' }}>
+              LATEST MUSIC
+            </h2>
             <Music isMinimal={true} />
           </div>
-
-          {/* Right: Upcoming Tour */}
-          <div>
-             <h2 className="serif-title" style={{ fontSize: '2.2rem', marginBottom: '4rem', textTransform: 'uppercase', fontStyle: 'normal' }}>Upcoming Tour</h2>
-             <History isMinimal={true} />
+          {/* Right: Tour */}
+          <div id="tour">
+            <h2 style={{ fontSize: '0.85rem', fontWeight: 800, letterSpacing: '3px', textTransform: 'uppercase', color: '#0F172A', marginBottom: '2.5rem' }}>
+              UPCOMING TOUR
+            </h2>
+            <History isMinimal={true} />
           </div>
-
         </div>
       </section>
 
-      {/* 📌 Archive Section (기존 갤러리 유지하되 클래식 톤으로) */}
-      <section style={{ backgroundColor: '#ffffff', padding: '8rem var(--spacing-main)', borderTop: '1px solid #000' }}>
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', marginBottom: '6rem' }}>
-            <div>
-              <h2 className="serif-title" style={{ fontSize: '3rem', color: '#000', fontStyle: 'normal', textTransform: 'uppercase' }}>Hunting Moments</h2>
-              <p style={{ color: 'var(--text-muted)', fontWeight: 500, fontSize: '1.1rem', marginTop: '1rem' }}>무대라는 사냥터에서 포착된 순간들</p>
-            </div>
-            <Link to="/sorter" style={{ textDecoration: 'none' }}>
-              <button className="btn">Explore Archives</button>
-            </Link>
-          </div>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(350px, 1fr))', gap: '4rem' }}>
-            {[1,2,3].map((item, idx) => (
-              <div key={idx} style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
-                <div style={{ height: '450px', backgroundColor: '#f5f5f5', border: '1px solid #000', position: 'relative' }}>
-                  <div style={{ position: 'absolute', bottom: '1.5rem', right: '1.5rem', fontSize: '1rem', fontWeight: 800 }}>RAW_FILE_00{idx+1}</div>
-                </div>
-                <h3 style={{ fontSize: '1.2rem', fontWeight: 900, textTransform: 'uppercase' }}>Archive #{idx + 1}</h3>
-              </div>
-            ))}
-          </div>
+      <div style={{ width: '100%', height: '1px', backgroundColor: '#e2e8f0' }}></div>
+
+      {/* ── MEMBERS ── */}
+      <section id="store" style={{ padding: '6rem var(--spacing-main)', maxWidth: '1400px', margin: '0 auto' }}>
+        <h2 style={{ fontSize: '0.85rem', fontWeight: 800, letterSpacing: '3px', textTransform: 'uppercase', color: '#0F172A', marginBottom: '2.5rem' }}>
+          BAND MEMBERS
+        </h2>
+        <Members isMinimal={true} />
       </section>
+
     </main>
   );
 }
