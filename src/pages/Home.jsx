@@ -5,6 +5,12 @@ import galleryGuitar from '../assets/gallery_guitar.png';
 import galleryStage  from '../assets/gallery_stage.png';
 import galleryCrowd  from '../assets/gallery_crowd.png';
 
+/* ── 실제 유튜브 영상들 (브라우저로 직접 확인한 실제 ID) ── */
+const YT_BG_ID    = 'WYrJr97nXFA'; // [월간 까호 4월] 까치와 고양이 - 깊은 밤을 날아서 (2:51)
+const YT_CHANNEL  = 'https://www.youtube.com/@magpientiger';
+const IG_URL      = 'https://www.instagram.com/magpientiger/';
+const SC_URL      = 'https://soundcloud.com/size_kim';
+
 /* ─── DATA ─── */
 const MEMBERS = [
   { name: '김치수',  role: '리더 · 베이스 · 프로듀서', animal: '호랑이 Tiger', emoji: '🐯',
@@ -48,7 +54,7 @@ function PhotoBox({ w, h, label }) {
 
 /* ─── PAGE ─── */
 export default function Home() {
-  const YT_ID = 'jfKfPfyJRdk';
+  // 실제 까치와호랑이 유튜브 배경 영상
 
   return (
     <div style={{ paddingTop: 60 }}>
@@ -56,7 +62,7 @@ export default function Home() {
       {/* ── 전역 배경 영상 + 필름 ── */}
       <div className="vbg">
         <iframe
-          src={`https://www.youtube.com/embed/${YT_ID}?autoplay=1&mute=1&controls=0&loop=1&playlist=${YT_ID}&rel=0&showinfo=0`}
+          src={`https://www.youtube.com/embed/${YT_BG_ID}?autoplay=1&mute=1&controls=0&loop=1&playlist=${YT_BG_ID}&rel=0&showinfo=0`}
           allow="autoplay; encrypted-media"
           style={{ border: 'none' }}
         />
@@ -126,9 +132,9 @@ export default function Home() {
           <h2 className="title" style={{ marginBottom: '3rem' }}>Music</h2>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))', gap: '1.2rem' }}>
             {[
-              { title: '꽉붙 (Demo)', type: '자작곡', link: 'https://soundcloud.com/size_kim' },
-              { title: 'Night & Day', type: '커버 · 편곡', link: 'https://soundcloud.com/size_kim' },
-              { title: '한밤의 동물원', type: '자작곡', link: 'https://soundcloud.com/size_kim' },
+              { title: '깊은 밤을 날아서', type: '까치와 고양이 커버', link: `https://www.youtube.com/watch?v=WYrJr97nXFA`, icon: '▶ YouTube에서 보기' },
+              { title: '크리스마스 캐롤 메들리', type: '밴드 커버', link: `https://www.youtube.com/watch?v=DS2NMYKaeuo`, icon: '▶ YouTube에서 보기' },
+              { title: '꽉붙 (Demo)', type: '자작곡', link: SC_URL, icon: '▶ SoundCloud에서 듣기' },
             ].map((t, i) => (
               <a key={i} href={t.link} target="_blank" rel="noreferrer"
                 className="glass lift"
@@ -138,7 +144,7 @@ export default function Home() {
                 </div>
                 <p style={{ fontSize: '.7rem', fontWeight: 800, letterSpacing: '.14em', color: 'var(--orange)', marginBottom: 6, textTransform: 'uppercase' }}>{t.type}</p>
                 <h3 style={{ fontSize: '1.35rem', fontWeight: 800, color: 'var(--navy)', letterSpacing: '-.02em' }}>{t.title}</h3>
-                <p style={{ fontSize: '.8rem', color: 'var(--text-3)', marginTop: 12, fontWeight: 600 }}>▶ SoundCloud에서 듣기</p>
+                <p style={{ fontSize: '.8rem', color: 'var(--text-3)', marginTop: 12, fontWeight: 600 }}>{t.icon}</p>
               </a>
             ))}
           </div>
