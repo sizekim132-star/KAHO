@@ -126,7 +126,7 @@ export default function Home() {
       {/* ════════════════════════════
           MUSIC
       ════════════════════════════ */}
-      <section id="music" className="section" style={{ background: 'transparent' }}>
+      <section id="music" className="section" style={{ background: 'rgba(255,255,255,0.6)' }}>
         <div style={{ maxWidth: 1200, margin: '0 auto' }}>
           <Label>Discography</Label>
           <h2 className="title" style={{ marginBottom: '3rem' }}>Music</h2>
@@ -192,7 +192,7 @@ export default function Home() {
       {/* ════════════════════════════
           SHOWS
       ════════════════════════════ */}
-      <section id="shows" className="section" style={{ background: 'transparent' }}>
+      <section id="shows" className="section" style={{ background: 'rgba(255,255,255,0.6)' }}>
         <div style={{ maxWidth: 1200, margin: '0 auto' }}>
           <Label>Performance History</Label>
           <h2 className="title" style={{ marginBottom: '3.5rem' }}>Shows</h2>

@@ -44,20 +44,19 @@ img { display: block; max-width: 100%; }
 .vbg iframe {
   position: absolute;
   top:50%; left:50%;
-  width: 100vw; height: 56.25vw;
-  min-height: 100vh; min-width: 177.78vh;
-  transform: translate(-50%,-50%);
+  width: 130vw; height: 73.125vw;
+  min-height: 130vh; min-width: 231.11vh;
+  transform: translate(-50%,-50%) scale(1.15);
   pointer-events: none;
 }
 
-/* 화이트 필름 (한지 느낌 아주 은은하게) */
+/* 화이트 필름 - 투명도 낮춰서 영상이 잘 보이게 */
 .film {
   position: fixed; inset: 0; z-index: -1; pointer-events: none;
-  background: rgba(255,255,255,0.88);
-  /* 미세 노이즈 */
+  background: rgba(255,255,255,0.55);
   background-image:
-    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E"),
-    linear-gradient(180deg,rgba(255,255,255,0.88) 0%,rgba(255,255,255,0.88) 100%);
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.025'/%3E%3C/svg%3E"),
+    linear-gradient(180deg,rgba(255,255,255,0.55) 0%,rgba(255,255,255,0.55) 100%);
 }
 
 /* ─── NAV ─── */
@@ -101,16 +100,16 @@ img { display: block; max-width: 100%; }
 
 /* ─── GLASS ─── */
 .glass {
-  background: rgba(255,255,255,0.6);
+  background: rgba(255,255,255,0.5);
   backdrop-filter: blur(24px) saturate(200%);
   -webkit-backdrop-filter: blur(24px) saturate(200%);
-  border: 1px solid rgba(255,255,255,0.8);
+  border: 1px solid rgba(255,255,255,0.75);
   box-shadow: 0 4px 24px rgba(0,0,0,.06), 0 1px 0 rgba(255,255,255,.9) inset;
 }
 
 /* ─── SECTIONS ─── */
 .section { padding: 120px var(--spacing); }
-.section-white { background: rgba(255,255,255,0.92); }
+.section-white { background: rgba(255,255,255,0.72); }
 
 .label {
   display: inline-block;
