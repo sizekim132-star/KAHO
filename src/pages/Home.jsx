@@ -239,16 +239,10 @@ export default function Home() {
           <h2 className="title-dark" style={{ marginBottom: '3.5rem' }}>Band Members</h2>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(320px, 1fr))', gap: '1.5rem' }}>
             {MEMBERS.map((m, i) => (
-              <div key={i} className="dark-card reveal-card" style={{ transitionDelay: `${i * 0.08}s` }}>
+              <div key={i} className="glass lift reveal-card" style={{ transitionDelay: `${i * 0.08}s`, overflow: 'hidden', borderRadius: 'var(--r-lg)' }}>
                 {/* 사진 공란 */}
                 <div style={{ height: 260 }}>
-                  <div className="photo-box-dark" style={{ width: '100%', height: '260px' }}>
-                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" style={{ opacity: 0.3 }}>
-                      <rect x="3" y="3" width="18" height="18" rx="3" /><circle cx="8.5" cy="8.5" r="1.5" />
-                      <polyline points="21,15 16,10 5,21" />
-                    </svg>
-                    <span style={{ color: 'rgba(255,255,255,0.25)' }}>{m.name} 프로필 사진</span>
-                  </div>
+                  <PhotoBox w="100%" h="260px" label={`${m.name} 프로필 사진`} />
                 </div>
 
                 {/* 텍스트 영역 */}
