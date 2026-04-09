@@ -13,39 +13,39 @@ const IG_URL = 'https://www.instagram.com/magpientiger/';
 const SC_URL = 'https://soundcloud.com/size_kim';
 
 /* ─── DATA ───
- * member_icons.png 은 3×2 그리드 이미지.
- * bgPos: 'X% Y%' → X: 0(좌)~100(우) 열, Y: 0(상)~100(하) 행
+ * member_icons.png: 3 columns x 2 rows (1024x1024)
+ * gridIdx: [column, row] (0-indexed)
  */
 const MEMBERS = [
   {
     name: '김치수', role: '리더 · 베이스 · 프로듀서', animal: '호랑이 Tiger',
     bio: '밴드의 심장. 곡을 만들고, 무대를 지배한다. 묵직한 베이스 그루브가 폭발하는 순간 Magpientiger가 시작된다.',
-    bgPos: '0% 0%'
+    gridIdx: [0, 0]
   },
   {
     name: '심어진', role: '일렉기타 · 엔지니어', animal: '치타 Cheetah',
     bio: '속도와 정밀함의 화신. 날카로운 픽 워크와 예리한 사운드 디자인으로 밴드의 소리를 조각한다.',
-    bgPos: '50% 0%'
+    gridIdx: [1, 0]
   },
   {
     name: '김태린', role: '메인보컬', animal: '까치 Magpie',
     bio: '시선을 단번에 사로잡는 존재감. 선율 위를 자유롭게 날고, 무대 어디서든 빛난다.',
-    bgPos: '100% 0%'
+    gridIdx: [2, 0]
   },
   {
     name: '최민서', role: '일렉기타 · 서브보컬', animal: '고양이 Cat',
     bio: '발칙한 고양이.',
-    bgPos: '0% 100%'
+    gridIdx: [0, 1]
   },
   {
     name: '박어진', role: '건반 · 서기', animal: '참새 Sparrow',
     bio: '밴드를 지탱하는 섬세한 손. 은은하게 스며드는 건반이 이 팀의 온기다.',
-    bgPos: '50% 100%'
+    gridIdx: [1, 1]
   },
   {
     name: '김민규', role: '드럼 · 편집', animal: '펭귄 Penguin',
     bio: '흔들리지 않는 기둥. 묵묵히 팀을 지탱한다.',
-    bgPos: '100% 100%'
+    gridIdx: [2, 1]
   },
 ];
 
@@ -201,29 +201,25 @@ export default function Home() {
                       <p style={{ fontSize: '.72rem', fontWeight: 800, letterSpacing: '.12em', color: 'var(--orange)', marginTop: 3, textTransform: 'uppercase' }}>{m.animal}</p>
                     </div>
 
-                    {/* 동물 라인 드로잉 — 배경 없이 선만 */}
+                    {/* 동물 라인 드로잉 — 정밀 좌표 및 초고선명 필터 적용 */}
                     <div style={{
-                      width: 64, height: 64,
-                      overflow: 'hidden',
+                      width: 80, height: 80,
                       flexShrink: 0,
+                      overflow: 'hidden',
                       position: 'relative',
                     }}>
-                      <img
-                        src={memberIcons}
-                        alt={m.animal}
-                        style={{
-                          position: 'absolute',
-                          width: '300%',
-                          height: '200%',
-                          objectFit: 'cover',
-                          top: m.bgPos === '0% 0%' || m.bgPos === '50% 0%' || m.bgPos === '100% 0%' ? '0%' : '-100%',
-                          left: m.bgPos === '0% 0%' || m.bgPos === '0% 100%' ? '0%'
-                              : m.bgPos === '50% 0%' || m.bgPos === '50% 100%' ? '-100%'
-                              : '-200%',
-                          mixBlendMode: 'multiply',
-                          filter: 'contrast(1.2)',
-                        }}
-                      />
+                      <div style={{
+                        width: 240, height: 240, // 3x 확대된 스프라이트 베이스
+                        backgroundImage: `url(${memberIcons})`,
+                        backgroundSize: '240px 240px',
+                        // 1024x1024 원본 기준 3x2 그리드 정밀 계산 (하나의 셀은 대략 80x120px)
+                        backgroundPosition: `${-m.gridIdx[0] * 80}px ${-m.gridIdx[1] * 120 - 20}px`,
+                        backgroundRepeat: 'no-repeat',
+                        mixBlendMode: 'multiply',
+                        // 선명도 극대화 필터 조합
+                        filter: 'grayscale(1) contrast(15) brightness(1.2)', 
+                        imageRendering: 'pixelated', // 크롬/웹킷 계열 선명도 최적화
+                      }} />
                     </div>
                   </div>
 
