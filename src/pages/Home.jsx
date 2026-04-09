@@ -188,27 +188,45 @@ export default function Home() {
                 overflow: 'hidden',
                 background: 'var(--white)',
               }}>
-                {/* 동물 아이콘 — CSS 스프라이트 방식 */}
-                <div style={{
-                  height: 220,
-                  backgroundImage: `url(${memberIcons})`,
-                  backgroundSize: '300% 200%',
-                  backgroundPosition: m.bgPos,
-                  backgroundRepeat: 'no-repeat',
-                  backgroundColor: '#f7f8fa',
-                }} />
+                {/* 사진 공란 — 나중에 실제 사진으로 교체 */}
+                <div style={{ height: 260 }}>
+                  <PhotoBox w="100%" h="260px" label={`${m.name} 프로필 사진`} />
+                </div>
+
                 {/* 텍스트 영역 */}
                 <div style={{ padding: '1.6rem' }}>
-                  <div style={{ marginBottom: 8 }}>
-                    <h3 style={{ fontSize: '1.3rem', fontWeight: 800, color: 'var(--navy)', letterSpacing: '-.02em' }}>{m.name}</h3>
-                    <p style={{ fontSize: '.72rem', fontWeight: 800, letterSpacing: '.12em', color: 'var(--orange)', marginTop: 3, textTransform: 'uppercase' }}>{m.animal}</p>
+                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: 8 }}>
+                    <div>
+                      <h3 style={{ fontSize: '1.3rem', fontWeight: 800, color: 'var(--navy)', letterSpacing: '-.02em' }}>{m.name}</h3>
+                      <p style={{ fontSize: '.72rem', fontWeight: 800, letterSpacing: '.12em', color: 'var(--orange)', marginTop: 3, textTransform: 'uppercase' }}>{m.animal}</p>
+                    </div>
+
+                    {/* 동물 라인 드로잉 아이콘 — CSS sprite */}
+                    <div style={{
+                      width: 52, height: 52,
+                      borderRadius: 12,
+                      overflow: 'hidden',
+                      border: '1.5px solid rgba(26,39,68,0.10)',
+                      background: '#f7f8fa',
+                      flexShrink: 0,
+                    }}>
+                      <div style={{
+                        width: '100%', height: '100%',
+                        backgroundImage: `url(${memberIcons})`,
+                        backgroundSize: '300% 200%',
+                        backgroundPosition: m.bgPos,
+                        backgroundRepeat: 'no-repeat',
+                      }} />
+                    </div>
                   </div>
+
                   <div style={{ height: 1, background: 'var(--border)', margin: '12px 0' }} />
                   <p style={{ fontSize: '.79rem', fontWeight: 700, color: 'var(--text-2)', marginBottom: 10, letterSpacing: '.01em' }}>{m.role}</p>
                   <p style={{ fontSize: '.85rem', color: 'var(--text-2)', lineHeight: 1.65 }}>{m.bio}</p>
                 </div>
               </div>
             ))}
+
           </div>
         </div>
       </section>
