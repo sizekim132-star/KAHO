@@ -150,7 +150,7 @@ export default function Home() {
       <section id="home" style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', padding: '80px var(--spacing)' }}>
         <div style={{ maxWidth: 1200, margin: '0 auto', width: '100%' }}>
 
-          <div className="glass reveal" style={{ padding: 'clamp(40px,6vw,72px)', borderRadius: 28 }}>
+          <div className="glass reveal float-slow" style={{ padding: 'clamp(40px,6vw,72px)', borderRadius: 28 }}>
             <Label>MAGPIENTIGER · 까치와호랑이</Label>
             <h1 style={{ fontSize: 'clamp(3rem,7vw,6.4rem)', fontWeight: 900, letterSpacing: '-0.05em', color: 'var(--navy)', lineHeight: 1.05, marginBottom: '1.5rem' }}>
               WHERE THE<br />
@@ -193,15 +193,16 @@ export default function Home() {
               </a>
             </div>
           </div>
-          {/* About 사진 공란 */}
-          <PhotoBox w="100%" h="440px" label="밴드 단체사진" />
+          <div className="reveal-card">
+            <PhotoBox w="100%" h="440px" label="밴드 단체사진" />
+          </div>
         </div>
       </section>
 
       {/* ════════════════════════════
           MUSIC
       ════════════════════════════ */}
-      <section id="music" className="section" style={{ background: 'rgba(255,255,255,0.6)' }}>
+      <section id="music" className="section section-gray">
         <div style={{ maxWidth: 1200, margin: '0 auto' }}>
           <Label>Discography</Label>
           <h2 className="title" style={{ marginBottom: '3rem' }}>Music</h2>
@@ -213,7 +214,7 @@ export default function Home() {
             ].map((t, i) => (
               <a key={i} href={t.link} target="_blank" rel="noreferrer"
                 className="glass lift reveal-card"
-                style={{ borderRadius: 'var(--r-lg)', padding: '2rem', display: 'block', transition: 'all .3s var(--ease)', transitionDelay: `${i * 0.1}s` }}>
+                style={{ borderRadius: 'var(--r-lg)', padding: '2rem', display: 'block', transitionDelay: `${i * 0.1}s` }}>
                 <div style={{ width: 52, height: 52, borderRadius: 12, background: 'var(--navy)', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: '1.2rem', fontSize: '1.3rem' }}>
                   🎵
                 </div>
@@ -226,25 +227,28 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ════════════════════════════
-          MEMBERS
-      ════════════════════════════ */}
-      <section id="members" className="section section-white reveal">
-        <div style={{ maxWidth: 1200, margin: '0 auto' }}>
-          <Label>The Wild Ones</Label>
-          <h2 className="title" style={{ marginBottom: '3.5rem' }}>Band Members</h2>
+      {/* ════ MEMBERS (다크 테마) ════ */}
+      <section id="members" className="section section-dark" style={{ padding: '120px var(--spacing)' }}>
+        {/* 배경 ORB 모션 그래픽 */}
+        <div className="orb float" style={{ width: 600, height: 600, top: '-200px', left: '-200px', background: 'radial-gradient(circle, rgba(255,95,31,0.12) 0%, transparent 70%)', animationDuration: '9s' }} />
+        <div className="orb float-slow" style={{ width: 500, height: 500, bottom: '-150px', right: '-100px', background: 'radial-gradient(circle, rgba(26,39,68,0.6) 0%, rgba(100,80,255,0.08) 60%, transparent 80%)', animationDuration: '12s' }} />
+        <div className="orb pulse-glow" style={{ width: 300, height: 300, top: '40%', left: '55%', background: 'radial-gradient(circle, rgba(255,95,31,0.08) 0%, transparent 70%)', animationDuration: '5s' }} />
+
+        <div style={{ maxWidth: 1200, margin: '0 auto', position: 'relative', zIndex: 1 }}>
+          <p className="label-dark">The Wild Ones</p>
+          <h2 className="title-dark" style={{ marginBottom: '3.5rem' }}>Band Members</h2>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(320px, 1fr))', gap: '1.5rem' }}>
             {MEMBERS.map((m, i) => (
-              <div key={i} className="lift reveal-card" style={{
-                transitionDelay: `${i * 0.08}s`,
-                border: '1px solid var(--border)',
-                borderRadius: 'var(--r-lg)',
-                overflow: 'hidden',
-                background: 'var(--white)',
-              }}>
-                {/* 사진 공란 — 나중에 실제 사진으로 교체 */}
+              <div key={i} className="dark-card reveal-card" style={{ transitionDelay: `${i * 0.08}s` }}>
+                {/* 사진 공란 */}
                 <div style={{ height: 260 }}>
-                  <PhotoBox w="100%" h="260px" label={`${m.name} 프로필 사진`} />
+                  <div className="photo-box-dark" style={{ width: '100%', height: '260px' }}>
+                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" style={{ opacity: 0.3 }}>
+                      <rect x="3" y="3" width="18" height="18" rx="3" /><circle cx="8.5" cy="8.5" r="1.5" />
+                      <polyline points="21,15 16,10 5,21" />
+                    </svg>
+                    <span style={{ color: 'rgba(255,255,255,0.25)' }}>{m.name} 프로필 사진</span>
+                  </div>
                 </div>
 
                 {/* 텍스트 영역 */}
@@ -282,13 +286,15 @@ export default function Home() {
       {/* ════════════════════════════
           SHOWS
       ════════════════════════════ */}
-      <section id="shows" className="section reveal" style={{ background: 'rgba(255,255,255,0.6)' }}>
+      <section id="shows" className="section section-white reveal">
         <div style={{ maxWidth: 1200, margin: '0 auto' }}>
-          <Label>Performance History</Label>
-          <h2 className="title" style={{ marginBottom: '3.5rem' }}>Shows</h2>
+          <div className="reveal-text">
+            <Label>Performance History</Label>
+            <h2 className="title" style={{ marginBottom: '3.5rem' }}>Shows</h2>
+          </div>
           <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
             {SHOWS.map((s, i) => (
-              <div key={i} className="glass lift" style={{ borderRadius: 'var(--r-lg)', overflow: 'hidden' }}>
+              <div key={i} className="glass lift reveal-card" style={{ borderRadius: 'var(--r-lg)', overflow: 'hidden', transitionDelay: `${i * 0.1}s` }}>
                 <div style={{ display: 'grid', gridTemplateColumns: '1fr 360px', minHeight: 220 }}>
                   {/* 텍스트 */}
                   <div style={{ padding: '2.5rem 3rem', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
@@ -321,13 +327,15 @@ export default function Home() {
       {/* ════════════════════════════
           GALLERY
       ════════════════════════════ */}
-      <section className="section section-white reveal">
+      <section className="section section-gray2 reveal">
         <div style={{ maxWidth: 1200, margin: '0 auto' }}>
-          <Label>Gallery</Label>
-          <h2 className="title" style={{ marginBottom: '3rem' }}>Moments</h2>
+          <div className="reveal-text">
+            <Label>Gallery</Label>
+            <h2 className="title" style={{ marginBottom: '3rem' }}>Moments</h2>
+          </div>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '1rem' }}>
             {PHOTOS_GALLERY.map((_, i) => (
-              <div key={i} style={{ aspectRatio: '4/3', borderRadius: 'var(--r-md)', overflow: 'hidden', position: 'relative' }}>
+              <div key={i} className="reveal-card" style={{ aspectRatio: '4/3', borderRadius: 'var(--r-md)', overflow: 'hidden', position: 'relative', transitionDelay: `${i * 0.12}s` }}>
                 <PhotoBox w="100%" h="100%" label={`Moment ${i + 1}`} />
               </div>
             ))}
