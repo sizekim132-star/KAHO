@@ -216,14 +216,31 @@ export default function Home() {
 
                 {/* 텍스트 영역 */}
                 <div style={{ padding: '1.6rem' }}>
-                  <div style={{ marginBottom: 8 }}>
-                    <h3 style={{ fontSize: '1.3rem', fontWeight: 800, color: 'var(--navy)', letterSpacing: '-.02em' }}>{m.name}</h3>
-                    <p style={{ fontSize: '.72rem', fontWeight: 800, letterSpacing: '.12em', color: 'var(--orange)', marginTop: 3, textTransform: 'uppercase' }}>{m.animal}</p>
+                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: 8 }}>
+                    <div>
+                      <h3 style={{ fontSize: '1.3rem', fontWeight: 800, color: 'var(--navy)', letterSpacing: '-.02em' }}>{m.name}</h3>
+                      <p style={{ fontSize: '.72rem', fontWeight: 800, letterSpacing: '.12em', color: 'var(--orange)', marginTop: 2, textTransform: 'uppercase' }}>{m.animal}</p>
+                    </div>
+                    {/* 우측 상단 여백에 포지션 배치 */}
+                    <div style={{ textAlign: 'right' }}>
+                      <p style={{ 
+                        fontSize: '.62rem', 
+                        fontWeight: 800, 
+                        color: 'var(--navy)', 
+                        letterSpacing: '.14em', 
+                        textTransform: 'uppercase',
+                        background: 'var(--gray-2)',
+                        padding: '4px 12px',
+                        borderRadius: 999,
+                        marginTop: 4
+                      }}>
+                        {m.role.split(' · ')[0]}
+                      </p>
+                    </div>
                   </div>
 
                   <div style={{ height: 1, background: 'var(--border)', margin: '12px 0' }} />
-                  <p style={{ fontSize: '.79rem', fontWeight: 700, color: 'var(--text-2)', marginBottom: 10, letterSpacing: '.01em' }}>{m.role}</p>
-                  <p style={{ fontSize: '.85rem', color: 'var(--text-2)', lineHeight: 1.65 }}>{m.bio}</p>
+                  <p style={{ fontSize: '.88rem', color: 'var(--text-2)', lineHeight: 1.75, wordBreak: 'keep-all' }}>{m.bio}</p>
                 </div>
               </div>
             ))}
