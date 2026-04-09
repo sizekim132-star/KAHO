@@ -1,30 +1,52 @@
 // src/pages/Home.jsx
 import React from 'react';
 import { FaInstagram, FaYoutube, FaSoundcloud } from 'react-icons/fa';
+import memberIcons from '../assets/member_icons.png';
 import galleryGuitar from '../assets/gallery_guitar.png';
-import galleryStage  from '../assets/gallery_stage.png';
-import galleryCrowd  from '../assets/gallery_crowd.png';
+import galleryStage from '../assets/gallery_stage.png';
+import galleryCrowd from '../assets/gallery_crowd.png';
 
 /* ── 실제 유튜브 영상들 (브라우저로 직접 확인한 실제 ID) ── */
-const YT_BG_ID    = 'WYrJr97nXFA'; // [월간 까호 4월] 까치와 고양이 - 깊은 밤을 날아서 (2:51)
-const YT_CHANNEL  = 'https://www.youtube.com/@magpientiger';
-const IG_URL      = 'https://www.instagram.com/magpientiger/';
-const SC_URL      = 'https://soundcloud.com/size_kim';
+const YT_BG_ID = 'WYrJr97nXFA';
+const YT_CHANNEL = 'https://www.youtube.com/@magpientiger';
+const IG_URL = 'https://www.instagram.com/magpientiger/';
+const SC_URL = 'https://soundcloud.com/size_kim';
 
-/* ─── DATA ─── */
+/* ─── DATA ───
+ * member_icons.png 은 3×2 그리드 이미지.
+ * bgPos: 'X% Y%' → X: 0(좌)~100(우) 열, Y: 0(상)~100(하) 행
+ */
 const MEMBERS = [
-  { name: '김치수',  role: '리더 · 베이스 · 프로듀서', animal: '호랑이 Tiger', emoji: '🐯',
-    bio: '밴드의 심장. 곡을 만들고, 무대를 지배한다. 묵직한 베이스 그루브가 폭발하는 순간 Magpientiger가 시작된다.' },
-  { name: '심어진',  role: '엔지니어 · 일렉기타', animal: '치타 Cheetah', emoji: '🐆',
-    bio: '속도와 정밀함의 화신. 날카로운 픽 워크와 예리한 사운드 디자인으로 밴드의 소리를 조각한다.' },
-  { name: '김태린',  role: '보컬 · 일렉기타', animal: '까치 Magpie', emoji: '🐦',
-    bio: '시선을 단번에 사로잡는 존재감. 선율 위를 자유롭게 날고, 무대 어디서든 빛난다.' },
-  { name: '최민서',  role: '보컬 · 일렉기타', animal: '고양이 Cat', emoji: '🐈‍⬛',
-    bio: '야성과 섬세함이 공존하는 보컬. 무대를 자신의 영역으로 만드는 타고난 퍼포머.' },
-  { name: '박어진',  role: '건반 · 서기', animal: '참새 Sparrow', emoji: '🪶',
-    bio: '가장 오랜 시간 밴드를 지켜온 손. 은은하게 스며드는 건반이 이 팀의 온기다.' },
-  { name: '김민규',  role: '드럼 · 편집', animal: '펭귄 Penguin', emoji: '🐧',
-    bio: '흔들리지 않는 리듬의 기둥. 편집과 비트로 무대 밖에서도 팀을 지탱한다.' },
+  {
+    name: '김치수', role: '리더 · 베이스 · 프로듀서', animal: '호랑이 Tiger',
+    bio: '밴드의 심장. 곡을 만들고, 무대를 지배한다. 묵직한 베이스 그루브가 폭발하는 순간 Magpientiger가 시작된다.',
+    bgPos: '0% 0%'
+  },
+  {
+    name: '심어진', role: '일렉기타 · 엔지니어', animal: '치타 Cheetah',
+    bio: '속도와 정밀함의 화신. 날카로운 픽 워크와 예리한 사운드 디자인으로 밴드의 소리를 조각한다.',
+    bgPos: '50% 0%'
+  },
+  {
+    name: '김태린', role: '메인보컬', animal: '까치 Magpie',
+    bio: '시선을 단번에 사로잡는 존재감. 선율 위를 자유롭게 날고, 무대 어디서든 빛난다.',
+    bgPos: '100% 0%'
+  },
+  {
+    name: '최민서', role: '일렉기타 · 서브보컬', animal: '고양이 Cat',
+    bio: '발칙한 고양이.',
+    bgPos: '0% 100%'
+  },
+  {
+    name: '박어진', role: '건반 · 서기', animal: '참새 Sparrow',
+    bio: '밴드를 지탱하는 섬세한 손. 은은하게 스며드는 건반이 이 팀의 온기다.',
+    bgPos: '50% 100%'
+  },
+  {
+    name: '김민규', role: '드럼 · 편집', animal: '펭귄 Penguin',
+    bio: '흔들리지 않는 기둥. 묵묵히 팀을 지탱한다.',
+    bgPos: '100% 100%'
+  },
 ];
 
 const SHOWS = [
@@ -44,8 +66,8 @@ function PhotoBox({ w, h, label }) {
   return (
     <div className="photo-box" style={{ width: w, height: h }}>
       <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
-        <rect x="3" y="3" width="18" height="18" rx="3"/><circle cx="8.5" cy="8.5" r="1.5"/>
-        <polyline points="21,15 16,10 5,21"/>
+        <rect x="3" y="3" width="18" height="18" rx="3" /><circle cx="8.5" cy="8.5" r="1.5" />
+        <polyline points="21,15 16,10 5,21" />
       </svg>
       <span>{label || '사진 추가'}</span>
     </div>
@@ -104,7 +126,7 @@ export default function Home() {
             <h2 className="title">야성이 깨어나는<br />그 순간의 음악.</h2>
             <AccentLine />
             <p className="body-text" style={{ marginBottom: '1.5rem' }}>
-              <strong style={{ color: 'var(--navy)', fontWeight: 700 }}>MAGPIENTIGER(까치와호랑이)</strong>는 2025년 서울에서 결성된 인디 밴드입니다. 까치의 영리함과 호랑이의 힘을 음악으로 녹여, 날카롭고 역동적인 사운드를 만들어냅니다.
+              <strong style={{ color: 'var(--navy)', fontWeight: 700 }}>MAGPIENTIGER(까치와호랑이)</strong>는 2025년 서울 강서구에서 결성된 인디 밴드입니다. 까치의 영리함과 호랑이의 힘을 음악으로 녹여, 날카롭고 역동적인 사운드를 만들어냅니다.
             </p>
             <p className="body-text" style={{ marginBottom: '2.5rem' }}>
               자작곡과 창의적인 편곡을 통해 우리만의 세계를 구축하고 있으며, 팬들과 함께하는 라이브 무대를 가장 사랑합니다.
@@ -166,18 +188,20 @@ export default function Home() {
                 overflow: 'hidden',
                 background: 'var(--white)',
               }}>
-                {/* 사진 영역 */}
-                <div style={{ height: 260 }}>
-                  <PhotoBox w="100%" h="260px" label={`${m.name} 프로필 사진`} />
-                </div>
+                {/* 동물 아이콘 — CSS 스프라이트 방식 */}
+                <div style={{
+                  height: 220,
+                  backgroundImage: `url(${memberIcons})`,
+                  backgroundSize: '300% 200%',
+                  backgroundPosition: m.bgPos,
+                  backgroundRepeat: 'no-repeat',
+                  backgroundColor: '#f7f8fa',
+                }} />
                 {/* 텍스트 영역 */}
                 <div style={{ padding: '1.6rem' }}>
-                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: 8 }}>
-                    <div>
-                      <h3 style={{ fontSize: '1.3rem', fontWeight: 800, color: 'var(--navy)', letterSpacing: '-.02em' }}>{m.name}</h3>
-                      <p style={{ fontSize: '.72rem', fontWeight: 800, letterSpacing: '.12em', color: 'var(--orange)', marginTop: 3, textTransform: 'uppercase' }}>{m.animal}</p>
-                    </div>
-                    <span style={{ fontSize: '2rem' }}>{m.emoji}</span>
+                  <div style={{ marginBottom: 8 }}>
+                    <h3 style={{ fontSize: '1.3rem', fontWeight: 800, color: 'var(--navy)', letterSpacing: '-.02em' }}>{m.name}</h3>
+                    <p style={{ fontSize: '.72rem', fontWeight: 800, letterSpacing: '.12em', color: 'var(--orange)', marginTop: 3, textTransform: 'uppercase' }}>{m.animal}</p>
                   </div>
                   <div style={{ height: 1, background: 'var(--border)', margin: '12px 0' }} />
                   <p style={{ fontSize: '.79rem', fontWeight: 700, color: 'var(--text-2)', marginBottom: 10, letterSpacing: '.01em' }}>{m.role}</p>
@@ -203,10 +227,12 @@ export default function Home() {
                   {/* 텍스트 */}
                   <div style={{ padding: '2.5rem 3rem', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
                     <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 16 }}>
-                      <span style={{ fontFamily: 'var(--font)', fontSize: '.72rem', fontWeight: 800, letterSpacing: '.12em', textTransform: 'uppercase',
+                      <span style={{
+                        fontFamily: 'var(--font)', fontSize: '.72rem', fontWeight: 800, letterSpacing: '.12em', textTransform: 'uppercase',
                         color: s.status === 'upcoming' ? 'var(--white)' : 'var(--text-3)',
                         background: s.status === 'upcoming' ? 'var(--orange)' : 'var(--gray-2)',
-                        padding: '4px 12px', borderRadius: 999 }}>
+                        padding: '4px 12px', borderRadius: 999
+                      }}>
                         {s.status === 'upcoming' ? '🔥 Upcoming' : 'Completed'}
                       </span>
                       <span style={{ fontSize: '.82rem', fontWeight: 600, color: 'var(--text-3)' }}>{s.date}</span>
@@ -236,10 +262,12 @@ export default function Home() {
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '1rem' }}>
             {PHOTOS_GALLERY.map((src, i) => (
               <div key={i} style={{ aspectRatio: '4/3', borderRadius: 'var(--r-md)', overflow: 'hidden', position: 'relative' }}>
-                <img src={src} alt="" style={{ width: '100%', height: '100%', objectFit: 'cover',
-                  transition: 'transform .6s var(--ease)' }}
-                  onMouseOver={e => e.target.style.transform='scale(1.06)'}
-                  onMouseOut={e => e.target.style.transform='scale(1)'} />
+                <img src={src} alt="" style={{
+                  width: '100%', height: '100%', objectFit: 'cover',
+                  transition: 'transform .6s var(--ease)'
+                }}
+                  onMouseOver={e => e.target.style.transform = 'scale(1.06)'}
+                  onMouseOut={e => e.target.style.transform = 'scale(1)'} />
               </div>
             ))}
           </div>
