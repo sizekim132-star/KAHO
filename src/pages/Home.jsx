@@ -201,22 +201,29 @@ export default function Home() {
                       <p style={{ fontSize: '.72rem', fontWeight: 800, letterSpacing: '.12em', color: 'var(--orange)', marginTop: 3, textTransform: 'uppercase' }}>{m.animal}</p>
                     </div>
 
-                    {/* 동물 라인 드로잉 아이콘 — CSS sprite */}
+                    {/* 동물 라인 드로잉 — 배경 없이 선만 */}
                     <div style={{
-                      width: 52, height: 52,
-                      borderRadius: 12,
+                      width: 64, height: 64,
                       overflow: 'hidden',
-                      border: '1.5px solid rgba(26,39,68,0.10)',
-                      background: '#f7f8fa',
                       flexShrink: 0,
+                      position: 'relative',
                     }}>
-                      <div style={{
-                        width: '100%', height: '100%',
-                        backgroundImage: `url(${memberIcons})`,
-                        backgroundSize: '300% 200%',
-                        backgroundPosition: m.bgPos,
-                        backgroundRepeat: 'no-repeat',
-                      }} />
+                      <img
+                        src={memberIcons}
+                        alt={m.animal}
+                        style={{
+                          position: 'absolute',
+                          width: '300%',
+                          height: '200%',
+                          objectFit: 'cover',
+                          top: m.bgPos === '0% 0%' || m.bgPos === '50% 0%' || m.bgPos === '100% 0%' ? '0%' : '-100%',
+                          left: m.bgPos === '0% 0%' || m.bgPos === '0% 100%' ? '0%'
+                              : m.bgPos === '50% 0%' || m.bgPos === '50% 100%' ? '-100%'
+                              : '-200%',
+                          mixBlendMode: 'multiply',
+                          filter: 'contrast(1.2)',
+                        }}
+                      />
                     </div>
                   </div>
 
