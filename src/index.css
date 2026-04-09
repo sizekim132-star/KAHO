@@ -54,13 +54,13 @@ img { display: block; max-width: 100%; }
   pointer-events: none;
 }
 
-/* 화이트 필름 - 투명도 낮춰서 영상이 잘 보이게 */
+/* 화이트 필름 - 투명도 대폭 낮춰서 영상이 훨씬 잘 보이게 보정 */
 .film {
   position: fixed; inset: 0; z-index: -1; pointer-events: none;
-  background: rgba(255,255,255,0.55);
+  background: rgba(255,255,255,0.2);
   background-image:
-    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.025'/%3E%3C/svg%3E"),
-    linear-gradient(180deg,rgba(255,255,255,0.55) 0%,rgba(255,255,255,0.55) 100%);
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E"),
+    linear-gradient(180deg,rgba(255,255,255,0.2) 0%,rgba(255,255,255,0.2) 100%);
 }
 
 /* ─── NAV ─── */

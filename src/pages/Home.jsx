@@ -7,7 +7,7 @@ import galleryStage from '../assets/gallery_stage.png';
 import galleryCrowd from '../assets/gallery_crowd.png';
 
 /* ── 실제 유튜브 영상들 (브라우저로 직접 확인한 실제 ID) ── */
-const YT_BG_IDS = ['WYrJr97nXFA', 'DS2NMYKaeuo', 'PpuyyzRHDH4', 'xp1fR6-Pwiw'];
+const YT_BG_IDS = ['WYrJr97nXFA', 'DS2NMYKaeuo']; // 3번째 일부공개 영상 ID 대기 중
 const YT_CHANNEL = 'https://www.youtube.com/@magpientiger';
 const IG_URL = 'https://www.instagram.com/magpientiger/';
 const SC_URL = 'https://soundcloud.com/size_kim';
@@ -18,32 +18,32 @@ const SC_URL = 'https://soundcloud.com/size_kim';
  */
 const MEMBERS = [
   {
-    name: '김치수', role: '리더 · 베이스 · 프로듀서', animal: '호랑이 Tiger',
+    name: '김치수', role: '리더 · 베이스 · 프로듀서', animal: '호랑이',
     bio: '밴드의 심장. 곡을 만들고, 무대를 지배한다. 묵직한 베이스 그루브가 폭발하는 순간 Magpientiger가 시작된다.',
     gridIdx: [0, 0]
   },
   {
-    name: '심어진', role: '일렉기타 · 엔지니어', animal: '치타 Cheetah',
+    name: '심어진', role: '일렉기타 · 엔지니어', animal: '치타',
     bio: '속도와 정밀함의 화신. 날카로운 픽 워크와 예리한 사운드 디자인으로 밴드의 소리를 조각한다.',
     gridIdx: [1, 0]
   },
   {
-    name: '김태린', role: '메인보컬', animal: '까치 Magpie',
+    name: '김태린', role: '메인보컬', animal: '까치',
     bio: '시선을 단번에 사로잡는 존재감. 선율 위를 자유롭게 날고, 무대 어디서든 빛난다.',
     gridIdx: [2, 0]
   },
   {
-    name: '최민서', role: '일렉기타 · 서브보컬', animal: '고양이 Cat',
+    name: '최민서', role: '일렉기타 · 서브보컬', animal: '고양이',
     bio: '발칙한 고양이.',
     gridIdx: [0, 1]
   },
   {
-    name: '박어진', role: '건반 · 서기', animal: '참새 Sparrow',
+    name: '박어진', role: '건반 · 서기', animal: '참새',
     bio: '밴드를 지탱하는 섬세한 손. 은은하게 스며드는 건반이 이 팀의 온기다.',
     gridIdx: [1, 1]
   },
   {
-    name: '김민규', role: '드럼 · 편집', animal: '펭귄 Penguin',
+    name: '김민규', role: '드럼 · 편집', animal: '펭귄',
     bio: '흔들리지 않는 기둥. 묵묵히 팀을 지탱한다.',
     gridIdx: [2, 1]
   },
