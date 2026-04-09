@@ -293,14 +293,9 @@ export default function Home() {
           <Label>Gallery</Label>
           <h2 className="title" style={{ marginBottom: '3rem' }}>Moments</h2>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '1rem' }}>
-            {PHOTOS_GALLERY.map((src, i) => (
+            {PHOTOS_GALLERY.map((_, i) => (
               <div key={i} style={{ aspectRatio: '4/3', borderRadius: 'var(--r-md)', overflow: 'hidden', position: 'relative' }}>
-                <img src={src} alt="" style={{
-                  width: '100%', height: '100%', objectFit: 'cover',
-                  transition: 'transform .6s var(--ease)'
-                }}
-                  onMouseOver={e => e.target.style.transform = 'scale(1.06)'}
-                  onMouseOut={e => e.target.style.transform = 'scale(1)'} />
+                <PhotoBox w="100%" h="100%" label={`Moment ${i + 1}`} />
               </div>
             ))}
           </div>
