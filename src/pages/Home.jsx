@@ -83,7 +83,22 @@ export default function Home() {
     const timer = setInterval(() => {
       setVidIdx((prev) => (prev + 1) % YT_BG_IDS.length);
     }, 10000); // 10초
-    return () => clearInterval(timer);
+
+    // 프리미엄 스크롤 애니메이션 (Intersection Observer)
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('active');
+        }
+      });
+    }, { threshold: 0.1 });
+
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+    return () => {
+      clearInterval(timer);
+      observer.disconnect();
+    };
   }, []);
 
   return (
@@ -118,7 +133,7 @@ export default function Home() {
       <section id="home" style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', padding: '80px var(--spacing)' }}>
         <div style={{ maxWidth: 1200, margin: '0 auto', width: '100%' }}>
 
-          <div className="glass" style={{ padding: 'clamp(40px,6vw,72px)', borderRadius: 28 }}>
+          <div className="glass reveal" style={{ padding: 'clamp(40px,6vw,72px)', borderRadius: 28 }}>
             <Label>MAGPIENTIGER · 까치와호랑이</Label>
             <h1 style={{ fontSize: 'clamp(3rem,7vw,6.4rem)', fontWeight: 900, letterSpacing: '-0.05em', color: 'var(--navy)', lineHeight: 1.05, marginBottom: '1.5rem' }}>
               WHERE THE<br />
@@ -197,7 +212,7 @@ export default function Home() {
       {/* ════════════════════════════
           MEMBERS
       ════════════════════════════ */}
-      <section id="members" className="section section-white">
+      <section id="members" className="section section-white reveal">
         <div style={{ maxWidth: 1200, margin: '0 auto' }}>
           <Label>The Wild Ones</Label>
           <h2 className="title" style={{ marginBottom: '3.5rem' }}>Band Members</h2>
@@ -249,7 +264,7 @@ export default function Home() {
       {/* ════════════════════════════
           SHOWS
       ════════════════════════════ */}
-      <section id="shows" className="section" style={{ background: 'rgba(255,255,255,0.6)' }}>
+      <section id="shows" className="section reveal" style={{ background: 'rgba(255,255,255,0.6)' }}>
         <div style={{ maxWidth: 1200, margin: '0 auto' }}>
           <Label>Performance History</Label>
           <h2 className="title" style={{ marginBottom: '3.5rem' }}>Shows</h2>
@@ -288,7 +303,7 @@ export default function Home() {
       {/* ════════════════════════════
           GALLERY
       ════════════════════════════ */}
-      <section className="section section-white">
+      <section className="section section-white reveal">
         <div style={{ maxWidth: 1200, margin: '0 auto' }}>
           <Label>Gallery</Label>
           <h2 className="title" style={{ marginBottom: '3rem' }}>Moments</h2>

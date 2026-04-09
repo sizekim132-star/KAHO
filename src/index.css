@@ -102,6 +102,24 @@ img { display: block; max-width: 100%; }
 }
 .nav-cta:hover { transform: translateY(-1px); box-shadow: 0 6px 18px rgba(255,95,31,.35); }
 
+/* ─── SCROLL REVEAL (PREMIUM BLUR) ─── */
+.reveal {
+  opacity: 0;
+  filter: blur(10px);
+  transform: translateY(20px);
+  transition: 
+    opacity 1.2s cubic-bezier(0.16, 1, 0.3, 1),
+    filter 1.2s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, filter, transform;
+}
+
+.reveal.active {
+  opacity: 1;
+  filter: blur(0);
+  transform: translateY(0);
+}
+
 /* ─── GLASS ─── */
 .glass {
   background: rgba(255,255,255,0.5);
