@@ -1,5 +1,5 @@
 // src/pages/Home.jsx
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { FaInstagram, FaYoutube, FaSoundcloud } from 'react-icons/fa';
 import memberIcons from '../assets/member_icons.png';
 import galleryGuitar from '../assets/gallery_guitar.png';
@@ -7,7 +7,7 @@ import galleryStage from '../assets/gallery_stage.png';
 import galleryCrowd from '../assets/gallery_crowd.png';
 
 /* ── 실제 유튜브 영상들 (브라우저로 직접 확인한 실제 ID) ── */
-const YT_BG_ID = 'WYrJr97nXFA';
+const YT_BG_IDS = ['WYrJr97nXFA', 'DS2NMYKaeuo', 'PpuyyzRHDH4', 'xp1fR6-Pwiw'];
 const YT_CHANNEL = 'https://www.youtube.com/@magpientiger';
 const IG_URL = 'https://www.instagram.com/magpientiger/';
 const SC_URL = 'https://soundcloud.com/size_kim';
@@ -76,18 +76,39 @@ function PhotoBox({ w, h, label }) {
 
 /* ─── PAGE ─── */
 export default function Home() {
-  // 실제 까치와호랑이 유튜브 배경 영상
+  const [vidIdx, setVidIdx] = useState(0);
+
+  // 10초마다 영상 변경 (순환)
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setVidIdx((prev) => (prev + 1) % YT_BG_IDS.length);
+    }, 10000); // 10초
+    return () => clearInterval(timer);
+  }, []);
 
   return (
     <div style={{ paddingTop: 60 }}>
 
-      {/* ── 전역 배경 영상 + 필름 ── */}
-      <div className="vbg">
-        <iframe
-          src={`https://www.youtube.com/embed/${YT_BG_ID}?autoplay=1&mute=1&controls=0&loop=1&playlist=${YT_BG_ID}&rel=0&showinfo=0`}
-          allow="autoplay; encrypted-media"
-          style={{ border: 'none' }}
-        />
+      {/* ── 전역 배경 영상 + 필름 (Cross-fade 지원) ── */}
+      <div className="vbg-container">
+        {YT_BG_IDS.map((id, index) => (
+          <div 
+            key={id}
+            className="vbg" 
+            style={{ 
+              opacity: vidIdx === index ? 1 : 0,
+              transition: 'opacity 1.5s ease-in-out',
+              zIndex: vidIdx === index ? 1 : 0
+            }}
+          >
+            <iframe
+              src={`https://www.youtube.com/embed/${id}?autoplay=1&mute=1&controls=0&loop=1&playlist=${id}&rel=0&showinfo=0&iv_load_policy=3&disablekb=1`}
+              allow="autoplay; encrypted-media"
+              style={{ border: 'none' }}
+              title={`bg-video-${index}`}
+            />
+          </div>
+        ))}
       </div>
       <div className="film" />
 
@@ -201,24 +222,25 @@ export default function Home() {
                       <p style={{ fontSize: '.72rem', fontWeight: 800, letterSpacing: '.12em', color: 'var(--orange)', marginTop: 3, textTransform: 'uppercase' }}>{m.animal}</p>
                     </div>
 
-                    {/* 동물 라인 드로잉 — 정밀 좌표 및 초고선명 필터 적용 */}
+                    {/* 동물 라인 드로잉 — 선의 연결성 및 선명도 최종 보정 */}
                     <div style={{
                       width: 80, height: 80,
                       flexShrink: 0,
                       overflow: 'hidden',
                       position: 'relative',
+                      filter: 'drop-shadow(0.5px 0.5px 0px rgba(26,39,68,0.4))', // 선 두께 보강 테두리
                     }}>
                       <div style={{
-                        width: 240, height: 240, // 3x 확대된 스프라이트 베이스
+                        width: 240, height: 240,
                         backgroundImage: `url(${memberIcons})`,
                         backgroundSize: '240px 240px',
-                        // 1024x1024 원본 기준 3x2 그리드 정밀 계산 (하나의 셀은 대략 80x120px)
                         backgroundPosition: `${-m.gridIdx[0] * 80}px ${-m.gridIdx[1] * 120 - 20}px`,
                         backgroundRepeat: 'no-repeat',
                         mixBlendMode: 'multiply',
-                        // 선명도 극대화 필터 조합
-                        filter: 'grayscale(1) contrast(15) brightness(1.2)', 
-                        imageRendering: 'pixelated', // 크롬/웹킷 계열 선명도 최적화
+                        // 대비를 너무 높이지 않아 선이 유실되는 것을 방지, 대신 선명하게 유지
+                        filter: 'grayscale(1) contrast(1.3) brightness(1.1)', 
+                        imageRendering: 'auto', 
+                        transform: 'scale(1.1)', 
                       }} />
                     </div>
                   </div>

@@ -37,8 +37,12 @@ a { text-decoration: none; color: inherit; }
 img { display: block; max-width: 100%; }
 
 /* ─── VIDEO BG ─── */
-.vbg {
+.vbg-container {
   position: fixed; inset: 0; z-index: -2; overflow: hidden;
+  background: var(--navy-3);
+}
+.vbg {
+  position: absolute; inset: 0;
   background: var(--navy-3);
 }
 .vbg iframe {
