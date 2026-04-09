@@ -217,28 +217,27 @@ export default function Home() {
                 {/* 텍스트 영역 */}
                 <div style={{ padding: '1.6rem' }}>
                   <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: 8 }}>
-                    <div>
-                      <h3 style={{ fontSize: '1.3rem', fontWeight: 800, color: 'var(--navy)', letterSpacing: '-.02em' }}>{m.name}</h3>
-                      <p style={{ fontSize: '.72rem', fontWeight: 800, letterSpacing: '.12em', color: 'var(--orange)', marginTop: 2, textTransform: 'uppercase' }}>{m.animal}</p>
+                    <div style={{ flex: 1 }}>
+                      <h3 style={{ fontSize: '1.45rem', fontWeight: 850, color: 'var(--navy)', letterSpacing: '-.03em', lineHeight: 1.2 }}>{m.name}</h3>
+                      <p style={{ fontSize: '.75rem', fontWeight: 800, letterSpacing: '.12em', color: 'var(--orange)', marginTop: 4, textTransform: 'uppercase' }}>{m.animal}</p>
                     </div>
-                    {/* 우측 상단 여백에 포지션 배치 (기존 디자인과 조화롭게 크기 확대) */}
-                    <div style={{ textAlign: 'right' }}>
+                    {/* 우측 포지션 전체 노출 및 폰트 확대 */}
+                    <div style={{ textAlign: 'right', marginLeft: 16 }}>
                       <p style={{ 
-                        fontSize: '.88rem', 
+                        fontSize: '1.02rem', 
                         fontWeight: 800, 
                         color: 'var(--navy)', 
-                        letterSpacing: '.05em', 
-                        textTransform: 'uppercase',
-                        opacity: 0.9,
-                        marginTop: 4
+                        letterSpacing: '-.01em',
+                        lineHeight: 1.3,
+                        opacity: 0.95
                       }}>
-                        {m.role.split(' · ')[0]}
+                        {m.role}
                       </p>
                     </div>
                   </div>
 
-                  <div style={{ height: 1.5, background: 'var(--navy)', opacity: 0.08, margin: '12px 0' }} />
-                  <p style={{ fontSize: '.88rem', color: 'var(--text-2)', lineHeight: 1.8, wordBreak: 'keep-all', fontWeight: 500 }}>{m.bio}</p>
+                  <div style={{ height: 2, background: 'var(--navy)', opacity: 0.08, margin: '14px 0' }} />
+                  <p style={{ fontSize: '.92rem', color: 'var(--text-2)', lineHeight: 1.8, wordBreak: 'keep-all', fontWeight: 500 }}>{m.bio}</p>
                 </div>
               </div>
             ))}
