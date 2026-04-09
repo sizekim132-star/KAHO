@@ -7,7 +7,7 @@ import galleryStage from '../assets/gallery_stage.png';
 import galleryCrowd from '../assets/gallery_crowd.png';
 
 /* ── 실제 유튜브 영상들 (브라우저로 직접 확인한 실제 ID) ── */
-const YT_BG_IDS = ['WYrJr97nXFA', 'DS2NMYKaeuo']; // 3번째 일부공개 영상 ID 대기 중
+const YT_BG_IDS = ['WYrJr97nXFA', 'DS2NMYKaeuo', 'NSsgmCNvKk8']; // 롱폼 3개 순환
 const YT_CHANNEL = 'https://www.youtube.com/@magpientiger';
 const IG_URL = 'https://www.instagram.com/magpientiger/';
 const SC_URL = 'https://soundcloud.com/size_kim';
@@ -77,26 +77,43 @@ function PhotoBox({ w, h, label }) {
 /* ─── PAGE ─── */
 export default function Home() {
   const [vidIdx, setVidIdx] = useState(0);
+  const [videoOpacity, setVideoOpacity] = useState(1); // 배경 영상 스크롤 페이드
 
-  // 10초마다 영상 변경 (순환)
   useEffect(() => {
+    // 10초마다 영상 순환
     const timer = setInterval(() => {
       setVidIdx((prev) => (prev + 1) % YT_BG_IDS.length);
-    }, 10000); // 10초
+    }, 10000);
 
-    // 프리미엄 스크롤 애니메이션 (Intersection Observer)
+    // 스크롤 연동 배경 영상 페이드아웃
+    const handleScroll = () => {
+      const scrollY = window.scrollY;
+      const heroHeight = window.innerHeight;
+      // 히로(100vh) 의 0~70% 구간에서 1→0 페이드
+      const fadeEnd = heroHeight * 0.7;
+      const raw = 1 - scrollY / fadeEnd;
+      setVideoOpacity(Math.max(0, Math.min(1, raw)));
+    };
+    window.addEventListener('scroll', handleScroll, { passive: true });
+
+    // Apple/Toss 스타일 Intersection Observer (stagger 순차 등장)
     const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
+      entries.forEach((entry) => {
         if (entry.isIntersecting) {
           entry.target.classList.add('active');
         }
       });
-    }, { threshold: 0.1 });
+    }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
 
-    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+    // stagger: 모든 리빌 요소 감지 (reveal, reveal-card, reveal-text)
+    document.querySelectorAll('.reveal, .reveal-card, .reveal-text').forEach((el, i) => {
+      el.style.transitionDelay = `${(i % 8) * 0.07}s`;
+      observer.observe(el);
+    });
 
     return () => {
       clearInterval(timer);
+      window.removeEventListener('scroll', handleScroll);
       observer.disconnect();
     };
   }, []);
@@ -105,7 +122,7 @@ export default function Home() {
     <div style={{ paddingTop: 60 }}>
 
       {/* ── 전역 배경 영상 + 필름 (Cross-fade 지원) ── */}
-      <div className="vbg-container">
+      <div className="vbg-container" style={{ opacity: videoOpacity, transition: 'opacity 0.05s linear' }}>
         {YT_BG_IDS.map((id, index) => (
           <div 
             key={id}
@@ -157,7 +174,7 @@ export default function Home() {
       ════════════════════════════ */}
       <section id="about" className="section section-white">
         <div style={{ maxWidth: 1200, margin: '0 auto', display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '6rem', alignItems: 'center' }}>
-          <div>
+          <div className="reveal-text">
             <Label>About Us</Label>
             <h2 className="title">야성이 깨어나는<br />그 순간의 음악.</h2>
             <AccentLine />
@@ -195,8 +212,8 @@ export default function Home() {
               { title: '꽉붙 (Demo)', type: '자작곡', link: SC_URL, icon: '▶ SoundCloud에서 듣기' },
             ].map((t, i) => (
               <a key={i} href={t.link} target="_blank" rel="noreferrer"
-                className="glass lift"
-                style={{ borderRadius: 'var(--r-lg)', padding: '2rem', display: 'block', transition: 'all .3s var(--ease)' }}>
+                className="glass lift reveal-card"
+                style={{ borderRadius: 'var(--r-lg)', padding: '2rem', display: 'block', transition: 'all .3s var(--ease)', transitionDelay: `${i * 0.1}s` }}>
                 <div style={{ width: 52, height: 52, borderRadius: 12, background: 'var(--navy)', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: '1.2rem', fontSize: '1.3rem' }}>
                   🎵
                 </div>
@@ -218,7 +235,8 @@ export default function Home() {
           <h2 className="title" style={{ marginBottom: '3.5rem' }}>Band Members</h2>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(320px, 1fr))', gap: '1.5rem' }}>
             {MEMBERS.map((m, i) => (
-              <div key={i} className="lift" style={{
+              <div key={i} className="lift reveal-card" style={{
+                transitionDelay: `${i * 0.08}s`,
                 border: '1px solid var(--border)',
                 borderRadius: 'var(--r-lg)',
                 overflow: 'hidden',

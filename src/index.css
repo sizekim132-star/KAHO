@@ -102,21 +102,53 @@ img { display: block; max-width: 100%; }
 }
 .nav-cta:hover { transform: translateY(-1px); box-shadow: 0 6px 18px rgba(255,95,31,.35); }
 
-/* ─── SCROLL REVEAL (PREMIUM BLUR) ─── */
+/* ─── PREMIUM SCROLL MOTION (Apple/Toss Style) ─── */
+
+/* 기본 리빌: 아래에서 위로 + 블러 + 스케일 */
 .reveal {
   opacity: 0;
-  filter: blur(10px);
-  transform: translateY(20px);
+  filter: blur(16px);
+  transform: translateY(32px) scale(0.97);
   transition: 
-    opacity 1.2s cubic-bezier(0.16, 1, 0.3, 1),
-    filter 1.2s cubic-bezier(0.16, 1, 0.3, 1),
-    transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+    opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1),
+    filter 0.9s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.9s cubic-bezier(0.16, 1, 0.3, 1);
   will-change: opacity, filter, transform;
 }
-
 .reveal.active {
   opacity: 1;
-  filter: blur(0);
+  filter: blur(0px);
+  transform: translateY(0) scale(1);
+}
+
+/* 카드 아이템 — 더 빠르고 민첩하게 */
+.reveal-card {
+  opacity: 0;
+  filter: blur(8px);
+  transform: translateY(24px) scale(0.98);
+  transition:
+    opacity 0.65s cubic-bezier(0.16, 1, 0.3, 1),
+    filter 0.65s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.65s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, filter, transform;
+}
+.reveal-card.active {
+  opacity: 1;
+  filter: blur(0px);
+  transform: translateY(0) scale(1);
+}
+
+/* 텍스트 리빌 — 수평 밀어올리기 (토스 스타일) */
+.reveal-text {
+  opacity: 0;
+  transform: translateY(16px);
+  transition:
+    opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
+}
+.reveal-text.active {
+  opacity: 1;
   transform: translateY(0);
 }
 
