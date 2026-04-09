@@ -221,17 +221,15 @@ export default function Home() {
                       <h3 style={{ fontSize: '1.3rem', fontWeight: 800, color: 'var(--navy)', letterSpacing: '-.02em' }}>{m.name}</h3>
                       <p style={{ fontSize: '.72rem', fontWeight: 800, letterSpacing: '.12em', color: 'var(--orange)', marginTop: 2, textTransform: 'uppercase' }}>{m.animal}</p>
                     </div>
-                    {/* 우측 상단 여백에 포지션 배치 */}
+                    {/* 우측 상단 여백에 포지션 배치 (기존 디자인과 조화롭게 크기 확대) */}
                     <div style={{ textAlign: 'right' }}>
                       <p style={{ 
-                        fontSize: '.62rem', 
+                        fontSize: '.88rem', 
                         fontWeight: 800, 
                         color: 'var(--navy)', 
-                        letterSpacing: '.14em', 
+                        letterSpacing: '.05em', 
                         textTransform: 'uppercase',
-                        background: 'var(--gray-2)',
-                        padding: '4px 12px',
-                        borderRadius: 999,
+                        opacity: 0.9,
                         marginTop: 4
                       }}>
                         {m.role.split(' · ')[0]}
@@ -239,8 +237,8 @@ export default function Home() {
                     </div>
                   </div>
 
-                  <div style={{ height: 1, background: 'var(--border)', margin: '12px 0' }} />
-                  <p style={{ fontSize: '.88rem', color: 'var(--text-2)', lineHeight: 1.75, wordBreak: 'keep-all' }}>{m.bio}</p>
+                  <div style={{ height: 1.5, background: 'var(--navy)', opacity: 0.08, margin: '12px 0' }} />
+                  <p style={{ fontSize: '.88rem', color: 'var(--text-2)', lineHeight: 1.8, wordBreak: 'keep-all', fontWeight: 500 }}>{m.bio}</p>
                 </div>
               </div>
             ))}
