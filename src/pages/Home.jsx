@@ -216,33 +216,9 @@ export default function Home() {
 
                 {/* 텍스트 영역 */}
                 <div style={{ padding: '1.6rem' }}>
-                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: 8 }}>
-                    <div>
-                      <h3 style={{ fontSize: '1.3rem', fontWeight: 800, color: 'var(--navy)', letterSpacing: '-.02em' }}>{m.name}</h3>
-                      <p style={{ fontSize: '.72rem', fontWeight: 800, letterSpacing: '.12em', color: 'var(--orange)', marginTop: 3, textTransform: 'uppercase' }}>{m.animal}</p>
-                    </div>
-
-                    {/* 동물 라인 드로잉 — 선의 연결성 및 선명도 최종 보정 */}
-                    <div style={{
-                      width: 80, height: 80,
-                      flexShrink: 0,
-                      overflow: 'hidden',
-                      position: 'relative',
-                      filter: 'drop-shadow(0.5px 0.5px 0px rgba(26,39,68,0.4))', // 선 두께 보강 테두리
-                    }}>
-                      <div style={{
-                        width: 240, height: 240,
-                        backgroundImage: `url(${memberIcons})`,
-                        backgroundSize: '240px 240px',
-                        backgroundPosition: `${-m.gridIdx[0] * 80}px ${-m.gridIdx[1] * 120 - 20}px`,
-                        backgroundRepeat: 'no-repeat',
-                        mixBlendMode: 'multiply',
-                        // 대비를 너무 높이지 않아 선이 유실되는 것을 방지, 대신 선명하게 유지
-                        filter: 'grayscale(1) contrast(1.3) brightness(1.1)', 
-                        imageRendering: 'auto', 
-                        transform: 'scale(1.1)', 
-                      }} />
-                    </div>
+                  <div style={{ marginBottom: 8 }}>
+                    <h3 style={{ fontSize: '1.3rem', fontWeight: 800, color: 'var(--navy)', letterSpacing: '-.02em' }}>{m.name}</h3>
+                    <p style={{ fontSize: '.72rem', fontWeight: 800, letterSpacing: '.12em', color: 'var(--orange)', marginTop: 3, textTransform: 'uppercase' }}>{m.animal}</p>
                   </div>
 
                   <div style={{ height: 1, background: 'var(--border)', margin: '12px 0' }} />
