@@ -11,10 +11,10 @@ html {
   --orange: #FF5F1F;
   --orange-light: rgba(255, 95, 31, 0.12);
   --white: #FFFFFF;
-  --gray-1: #f9fafb;
-  /* 거의 하얀색에 가까운 오프화이트 */
-  --gray-2: #f4f6f8;
-  /* 부드러운 섹션 구분을 위한 미세한 연회색 */
+  --gray-1: #F9FAFB;
+  /* 깨끗한 애플스타일 오프화이트 */
+  --gray-2: #F2F4F6;
+  /* 세련된 토스스타일 그레이 */
   --dark-bg: #09090F;
   /* 멤버 섹션 다크 배경 */
   --dark-card: #141420;
@@ -440,7 +440,7 @@ img {
   transform: translateX(-50%);
   width: 60%;
   height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(0, 0, 0, 0.12), transparent);
+  background: linear-gradient(90deg, transparent, rgba(0, 0, 0, 0.06), transparent);
 }
 
 .section-dark::before {
