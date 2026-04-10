@@ -269,7 +269,6 @@ export default function Home() {
       </section>
 
       {/* ════ CONTACT ════ */}
-      <section id="contact" className="section section-white" style={{ borderTop: '1px solid var(--gray-2)' }}>
       <section id="contact" className="section" style={{ backgroundColor: '#F5F5F7', borderTop: '1px solid #E5E5E7' }}>
         <div style={{ maxWidth: 1000, margin: '0 auto' }}>
           <div className="reveal-text" style={{ textAlign: 'center', marginBottom: '4rem' }}>
