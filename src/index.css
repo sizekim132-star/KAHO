@@ -2,6 +2,7 @@
 
 html {
   scroll-behavior: smooth;
+  scroll-snap-type: y mandatory;
 }
 
 :root {
@@ -13,8 +14,8 @@ html {
   --white: #FFFFFF;
   --gray-1: #f3f4f6;
   /* 명확한 오프화이트 */
-  --gray-2: #e5e7eb;
-  /* 가독성 높은 확실한 그레이 */
+  --gray-2: #ced4da;
+  /* 중첩된 섹션용 짙은 그레이 */
   --dark-bg: #09090F;
   /* 멤버 섹션 다크 배경 */
   --dark-card: #141420;
@@ -174,6 +175,11 @@ img {
 .nav-cta:hover {
   transform: translateY(-1px);
   box-shadow: 0 6px 18px rgba(255, 95, 31, .35);
+}
+
+/* ─── HERO ─── */
+#home {
+  scroll-snap-align: start;
 }
 
 /* ════════════════════════════════════════════
@@ -412,6 +418,11 @@ img {
   padding: 120px var(--spacing);
   position: relative;
   overflow: hidden;
+  scroll-snap-align: start;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .section-white {
