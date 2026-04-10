@@ -164,6 +164,14 @@ export default function Home() {
             <p className="body-text" style={{ marginBottom: '2.5rem' }}>
               자작곡과 창의적인 편곡을 통해 우리만의 세계를 구축하고 있으며, 팬들과 함께하는 라이브 무대를 가장 사랑합니다.
             </p>
+            <div style={{ display: 'flex', gap: 12 }} className="reveal-text">
+              <a href={IG_URL} target="_blank" rel="noreferrer" className="btn btn-secondary" style={{ padding: '10px 22px', fontSize: '.82rem' }}>
+                <FaInstagram size={15} /> Instagram
+              </a>
+              <a href={YT_CHANNEL} target="_blank" rel="noreferrer" className="btn btn-ghost" style={{ padding: '10px 22px', fontSize: '.82rem' }}>
+                <FaYoutube size={15} /> YouTube
+              </a>
+            </div>
           </div>
           <div className="reveal-card">
             <PhotoBox w="100%" h="440px" label="밴드 단체사진" />
@@ -180,16 +188,29 @@ export default function Home() {
           </div>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))', gap: '1.5rem' }}>
             {[
-              { title: '깊은 밤을 날아서', type: '까치와 고양이 커버', link: `https://www.youtube.com/watch?v=WYrJr97nXFA` },
-              { title: '크리스마스 캐롤 메들리', type: '밴드 커버', link: `https://www.youtube.com/watch?v=DS2NMYKaeuo` },
-              { title: '꽉붙 (Demo)', type: '자작곡', link: SC_URL },
+              { title: '깊은 밤을 날아서', type: '까치와 고양이 커버', link: `WYrJr97nXFA`, isYT: true },
+              { title: '크리스마스 캐롤 메들리', type: '밴드 커버', link: `DS2NMYKaeuo`, isYT: true },
+              { title: '꽉붙 (Demo)', type: '자작곡', link: SC_URL, isYT: false },
             ].map((t, i) => (
-              <a key={i} href={t.link} target="_blank" rel="noreferrer" className="lift reveal-card"
-                style={{ borderRadius: 'var(--r-lg)', padding: '2rem', display: 'block', backgroundColor: '#fff', border: '1px solid rgba(0,0,0,0.05)' }}>
-                <div style={{ width: 52, height: 52, borderRadius: 12, background: 'var(--navy)', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: '1.2rem', fontSize: '1.3rem' }}>🎵</div>
-                <p style={{ fontSize: '.7rem', fontWeight: 800, color: 'var(--orange)', marginBottom: 6 }}>{t.type}</p>
-                <h3 style={{ fontSize: '1.35rem', fontWeight: 800, color: 'var(--navy)' }}>{t.title}</h3>
-              </a>
+              <div key={i} className="lift reveal-card"
+                style={{ borderRadius: 'var(--r-lg)', overflow: 'hidden', backgroundColor: '#fff', border: '1px solid rgba(0,0,0,0.05)', display: 'flex', flexDirection: 'column' }}>
+                {t.isYT ? (
+                  <div style={{ aspectRatio: '16/9', width: '100%' }}>
+                    <iframe width="100%" height="100%" src={`https://www.youtube.com/embed/${t.link}?rel=0`}
+                      title={t.title} frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen />
+                  </div>
+                ) : (
+                  <div style={{ height: 180, backgroundColor: 'var(--navy-2)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#fff', fontSize: '2rem' }}>🎵</div>
+                )}
+                <div style={{ padding: '1.5rem' }}>
+                  <p style={{ fontSize: '.7rem', fontWeight: 800, color: 'var(--orange)', marginBottom: 6 }}>{t.type}</p>
+                  <h3 style={{ fontSize: '1.2rem', fontWeight: 800, color: 'var(--navy)', marginBottom: 12 }}>{t.title}</h3>
+                  <a href={t.isYT ? `https://www.youtube.com/watch?v=${t.link}` : t.link} target="_blank" rel="noreferrer"
+                    style={{ fontSize: '.8rem', fontWeight: 700, color: 'var(--text-3)', display: 'inline-flex', alignItems: 'center', gap: 4 }}>
+                    {t.isYT ? '▶ YouTube에서 보기' : '▶ SoundCloud에서 듣기'}
+                  </a>
+                </div>
+              </div>
             ))}
           </div>
         </div>
