@@ -7,10 +7,10 @@ import Home from './pages/Home';
 import PhotoSorterTool from './pages/PhotoSorterTool';
 
 const LINKS = [
-  { label: 'About',   href: '#about' },
-  { label: 'Music',   href: '#music' },
+  { label: 'About', href: '#about' },
+  { label: 'Music', href: '#music' },
   { label: 'Members', href: '#members' },
-  { label: 'Shows',   href: '#shows' },
+  { label: 'Shows', href: '#shows' },
   { label: 'Contact', href: '#contact' },
 ];
 
@@ -34,21 +34,21 @@ function Nav() {
       </ul>
       <div style={{ display: 'flex', gap: 12, alignItems: 'center' }}>
         <a href="https://www.instagram.com/magpientiger/" target="_blank" rel="noreferrer"
-          style={{ color:'#9CA3AF', transition:'color .15s' }}
-          onMouseOver={e=>e.currentTarget.style.color='#E1306C'}
-          onMouseOut={e=>e.currentTarget.style.color='#9CA3AF'}>
+          style={{ color: '#9CA3AF', transition: 'color .15s' }}
+          onMouseOver={e => e.currentTarget.style.color = '#E1306C'}
+          onMouseOut={e => e.currentTarget.style.color = '#9CA3AF'}>
           <FaInstagram size={17} />
         </a>
         <a href="https://www.youtube.com/@magpientiger" target="_blank" rel="noreferrer"
-          style={{ color:'#9CA3AF', transition:'color .15s' }}
-          onMouseOver={e=>e.currentTarget.style.color='#FF0000'}
-          onMouseOut={e=>e.currentTarget.style.color='#9CA3AF'}>
+          style={{ color: '#9CA3AF', transition: 'color .15s' }}
+          onMouseOver={e => e.currentTarget.style.color = '#FF0000'}
+          onMouseOut={e => e.currentTarget.style.color = '#9CA3AF'}>
           <FaYoutube size={18} />
         </a>
         <a href="https://soundcloud.com/size_kim" target="_blank" rel="noreferrer"
-          style={{ color:'#9CA3AF', transition:'color .15s' }}
-          onMouseOver={e=>e.currentTarget.style.color='#FF5500'}
-          onMouseOut={e=>e.currentTarget.style.color='#9CA3AF'}>
+          style={{ color: '#9CA3AF', transition: 'color .15s' }}
+          onMouseOver={e => e.currentTarget.style.color = '#FF5500'}
+          onMouseOut={e => e.currentTarget.style.color = '#9CA3AF'}>
           <FaSoundcloud size={20} />
         </a>
         <a href="https://soundcloud.com/size_kim" target="_blank" rel="noreferrer" className="nav-cta">
