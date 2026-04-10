@@ -70,7 +70,10 @@ export default function Home() {
         const el = document.getElementById(section);
         if (el) {
           const rect = el.getBoundingClientRect();
-          if (rect.top <= 150 && rect.bottom >= 150) setActiveSection(section);
+          // 섹션의 상단이 화면의 40% 지점 이내로 들어오면 활성화 (더 기민하게)
+          if (rect.top <= window.innerHeight * 0.4 && rect.bottom >= window.innerHeight * 0.4) {
+            setActiveSection(section);
+          }
         }
       }
     };
@@ -106,12 +109,12 @@ export default function Home() {
           { id: 'members', label: 'Band' },
           { id: 'contact', label: 'Contact' }
         ].map(item => (
-          <a key={item.id} href={`#${item.id}`} 
-             className={`thumb-btn ${activeSection === item.id ? 'active' : ''}`}
-             onClick={(e) => {
-               e.preventDefault();
-               document.getElementById(item.id)?.scrollIntoView({ behavior: 'smooth' });
-             }}>
+          <a key={item.id} href={`#${item.id}`}
+            className={`thumb-btn ${activeSection === item.id ? 'active' : ''}`}
+            onClick={(e) => {
+              e.preventDefault();
+              document.getElementById(item.id)?.scrollIntoView({ behavior: 'smooth' });
+            }}>
             {item.label}
           </a>
         ))}
@@ -121,7 +124,7 @@ export default function Home() {
         {YT_BG_IDS.map((id, index) => (
           <div key={id} className="vbg" style={{ opacity: vidIdx === index ? 1 : 0, transition: 'opacity 1.5s ease-in-out', zIndex: vidIdx === index ? 1 : 0 }}>
             <iframe src={`https://www.youtube.com/embed/${id}?autoplay=1&mute=1&controls=0&loop=1&playlist=${id}&rel=0&showinfo=0&iv_load_policy=3&disablekb=1`}
-                    allow="autoplay; encrypted-media" style={{ border: 'none' }} title={`bg-video-${index}`} />
+              allow="autoplay; encrypted-media" style={{ border: 'none' }} title={`bg-video-${index}`} />
           </div>
         ))}
       </div>
@@ -230,13 +233,13 @@ export default function Home() {
                 <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', minHeight: 200 }}>
                   <div style={{ padding: '2.5rem 3rem' }}>
                     <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 12 }}>
-                      <span style={{ fontSize: '.7rem', fontWeight: 800, background: s.status==='upcoming'?'var(--orange)':'var(--gray-2)', color: s.status==='upcoming'?'#fff':'var(--text-3)', padding:'4px 12px', borderRadius:999 }}>{s.status==='upcoming'?'🔥 Upcoming':'Completed'}</span>
+                      <span style={{ fontSize: '.7rem', fontWeight: 800, background: s.status === 'upcoming' ? 'var(--orange)' : 'var(--gray-2)', color: s.status === 'upcoming' ? '#fff' : 'var(--text-3)', padding: '4px 12px', borderRadius: 999 }}>{s.status === 'upcoming' ? '🔥 Upcoming' : 'Completed'}</span>
                       <span style={{ fontSize: '.8rem', color: 'var(--text-3)' }}>{s.date}</span>
                     </div>
                     <h3 style={{ fontSize: '1.5rem', fontWeight: 800, color: 'var(--navy)' }}>{s.name}</h3>
                     <p style={{ fontSize: '.9rem', color: 'var(--text-2)', marginTop: 8 }}>📍 {s.location}</p>
                   </div>
-                  <div style={{ borderLeft: '1px solid rgba(0,0,0,.04)', background:'rgba(0,0,0,.01)' }}><PhotoBox w="100%" h="100%" label="Show Moment" /></div>
+                  <div style={{ borderLeft: '1px solid rgba(0,0,0,.04)', background: 'rgba(0,0,0,.01)' }}><PhotoBox w="100%" h="100%" label="Show Moment" /></div>
                 </div>
               </div>
             ))}
@@ -252,17 +255,17 @@ export default function Home() {
             <AccentLine />
           </div>
           <div className="reveal-card" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '1px', backgroundColor: 'var(--gray-2)', borderRadius: 'var(--r-lg)', overflow: 'hidden', boxShadow: 'var(--shadow-lg)', border: '1px solid var(--gray-2)' }}>
-             {[
-               { label: 'REPRESENTATIVE', val: '김치수 (리더)', icon: '👤' },
-               { label: 'PHONE', val: '010-5532-0456', icon: '📞' },
-               { label: 'EMAIL', val: 'size132@naver.com', icon: '✉️' }
-             ].map((c, idx) => (
-               <div key={idx} style={{ backgroundColor: '#fff', padding: '3rem 2rem', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '1rem' }}>
-                 <span style={{ fontSize: '1.5rem', marginBottom: '0.5rem' }}>{c.icon}</span>
-                 <p style={{ fontSize: '.65rem', fontWeight: 800, color: 'var(--text-3)', letterSpacing:'.2em' }}>{c.label}</p>
-                 <p style={{ fontSize: '1.1rem', fontWeight: 900, color: 'var(--navy)' }}>{c.val}</p>
-               </div>
-             ))}
+            {[
+              { label: 'REPRESENTATIVE', val: '김치수 (리더)', icon: '👤' },
+              { label: 'PHONE', val: '010-5532-0456', icon: '📞' },
+              { label: 'EMAIL', val: 'size132@naver.com', icon: '✉️' }
+            ].map((c, idx) => (
+              <div key={idx} style={{ backgroundColor: '#fff', padding: '3rem 2rem', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '1rem' }}>
+                <span style={{ fontSize: '1.5rem', marginBottom: '0.5rem' }}>{c.icon}</span>
+                <p style={{ fontSize: '.65rem', fontWeight: 800, color: 'var(--text-3)', letterSpacing: '.2em' }}>{c.label}</p>
+                <p style={{ fontSize: '1.1rem', fontWeight: 900, color: 'var(--navy)' }}>{c.val}</p>
+              </div>
+            ))}
           </div>
           <div style={{ textAlign: 'center', marginTop: '4rem' }} className="reveal"><a href={`mailto:size132@naver.com`} className="btn btn-primary" style={{ padding: '18px 48px' }}>공연 제안하기</a></div>
         </div>
