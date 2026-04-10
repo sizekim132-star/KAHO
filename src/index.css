@@ -136,34 +136,34 @@ img { display: block; max-width: 100%; }
   to   { transform: rotate(360deg); }
 }
 
-/* ── 스크롤 리빌 ── */
+/* ── 스크롤 리빌 (Apple/Toss Premium Refinement) ── */
 .reveal {
   opacity: 0;
-  filter: blur(16px);
-  transform: translateY(32px) scale(0.97);
+  filter: blur(20px);
+  transform: translateY(40px) scale(0.96);
   transition:
-    opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1),
-    filter  0.9s cubic-bezier(0.16, 1, 0.3, 1),
-    transform 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+    opacity 1.2s cubic-bezier(0.16, 1, 0.3, 1),
+    filter  1.2s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
   will-change: opacity, filter, transform;
 }
 .reveal.active { opacity: 1; filter: blur(0px); transform: translateY(0) scale(1); }
 
 .reveal-card {
-  opacity: 0; filter: blur(8px); transform: translateY(24px) scale(0.98);
+  opacity: 0; filter: blur(12px); transform: translateY(32px) scale(0.98);
   transition:
-    opacity 0.65s cubic-bezier(0.16, 1, 0.3, 1),
-    filter  0.65s cubic-bezier(0.16, 1, 0.3, 1),
-    transform 0.65s cubic-bezier(0.16, 1, 0.3, 1);
+    opacity 1.0s cubic-bezier(0.2, 0.8, 0.2, 1),
+    filter  1.0s cubic-bezier(0.2, 0.8, 0.2, 1),
+    transform 1.0s cubic-bezier(0.2, 0.8, 0.2, 1);
   will-change: opacity, filter, transform;
 }
 .reveal-card.active { opacity: 1; filter: blur(0px); transform: translateY(0) scale(1); }
 
 .reveal-text {
-  opacity: 0; transform: translateY(16px);
+  opacity: 0; transform: translateY(24px);
   transition:
-    opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
-    transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+    opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
   will-change: opacity, transform;
 }
 .reveal-text.active { opacity: 1; transform: translateY(0); }
