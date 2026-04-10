@@ -180,7 +180,7 @@ export default function Home() {
       </section>
 
       {/* ════ MUSIC ════ */}
-      <section id="music" className="section section-gray">
+      <section id="music" className="section section-gray2">
         <div style={{ maxWidth: 1200, margin: '0 auto' }}>
           <div className="reveal-text">
             <Label>Discography</Label>
@@ -269,7 +269,7 @@ export default function Home() {
       </section>
 
       {/* ════ CONTACT ════ */}
-      <section id="contact" className="section section-white" style={{ borderTop: '1px solid var(--gray-2)' }}>
+      <section id="contact" className="section section-gray1" style={{ borderTop: '1px solid var(--gray-2)' }}>
         <div style={{ maxWidth: 1000, margin: '0 auto' }}>
           <div className="reveal-text" style={{ textAlign: 'center', marginBottom: '4rem' }}>
             <h2 className="title" style={{ fontSize: '1rem', letterSpacing: '.4em', opacity: 0.4, marginBottom: '1.5rem' }}>CONTACT</h2>

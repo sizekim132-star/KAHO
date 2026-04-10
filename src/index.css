@@ -11,9 +11,10 @@ html {
   --orange: #FF5F1F;
   --orange-light: rgba(255, 95, 31, 0.12);
   --white: #FFFFFF;
-  --gray-1: #F8F8FA;
-  /* 아주 살짝 회색빛 흰색 */
-  --gray-2: #F2F2F5;
+  --gray-1: #f1f5f9;
+  /* 명확한 오프화이트 */
+  --gray-2: #e2e8f0;
+  /* 확실한 섹션 구분용 청회색 */
   /* 섹션 구분용 */
   --dark-bg: #09090F;
   /* 멤버 섹션 다크 배경 */
@@ -440,7 +441,7 @@ img {
   transform: translateX(-50%);
   width: 60%;
   height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(0, 0, 0, 0.08), transparent);
+  background: linear-gradient(90deg, transparent, rgba(0, 0, 0, 0.3), transparent);
 }
 
 .section-dark::before {
