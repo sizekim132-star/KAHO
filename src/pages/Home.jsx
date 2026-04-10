@@ -241,7 +241,13 @@ export default function Home() {
           <h2 className="title-dark" style={{ marginBottom: '3.5rem' }}>Band Members</h2>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(310px, 1fr))', gap: '1.5rem' }}>
             {MEMBERS.map((m, i) => (
-              <div key={i} className="glass lift reveal-card" style={{ transitionDelay: `${i * 0.08}s`, overflow: 'hidden', borderRadius: 'var(--r-lg)' }}>
+              <div key={i} className="lift reveal-card" style={{ 
+                transitionDelay: `${i * 0.08}s`, 
+                overflow: 'hidden', 
+                borderRadius: 'var(--r-lg)',
+                backgroundColor: '#ffffff', // 흰색으로 변경
+                border: '1px solid rgba(0,0,0,0.05)'
+              }}>
                 <div style={{ height: 260 }}><PhotoBox w="100%" h="260px" label={m.name} /></div>
                 <div style={{ padding: '1.6rem' }}>
                   <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: 8 }}>
@@ -292,27 +298,47 @@ export default function Home() {
       </section>
 
       {/* ════ CONTACT ════ */}
-      <section id="contact" className="section section-gray2">
-        <div style={{ maxWidth: 800, margin: '0 auto', textAlign: 'center' }}>
-          <div className="reveal-text">
-            <Label>Get In Touch</Label>
-            <h2 className="title" style={{ marginBottom: '1.5rem' }}>Contact Magpientiger</h2>
+      <section id="contact" className="section section-white" style={{ borderTop: '1px solid var(--gray-2)' }}>
+        <div style={{ maxWidth: 1000, margin: '0 auto' }}>
+          <div className="reveal-text" style={{ textAlign: 'center', marginBottom: '4rem' }}>
+            <h2 className="title" style={{ fontSize: '1rem', letterSpacing: '.4em', opacity: 0.4, marginBottom: '1.5rem' }}>CONTACT</h2>
             <AccentLine />
-            <p className="body-text" style={{ marginBottom: '4rem' }}>공연 섭외 및 기타 문의는 아래 연락처로 편하게 연락주세요.</p>
           </div>
-          <div className="glass reveal-card" style={{ padding: 'clamp(2rem, 5vw, 4rem)', borderRadius: 28, display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '2rem' }}>
-             <div>
-               <p style={{ fontSize: '.68rem', fontWeight: 800, color: 'var(--text-3)', letterSpacing:'.15em', marginBottom: 12 }}>REPRESENTATIVE</p>
-               <p style={{ fontSize: '1.4rem', fontWeight: 900, color: 'var(--navy)' }}>김치수 (리더)</p>
-             </div>
-             <div>
-               <p style={{ fontSize: '.68rem', fontWeight: 800, color: 'var(--text-3)', letterSpacing:'.15em', marginBottom: 12 }}>PHONE</p>
-               <p style={{ fontSize: '1.1rem', fontWeight: 800, color: 'var(--navy)' }}>010-5532-0456</p>
-             </div>
-             <div>
-               <p style={{ fontSize: '.68rem', fontWeight: 800, color: 'var(--text-3)', letterSpacing:'.15em', marginBottom: 12 }}>EMAIL</p>
-               <p style={{ fontSize: '1.1rem', fontWeight: 800, color: 'var(--navy)' }}>size132@naver.com</p>
-             </div>
+          
+          <div className="reveal-card" style={{ 
+            display: 'grid', 
+            gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', 
+            gap: '1px',
+            backgroundColor: 'var(--gray-2)',
+            borderRadius: 'var(--r-lg)',
+            overflow: 'hidden',
+            boxShadow: 'var(--shadow-lg)',
+            border: '1px solid var(--gray-2)'
+          }}>
+             {[
+               { label: 'REPRESENTATIVE', val: '김치수 (리더)', icon: '👤' },
+               { label: 'PHONE', val: '010-5532-0456', icon: '📞' },
+               { label: 'EMAIL', val: 'size132@naver.com', icon: '✉️' }
+             ].map((c, idx) => (
+               <div key={idx} style={{ 
+                 backgroundColor: '#fff', 
+                 padding: '3rem 2rem',
+                 display: 'flex',
+                 flexDirection: 'column',
+                 alignItems: 'center',
+                 gap: '1rem'
+               }}>
+                 <span style={{ fontSize: '1.5rem', marginBottom: '0.5rem' }}>{c.icon}</span>
+                 <p style={{ fontSize: '.65rem', fontWeight: 800, color: 'var(--text-3)', letterSpacing:'.2em' }}>{c.label}</p>
+                 <p style={{ fontSize: '1.1rem', fontWeight: 900, color: 'var(--navy)', letterSpacing: '-0.02em' }}>{c.val}</p>
+               </div>
+             ))}
+          </div>
+          
+          <div style={{ textAlign: 'center', marginTop: '4rem' }} className="reveal">
+            <a href={`mailto:size132@naver.com`} className="btn btn-primary" style={{ padding: '18px 48px' }}>
+              공연 제안하기
+            </a>
           </div>
         </div>
       </section>
