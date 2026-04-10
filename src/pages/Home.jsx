@@ -58,35 +58,23 @@ export default function Home() {
       setVidIdx((prev) => (prev + 1) % YT_BG_IDS.length);
     }, 10000);
 
-    let ticking = false;
     const handleScroll = () => {
-      if (!ticking) {
-        window.requestAnimationFrame(() => {
-          const scrollY = window.scrollY;
-          const heroHeight = window.innerHeight;
-          const fadeEnd = heroHeight * 0.7;
-          const raw = 1 - scrollY / fadeEnd;
-          setVideoOpacity(prev => {
-            const next = Math.max(0, Math.min(1, raw));
-            return Math.abs(prev - next) > 0.01 ? next : prev;
-          });
+      const scrollY = window.scrollY;
+      const heroHeight = window.innerHeight;
+      const fadeEnd = heroHeight * 0.7;
+      const raw = 1 - scrollY / fadeEnd;
+      setVideoOpacity(Math.max(0, Math.min(1, raw)));
 
-          const sections = ['home', 'about', 'music', 'members', 'shows', 'contact'];
-          let currentSection = 'home';
-          for (const section of sections) {
-            const el = document.getElementById(section);
-            if (el) {
-              const rect = el.getBoundingClientRect();
-              if (rect.top <= window.innerHeight * 0.4 && rect.bottom >= window.innerHeight * 0.4) {
-                currentSection = section;
-                break;
-              }
-            }
+      const sections = ['home', 'about', 'music', 'members', 'shows', 'contact'];
+      for (const section of sections) {
+        const el = document.getElementById(section);
+        if (el) {
+          const rect = el.getBoundingClientRect();
+          // 섹션의 상단이 화면의 40% 지점 이내로 들어오면 활성화 (더 기민하게)
+          if (rect.top <= window.innerHeight * 0.4 && rect.bottom >= window.innerHeight * 0.4) {
+            setActiveSection(section);
           }
-          setActiveSection(prev => (prev !== currentSection ? currentSection : prev));
-          ticking = false;
-        });
-        ticking = true;
+        }
       }
     };
     window.addEventListener('scroll', handleScroll, { passive: true });
@@ -192,7 +180,7 @@ export default function Home() {
       </section>
 
       {/* ════ MUSIC ════ */}
-      <section id="music" className="section section-gray">
+      <section id="music" className="section section-gray2">
         <div style={{ maxWidth: 1200, margin: '0 auto' }}>
           <div className="reveal-text">
             <Label>Discography</Label>
@@ -254,7 +242,7 @@ export default function Home() {
       </section>
 
       {/* ════ SHOWS ════ */}
-      <section id="shows" className="section section-white reveal">
+      <section id="shows" className="section section-gray2 reveal">
         <div style={{ maxWidth: 1200, margin: '0 auto' }}>
           <div className="reveal-text">
             <Label>Performance History</Label>
