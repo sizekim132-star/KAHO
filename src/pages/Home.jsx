@@ -134,7 +134,7 @@ export default function Home() {
       <section id="home" style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', padding: '80px var(--spacing)' }}>
         <div style={{ maxWidth: 1200, margin: '0 auto', width: '100%' }}>
           <div className="glass reveal float-slow" style={{ padding: 'clamp(40px,6vw,72px)', borderRadius: 28, maxWidth: 840 }}>
-            <Label>MAGPIENTIGER · 까치와호랑이</Label>
+            <Label>MAGPIENTIGER</Label>
             <h1 className="reveal-text" style={{ fontSize: 'clamp(3rem,7vw,6.4rem)', fontWeight: 900, letterSpacing: '-0.05em', color: 'var(--navy)', lineHeight: 1.05, marginBottom: '1.5rem' }}>
               WHERE THE<br />
               <span className="gradient-text">WILDS SING.</span>

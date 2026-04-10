@@ -27,7 +27,7 @@ function Nav() {
   return (
     <nav className={`nav${scrolled ? ' scrolled' : ''}`}>
       <a href="#home" className="nav-logo">
-        MAGPIENTIGER <em>·</em> 까치와호랑이
+        MAGPIENTIGER
       </a>
       <ul className="nav-links">
         {LINKS.map(l => <li key={l.label}><a href={l.href}>{l.label}</a></li>)}
