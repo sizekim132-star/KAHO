@@ -2,8 +2,6 @@
 
 html {
   scroll-behavior: smooth;
-  scroll-snap-type: y mandatory;
-  scroll-padding-top: 60px;
 }
 
 :root {
@@ -13,10 +11,10 @@ html {
   --orange: #FF5F1F;
   --orange-light: rgba(255, 95, 31, 0.12);
   --white: #FFFFFF;
-  --gray-1: #f9fafb;
-  /* 깨끗한 오프화이트 */
-  --gray-2: #eceef2;
-  /* 확실하게 구분되는 라이트 그레이 */
+  --gray-1: #F8F8FA;
+  /* 아주 살짝 회색빛 흰색 */
+  --gray-2: #e2e8f0;
+  /* 섹션 구분용 */
   --dark-bg: #09090F;
   /* 멤버 섹션 다크 배경 */
   --dark-card: #141420;
@@ -414,11 +412,6 @@ img {
   padding: 120px var(--spacing);
   position: relative;
   overflow: hidden;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  min-height: 100dvh;
-  scroll-snap-align: start;
 }
 
 .section-white {
