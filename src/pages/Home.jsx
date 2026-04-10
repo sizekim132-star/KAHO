@@ -12,10 +12,7 @@ const YT_CHANNEL = 'https://www.youtube.com/@magpientiger';
 const IG_URL = 'https://www.instagram.com/magpientiger/';
 const SC_URL = 'https://soundcloud.com/size_kim';
 
-/* ─── DATA ───
- * member_icons.png: 3 columns x 2 rows (1024x1024)
- * gridIdx: [column, row] (0-indexed)
- */
+/* ─── DATA ─── */
 const MEMBERS = [
   {
     name: '김치수', role: '리더 · 베이스 · 프로듀서', animal: '호랑이',
@@ -77,26 +74,35 @@ function PhotoBox({ w, h, label }) {
 /* ─── PAGE ─── */
 export default function Home() {
   const [vidIdx, setVidIdx] = useState(0);
-  const [videoOpacity, setVideoOpacity] = useState(1); // 배경 영상 스크롤 페이드
+  const [videoOpacity, setVideoOpacity] = useState(1);
+  const [activeSection, setActiveSection] = useState('home');
 
   useEffect(() => {
-    // 10초마다 영상 순환
     const timer = setInterval(() => {
       setVidIdx((prev) => (prev + 1) % YT_BG_IDS.length);
     }, 10000);
 
-    // 스크롤 연동 배경 영상 페이드아웃
     const handleScroll = () => {
       const scrollY = window.scrollY;
       const heroHeight = window.innerHeight;
-      // 히로(100vh) 의 0~70% 구간에서 1→0 페이드
       const fadeEnd = heroHeight * 0.7;
       const raw = 1 - scrollY / fadeEnd;
       setVideoOpacity(Math.max(0, Math.min(1, raw)));
+
+      // Section tracking for thumb zone
+      const sections = ['home', 'about', 'music', 'members', 'shows', 'contact'];
+      for (const section of sections) {
+        const el = document.getElementById(section);
+        if (el) {
+          const rect = el.getBoundingClientRect();
+          if (rect.top <= 150 && rect.bottom >= 150) {
+            setActiveSection(section);
+          }
+        }
+      }
     };
     window.addEventListener('scroll', handleScroll, { passive: true });
 
-    // Apple/Toss 스타일 Intersection Observer (stagger 순차 등장)
     const observer = new IntersectionObserver((entries) => {
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
@@ -105,7 +111,6 @@ export default function Home() {
       });
     }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
 
-    // stagger: 모든 리빌 요소 감지 (reveal, reveal-card, reveal-text)
     document.querySelectorAll('.reveal, .reveal-card, .reveal-text').forEach((el, i) => {
       el.style.transitionDelay = `${(i % 8) * 0.07}s`;
       observer.observe(el);
@@ -120,60 +125,62 @@ export default function Home() {
 
   return (
     <div style={{ paddingTop: 60 }}>
+      {/* ── Mobile Thumb Zone ── */}
+      <div className="mobile-thumb-zone">
+        {[
+          { id: 'home', label: 'Home' },
+          { id: 'music', label: 'Music' },
+          { id: 'members', label: 'Band' },
+          { id: 'contact', label: 'Contact' }
+        ].map(item => (
+          <a key={item.id} href={`#${item.id}`} 
+             className={`thumb-btn ${activeSection === item.id ? 'active' : ''}`}
+             onClick={(e) => {
+               e.preventDefault();
+               const el = document.getElementById(item.id);
+               if (el) el.scrollIntoView({ behavior: 'smooth' });
+             }}>
+            {item.label}
+          </a>
+        ))}
+      </div>
 
-      {/* ── 전역 배경 영상 + 필름 (Cross-fade 지원) ── */}
+      {/* ── 전역 배경 영상 + 필름 ── */}
       <div className="vbg-container" style={{ opacity: videoOpacity, transition: 'opacity 0.05s linear' }}>
         {YT_BG_IDS.map((id, index) => (
-          <div 
-            key={id}
-            className="vbg" 
-            style={{ 
-              opacity: vidIdx === index ? 1 : 0,
-              transition: 'opacity 1.5s ease-in-out',
-              zIndex: vidIdx === index ? 1 : 0
-            }}
-          >
-            <iframe
-              src={`https://www.youtube.com/embed/${id}?autoplay=1&mute=1&controls=0&loop=1&playlist=${id}&rel=0&showinfo=0&iv_load_policy=3&disablekb=1`}
-              allow="autoplay; encrypted-media"
-              style={{ border: 'none' }}
-              title={`bg-video-${index}`}
-            />
+          <div key={id} className="vbg" 
+               style={{ opacity: vidIdx === index ? 1 : 0, transition: 'opacity 1.5s ease-in-out', zIndex: vidIdx === index ? 1 : 0 }}>
+            <iframe src={`https://www.youtube.com/embed/${id}?autoplay=1&mute=1&controls=0&loop=1&playlist=${id}&rel=0&showinfo=0&iv_load_policy=3&disablekb=1`}
+                    allow="autoplay; encrypted-media" style={{ border: 'none' }} title={`bg-video-${index}`} />
           </div>
         ))}
       </div>
       <div className="film" />
 
-      {/* ════════════════════════════
-          HERO
-      ════════════════════════════ */}
+      {/* ════ HERO (Cleaned) ════ */}
       <section id="home" style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', padding: '80px var(--spacing)' }}>
         <div style={{ maxWidth: 1200, margin: '0 auto', width: '100%' }}>
-
-          <div className="glass reveal float-slow" style={{ padding: 'clamp(40px,6vw,72px)', borderRadius: 28 }}>
+          <div className="glass reveal float-slow" style={{ padding: 'clamp(40px,6vw,72px)', borderRadius: 28, maxWidth: 840 }}>
             <Label>MAGPIENTIGER · 까치와호랑이</Label>
             <h1 style={{ fontSize: 'clamp(3rem,7vw,6.4rem)', fontWeight: 900, letterSpacing: '-0.05em', color: 'var(--navy)', lineHeight: 1.05, marginBottom: '1.5rem' }}>
               WHERE THE<br />
-              <span style={{ color: 'var(--orange)' }}>WILDS SING.</span>
+              <span className="gradient-text">WILDS SING.</span>
             </h1>
             <p className="body-text" style={{ maxWidth: 520, marginBottom: '2.5rem' }}>
               까치의 목소리와 호랑이의 그루브.<br />
               서울에서 가장 야성적인 밴드의 포효가 시작된다.
             </p>
             <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap' }}>
-              <a href="https://soundcloud.com/size_kim" target="_blank" rel="noreferrer" className="btn btn-primary">음악 듣기</a>
-              <a href="#shows" className="btn btn-ghost">공연 기록 →</a>
+              <a href="#music" className="btn btn-primary" onClick={(e) => { e.preventDefault(); document.getElementById('music').scrollIntoView({ behavior: 'smooth' }); }}>음악 듣기</a>
+              <a href="#shows" className="btn btn-ghost" onClick={(e) => { e.preventDefault(); document.getElementById('shows').scrollIntoView({ behavior: 'smooth' }); }}>공연 기록 →</a>
             </div>
           </div>
-
         </div>
       </section>
 
-      {/* ════════════════════════════
-          ABOUT
-      ════════════════════════════ */}
+      {/* ════ ABOUT ════ */}
       <section id="about" className="section section-white">
-        <div style={{ maxWidth: 1200, margin: '0 auto', display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '6rem', alignItems: 'center' }}>
+        <div style={{ maxWidth: 1200, margin: '0 auto', display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '4rem', alignItems: 'center' }}>
           <div className="reveal-text">
             <Label>About Us</Label>
             <h2 className="title">야성이 깨어나는<br />그 순간의 음악.</h2>
@@ -185,10 +192,10 @@ export default function Home() {
               자작곡과 창의적인 편곡을 통해 우리만의 세계를 구축하고 있으며, 팬들과 함께하는 라이브 무대를 가장 사랑합니다.
             </p>
             <div style={{ display: 'flex', gap: 12 }}>
-              <a href="https://www.instagram.com/magpientiger/" target="_blank" rel="noreferrer" className="btn btn-secondary" style={{ padding: '10px 22px', fontSize: '.82rem' }}>
+              <a href={IG_URL} target="_blank" rel="noreferrer" className="btn btn-secondary" style={{ padding: '10px 22px', fontSize: '.82rem' }}>
                 <FaInstagram size={15} /> Instagram
               </a>
-              <a href="https://www.youtube.com/@magpientiger" target="_blank" rel="noreferrer" className="btn btn-ghost" style={{ padding: '10px 22px', fontSize: '.82rem' }}>
+              <a href={YT_CHANNEL} target="_blank" rel="noreferrer" className="btn btn-ghost" style={{ padding: '10px 22px', fontSize: '.82rem' }}>
                 <FaYoutube size={15} /> YouTube
               </a>
             </div>
@@ -199,18 +206,16 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ════════════════════════════
-          MUSIC
-      ════════════════════════════ */}
+      {/* ════ MUSIC ════ */}
       <section id="music" className="section section-gray">
         <div style={{ maxWidth: 1200, margin: '0 auto' }}>
           <Label>Discography</Label>
           <h2 className="title" style={{ marginBottom: '3rem' }}>Music</h2>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))', gap: '1.2rem' }}>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))', gap: '1.5rem' }}>
             {[
-              { title: '깊은 밤을 날아서', type: '까치와 고양이 커버', link: `https://www.youtube.com/watch?v=WYrJr97nXFA`, icon: '▶ YouTube에서 보기' },
-              { title: '크리스마스 캐롤 메들리', type: '밴드 커버', link: `https://www.youtube.com/watch?v=DS2NMYKaeuo`, icon: '▶ YouTube에서 보기' },
-              { title: '꽉붙 (Demo)', type: '자작곡', link: SC_URL, icon: '▶ SoundCloud에서 듣기' },
+              { title: '깊은 밤을 날아서', type: '까치와 고양이 커버', link: `https://www.youtube.com/watch?v=WYrJr97nXFA`, icon: '▶ YouTube' },
+              { title: '크리스마스 캐롤 메들리', type: '밴드 커버', link: `https://www.youtube.com/watch?v=DS2NMYKaeuo`, icon: '▶ YouTube' },
+              { title: '꽉붙 (Demo)', type: '자작곡', link: SC_URL, icon: '▶ SoundCloud' },
             ].map((t, i) => (
               <a key={i} href={t.link} target="_blank" rel="noreferrer"
                 className="glass lift reveal-card"
@@ -227,59 +232,35 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ════ MEMBERS (다크 테마) ════ */}
-      <section id="members" className="section section-dark" style={{ padding: '120px var(--spacing)' }}>
-        {/* 배경 ORB 모션 그래픽 */}
-        <div className="orb float" style={{ width: 600, height: 600, top: '-200px', left: '-200px', background: 'radial-gradient(circle, rgba(255,95,31,0.12) 0%, transparent 70%)', animationDuration: '9s' }} />
-        <div className="orb float-slow" style={{ width: 500, height: 500, bottom: '-150px', right: '-100px', background: 'radial-gradient(circle, rgba(26,39,68,0.6) 0%, rgba(100,80,255,0.08) 60%, transparent 80%)', animationDuration: '12s' }} />
-        <div className="orb pulse-glow" style={{ width: 300, height: 300, top: '40%', left: '55%', background: 'radial-gradient(circle, rgba(255,95,31,0.08) 0%, transparent 70%)', animationDuration: '5s' }} />
-
+      {/* ════ MEMBERS ════ */}
+      <section id="members" className="section section-dark">
+        <div className="orb float" style={{ width: 600, height: 600, top: '-200px', left: '-200px', background: 'radial-gradient(circle, rgba(255,95,31,0.1) 0%, transparent 70%)' }} />
+        <div className="orb float-slow" style={{ width: 500, height: 500, bottom: '-150px', right: '-100px', background: 'radial-gradient(circle, rgba(26,39,68,0.5) 0%, transparent 80%)' }} />
         <div style={{ maxWidth: 1200, margin: '0 auto', position: 'relative', zIndex: 1 }}>
           <p className="label-dark">The Wild Ones</p>
           <h2 className="title-dark" style={{ marginBottom: '3.5rem' }}>Band Members</h2>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(320px, 1fr))', gap: '1.5rem' }}>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(310px, 1fr))', gap: '1.5rem' }}>
             {MEMBERS.map((m, i) => (
               <div key={i} className="glass lift reveal-card" style={{ transitionDelay: `${i * 0.08}s`, overflow: 'hidden', borderRadius: 'var(--r-lg)' }}>
-                {/* 사진 공란 */}
-                <div style={{ height: 260 }}>
-                  <PhotoBox w="100%" h="260px" label={`${m.name} 프로필 사진`} />
-                </div>
-
-                {/* 텍스트 영역 */}
+                <div style={{ height: 260 }}><PhotoBox w="100%" h="260px" label={m.name} /></div>
                 <div style={{ padding: '1.6rem' }}>
                   <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: 8 }}>
-                    <div style={{ flex: 1 }}>
-                      <h3 style={{ fontSize: '1.45rem', fontWeight: 850, color: 'var(--navy)', letterSpacing: '-.03em', lineHeight: 1.2 }}>{m.name}</h3>
-                      <p style={{ fontSize: '.75rem', fontWeight: 800, letterSpacing: '.12em', color: 'var(--orange)', marginTop: 4, textTransform: 'uppercase' }}>{m.animal}</p>
+                    <div>
+                      <h3 style={{ fontSize: '1.4rem', fontWeight: 850, color: 'var(--navy)' }}>{m.name}</h3>
+                      <p style={{ fontSize: '.72rem', fontWeight: 800, color: 'var(--orange)', marginTop: 4 }}>{m.animal}</p>
                     </div>
-                    {/* 우측 포지션 전체 노출 및 폰트 확대 */}
-                    <div style={{ textAlign: 'right', marginLeft: 16 }}>
-                      <p style={{ 
-                        fontSize: '1.02rem', 
-                        fontWeight: 800, 
-                        color: 'var(--navy)', 
-                        letterSpacing: '-.01em',
-                        lineHeight: 1.3,
-                        opacity: 0.95
-                      }}>
-                        {m.role}
-                      </p>
-                    </div>
+                    <div style={{ textAlign: 'right' }}><p style={{ fontSize: '.85rem', fontWeight: 800, color: 'var(--navy)', opacity: 0.8 }}>{m.role}</p></div>
                   </div>
-
-                  <div style={{ height: 2, background: 'var(--navy)', opacity: 0.08, margin: '14px 0' }} />
-                  <p style={{ fontSize: '.92rem', color: 'var(--text-2)', lineHeight: 1.8, wordBreak: 'keep-all', fontWeight: 500 }}>{m.bio}</p>
+                  <div style={{ height: 1, background: 'var(--navy)', opacity: 0.08, margin: '14px 0' }} />
+                  <p style={{ fontSize: '.9rem', color: 'var(--text-2)', lineHeight: 1.7 }}>{m.bio}</p>
                 </div>
               </div>
             ))}
-
           </div>
         </div>
       </section>
 
-      {/* ════════════════════════════
-          SHOWS
-      ════════════════════════════ */}
+      {/* ════ SHOWS ════ */}
       <section id="shows" className="section section-white reveal">
         <div style={{ maxWidth: 1200, margin: '0 auto' }}>
           <div className="reveal-text">
@@ -288,28 +269,20 @@ export default function Home() {
           </div>
           <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
             {SHOWS.map((s, i) => (
-              <div key={i} className="glass lift reveal-card" style={{ borderRadius: 'var(--r-lg)', overflow: 'hidden', transitionDelay: `${i * 0.1}s` }}>
-                <div style={{ display: 'grid', gridTemplateColumns: '1fr 360px', minHeight: 220 }}>
-                  {/* 텍스트 */}
-                  <div style={{ padding: '2.5rem 3rem', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
-                    <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 16 }}>
-                      <span style={{
-                        fontFamily: 'var(--font)', fontSize: '.72rem', fontWeight: 800, letterSpacing: '.12em', textTransform: 'uppercase',
-                        color: s.status === 'upcoming' ? 'var(--white)' : 'var(--text-3)',
-                        background: s.status === 'upcoming' ? 'var(--orange)' : 'var(--gray-2)',
-                        padding: '4px 12px', borderRadius: 999
-                      }}>
-                        {s.status === 'upcoming' ? '🔥 Upcoming' : 'Completed'}
+              <div key={i} className="glass lift reveal-card" style={{ borderRadius: 'var(--r-lg)', overflow: 'hidden' }}>
+                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', minHeight: 200 }}>
+                  <div style={{ padding: '2.5rem 3rem', flex: 1 }}>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 12 }}>
+                      <span style={{ fontSize: '.7rem', fontWeight: 800, background: s.status==='upcoming'?'var(--orange)':'var(--gray-2)', color: s.status==='upcoming'?'#fff':'var(--text-3)', padding:'4px 12px', borderRadius:999 }}>
+                        {s.status==='upcoming'?'🔥 Upcoming':'Completed'}
                       </span>
-                      <span style={{ fontSize: '.82rem', fontWeight: 600, color: 'var(--text-3)' }}>{s.date}</span>
+                      <span style={{ fontSize: '.8rem', color: 'var(--text-3)' }}>{s.date}</span>
                     </div>
-                    <h3 style={{ fontSize: '1.6rem', fontWeight: 800, color: 'var(--navy)', letterSpacing: '-.02em', marginBottom: 10 }}>{s.name}</h3>
-                    <p style={{ fontSize: '.9rem', color: 'var(--text-2)', marginBottom: 8 }}>📍 {s.location}</p>
-                    <p style={{ fontSize: '.87rem', color: 'var(--text-3)' }}>{s.desc}</p>
+                    <h3 style={{ fontSize: '1.5rem', fontWeight: 800, color: 'var(--navy)' }}>{s.name}</h3>
+                    <p style={{ fontSize: '.9rem', color: 'var(--text-2)', marginTop: 8 }}>📍 {s.location}</p>
                   </div>
-                  {/* 사진 공란 */}
-                  <div style={{ borderLeft: '1px solid rgba(0,0,0,.05)' }}>
-                    <PhotoBox w="100%" h="100%" label="공연 사진" />
+                  <div style={{ borderLeft: '1px solid rgba(0,0,0,.04)', background:'rgba(0,0,0,.02)' }}>
+                    <PhotoBox w="100%" h="100%" label="Show Moment" />
                   </div>
                 </div>
               </div>
@@ -318,69 +291,51 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ════════════════════════════
-          GALLERY
-      ════════════════════════════ */}
-      <section className="section section-gray2 reveal">
-        <div style={{ maxWidth: 1200, margin: '0 auto' }}>
+      {/* ════ CONTACT ════ */}
+      <section id="contact" className="section section-gray2">
+        <div style={{ maxWidth: 800, margin: '0 auto', textAlign: 'center' }}>
           <div className="reveal-text">
-            <Label>Gallery</Label>
-            <h2 className="title" style={{ marginBottom: '3rem' }}>Moments</h2>
+            <Label>Get In Touch</Label>
+            <h2 className="title" style={{ marginBottom: '1.5rem' }}>Contact Magpientiger</h2>
+            <AccentLine />
+            <p className="body-text" style={{ marginBottom: '4rem' }}>공연 섭외 및 기타 문의는 아래 연락처로 편하게 연락주세요.</p>
           </div>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '1rem' }}>
-            {PHOTOS_GALLERY.map((_, i) => (
-              <div key={i} className="reveal-card" style={{ aspectRatio: '4/3', borderRadius: 'var(--r-md)', overflow: 'hidden', position: 'relative', transitionDelay: `${i * 0.12}s` }}>
-                <PhotoBox w="100%" h="100%" label={`Moment ${i + 1}`} />
-              </div>
-            ))}
+          <div className="glass reveal-card" style={{ padding: 'clamp(2rem, 5vw, 4rem)', borderRadius: 28, display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '2rem' }}>
+             <div>
+               <p style={{ fontSize: '.68rem', fontWeight: 800, color: 'var(--text-3)', letterSpacing:'.15em', marginBottom: 12 }}>REPRESENTATIVE</p>
+               <p style={{ fontSize: '1.4rem', fontWeight: 900, color: 'var(--navy)' }}>김치수 (리더)</p>
+             </div>
+             <div>
+               <p style={{ fontSize: '.68rem', fontWeight: 800, color: 'var(--text-3)', letterSpacing:'.15em', marginBottom: 12 }}>PHONE</p>
+               <p style={{ fontSize: '1.1rem', fontWeight: 800, color: 'var(--navy)' }}>010-5532-0456</p>
+             </div>
+             <div>
+               <p style={{ fontSize: '.68rem', fontWeight: 800, color: 'var(--text-3)', letterSpacing:'.15em', marginBottom: 12 }}>EMAIL</p>
+               <p style={{ fontSize: '1.1rem', fontWeight: 800, color: 'var(--navy)' }}>size132@naver.com</p>
+             </div>
           </div>
         </div>
       </section>
 
-      {/* ════════════════════════════
-          CONTACT / FOOTER
-      ════════════════════════════ */}
-      <footer id="contact" style={{ background: 'var(--navy)', padding: '80px var(--spacing) 48px' }}>
+      {/* ════ FOOTER ════ */}
+      <footer style={{ background: 'var(--navy)', padding: '80px var(--spacing) 120px' }}>
         <div style={{ maxWidth: 1200, margin: '0 auto' }}>
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr auto 1fr', gap: '4rem', alignItems: 'start', marginBottom: '4rem' }}>
-            {/* Brand */}
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '2rem' }}>
             <div>
-              <h3 style={{ fontSize: '1rem', fontWeight: 900, letterSpacing: '.14em', color: 'var(--white)', marginBottom: 8 }}>MAGPIENTIGER</h3>
-              <p style={{ fontSize: '.85rem', color: 'rgba(255,255,255,.45)', lineHeight: 1.7 }}>까치와호랑이<br />서울 기반 인디 밴드 · 2025</p>
+              <h3 style={{ fontSize: '1rem', fontWeight: 900, color: '#fff', letterSpacing: '.14em' }}>MAGPIENTIGER</h3>
+              <p style={{ fontSize: '.85rem', color: 'rgba(255,255,255,.4)', marginTop: 8 }}>까치와호랑이 · 서울 기반 인디 밴드</p>
             </div>
-            {/* Social */}
-            <div style={{ textAlign: 'center' }}>
-              <p style={{ fontSize: '.68rem', fontWeight: 700, letterSpacing: '.18em', color: 'rgba(255,255,255,.3)', marginBottom: 16 }}>FOLLOW</p>
-              <div style={{ display: 'flex', gap: 20, justifyContent: 'center' }}>
-                {[
-                  { icon: <FaInstagram size={20} />, href: 'https://www.instagram.com/magpientiger/', hc: '#E1306C' },
-                  { icon: <FaYoutube size={20} />, href: 'https://www.youtube.com/@magpientiger', hc: '#FF0000' },
-                  { icon: <FaSoundcloud size={22} />, href: 'https://soundcloud.com/size_kim', hc: '#FF5500' },
-                ].map((s, i) => (
-                  <a key={i} href={s.href} target="_blank" rel="noreferrer"
-                    style={{ color: 'rgba(255,255,255,.35)', transition: 'all .2s' }}
-                    onMouseOver={e => { e.currentTarget.style.color = s.hc; e.currentTarget.style.transform = 'translateY(-3px)'; }}
-                    onMouseOut={e => { e.currentTarget.style.color = 'rgba(255,255,255,.35)'; e.currentTarget.style.transform = 'translateY(0)'; }}>
-                    {s.icon}
-                  </a>
-                ))}
-              </div>
-            </div>
-            {/* Contact */}
-            <div style={{ textAlign: 'right' }}>
-              <p style={{ fontSize: '.68rem', fontWeight: 700, letterSpacing: '.18em', color: 'rgba(255,255,255,.3)', marginBottom: 16 }}>BOOKING</p>
-              <p style={{ fontSize: '1.05rem', fontWeight: 800, color: 'var(--white)', marginBottom: 4 }}>김치수 리더</p>
-              <p style={{ fontSize: '.88rem', color: 'rgba(255,255,255,.5)', marginBottom: 2 }}>010-5532-0456</p>
-              <p style={{ fontSize: '.88rem', color: 'rgba(255,255,255,.5)' }}>size132@naver.com</p>
+            <div style={{ display: 'flex', gap: 24 }}>
+              <a href={IG_URL} target="_blank" rel="noreferrer" style={{ color: 'rgba(255,255,255,.4)' }}><FaInstagram size={22} /></a>
+              <a href={YT_CHANNEL} target="_blank" rel="noreferrer" style={{ color: 'rgba(255,255,255,.4)' }}><FaYoutube size={22} /></a>
+              <a href={SC_URL} target="_blank" rel="noreferrer" style={{ color: 'rgba(255,255,255,.4)' }}><FaSoundcloud size={24} /></a>
             </div>
           </div>
-          <div style={{ borderTop: '1px solid rgba(255,255,255,.07)', paddingTop: '2rem', display: 'flex', justifyContent: 'space-between' }}>
-            <p style={{ fontSize: '.75rem', color: 'rgba(255,255,255,.25)' }}>© 2025 MAGPIENTIGER. All rights reserved.</p>
-            <p style={{ fontSize: '.75rem', color: 'rgba(255,255,255,.25)' }}>창립기념일 🐾 4월 29일</p>
+          <div style={{ borderTop: '1px solid rgba(255,255,255,.07)', marginTop: '4rem', paddingTop: '2rem', textAlign: 'center' }}>
+            <p style={{ fontSize: '.75rem', color: 'rgba(255,255,255,.2)' }}>© 2025 MAGPIENTIGER. All rights reserved. 🐾</p>
           </div>
         </div>
       </footer>
-
     </div>
   );
 }
