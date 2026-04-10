@@ -7,7 +7,7 @@ import galleryStage from '../assets/gallery_stage.png';
 import galleryCrowd from '../assets/gallery_crowd.png';
 
 /* ── 실제 유튜브 영상들 (브라우저로 직접 확인한 실제 ID) ── */
-const YT_BG_IDS = ['WYrJr97nXFA', 'DS2NMYKaeuo', 'NSsgmCNvKk8'];
+const YT_BG_IDS = ['WYrJr97nXFA', 'DS2NMYKaeuo', 'NSsgmCNvKk8', 'fCJyKpGrIBI'];
 const YT_CHANNEL = 'https://www.youtube.com/@magpientiger';
 const IG_URL = 'https://www.instagram.com/magpientiger/';
 const SC_URL = 'https://soundcloud.com/size_kim';
