@@ -180,7 +180,7 @@ export default function Home() {
       </section>
 
       {/* ════ MUSIC ════ */}
-      <section id="music" className="section section-gray2">
+      <section id="music" className="section section-gray">
         <div style={{ maxWidth: 1200, margin: '0 auto' }}>
           <div className="reveal-text">
             <Label>Discography</Label>
@@ -269,7 +269,8 @@ export default function Home() {
       </section>
 
       {/* ════ CONTACT ════ */}
-      <section id="contact" className="section section-gray1" style={{ borderTop: '1px solid var(--gray-2)' }}>
+      <section id="contact" className="section section-white" style={{ borderTop: '1px solid var(--gray-2)' }}>
+      <section id="contact" className="section section-white" style={{ borderTop: '1px solid var(--gray-2)' }}>
         <div style={{ maxWidth: 1000, margin: '0 auto' }}>
           <div className="reveal-text" style={{ textAlign: 'center', marginBottom: '4rem' }}>
             <h2 className="title" style={{ fontSize: '1rem', letterSpacing: '.4em', opacity: 0.4, marginBottom: '1.5rem' }}>CONTACT</h2>
@@ -288,7 +289,6 @@ export default function Home() {
               </div>
             ))}
           </div>
-          <div style={{ textAlign: 'center', marginTop: '4rem' }} className="reveal"><a href={`mailto:size132@naver.com`} className="btn btn-primary" style={{ padding: '18px 48px' }}>공연 제안하기</a></div>
         </div>
       </section>
 
