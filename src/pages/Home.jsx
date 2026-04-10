@@ -180,10 +180,10 @@ export default function Home() {
       </section>
 
       {/* ════ MUSIC ════ */}
-      <section id="music" className="section section-gray">
+      <section id="music" className="section section-gray2">
         <div style={{ maxWidth: 1200, margin: '0 auto' }}>
           <div className="reveal-text">
-            <Label>Discography</Label>
+            <Label>History</Label>
             <h2 className="title" style={{ marginBottom: '3rem' }}>Music</h2>
           </div>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))', gap: '1.5rem' }}>
@@ -242,10 +242,10 @@ export default function Home() {
       </section>
 
       {/* ════ SHOWS ════ */}
-      <section id="shows" className="section section-white reveal">
+      <section id="shows" className="section section-gray2 reveal">
         <div style={{ maxWidth: 1200, margin: '0 auto' }}>
           <div className="reveal-text">
-            <Label>Performance History</Label>
+            <Label>History</Label>
             <h2 className="title" style={{ marginBottom: '3.5rem' }}>Shows</h2>
           </div>
           <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
@@ -270,24 +270,26 @@ export default function Home() {
 
       {/* ════ CONTACT ════ */}
       <section id="contact" className="section section-white" style={{ borderTop: '1px solid var(--gray-2)' }}>
+      <section id="contact" className="section" style={{ backgroundColor: '#F5F5F7', borderTop: '1px solid #E5E5E7' }}>
         <div style={{ maxWidth: 1000, margin: '0 auto' }}>
           <div className="reveal-text" style={{ textAlign: 'center', marginBottom: '4rem' }}>
             <h2 className="title" style={{ fontSize: '1rem', letterSpacing: '.4em', opacity: 0.4, marginBottom: '1.5rem' }}>CONTACT</h2>
             <AccentLine />
           </div>
-          <div className="reveal-card" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '1px', backgroundColor: 'var(--gray-2)', borderRadius: 'var(--r-lg)', overflow: 'hidden', boxShadow: 'var(--shadow-lg)', border: '1px solid var(--gray-2)' }}>
+          <div className="reveal-card" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '1px', backgroundColor: '#E5E5E7', borderRadius: '24px', overflow: 'hidden', boxShadow: '0 20px 40px rgba(0,0,0,0.08)', border: '1px solid #E5E5E7' }}>
             {[
               { label: 'REPRESENTATIVE', val: '김치수 (리더)', icon: '👤' },
               { label: 'PHONE', val: '010-5532-0456', icon: '📞' },
               { label: 'EMAIL', val: 'size132@naver.com', icon: '✉️' }
             ].map((c, idx) => (
-              <div key={idx} style={{ backgroundColor: '#fff', padding: '3rem 2rem', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '1rem' }}>
+              <div key={idx} style={{ backgroundColor: '#fff', padding: '3rem 2rem', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '1rem', transition: 'transform 0.3s ease' }} className="hover-lift">
                 <span style={{ fontSize: '1.5rem', marginBottom: '0.5rem' }}>{c.icon}</span>
                 <p style={{ fontSize: '.65rem', fontWeight: 800, color: 'var(--text-3)', letterSpacing: '.2em' }}>{c.label}</p>
                 <p style={{ fontSize: '1.1rem', fontWeight: 900, color: 'var(--navy)' }}>{c.val}</p>
               </div>
             ))}
           </div>
+          <div style={{ textAlign: 'center', marginTop: '4rem' }} className="reveal"><a href={`mailto:size132@naver.com`} className="btn btn-primary" style={{ padding: '18px 48px' }}>공연 제안하기</a></div>
         </div>
       </section>
 
