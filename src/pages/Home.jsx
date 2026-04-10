@@ -58,23 +58,35 @@ export default function Home() {
       setVidIdx((prev) => (prev + 1) % YT_BG_IDS.length);
     }, 10000);
 
+    let ticking = false;
     const handleScroll = () => {
-      const scrollY = window.scrollY;
-      const heroHeight = window.innerHeight;
-      const fadeEnd = heroHeight * 0.7;
-      const raw = 1 - scrollY / fadeEnd;
-      setVideoOpacity(Math.max(0, Math.min(1, raw)));
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          const scrollY = window.scrollY;
+          const heroHeight = window.innerHeight;
+          const fadeEnd = heroHeight * 0.7;
+          const raw = 1 - scrollY / fadeEnd;
+          setVideoOpacity(prev => {
+            const next = Math.max(0, Math.min(1, raw));
+            return Math.abs(prev - next) > 0.01 ? next : prev;
+          });
 
-      const sections = ['home', 'about', 'music', 'members', 'shows', 'contact'];
-      for (const section of sections) {
-        const el = document.getElementById(section);
-        if (el) {
-          const rect = el.getBoundingClientRect();
-          // 섹션의 상단이 화면의 40% 지점 이내로 들어오면 활성화 (더 기민하게)
-          if (rect.top <= window.innerHeight * 0.4 && rect.bottom >= window.innerHeight * 0.4) {
-            setActiveSection(section);
+          const sections = ['home', 'about', 'music', 'members', 'shows', 'contact'];
+          let currentSection = 'home';
+          for (const section of sections) {
+            const el = document.getElementById(section);
+            if (el) {
+              const rect = el.getBoundingClientRect();
+              if (rect.top <= window.innerHeight * 0.4 && rect.bottom >= window.innerHeight * 0.4) {
+                currentSection = section;
+                break;
+              }
+            }
           }
-        }
+          setActiveSection(prev => (prev !== currentSection ? currentSection : prev));
+          ticking = false;
+        });
+        ticking = true;
       }
     };
     window.addEventListener('scroll', handleScroll, { passive: true });
@@ -180,10 +192,10 @@ export default function Home() {
       </section>
 
       {/* ════ MUSIC ════ */}
-      <section id="music" className="section section-gray2">
+      <section id="music" className="section section-gray">
         <div style={{ maxWidth: 1200, margin: '0 auto' }}>
           <div className="reveal-text">
-            <Label>History</Label>
+            <Label>Discography</Label>
             <h2 className="title" style={{ marginBottom: '3rem' }}>Music</h2>
           </div>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))', gap: '1.5rem' }}>
@@ -242,10 +254,10 @@ export default function Home() {
       </section>
 
       {/* ════ SHOWS ════ */}
-      <section id="shows" className="section section-gray2 reveal">
+      <section id="shows" className="section section-white reveal">
         <div style={{ maxWidth: 1200, margin: '0 auto' }}>
           <div className="reveal-text">
-            <Label>History</Label>
+            <Label>Performance History</Label>
             <h2 className="title" style={{ marginBottom: '3.5rem' }}>Shows</h2>
           </div>
           <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
@@ -269,19 +281,19 @@ export default function Home() {
       </section>
 
       {/* ════ CONTACT ════ */}
-      <section id="contact" className="section" style={{ backgroundColor: '#F5F5F7', borderTop: '1px solid #E5E5E7' }}>
+      <section id="contact" className="section section-white" style={{ borderTop: '1px solid var(--gray-2)' }}>
         <div style={{ maxWidth: 1000, margin: '0 auto' }}>
           <div className="reveal-text" style={{ textAlign: 'center', marginBottom: '4rem' }}>
             <h2 className="title" style={{ fontSize: '1rem', letterSpacing: '.4em', opacity: 0.4, marginBottom: '1.5rem' }}>CONTACT</h2>
             <AccentLine />
           </div>
-          <div className="reveal-card" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '1px', backgroundColor: '#E5E5E7', borderRadius: '24px', overflow: 'hidden', boxShadow: '0 20px 40px rgba(0,0,0,0.08)', border: '1px solid #E5E5E7' }}>
+          <div className="reveal-card" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '1px', backgroundColor: 'var(--gray-2)', borderRadius: 'var(--r-lg)', overflow: 'hidden', boxShadow: 'var(--shadow-lg)', border: '1px solid var(--gray-2)' }}>
             {[
               { label: 'REPRESENTATIVE', val: '김치수 (리더)', icon: '👤' },
               { label: 'PHONE', val: '010-5532-0456', icon: '📞' },
               { label: 'EMAIL', val: 'size132@naver.com', icon: '✉️' }
             ].map((c, idx) => (
-              <div key={idx} style={{ backgroundColor: '#fff', padding: '3rem 2rem', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '1rem', transition: 'transform 0.3s ease' }} className="hover-lift">
+              <div key={idx} style={{ backgroundColor: '#fff', padding: '3rem 2rem', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '1rem' }}>
                 <span style={{ fontSize: '1.5rem', marginBottom: '0.5rem' }}>{c.icon}</span>
                 <p style={{ fontSize: '.65rem', fontWeight: 800, color: 'var(--text-3)', letterSpacing: '.2em' }}>{c.label}</p>
                 <p style={{ fontSize: '1.1rem', fontWeight: 900, color: 'var(--navy)' }}>{c.val}</p>
