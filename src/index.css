@@ -676,19 +676,22 @@ img {
 }
 
 @media (max-width: 768px) {
+  .bento-grid {
+    gap: 10px;
+  }
 
   .bento-card-large,
   .bento-card-small {
     grid-column: span 2;
-    padding: 32px 24px 64px !important; /* 모바일 전용 하단 여백 대폭 추가 */
+    padding: 24px 20px !important; /* 15% 하향 조정 및 여백 최소화 */
     min-height: auto;
   }
   
   .bento-header {
     display: flex;
     align-items: center;
-    gap: 12px;
-    margin-bottom: 16px;
+    gap: 10px;
+    margin-bottom: 12px;
   }
   
   .bento-header .icon-box {
@@ -711,10 +714,10 @@ img {
   white-space: nowrap;
 }
 
-@media (max-width: 480px) {
+@media (max-width: 768px) {
   .bento-value {
-    font-size: 1.15rem !important;
-    letter-spacing: -0.05em !important;
+    font-size: clamp(1.25rem, 4vw, 1.4rem) !important;
+    letter-spacing: -0.04em !important;
   }
 }
 
@@ -746,18 +749,18 @@ img {
     flex-direction: column;
     align-items: flex-start;
     padding-right: 0;
-    gap: 20px;
+    gap: 14px;
   }
   
   .bento-social-group {
     margin-left: 0;
-    gap: 1.5rem;
-    margin-top: 10px;
+    gap: 1.25rem;
+    margin-top: 4px;
   }
 
   .bento-social-icon {
-    width: 32px;
-    height: 32px;
+    width: 28px;
+    height: 28px;
   }
 }
 
