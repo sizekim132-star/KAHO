@@ -952,14 +952,3 @@ img {
     height: 14px;
   }
 }
-
-min-width: 0;
-white-space: nowrap;
-letter-spacing: -0.02rem;
-}
-
-.social-btn svg {
-  width: 14px;
-  height: 14px;
-}
-}
