@@ -184,7 +184,7 @@ export default function Home() {
           entry.target.classList.add('active');
         }
       });
-    }, { threshold: 0.15, rootMargin: '0px 0px -100px 0px' });
+    }, { threshold: 0.1, rootMargin: '0px 0px -60px 0px' });
 
     document.querySelectorAll('.reveal, .reveal-card, .reveal-text').forEach((el, i) => {
       // 인라인 스타일로 지연시간이 지정된 경우는 덮어쓰지 않아 About Us와 같은 기본 섹션을 보호합니다.
@@ -313,13 +313,13 @@ export default function Home() {
               { title: '꽉붙 (Demo)', type: '자작곡', link: SC_URL, isYT: false, img: '' },
             ].map((t, i) => (
               <div key={i} className="lift reveal-card"
-                style={{ 
-                  borderRadius: 'var(--r-lg)', 
-                  overflow: 'hidden', 
-                  backgroundColor: '#fff', 
-                  border: '1px solid rgba(0,0,0,0.05)', 
-                  display: 'flex', 
-                  flexDirection: 'column', 
+                style={{
+                  borderRadius: 'var(--r-lg)',
+                  overflow: 'hidden',
+                  backgroundColor: '#fff',
+                  border: '1px solid rgba(0,0,0,0.05)',
+                  display: 'flex',
+                  flexDirection: 'column',
                   boxShadow: 'var(--shadow-md)',
                   transitionDelay: `${(i + 1) * 0.15}s`
                 }}>

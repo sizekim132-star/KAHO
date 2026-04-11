@@ -289,11 +289,11 @@ img {
 .reveal-card {
   opacity: 0;
   filter: blur(12px);
-  transform: translateY(48px) scale(0.98);
+  transform: translateY(32px) scale(0.98);
   transition:
-    opacity 1.2s cubic-bezier(0.16, 1, 0.3, 1),
-    filter 1.2s cubic-bezier(0.16, 1, 0.3, 1),
-    transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+    opacity 1.0s cubic-bezier(0.2, 0.8, 0.2, 1),
+    filter 1.0s cubic-bezier(0.2, 0.8, 0.2, 1),
+    transform 1.0s cubic-bezier(0.2, 0.8, 0.2, 1);
   will-change: opacity, filter, transform;
 }
 
@@ -676,7 +676,9 @@ img {
 }
 
 @media (max-width: 768px) {
-  .bento-card-large, .bento-card-small {
+
+  .bento-card-large,
+  .bento-card-small {
     grid-column: span 2;
   }
 }
