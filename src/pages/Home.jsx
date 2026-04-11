@@ -57,9 +57,7 @@ function BentoCard({ label, value, icon: Icon, sizeClass, socials = [] }) {
 
 // ... (rest of the components)
 
-import galleryGuitar from '../assets/gallery_guitar.png';
-import galleryStage from '../assets/gallery_stage.png';
-import galleryCrowd from '../assets/gallery_crowd.png';
+
 
 /* ─── IMAGE ASSETS (자동 매핑용) ─── */
 import groupPhoto from '../assets/group_photo.jpg';
