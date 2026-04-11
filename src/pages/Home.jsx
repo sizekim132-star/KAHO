@@ -19,7 +19,7 @@ function BentoCard({ label, value, icon: Icon, sizeClass, socials = [] }) {
   return (
     <div className={`bento-card ${sizeClass} reveal-card`} onClick={handleCopy}>
       <div className={`copy-toast ${copied ? 'active' : ''}`}>Copied!</div>
-      <div style={{ display: 'flex', height: '100%', justifyContent: 'space-between', alignItems: 'center', paddingRight: '6rem' }}>
+      <div className="bento-inner" style={{ display: 'flex', height: '100%', justifyContent: 'space-between', alignItems: 'center' }}>
         <div style={{ flex: 1 }}>
           <div className="icon-box">
             <Icon size={22} />
@@ -33,7 +33,7 @@ function BentoCard({ label, value, icon: Icon, sizeClass, socials = [] }) {
         </div>
 
         {socials.length > 0 && (
-          <div style={{ display: 'flex', gap: '3rem', marginLeft: '3rem' }}>
+          <div className="bento-socials" style={{ display: 'flex', gap: '2rem' }}>
             {socials.map((s, idx) => (
               <a
                 key={idx}
@@ -45,7 +45,7 @@ function BentoCard({ label, value, icon: Icon, sizeClass, socials = [] }) {
                 onMouseEnter={(e) => e.currentTarget.style.color = 'var(--orange)'}
                 onMouseLeave={(e) => e.currentTarget.style.color = 'var(--text-3)'}
               >
-                <s.icon size={44} />
+                <s.icon size={innerWidth < 768 ? 32 : 44} />
               </a>
             ))}
           </div>
@@ -306,7 +306,7 @@ export default function Home() {
             <Label>Discography</Label>
             <h2 className="title" style={{ marginBottom: '3rem' }}>Music</h2>
           </div>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))', gap: '1.5rem' }}>
+          <div className="grid-music">
             {[
               { title: '깊은 밤을 날아서', type: '까치와 고양이 커버', link: `WYrJr97nXFA`, isYT: true },
               { title: '크리스마스 캐롤 메들리', type: '밴드 커버', link: `DS2NMYKaeuo`, isYT: true },
@@ -352,7 +352,7 @@ export default function Home() {
             <p className="label-dark">The Wild Ones</p>
             <h2 className="title-dark" style={{ marginBottom: '3.5rem' }}>Band Members</h2>
           </div>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(310px, 1fr))', gap: '1.5rem' }}>
+          <div className="grid-members">
             {MEMBERS.map((m, i) => (
               <div key={i} className="lift reveal-card" style={{ overflow: 'hidden', borderRadius: 'var(--r-lg)', backgroundColor: '#fff', transitionDelay: `${(i + 1) * 0.15}s` }}>
                 <div style={{ height: 260 }}><PhotoBox src={m.img} w="100%" h="260px" label={m.name} /></div>
@@ -380,7 +380,7 @@ export default function Home() {
           <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
             {SHOWS.map((s, i) => (
               <div key={i} className="lift reveal-card" style={{ borderRadius: 'var(--r-lg)', overflow: 'hidden', backgroundColor: '#fff', border: '1px solid var(--gray-2)', boxShadow: 'var(--shadow-md)', transitionDelay: `${(i + 1) * 0.15}s` }}>
-                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', minHeight: 200 }}>
+                <div className="grid-shows" style={{ minHeight: 200 }}>
                   <div style={{ padding: '2.5rem 3rem' }}>
                     <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 12 }}>
                       <span style={{

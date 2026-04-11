@@ -25,7 +25,7 @@ function Nav() {
   if (pathname === '/sorter') return null;
 
   return (
-    <nav className={`nav${scrolled ? ' scrolled' : ''}`}>
+    <nav className={`nav desktop-only${scrolled ? ' scrolled' : ''}`}>
       <a href="#home" className="nav-logo">
         MAGPIENTIGER
       </a>

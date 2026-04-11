@@ -36,6 +36,9 @@ html {
   --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.08), 0 12px 32px rgba(0, 0, 0, 0.1);
   --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.12), 0 24px 64px rgba(0, 0, 0, 0.16);
   --shadow-xl: 0 12px 48px rgba(0, 0, 0, 0.18), 0 48px 120px rgba(0, 0, 0, 0.22);
+  /* Breakpoints */
+  --mobile: 480px;
+  --tablet: 768px;
 }
 
 *,
@@ -44,6 +47,20 @@ html {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+  /* Scroll Snap 기본 활성화 (데스크톱에서는 선택적, 모바일에서 필수) */
+  scroll-snap-type: y proximity;
+}
+
+@media (max-width: 768px) {
+  html, body {
+    scroll-snap-type: y mandatory;
+  }
 }
 
 body {
@@ -410,9 +427,17 @@ img {
 
 /* ─── SECTIONS ─── */
 .section {
-  padding: 120px var(--spacing);
+  padding: 100px var(--spacing);
+  min-height: 100vh;
   position: relative;
-  overflow: hidden;
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
+}
+
+@media (max-width: 768px) {
+  .section {
+    padding: 80px 20px;
+  }
 }
 
 .section-white {
@@ -605,6 +630,37 @@ img {
   border-color: rgba(255, 95, 31, 0.25);
 }
 
+@media (max-width: 768px) {
+  .desktop-only {
+    display: none !important;
+  }
+}
+
+/* ─── HERO RESPONSIVE ─── */
+@media (max-width: 768px) {
+  #home {
+    padding: 60px 20px !important;
+    text-align: center;
+  }
+  
+  #home .glass {
+    padding: 32px 20px !important;
+  }
+  
+  #home h1 {
+    font-size: 2.8rem !important;
+    line-height: 1.1 !important;
+  }
+  
+  #home .body-text {
+    margin: 0 auto 2rem !important;
+  }
+  
+  #home div[style*="display: flex"] {
+    justify-content: center !important;
+  }
+}
+
 /* ─── ORB (배경 장식 구체) ─── */
 .orb {
   position: absolute;
@@ -639,6 +695,12 @@ img {
   grid-template-columns: repeat(2, 1fr);
   grid-template-rows: auto auto;
   gap: 20px;
+}
+
+@media (max-width: 768px) {
+  .bento-grid {
+    gap: 12px;
+  }
 }
 
 .bento-card {
@@ -676,11 +738,119 @@ img {
 }
 
 @media (max-width: 768px) {
-
   .bento-card-large,
   .bento-card-small {
     grid-column: span 2;
+    padding: 32px 24px;
+    min-height: auto;
   }
+  
+  .bento-inner {
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    text-align: left;
+    gap: 20px;
+  }
+  
+  .bento-socials {
+    margin-left: 0 !important;
+    gap: 1.5rem !important;
+  }
+  
+  .bento-card h4 {
+    font-size: 1.3rem !important;
+  }
+}
+
+/* ─── RESPONSIVE GRID HELPERS ─── */
+.grid-responsive {
+  display: grid;
+  gap: 1.5rem;
+}
+
+/* Music, Members: Desktop 3, Tablet 2, Mobile 2 (User requested 2) */
+.grid-music, .grid-members {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+}
+
+@media (max-width: 1024px) {
+  .grid-music, .grid-members {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 500px) {
+  .grid-music, .grid-members {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+  }
+  
+  .grid-music .reveal-card, .grid-members .reveal-card {
+    padding-bottom: 10px;
+  }
+}
+
+.grid-shows {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+}
+
+@media (max-width: 850px) {
+  .grid-shows {
+    grid-template-columns: 1fr;
+  }
+  
+  .grid-shows div:first-child {
+    padding: 2rem 1.5rem !important;
+  }
+  
+  .grid-shows div:last-child {
+    height: 240px !important;
+    border-left: none !important;
+    border-top: 1px solid rgba(0,0,0,0.05);
+  }
+}
+
+/* ─── MOBILE THUMB ZONE POLISH ─── */
+.mobile-thumb-zone {
+  display: none;
+  position: fixed;
+  bottom: 24px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  padding: 8px;
+  border-radius: 999px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  z-index: 1000;
+  gap: 8px;
+}
+
+@media (max-width: 768px) {
+  .mobile-thumb-zone {
+    display: flex;
+  }
+}
+
+.thumb-btn {
+  padding: 10px 20px;
+  border-radius: 999px;
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--text-2);
+  text-decoration: none;
+  transition: all 0.3s var(--ease);
+}
+
+.thumb-btn.active {
+  background: var(--navy);
+  color: #fff;
+  box-shadow: 0 4px 12px rgba(26, 39, 68, 0.2);
 }
 
 .copy-toast {
