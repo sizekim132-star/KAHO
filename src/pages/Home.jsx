@@ -308,9 +308,9 @@ export default function Home() {
           </div>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))', gap: '1.5rem' }}>
             {[
-              { title: '깊은 밤을 날아서', type: '까치와 고양이 커버', desc: '이문세 원곡의 화려한 변신. 보컬과 포핸즈 피아노가 어우러진 버스킹 버전입니다.', link: `WYrJr97nXFA`, isYT: true },
-              { title: '크리스마스 캐롤 메들리', type: '밴드 커버', desc: '허준축제 현장을 들썩이게 한 캐롤 올스타 메들리 라이브.', link: `DS2NMYKaeuo`, isYT: true },
-              { title: '꽉붙 (Demo)', type: '자작곡', desc: '까치와호랑이의 첫 번째 오리지널 자작곡 데모. 묵직한 야성이 느껴지는 사운드.', link: SC_URL, isYT: false, img: '' },
+              { title: '깊은 밤을 날아서', type: '까치와 고양이 커버', link: `WYrJr97nXFA`, isYT: true },
+              { title: '크리스마스 캐롤 메들리', type: '밴드 커버', link: `DS2NMYKaeuo`, isYT: true },
+              { title: '꽉붙 (Demo)', type: '자작곡', link: SC_URL, isYT: false, img: '' },
             ].map((t, i) => (
               <div key={i} className="lift reveal-card"
                 style={{ 
@@ -333,8 +333,7 @@ export default function Home() {
                 )}
                 <div style={{ padding: '1.5rem' }}>
                   <p style={{ fontSize: '.7rem', fontWeight: 800, color: 'var(--orange)', marginBottom: 6 }}>{t.type}</p>
-                  <h3 style={{ fontSize: '1.2rem', fontWeight: 800, color: 'var(--navy)', marginBottom: 12 }}>{t.title}</h3>
-                  <p style={{ fontSize: '.85rem', color: 'var(--text-3)', marginBottom: 16, lineHeight: 1.5 }}>{t.desc}</p>
+                  <h3 style={{ fontSize: '1.2rem', fontWeight: 800, color: 'var(--navy)', marginBottom: 16 }}>{t.title}</h3>
                   <a href={t.isYT ? `https://www.youtube.com/watch?v=${t.link}` : t.link} target="_blank" rel="noreferrer"
                     style={{ fontSize: '.8rem', fontWeight: 700, color: 'var(--text-3)', display: 'inline-flex', alignItems: 'center', gap: 4 }}>
                     {t.isYT ? '▶ YouTube에서 보기' : '▶ SoundCloud에서 듣기'}
