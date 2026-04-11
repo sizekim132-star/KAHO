@@ -29,7 +29,7 @@ function BentoCard({ label, value, icon: Icon, sizeClass, socials = [] }) {
               {label}
             </p>
           </div>
-          <h4 style={{ fontSize: '1.6rem', fontWeight: 900, color: 'var(--navy)', letterSpacing: '-.02em', marginTop: 12 }}>
+          <h4 className="bento-value" style={{ fontWeight: 900, color: 'var(--navy)', marginTop: 12 }}>
             {value}
           </h4>
         </div>

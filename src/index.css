@@ -705,6 +705,19 @@ img {
   .mobile-only { display: inline !important; }
 }
 
+.bento-value {
+  font-size: 1.6rem;
+  letter-spacing: -0.02em;
+  white-space: nowrap;
+}
+
+@media (max-width: 480px) {
+  .bento-value {
+    font-size: 1.15rem !important;
+    letter-spacing: -0.05em !important;
+  }
+}
+
 /* ─── RESPONSIVE GRID HELPERS ─── */
 .grid-responsive {
   display: grid;
