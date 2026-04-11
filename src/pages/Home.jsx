@@ -1,5 +1,5 @@
 // src/pages/Home.jsx
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { FaInstagram, FaYoutube, FaSoundcloud } from 'react-icons/fa';
 import { FiUser, FiPhone, FiMail } from 'react-icons/fi';
 import memberIcons from '../assets/member_icons.png';
@@ -104,14 +104,41 @@ function PhotoBox({ w, h, label }) {
 
 /* ─── PAGE ─── */
 export default function Home() {
-  const [vidIdx, setVidIdx] = useState(0);
+  const [activeSlot, setActiveSlot] = useState(0); // 현재 보여지는 슬롯 (0 또는 1)
+  const [slotIndices, setSlotIndices] = useState([0, 1]); // 각 물리적 슬롯이 담당할 영상 인덱스
   const [videoOpacity, setVideoOpacity] = useState(1);
   const [activeSection, setActiveSection] = useState('home');
 
+  // 타이머 중첩 방지 및 지연 로딩을 위한 Ref
+  const intervalRef = useRef(null);
+  const timeoutRef = useRef(null);
+
   useEffect(() => {
-    const timer = setInterval(() => {
-      setVidIdx((prev) => (prev + 1) % YT_BG_IDS.length);
-    }, 10000);
+    // 이전 타이머들 확실히 제거 (Double-Guard)
+    if (intervalRef.current) clearInterval(intervalRef.current);
+    if (timeoutRef.current) clearTimeout(timeoutRef.current);
+
+    // 11초마다 슬롯을 교환 (사용자 피드백 반영: 주기를 약간 늘림)
+    intervalRef.current = setInterval(() => {
+      setActiveSlot((prev) => {
+        const next = prev === 0 ? 1 : 0;
+        
+        // 중요: 전환 직후가 아니라, 페이드 아웃이 끝난 3.5초 뒤에 비활성 슬롯의 영상을 교체
+        // 이렇게 하면 사라지는 도중에 영상환 휙 바뀌는 현상을 원천 차단
+        timeoutRef.current = setTimeout(() => {
+          setSlotIndices((prevIndices) => {
+            const nextIndices = [...prevIndices];
+            // 방금 비활성화된 슬롯(prev)의 영상을 '다음-다음' 영상으로 미리 로드 시작
+            // nextIndices[next]는 현재 활성화된 영상임
+            const currentGlobalIdx = prevIndices[next];
+            nextIndices[prev] = (currentGlobalIdx + 1) % YT_BG_IDS.length;
+            return nextIndices;
+          });
+        }, 3500);
+
+        return next;
+      });
+    }, 11000);
 
     const handleScroll = () => {
       const scrollY = window.scrollY;
@@ -125,7 +152,6 @@ export default function Home() {
         const el = document.getElementById(section);
         if (el) {
           const rect = el.getBoundingClientRect();
-          // 섹션의 상단이 화면의 40% 지점 이내로 들어오면 활성화 (더 기민하게)
           if (rect.top <= window.innerHeight * 0.4 && rect.bottom >= window.innerHeight * 0.4) {
             setActiveSection(section);
           }
@@ -148,7 +174,8 @@ export default function Home() {
     });
 
     return () => {
-      clearInterval(timer);
+      if (intervalRef.current) clearInterval(intervalRef.current);
+      if (timeoutRef.current) clearTimeout(timeoutRef.current);
       window.removeEventListener('scroll', handleScroll);
       observer.disconnect();
     };
@@ -176,14 +203,28 @@ export default function Home() {
       </div>
 
       <div className="vbg-container" style={{ opacity: videoOpacity, transition: 'opacity 0.05s linear' }}>
-        {YT_BG_IDS.map((id, index) => (
-          <div key={id} className="vbg" style={{ opacity: vidIdx === index ? 1 : 0, transition: 'opacity 1.5s ease-in-out', zIndex: vidIdx === index ? 1 : 0 }}>
-            <iframe src={`https://www.youtube.com/embed/${id}?autoplay=1&mute=1&controls=0&loop=1&playlist=${id}&rel=0&showinfo=0&iv_load_policy=3&disablekb=1`}
-              allow="autoplay; encrypted-media" style={{ border: 'none' }} title={`bg-video-${index}`} />
-          </div>
-        ))}
+        {/* 물리적 슬롯 0 */}
+        <div className="vbg" style={{ opacity: activeSlot === 0 ? 1 : 0, zIndex: activeSlot === 0 ? 1 : 0 }}>
+          <iframe 
+            key={`vbg-s0-${YT_BG_IDS[slotIndices[0]]}`}
+            src={`https://www.youtube.com/embed/${YT_BG_IDS[slotIndices[0]]}?autoplay=1&mute=1&controls=0&loop=1&playlist=${YT_BG_IDS[slotIndices[0]]}&rel=0&showinfo=0&iv_load_policy=3&disablekb=1`}
+            allow="autoplay; encrypted-media" 
+            style={{ border: 'none' }} 
+            title="bg-video-slot-0" 
+          />
+        </div>
+        {/* 물리적 슬롯 1 */}
+        <div className="vbg" style={{ opacity: activeSlot === 1 ? 1 : 0, zIndex: activeSlot === 1 ? 1 : 0 }}>
+          <iframe 
+            key={`vbg-s1-${YT_BG_IDS[slotIndices[1]]}`}
+            src={`https://www.youtube.com/embed/${YT_BG_IDS[slotIndices[1]]}?autoplay=1&mute=1&controls=0&loop=1&playlist=${YT_BG_IDS[slotIndices[1]]}&rel=0&showinfo=0&iv_load_policy=3&disablekb=1`}
+            allow="autoplay; encrypted-media" 
+            style={{ border: 'none' }} 
+            title="bg-video-slot-1" 
+          />
+        </div>
       </div>
-      <div className="film" />
+      <div className="film" style={{ background: 'rgba(26, 39, 68, 0.25)' }} />
 
       {/* ════ HERO ════ */}
       <section id="home" style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', padding: '80px var(--spacing)' }}>
