@@ -283,14 +283,14 @@ export default function Home() {
             <p className="body-text" style={{ marginBottom: '2.5rem' }}>
               자작곡과 창의적인 편곡을 통해 우리만의 세계를 구축하고 있으며, 팬들과 함께하는 라이브 무대를 가장 사랑합니다.
             </p>
-            <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap' }} className="reveal-text">
+            <div className="reveal-text about-socials" style={{ display: 'flex', gap: 12, flexWrap: 'wrap' }}>
               <a href={IG_URL} target="_blank" rel="noreferrer" className="btn btn-secondary" style={{ padding: '10px 22px', fontSize: '.82rem' }}>
                 <FaInstagram size={15} /> Instagram
               </a>
               <a href={YT_CHANNEL} target="_blank" rel="noreferrer" className="btn btn-ghost" style={{ padding: '10px 22px', fontSize: '.82rem' }}>
                 <FaYoutube size={15} /> YouTube
               </a>
-              <a href={SC_URL} target="_blank" rel="noreferrer" className="btn btn-ghost" style={{ padding: '10px 22px', fontSize: '.82rem', background: 'rgba(255, 119, 0, 0.1)', color: '#FF7700' }}>
+              <a href={SC_URL} target="_blank" rel="noreferrer" className="btn btn-ghost sc-btn-solid" style={{ padding: '10px 22px', fontSize: '.82rem' }}>
                 <FaSoundcloud size={16} /> SoundCloud
               </a>
             </div>
