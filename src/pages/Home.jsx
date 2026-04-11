@@ -18,22 +18,22 @@ function BentoCard({ label, value, icon: Icon, sizeClass, socials = [] }) {
 
   return (
     <div className={`bento-card ${sizeClass} reveal-card`} onClick={handleCopy}>
-      <div className={`copy-toast ${copied ? 'active' : ''}`}>복사 완료!</div>
-      <div className="bento-inner">
-        <div className="bento-main-content">
+      <div className={`copy-toast ${copied ? 'active' : ''}`}>Copied!</div>
+      <div style={{ display: 'flex', height: '100%', justifyContent: 'space-between', alignItems: 'center', paddingRight: '6rem' }}>
+        <div style={{ flex: 1 }}>
           <div className="icon-box">
             <Icon size={22} />
           </div>
-          <p style={{ fontSize: '.75rem', fontWeight: 800, color: 'var(--text-3)', letterSpacing: '.12em', textTransform: 'uppercase', marginBottom: 6 }}>
+          <p style={{ fontSize: '.75rem', fontWeight: 800, color: 'var(--text-3)', letterSpacing: '.1em', textTransform: 'uppercase', marginBottom: 8 }}>
             {label}
           </p>
-          <h4 style={{ fontSize: 'var(--fs-bento-val)', fontWeight: 900, color: 'var(--navy)', letterSpacing: '-.03em' }}>
+          <h4 style={{ fontSize: '1.6rem', fontWeight: 900, color: 'var(--navy)', letterSpacing: '-.02em' }}>
             {value}
           </h4>
         </div>
 
         {socials.length > 0 && (
-          <div className="bento-socials">
+          <div style={{ display: 'flex', gap: '3rem', marginLeft: '3rem' }}>
             {socials.map((s, idx) => (
               <a 
                 key={idx} 
@@ -41,7 +41,7 @@ function BentoCard({ label, value, icon: Icon, sizeClass, socials = [] }) {
                 target="_blank" 
                 rel="noreferrer" 
                 onClick={(e) => e.stopPropagation()}
-                style={{ color: 'var(--text-3)', transition: 'all 0.25s var(--ease)', display: 'flex' }}
+                style={{ color: 'var(--text-3)', transition: 'all 0.2s cubic-bezier(0.4, 0, 0.2, 1)', display: 'flex' }}
                 onMouseEnter={(e) => e.currentTarget.style.color = 'var(--orange)'}
                 onMouseLeave={(e) => e.currentTarget.style.color = 'var(--text-3)'}
               >
@@ -380,9 +380,9 @@ export default function Home() {
         <div className="orb" style={{ width: 300, height: 300, background: 'rgba(26, 39, 68, 0.05)', bottom: '0', left: '-50px' }} />
 
         <div style={{ maxWidth: 900, margin: '0 auto', position: 'relative', zIndex: 2 }}>
-          <div className="reveal-text" style={{ textAlign: 'center', marginBottom: 'clamp(2.5rem, 5vw, 4.5rem)' }}>
-            <Label style={{ color: 'var(--navy)', letterSpacing: '.3em', fontSize: 'clamp(1.4rem, 4vw, 1.8rem)', fontWeight: 900 }}>CONTACT</Label>
-            <p className="body-text" style={{ marginTop: 16 }}>함께 까치와호랑이의 다음 무대를 만들어가요.</p>
+          <div className="reveal-text" style={{ textAlign: 'center', marginBottom: '4.5rem' }}>
+            <Label style={{ color: 'var(--navy)', letterSpacing: '.3em', fontSize: '1.8rem', fontWeight: 900 }}>CONTACT</Label>
+            <p style={{ marginTop: 24, fontSize: '1.05rem', color: 'var(--text-2)' }}>함께 까치와호랑이의 다음 무대를 만들어가요.</p>
           </div>
 
           <div className="bento-grid">
@@ -417,13 +417,13 @@ export default function Home() {
       </section>
 
       {/* ════ FOOTER ════ */}
-      <footer style={{ background: 'var(--navy)', padding: '80px var(--spacing) 160px' }}>
+      <footer style={{ background: 'var(--navy)', padding: '80px var(--spacing) 120px' }}>
         <div style={{ maxWidth: 1200, margin: '0 auto', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '2rem' }}>
-          <div><h3 style={{ fontSize: '1rem', fontWeight: 900, color: '#fff' }}>MAGPIENTIGER</h3><p style={{ fontSize: '.85rem', color: 'rgba(255,255,255,.3)', marginTop: 8 }}>© 까치와호랑이</p></div>
+          <div><h3 style={{ fontSize: '1rem', fontWeight: 900, color: '#fff' }}>MAGPIENTIGER</h3><p style={{ fontSize: '.85rem', color: 'rgba(255,255,255,.4)', marginTop: 8 }}>© 까치와호랑이</p></div>
           <div style={{ display: 'flex', gap: 24 }}>
-            <a href={IG_URL} target="_blank" rel="noreferrer" style={{ color: 'rgba(255,255,255,.4)', transition: 'color 0.2s' }} onMouseEnter={(e)=>e.currentTarget.style.color='#fff'} onMouseLeave={(e)=>e.currentTarget.style.color='rgba(255,255,255,.4)'}><FaInstagram size={22} /></a>
-            <a href={YT_CHANNEL} target="_blank" rel="noreferrer" style={{ color: 'rgba(255,255,255,.4)', transition: 'color 0.2s' }} onMouseEnter={(e)=>e.currentTarget.style.color='#fff'} onMouseLeave={(e)=>e.currentTarget.style.color='rgba(255,255,255,.4)'}><FaYoutube size={22} /></a>
-            <a href={SC_URL} target="_blank" rel="noreferrer" style={{ color: 'rgba(255,255,255,.4)', transition: 'color 0.2s' }} onMouseEnter={(e)=>e.currentTarget.style.color='#fff'} onMouseLeave={(e)=>e.currentTarget.style.color='rgba(255,255,255,.4)'}><FaSoundcloud size={24} /></a>
+            <a href={IG_URL} target="_blank" rel="noreferrer" style={{ color: 'rgba(255,255,255,.4)' }}><FaInstagram size={22} /></a>
+            <a href={YT_CHANNEL} target="_blank" rel="noreferrer" style={{ color: 'rgba(255,255,255,.4)' }}><FaYoutube size={22} /></a>
+            <a href={SC_URL} target="_blank" rel="noreferrer" style={{ color: 'rgba(255,255,255,.4)' }}><FaSoundcloud size={24} /></a>
           </div>
         </div>
       </footer>
