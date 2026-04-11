@@ -31,11 +31,11 @@ html {
   --r-md: 16px;
   --r-sm: 10px;
   --spacing: clamp(24px, 6vw, 80px);
-  /* 입체 그림자 레이어 */
-  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.04), 0 4px 16px rgba(0, 0, 0, 0.04);
-  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.08), 0 12px 32px rgba(0, 0, 0, 0.1);
-  --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.12), 0 24px 64px rgba(0, 0, 0, 0.16);
   --shadow-xl: 0 12px 48px rgba(0, 0, 0, 0.18), 0 48px 120px rgba(0, 0, 0, 0.22);
+
+  /* 반응형 폰트 크기 변수 */
+  --fs-bento-val: 1.6rem;
+  --fs-section-title: clamp(2.2rem, 4vw, 3.2rem);
 }
 
 *,
@@ -337,37 +337,43 @@ img {
 /* ─── MOBILE THUMB ZONE ─── */
 .mobile-thumb-zone {
   position: fixed;
-  bottom: 24px;
+  bottom: 32px;
   left: 50%;
   transform: translateX(-50%);
   z-index: 1000;
   display: none;
-  background: rgba(26, 39, 68, 0.85);
-  backdrop-filter: blur(24px) saturate(180%);
-  -webkit-backdrop-filter: blur(24px) saturate(180%);
-  padding: 8px;
+  background: rgba(13, 27, 53, 0.75);
+  backdrop-filter: blur(28px) saturate(210%);
+  -webkit-backdrop-filter: blur(28px) saturate(210%);
+  padding: 6px;
   border-radius: 999px;
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.5);
-  gap: 4px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow: 0 20px 48px rgba(0, 0, 0, 0.45);
+  gap: 2px;
 }
 
 .thumb-btn {
-  color: rgba(255, 255, 255, 0.6);
-  padding: 10px 18px;
+  color: rgba(255, 255, 255, 0.5);
+  padding: 12px 22px;
   border-radius: 999px;
-  font-size: 0.75rem;
-  font-weight: 700;
-  letter-spacing: 0.05em;
-  transition: all 0.2s var(--ease);
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  transition: all 0.3s var(--ease);
 }
 
 .thumb-btn.active {
   background: var(--orange);
   color: white;
+  box-shadow: 0 4px 14px rgba(255, 95, 31, 0.4);
 }
 
 @media (max-width: 768px) {
+  :root {
+    --fs-bento-val: 1.25rem;
+    --spacing: 24px;
+  }
+
   .mobile-thumb-zone {
     display: flex;
   }
@@ -376,17 +382,26 @@ img {
     display: none;
   }
 
-  /* 모바일에서는 하단 바로 대체 */
   .section {
-    padding: 80px 24px;
+    padding: 70px 24px;
   }
 
-  .title {
-    font-size: 2.2rem;
+  .title, .title-dark {
+    font-size: 2.1rem;
   }
 
-  .body-text {
-    font-size: 0.95rem;
+  .bento-card {
+    padding: 24px;
+  }
+}
+
+@media (max-width: 480px) {
+  .bento-grid {
+    gap: 12px;
+  }
+  
+  .title, .title-dark {
+    font-size: 1.85rem;
   }
 }
 
@@ -647,15 +662,40 @@ img {
   -webkit-backdrop-filter: blur(12px);
   border: 1px solid rgba(255, 255, 255, 0.5);
   border-radius: var(--r-lg);
-  padding: 40px;
-  position: relative;
-  overflow: hidden;
-  transition: all 0.5s var(--ease);
-  cursor: pointer;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
   box-shadow: var(--shadow-lg);
+}
+
+.bento-inner {
+  display: flex;
+  height: 100%;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.bento-main-content {
+  flex: 1;
+}
+
+.bento-socials {
+  display: flex;
+  gap: 3rem;
+  margin-left: 3rem;
+}
+
+@media (max-width: 768px) {
+  .bento-inner {
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    gap: 1.5rem;
+  }
+  
+  .bento-socials {
+    margin-left: 0;
+    gap: 1.8rem;
+    width: 100%;
+    justify-content: flex-start;
+  }
 }
 
 .bento-card:hover {
