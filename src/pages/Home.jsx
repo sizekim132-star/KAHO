@@ -35,11 +35,11 @@ function BentoCard({ label, value, icon: Icon, sizeClass, socials = [] }) {
         {socials.length > 0 && (
           <div style={{ display: 'flex', gap: '3rem', marginLeft: '3rem' }}>
             {socials.map((s, idx) => (
-              <a 
-                key={idx} 
-                href={s.url} 
-                target="_blank" 
-                rel="noreferrer" 
+              <a
+                key={idx}
+                href={s.url}
+                target="_blank"
+                rel="noreferrer"
                 onClick={(e) => e.stopPropagation()}
                 style={{ color: 'var(--text-3)', transition: 'all 0.2s cubic-bezier(0.4, 0, 0.2, 1)', display: 'flex' }}
                 onMouseEnter={(e) => e.currentTarget.style.color = 'var(--orange)'}
@@ -101,10 +101,10 @@ function PhotoBox({ src, w, h, label, alt }) {
   if (src) {
     return (
       <div style={{ width: w, height: h, overflow: 'hidden', borderRadius: 'inherit', position: 'relative' }}>
-        <img 
-          src={src} 
-          alt={alt || label} 
-          style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center', display: 'block' }} 
+        <img
+          src={src}
+          alt={alt || label}
+          style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center', display: 'block' }}
         />
       </div>
     );
@@ -140,7 +140,7 @@ export default function Home() {
     intervalRef.current = setInterval(() => {
       setActiveSlot((prev) => {
         const next = prev === 0 ? 1 : 0;
-        
+
         // 중요: 전환 직후가 아니라, 페이드 아웃이 끝난 3.5초 뒤에 비활성 슬롯의 영상을 교체
         // 이렇게 하면 사라지는 도중에 영상환 휙 바뀌는 현상을 원천 차단
         timeoutRef.current = setTimeout(() => {
@@ -222,22 +222,22 @@ export default function Home() {
       <div className="vbg-container" style={{ opacity: videoOpacity, transition: 'opacity 0.05s linear' }}>
         {/* 물리적 슬롯 0 */}
         <div className="vbg" style={{ opacity: activeSlot === 0 ? 1 : 0, zIndex: activeSlot === 0 ? 1 : 0 }}>
-          <iframe 
+          <iframe
             key={`vbg-s0-${YT_BG_IDS[slotIndices[0]]}`}
             src={`https://www.youtube.com/embed/${YT_BG_IDS[slotIndices[0]]}?autoplay=1&mute=1&controls=0&loop=1&playlist=${YT_BG_IDS[slotIndices[0]]}&rel=0&showinfo=0&iv_load_policy=3&disablekb=1`}
-            allow="autoplay; encrypted-media" 
-            style={{ border: 'none' }} 
-            title="bg-video-slot-0" 
+            allow="autoplay; encrypted-media"
+            style={{ border: 'none' }}
+            title="bg-video-slot-0"
           />
         </div>
         {/* 물리적 슬롯 1 */}
         <div className="vbg" style={{ opacity: activeSlot === 1 ? 1 : 0, zIndex: activeSlot === 1 ? 1 : 0 }}>
-          <iframe 
+          <iframe
             key={`vbg-s1-${YT_BG_IDS[slotIndices[1]]}`}
             src={`https://www.youtube.com/embed/${YT_BG_IDS[slotIndices[1]]}?autoplay=1&mute=1&controls=0&loop=1&playlist=${YT_BG_IDS[slotIndices[1]]}&rel=0&showinfo=0&iv_load_policy=3&disablekb=1`}
-            allow="autoplay; encrypted-media" 
-            style={{ border: 'none' }} 
-            title="bg-video-slot-1" 
+            allow="autoplay; encrypted-media"
+            style={{ border: 'none' }}
+            title="bg-video-slot-1"
           />
         </div>
       </div>
@@ -309,7 +309,7 @@ export default function Home() {
               { title: '꽉붙 (Demo)', type: '자작곡', desc: '까치와호랑이의 첫 번째 오리지널 자작곡 데모. 묵직한 야성이 느껴지는 사운드.', link: SC_URL, isYT: false, img: '' },
             ].map((t, i) => (
               <div key={i} className="lift reveal-card"
-                style={{ borderRadius: 'var(--r-lg)', overflow: 'hidden', backgroundColor: '#fff', border: '1px solid rgba(0,0,0,0.05)', display: 'flex', flexDirection: 'column', boxShadow: 'var(--shadow-md)', transitionDelay: `${i * 0.1}s` }}>
+                style={{ borderRadius: 'var(--r-lg)', overflow: 'hidden', backgroundColor: '#fff', border: '1px solid rgba(0,0,0,0.05)', display: 'flex', flexDirection: 'column', boxShadow: 'var(--shadow-md)', transitionDelay: `${i * 0.12}s` }}>
                 {t.isYT ? (
                   <div style={{ aspectRatio: '16/9', width: '100%' }}>
                     <iframe width="100%" height="100%" src={`https://www.youtube.com/embed/${t.link}?rel=0`}
@@ -342,7 +342,7 @@ export default function Home() {
           </div>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(310px, 1fr))', gap: '1.5rem' }}>
             {MEMBERS.map((m, i) => (
-              <div key={i} className="lift reveal-card" style={{ overflow: 'hidden', borderRadius: 'var(--r-lg)', backgroundColor: '#fff', transitionDelay: `${i * 0.1}s` }}>
+              <div key={i} className="lift reveal-card" style={{ overflow: 'hidden', borderRadius: 'var(--r-lg)', backgroundColor: '#fff', transitionDelay: `${i * 0.12}s` }}>
                 <div style={{ height: 260 }}><PhotoBox src={m.img} w="100%" h="260px" label={m.name} /></div>
                 <div style={{ padding: '1.6rem' }}>
                   <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: 8 }}>
@@ -367,7 +367,7 @@ export default function Home() {
           </div>
           <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
             {SHOWS.map((s, i) => (
-              <div key={i} className="lift reveal-card" style={{ borderRadius: 'var(--r-lg)', overflow: 'hidden', backgroundColor: '#fff', border: '1px solid var(--gray-2)', boxShadow: 'var(--shadow-md)', transitionDelay: `${i * 0.1}s` }}>
+              <div key={i} className="lift reveal-card" style={{ borderRadius: 'var(--r-lg)', overflow: 'hidden', backgroundColor: '#fff', border: '1px solid var(--gray-2)', boxShadow: 'var(--shadow-md)', transitionDelay: `${i * 0.12}s` }}>
                 <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', minHeight: 200 }}>
                   <div style={{ padding: '2.5rem 3rem' }}>
                     <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 12 }}>
@@ -410,12 +410,12 @@ export default function Home() {
           </div>
 
           <div className="bento-grid">
-            <BentoCard 
-              label="Booking & Inquiries" 
-              value="김치수" 
-              sub="REPRESENTATIVE" 
-              icon={FiUser} 
-              sizeClass="bento-card-large" 
+            <BentoCard
+              label="Booking & Inquiries"
+              value="김치수"
+              sub="REPRESENTATIVE"
+              icon={FiUser}
+              sizeClass="bento-card-large"
               socials={[
                 { icon: FaInstagram, url: 'https://www.instagram.com/size.kim/' },
                 { icon: FaYoutube, url: 'https://www.youtube.com/@sizekim' },
