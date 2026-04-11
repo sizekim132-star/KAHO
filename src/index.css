@@ -680,9 +680,29 @@ img {
   .bento-card-large,
   .bento-card-small {
     grid-column: span 2;
-    padding: 32px 24px;
+    padding: 32px 24px 64px !important; /* 모바일 전용 하단 여백 대폭 추가 */
     min-height: auto;
   }
+  
+  .bento-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 16px;
+  }
+  
+  .bento-header .icon-box {
+    margin-bottom: 0 !important;
+  }
+  
+  .bento-label {
+    margin-bottom: 0 !important;
+  }
+}
+
+.mobile-only { display: none; }
+@media (max-width: 768px) {
+  .mobile-only { display: inline !important; }
 }
 
 /* ─── RESPONSIVE GRID HELPERS ─── */
@@ -730,14 +750,20 @@ img {
     grid-template-columns: 1fr;
   }
 
-  .grid-shows div:first-child {
+  /* 강제로 플렉스로 변환 후 모바일에서만 이미지를 위로 (column-reverse 활용) */
+  .grid-shows .reveal-card > div {
+    display: flex !important;
+    flex-direction: column-reverse;
+  }
+
+  .grid-shows .show-info {
     padding: 2.5rem 1.8rem !important;
   }
 
-  .grid-shows div:last-child {
+  .grid-shows .show-img-container {
     height: 280px !important;
     border-left: none !important;
-    border-top: 1px solid rgba(0, 0, 0, 0.05);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05); /* 이미지가 위에 배치되므로 하단 경계선 */
   }
 }
 
@@ -821,12 +847,12 @@ img {
 
 /* ─── MOBILE SECTION BOTTOM PADDING (FOR NAV) ─── */
 @media (max-width: 768px) {
+
   #music,
   #members,
   #shows,
-  #contact,
-  .footer-responsive {
-    padding-bottom: 200px !important;
+  #contact {
+    padding-bottom: 140px !important;
   }
 }
 
