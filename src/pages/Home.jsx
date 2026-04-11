@@ -19,7 +19,7 @@ function BentoCard({ label, value, icon: Icon, sizeClass, socials = [] }) {
   return (
     <div className={`bento-card ${sizeClass} reveal-card`} onClick={handleCopy}>
       <div className={`copy-toast ${copied ? 'active' : ''}`}>Copied!</div>
-      <div style={{ display: 'flex', height: '100%', justifyContent: 'space-between', alignItems: 'center', paddingRight: '6rem' }}>
+      <div className="bento-inner">
         <div style={{ flex: 1 }}>
           <div className="icon-box">
             <Icon size={22} />
@@ -97,10 +97,10 @@ const PHOTOS_GALLERY = [groupPhoto, galleryHeojun];
 const Label = ({ children, style }) => <p className="label" style={style}>{children}</p>;
 const AccentLine = () => <div className="accent-line" />;
 
-function PhotoBox({ src, w, h, label, alt }) {
+function PhotoBox({ src, w, h, label, alt, className }) {
   if (src) {
     return (
-      <div style={{ width: w, height: h, overflow: 'hidden', borderRadius: 'inherit', position: 'relative' }}>
+      <div className={className} style={{ width: w, height: h, overflow: 'hidden', borderRadius: 'inherit', position: 'relative' }}>
         <img
           src={src}
           alt={alt || label}
@@ -355,7 +355,7 @@ export default function Home() {
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(310px, 1fr))', gap: '1.5rem' }}>
             {MEMBERS.map((m, i) => (
               <div key={i} className="lift reveal-card" style={{ overflow: 'hidden', borderRadius: 'var(--r-lg)', backgroundColor: '#fff', transitionDelay: `${(i + 1) * 0.15}s` }}>
-                <div style={{ height: 260 }}><PhotoBox src={m.img} w="100%" h="260px" label={m.name} /></div>
+                <div style={{ height: 260 }}><PhotoBox src={m.img} w="100%" h="260px" label={m.name} className="mobile-shrink" /></div>
                 <div style={{ padding: '1.6rem' }}>
                   <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: 8 }}>
                     <div><h3 style={{ fontSize: '1.4rem', fontWeight: 850, color: 'var(--navy)' }}>{m.name}</h3><p style={{ fontSize: '.72rem', fontWeight: 800, color: 'var(--orange)', marginTop: 4 }}>{m.animal}</p></div>
@@ -399,8 +399,8 @@ export default function Home() {
                     <p style={{ fontSize: '.9rem', color: 'var(--text-2)', marginTop: 8 }}>📍 {s.location}</p>
                     <p style={{ fontSize: '.85rem', color: 'var(--text-3)', marginTop: 12, lineHeight: 1.6 }}>{s.desc}</p>
                   </div>
-                  <div style={{ borderLeft: '1px solid rgba(0,0,0,.04)', background: 'rgba(0,0,0,.01)', height: 320 }}>
-                    <PhotoBox src={s.img} w="100%" h="320px" label="Show Moment" />
+                  <div style={{ position: 'relative', borderLeft: '1px solid rgba(0,0,0,.04)', background: 'rgba(0,0,0,.01)', height: 320 }}>
+                    <PhotoBox src={s.img} w="100%" h="320px" label="Show Moment" className="mobile-shrink" />
                   </div>
                 </div>
               </div>
@@ -453,7 +453,7 @@ export default function Home() {
       </section>
 
       {/* ════ FOOTER ════ */}
-      <footer className="footer-responsive" style={{ background: 'var(--navy)', padding: '80px var(--spacing) 120px' }}>
+      <footer style={{ background: 'var(--navy)', padding: '80px var(--spacing) 120px' }}>
         <div style={{ maxWidth: 1200, margin: '0 auto', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '2rem' }}>
           <div><h3 style={{ fontSize: '1rem', fontWeight: 900, color: '#fff' }}>MAGPIENTIGER</h3><p style={{ fontSize: '.85rem', color: 'rgba(255,255,255,.4)', marginTop: 8 }}>© 까치와호랑이</p></div>
           <div style={{ display: 'flex', gap: 24 }}>
