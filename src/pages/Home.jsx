@@ -65,6 +65,7 @@ import memUjinP from '../assets/member_ujin.jpg'; // 박어진
 const memDefault = ''; // 누락된 멤버용
 
 import showHeojun from '../assets/show_heojun.jpg';
+import showHalloween from '../assets/show_halloween.jpg';
 import galleryHeojun from '../assets/gallery_heojun_scene.jpg';
 
 /* ── 실제 유튜브 영상들 (브라우저로 직접 확인한 실제 ID) ── */
@@ -86,6 +87,7 @@ const MEMBERS = [
 const SHOWS = [
   { name: '까치와호랑이 조우', date: '2025.04.29', location: '숲 속', desc: '운명적인 첫 만남', status: 'done', img: galleryHeojun },
   { name: '제23회 허준축제', date: '2025.10.19', location: '마곡중앙로', desc: '100+ 관객, 야외 공연', status: 'done', img: showHeojun },
+  { name: '서울청년센터 할로윈축제', date: '2025.10.31', location: '서울청년센터양천', desc: '30+ 관객, 특별공연', status: 'done', img: showHalloween },
   { name: '청년예술인 네트워크 공연', date: '2026.05.07', location: '강서 운전면허시험장 광장', desc: '40~100명 예정', status: 'upcoming', img: '' },
 ];
 
