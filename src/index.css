@@ -676,37 +676,12 @@ img {
 }
 
 @media (max-width: 768px) {
+
   .bento-card-large,
   .bento-card-small {
     grid-column: span 2;
     padding: 32px 24px;
     min-height: auto;
-  }
-}
-
-.bento-inner {
-  display: flex;
-  height: 100%;
-  justify-content: space-between;
-  align-items: center;
-  padding-right: 6rem;
-}
-
-@media (max-width: 768px) {
-  .bento-inner {
-    flex-direction: column !important;
-    align-items: center !important;
-    text-align: center;
-    padding-right: 0 !important;
-    gap: 24px;
-  }
-  
-  .bento-inner div {
-    width: 100%;
-  }
-  
-  .bento-inner .icon-box {
-    margin: 0 auto 20px !important;
   }
 }
 
@@ -742,30 +717,6 @@ img {
 
   .reveal-card {
     padding-bottom: 0;
-  }
-  
-  .reveal-card > div[style*="padding: 1.6rem"] {
-    padding: 1.25rem !important;
-  }
-  
-  .reveal-card h3 {
-    font-size: 1.2rem !important;
-  }
-}
-
-.mobile-shrink {
-  transition: all 0.3s var(--ease);
-}
-
-@media (max-width: 768px) {
-  .mobile-shrink {
-    height: 180px !important;
-  }
-  
-  .mobile-shrink + div, 
-  div[style*="height: 260px"],
-  div[style*="height: 320px"] {
-    height: auto !important;
   }
 }
 
@@ -870,12 +821,12 @@ img {
 
 /* ─── MOBILE SECTION BOTTOM PADDING (FOR NAV) ─── */
 @media (max-width: 768px) {
-
   #music,
   #members,
   #shows,
-  #contact {
-    padding-bottom: 140px !important;
+  #contact,
+  .footer-responsive {
+    padding-bottom: 200px !important;
   }
 }
 
