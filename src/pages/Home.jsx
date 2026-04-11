@@ -335,8 +335,9 @@ export default function Home() {
                   <p style={{ fontSize: '.7rem', fontWeight: 800, color: 'var(--orange)', marginBottom: 6 }}>{t.type}</p>
                   <h3 style={{ fontSize: '1.2rem', fontWeight: 800, color: 'var(--navy)', marginBottom: 16 }}>{t.title}</h3>
                   <a href={t.isYT ? `https://www.youtube.com/watch?v=${t.link}` : t.link} target="_blank" rel="noreferrer"
-                    style={{ fontSize: '.8rem', fontWeight: 700, color: 'var(--text-3)', display: 'inline-flex', alignItems: 'center', gap: 4 }}>
-                    {t.isYT ? '▶ YouTube에서 보기' : '▶ SoundCloud에서 듣기'}
+                    style={{ fontSize: '.8rem', fontWeight: 700, color: 'var(--text-3)', display: 'inline-flex', alignItems: 'center', gap: 6 }}>
+                    {t.isYT ? <FaYoutube size={16} color="#FF0000" /> : <FaSoundcloud size={18} color="#FF5500" />}
+                    {t.isYT ? 'YouTube에서 보기' : 'SoundCloud에서 듣기'}
                   </a>
                 </div>
               </div>
