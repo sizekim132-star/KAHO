@@ -828,6 +828,25 @@ img {
   color: #FF7700 !important;
 }
 
+.sc-btn-solid {
+  background: #FF5500 !important;
+  color: #fff !important;
+  box-shadow: 0 4px 15px rgba(255, 85, 0, 0.3);
+}
+
+.sc-btn-solid:hover {
+  background: #ff6a1f !important;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(255, 85, 0, 0.45);
+}
+
+/* ─── MOBILE SECTION BOTTOM PADDING (FOR NAV) ─── */
+@media (max-width: 768px) {
+  #music, #members, #shows, #contact {
+    padding-bottom: 140px !important;
+  }
+}
+
 @media (max-width: 480px) {
   .about-socials {
     gap: 8px !important;

@@ -288,7 +288,7 @@ export default function Home() {
               <a href={YT_CHANNEL} target="_blank" rel="noreferrer" className="btn btn-ghost">
                 <FaYoutube size={15} /> YouTube
               </a>
-              <a href={SC_URL} target="_blank" rel="noreferrer" className="btn btn-ghost sc-btn">
+              <a href={SC_URL} target="_blank" rel="noreferrer" className="btn btn-ghost sc-btn-solid">
                 <FaSoundcloud size={16} /> SoundCloud
               </a>
             </div>
