@@ -425,7 +425,7 @@ export default function Home() {
 
           <div className="bento-grid">
             <BentoCard
-              label="Official Email"
+              label="Inquiry"
               value="김치수"
               sub="REPRESENTATIVE"
               icon={FiUser}
