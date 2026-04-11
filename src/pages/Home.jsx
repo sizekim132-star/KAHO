@@ -19,8 +19,8 @@ function BentoCard({ label, value, icon: Icon, sizeClass, socials = [] }) {
   return (
     <div className={`bento-card ${sizeClass} reveal-card`} onClick={handleCopy}>
       <div className={`copy-toast ${copied ? 'active' : ''}`}>Copied!</div>
-      <div style={{ display: 'flex', height: '100%', justifyContent: 'space-between', alignItems: 'center', paddingRight: '6rem' }}>
-        <div style={{ flex: 1 }}>
+      <div className="bento-inner-container">
+        <div className="bento-text-content">
           <div className="bento-header">
             <div className="icon-box">
               <Icon size={22} />
@@ -35,7 +35,7 @@ function BentoCard({ label, value, icon: Icon, sizeClass, socials = [] }) {
         </div>
 
         {socials.length > 0 && (
-          <div style={{ display: 'flex', gap: '3rem', marginLeft: '3rem' }}>
+          <div className="bento-social-group">
             {socials.map((s, idx) => (
               <a
                 key={idx}
@@ -47,7 +47,7 @@ function BentoCard({ label, value, icon: Icon, sizeClass, socials = [] }) {
                 onMouseEnter={(e) => e.currentTarget.style.color = 'var(--orange)'}
                 onMouseLeave={(e) => e.currentTarget.style.color = 'var(--text-3)'}
               >
-                <s.icon size={44} />
+                <s.icon className="bento-social-icon" />
               </a>
             ))}
           </div>

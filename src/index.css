@@ -718,6 +718,49 @@ img {
   }
 }
 
+.bento-inner-container {
+  display: flex;
+  height: 100%;
+  justify-content: space-between;
+  align-items: center;
+  padding-right: 6rem;
+}
+
+.bento-text-content {
+  flex: 1;
+}
+
+.bento-social-group {
+  display: flex;
+  gap: 3rem;
+  margin-left: 3rem;
+}
+
+.bento-social-icon {
+  width: 44px;
+  height: 44px;
+}
+
+@media (max-width: 768px) {
+  .bento-inner-container {
+    flex-direction: column;
+    align-items: flex-start;
+    padding-right: 0;
+    gap: 20px;
+  }
+  
+  .bento-social-group {
+    margin-left: 0;
+    gap: 1.5rem;
+    margin-top: 10px;
+  }
+
+  .bento-social-icon {
+    width: 32px;
+    height: 32px;
+  }
+}
+
 /* ─── RESPONSIVE GRID HELPERS ─── */
 .grid-responsive {
   display: grid;
