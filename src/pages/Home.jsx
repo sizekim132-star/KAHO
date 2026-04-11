@@ -186,7 +186,11 @@ export default function Home() {
       });
     }, { threshold: 0.1, rootMargin: '0px 0px -60px 0px' });
 
-    document.querySelectorAll('.reveal, .reveal-card, .reveal-text').forEach((el) => {
+    document.querySelectorAll('.reveal, .reveal-card, .reveal-text').forEach((el, i) => {
+      // 인라인 스타일로 지연시간이 이미 지정된 경우(섹션별 staggered)는 덮어쓰지 않음
+      if (!el.style.transitionDelay) {
+        el.style.transitionDelay = `${(i % 5) * 0.1}s`;
+      }
       observer.observe(el);
     });
 
@@ -296,7 +300,7 @@ export default function Home() {
       </section>
 
       {/* ════ MUSIC ════ */}
-      <section id="music" className="section section-gray2 reveal">
+      <section id="music" className="section section-gray2">
         <div style={{ maxWidth: 1200, margin: '0 auto' }}>
           <div className="reveal-text">
             <Label>Discography</Label>
@@ -309,7 +313,16 @@ export default function Home() {
               { title: '꽉붙 (Demo)', type: '자작곡', desc: '까치와호랑이의 첫 번째 오리지널 자작곡 데모. 묵직한 야성이 느껴지는 사운드.', link: SC_URL, isYT: false, img: '' },
             ].map((t, i) => (
               <div key={i} className="lift reveal-card"
-                style={{ borderRadius: 'var(--r-lg)', overflow: 'hidden', backgroundColor: '#fff', border: '1px solid rgba(0,0,0,0.05)', display: 'flex', flexDirection: 'column', boxShadow: 'var(--shadow-md)', transitionDelay: `${i * 0.12}s` }}>
+                style={{ 
+                  borderRadius: 'var(--r-lg)', 
+                  overflow: 'hidden', 
+                  backgroundColor: '#fff', 
+                  border: '1px solid rgba(0,0,0,0.05)', 
+                  display: 'flex', 
+                  flexDirection: 'column', 
+                  boxShadow: 'var(--shadow-md)',
+                  transitionDelay: `${(i + 1) * 0.15}s` 
+                }}>
                 {t.isYT ? (
                   <div style={{ aspectRatio: '16/9', width: '100%' }}>
                     <iframe width="100%" height="100%" src={`https://www.youtube.com/embed/${t.link}?rel=0`}
@@ -334,7 +347,7 @@ export default function Home() {
       </section>
 
       {/* ════ MEMBERS ════ */}
-      <section id="members" className="section section-dark reveal">
+      <section id="members" className="section section-dark">
         <div style={{ maxWidth: 1200, margin: '0 auto', position: 'relative', zIndex: 1 }}>
           <div className="reveal-text">
             <p className="label-dark">The Wild Ones</p>
@@ -342,7 +355,7 @@ export default function Home() {
           </div>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(310px, 1fr))', gap: '1.5rem' }}>
             {MEMBERS.map((m, i) => (
-              <div key={i} className="lift reveal-card" style={{ overflow: 'hidden', borderRadius: 'var(--r-lg)', backgroundColor: '#fff', transitionDelay: `${i * 0.12}s` }}>
+              <div key={i} className="lift reveal-card" style={{ overflow: 'hidden', borderRadius: 'var(--r-lg)', backgroundColor: '#fff', transitionDelay: `${(i + 1) * 0.15}s` }}>
                 <div style={{ height: 260 }}><PhotoBox src={m.img} w="100%" h="260px" label={m.name} /></div>
                 <div style={{ padding: '1.6rem' }}>
                   <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: 8 }}>
@@ -367,7 +380,7 @@ export default function Home() {
           </div>
           <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
             {SHOWS.map((s, i) => (
-              <div key={i} className="lift reveal-card" style={{ borderRadius: 'var(--r-lg)', overflow: 'hidden', backgroundColor: '#fff', border: '1px solid var(--gray-2)', boxShadow: 'var(--shadow-md)', transitionDelay: `${i * 0.12}s` }}>
+              <div key={i} className="lift reveal-card" style={{ borderRadius: 'var(--r-lg)', overflow: 'hidden', backgroundColor: '#fff', border: '1px solid var(--gray-2)', boxShadow: 'var(--shadow-md)', transitionDelay: `${(i + 1) * 0.15}s` }}>
                 <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', minHeight: 200 }}>
                   <div style={{ padding: '2.5rem 3rem' }}>
                     <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 12 }}>
