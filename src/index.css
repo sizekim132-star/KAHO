@@ -412,7 +412,6 @@ img {
 .section {
   padding: 120px var(--spacing);
   position: relative;
-  overflow: hidden;
 }
 
 .section-white {
@@ -821,8 +820,8 @@ img {
 
 /* ─── MOBILE SECTION BOTTOM PADDING (FOR NAV) ─── */
 @media (max-width: 768px) {
-  #music, #members, #shows, #contact {
-    padding-bottom: 140px !important;
+  #music, #members, #shows, #contact, .footer-responsive {
+    padding-bottom: 170px !important;
   }
 }
 

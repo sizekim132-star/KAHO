@@ -281,14 +281,14 @@ export default function Home() {
             <p className="body-text" style={{ marginBottom: '2.5rem' }}>
               자작곡과 창의적인 편곡을 통해 우리만의 세계를 구축하고 있으며, 팬들과 함께하는 라이브 무대를 가장 사랑합니다.
             </p>
-            <div className="reveal-text about-socials" style={{ display: 'flex', gap: 12, flexWrap: 'wrap' }}>
-              <a href={IG_URL} target="_blank" rel="noreferrer" className="btn btn-secondary">
+            <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap' }} className="reveal-text">
+              <a href={IG_URL} target="_blank" rel="noreferrer" className="btn btn-secondary" style={{ padding: '10px 22px', fontSize: '.82rem' }}>
                 <FaInstagram size={15} /> Instagram
               </a>
-              <a href={YT_CHANNEL} target="_blank" rel="noreferrer" className="btn btn-ghost">
+              <a href={YT_CHANNEL} target="_blank" rel="noreferrer" className="btn btn-ghost" style={{ padding: '10px 22px', fontSize: '.82rem' }}>
                 <FaYoutube size={15} /> YouTube
               </a>
-              <a href={SC_URL} target="_blank" rel="noreferrer" className="btn btn-ghost sc-btn-solid">
+              <a href={SC_URL} target="_blank" rel="noreferrer" className="btn btn-ghost" style={{ padding: '10px 22px', fontSize: '.82rem', background: 'rgba(255, 119, 0, 0.1)', color: '#FF7700' }}>
                 <FaSoundcloud size={16} /> SoundCloud
               </a>
             </div>
@@ -335,9 +335,8 @@ export default function Home() {
                   <p style={{ fontSize: '.7rem', fontWeight: 800, color: 'var(--orange)', marginBottom: 6 }}>{t.type}</p>
                   <h3 style={{ fontSize: '1.2rem', fontWeight: 800, color: 'var(--navy)', marginBottom: 16 }}>{t.title}</h3>
                   <a href={t.isYT ? `https://www.youtube.com/watch?v=${t.link}` : t.link} target="_blank" rel="noreferrer"
-                    style={{ fontSize: '.8rem', fontWeight: 700, color: 'var(--text-3)', display: 'inline-flex', alignItems: 'center', gap: 6 }}>
-                    {t.isYT ? <FaYoutube size={16} color="#FF0000" /> : <FaSoundcloud size={18} color="#FF5500" />}
-                    {t.isYT ? 'YouTube에서 보기' : 'SoundCloud에서 듣기'}
+                    style={{ fontSize: '.8rem', fontWeight: 700, color: 'var(--text-3)', display: 'inline-flex', alignItems: 'center', gap: 4 }}>
+                    {t.isYT ? '▶ YouTube에서 보기' : '▶ SoundCloud에서 듣기'}
                   </a>
                 </div>
               </div>
@@ -454,7 +453,7 @@ export default function Home() {
       </section>
 
       {/* ════ FOOTER ════ */}
-      <footer style={{ background: 'var(--navy)', padding: '80px var(--spacing) 120px' }}>
+      <footer className="footer-responsive" style={{ background: 'var(--navy)', padding: '80px var(--spacing) 120px' }}>
         <div style={{ maxWidth: 1200, margin: '0 auto', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '2rem' }}>
           <div><h3 style={{ fontSize: '1rem', fontWeight: 900, color: '#fff' }}>MAGPIENTIGER</h3><p style={{ fontSize: '.85rem', color: 'rgba(255,255,255,.4)', marginTop: 8 }}>© 까치와호랑이</p></div>
           <div style={{ display: 'flex', gap: 24 }}>
