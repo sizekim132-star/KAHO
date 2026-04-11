@@ -349,17 +349,21 @@ img {
   border-radius: 999px;
   border: 1px solid rgba(255, 255, 255, 0.1);
   box-shadow: 0 12px 40px rgba(0, 0, 0, 0.5);
-  gap: 2px;
+  gap: 0;
+  width: 92vw;
+  max-width: 450px;
 }
 
 .thumb-btn {
   color: rgba(255, 255, 255, 0.6);
-  padding: 10px 14px; /* 가로 패딩 18px -> 14px 하향 */
+  padding: 10px 0;
   border-radius: 999px;
-  font-size: 0.72rem; /* 폰트 사이즈 살짝 축소 */
+  font-size: 0.7rem;
   font-weight: 700;
-  letter-spacing: 0.03em;
+  letter-spacing: 0;
   transition: all 0.2s var(--ease);
+  flex: 1;
+  text-align: center;
 }
 
 .thumb-btn.active {
@@ -370,6 +374,7 @@ img {
 @media (max-width: 768px) {
   .mobile-thumb-zone {
     display: flex;
+    justify-content: space-around;
   }
 
   .nav {
