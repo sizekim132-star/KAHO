@@ -19,7 +19,7 @@ function BentoCard({ label, value, icon: Icon, sizeClass, socials = [] }) {
   return (
     <div className={`bento-card ${sizeClass} reveal-card`} onClick={handleCopy}>
       <div className={`copy-toast ${copied ? 'active' : ''}`}>Copied!</div>
-      <div className="bento-inner" style={{ display: 'flex', height: '100%', justifyContent: 'space-between', alignItems: 'center' }}>
+      <div style={{ display: 'flex', height: '100%', justifyContent: 'space-between', alignItems: 'center', paddingRight: '6rem' }}>
         <div style={{ flex: 1 }}>
           <div className="icon-box">
             <Icon size={22} />
@@ -33,7 +33,7 @@ function BentoCard({ label, value, icon: Icon, sizeClass, socials = [] }) {
         </div>
 
         {socials.length > 0 && (
-          <div className="bento-socials" style={{ display: 'flex', gap: '2rem' }}>
+          <div style={{ display: 'flex', gap: '3rem', marginLeft: '3rem' }}>
             {socials.map((s, idx) => (
               <a
                 key={idx}
@@ -45,7 +45,7 @@ function BentoCard({ label, value, icon: Icon, sizeClass, socials = [] }) {
                 onMouseEnter={(e) => e.currentTarget.style.color = 'var(--orange)'}
                 onMouseLeave={(e) => e.currentTarget.style.color = 'var(--text-3)'}
               >
-                <s.icon size={innerWidth < 768 ? 32 : 44} />
+                <s.icon size={44} />
               </a>
             ))}
           </div>
@@ -281,14 +281,14 @@ export default function Home() {
             <p className="body-text" style={{ marginBottom: '2.5rem' }}>
               자작곡과 창의적인 편곡을 통해 우리만의 세계를 구축하고 있으며, 팬들과 함께하는 라이브 무대를 가장 사랑합니다.
             </p>
-            <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap' }} className="reveal-text">
-              <a href={IG_URL} target="_blank" rel="noreferrer" className="btn btn-secondary" style={{ padding: '10px 22px', fontSize: '.82rem' }}>
+            <div className="reveal-text about-socials" style={{ display: 'flex', gap: 12, flexWrap: 'wrap' }}>
+              <a href={IG_URL} target="_blank" rel="noreferrer" className="btn btn-secondary">
                 <FaInstagram size={15} /> Instagram
               </a>
-              <a href={YT_CHANNEL} target="_blank" rel="noreferrer" className="btn btn-ghost" style={{ padding: '10px 22px', fontSize: '.82rem' }}>
+              <a href={YT_CHANNEL} target="_blank" rel="noreferrer" className="btn btn-ghost">
                 <FaYoutube size={15} /> YouTube
               </a>
-              <a href={SC_URL} target="_blank" rel="noreferrer" className="btn btn-ghost" style={{ padding: '10px 22px', fontSize: '.82rem', background: 'rgba(255, 119, 0, 0.1)', color: '#FF7700' }}>
+              <a href={SC_URL} target="_blank" rel="noreferrer" className="btn btn-ghost sc-btn">
                 <FaSoundcloud size={16} /> SoundCloud
               </a>
             </div>
@@ -306,7 +306,7 @@ export default function Home() {
             <Label>Discography</Label>
             <h2 className="title" style={{ marginBottom: '3rem' }}>Music</h2>
           </div>
-          <div className="grid-music">
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))', gap: '1.5rem' }}>
             {[
               { title: '깊은 밤을 날아서', type: '까치와 고양이 커버', link: `WYrJr97nXFA`, isYT: true },
               { title: '크리스마스 캐롤 메들리', type: '밴드 커버', link: `DS2NMYKaeuo`, isYT: true },
@@ -352,7 +352,7 @@ export default function Home() {
             <p className="label-dark">The Wild Ones</p>
             <h2 className="title-dark" style={{ marginBottom: '3.5rem' }}>Band Members</h2>
           </div>
-          <div className="grid-members">
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(310px, 1fr))', gap: '1.5rem' }}>
             {MEMBERS.map((m, i) => (
               <div key={i} className="lift reveal-card" style={{ overflow: 'hidden', borderRadius: 'var(--r-lg)', backgroundColor: '#fff', transitionDelay: `${(i + 1) * 0.15}s` }}>
                 <div style={{ height: 260 }}><PhotoBox src={m.img} w="100%" h="260px" label={m.name} /></div>
@@ -380,7 +380,7 @@ export default function Home() {
           <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
             {SHOWS.map((s, i) => (
               <div key={i} className="lift reveal-card" style={{ borderRadius: 'var(--r-lg)', overflow: 'hidden', backgroundColor: '#fff', border: '1px solid var(--gray-2)', boxShadow: 'var(--shadow-md)', transitionDelay: `${(i + 1) * 0.15}s` }}>
-                <div className="grid-shows" style={{ minHeight: 200 }}>
+                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', minHeight: 200 }}>
                   <div style={{ padding: '2.5rem 3rem' }}>
                     <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 12 }}>
                       <span style={{

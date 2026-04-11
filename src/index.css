@@ -812,3 +812,34 @@ img {
 .bento-card:hover .icon-box {
   transform: scale(1.1) rotate(5deg);
 }
+
+/* ─── ABOUT SOCIALS MOBILE FIX ─── */
+.about-socials {
+  margin-top: 1rem;
+}
+
+.about-socials .btn {
+  padding: 10px 22px;
+  font-size: 0.82rem;
+}
+
+.sc-btn {
+  background: rgba(255, 119, 0, 0.1) !important;
+  color: #FF7700 !important;
+}
+
+@media (max-width: 480px) {
+  .about-socials {
+    gap: 8px !important;
+    justify-content: center;
+  }
+  
+  .about-socials .btn {
+    padding: 10px 14px !important;
+    font-size: 0.75rem !important;
+    flex: 1;
+    justify-content: center;
+    min-width: 0;
+    white-space: nowrap;
+  }
+}
