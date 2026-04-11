@@ -22,3 +22,13 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Band private data & Temp files
+*.zip
+band1.zip
+tmp_images/
+tmp_home_ver2.jsx
+tmp_home_ver2_utf8.jsx
+tmp_index_ver2.css
+tmp_index_ver2_utf8.css
+tmp_*
