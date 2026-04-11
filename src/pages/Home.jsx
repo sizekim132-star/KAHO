@@ -209,7 +209,6 @@ export default function Home() {
       {/* ── Mobile Thumb Zone ── */}
       <div className="mobile-thumb-zone">
         {[
-          { id: 'home', label: 'Home' },
           { id: 'music', label: 'Music' },
           { id: 'members', label: 'Band' },
           { id: 'shows', label: 'Shows' },

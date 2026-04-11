@@ -345,29 +345,21 @@ img {
   background: rgba(26, 39, 68, 0.85);
   backdrop-filter: blur(24px) saturate(180%);
   -webkit-backdrop-filter: blur(24px) saturate(180%);
-  padding: 4px;
+  padding: 8px;
   border-radius: 999px;
   border: 1px solid rgba(255, 255, 255, 0.1);
   box-shadow: 0 12px 40px rgba(0, 0, 0, 0.5);
-  gap: 0;
-  width: 96vw;
-  max-width: 500px;
+  gap: 4px;
 }
 
 .thumb-btn {
   color: rgba(255, 255, 255, 0.6);
-  padding: 10px 0;
+  padding: 10px 18px;
   border-radius: 999px;
-  font-size: clamp(0.5rem, 2vw, 0.65rem);
+  font-size: 0.75rem;
   font-weight: 700;
-  letter-spacing: -0.05em;
+  letter-spacing: 0.05em;
   transition: all 0.2s var(--ease);
-  flex: 1;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  white-space: nowrap;
 }
 
 .thumb-btn.active {
@@ -378,7 +370,6 @@ img {
 @media (max-width: 768px) {
   .mobile-thumb-zone {
     display: flex;
-    justify-content: space-around;
   }
 
   .nav {
@@ -692,29 +683,35 @@ img {
   .bento-card-large,
   .bento-card-small {
     grid-column: span 2;
-    padding: 24px 20px !important; /* 15% 하향 조정 및 여백 최소화 */
+    padding: 24px 20px !important;
+    /* 15% 하향 조정 및 여백 최소화 */
     min-height: auto;
   }
-  
+
   .bento-header {
     display: flex;
     align-items: center;
     gap: 10px;
     margin-bottom: 12px;
   }
-  
+
   .bento-header .icon-box {
     margin-bottom: 0 !important;
   }
-  
+
   .bento-label {
     margin-bottom: 0 !important;
   }
 }
 
-.mobile-only { display: none; }
+.mobile-only {
+  display: none;
+}
+
 @media (max-width: 768px) {
-  .mobile-only { display: inline !important; }
+  .mobile-only {
+    display: inline !important;
+  }
 }
 
 .bento-value {
@@ -760,7 +757,7 @@ img {
     padding-right: 0;
     gap: 14px;
   }
-  
+
   .bento-social-group {
     margin-left: 0;
     gap: 1.25rem;
@@ -819,7 +816,7 @@ img {
   }
 
   /* 강제로 플렉스로 변환 후 모바일에서만 이미지를 위로 (column-reverse 활용) */
-  .grid-shows .reveal-card > div {
+  .grid-shows .reveal-card>div {
     display: flex !important;
     flex-direction: column-reverse;
   }
@@ -831,7 +828,8 @@ img {
   .grid-shows .show-img-container {
     height: 280px !important;
     border-left: none !important;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.05); /* 이미지가 위에 배치되므로 하단 경계선 */
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    /* 이미지가 위에 배치되므로 하단 경계선 */
   }
 }
 
@@ -948,9 +946,20 @@ img {
     white-space: nowrap;
     letter-spacing: -0.02rem;
   }
-  
+
   .social-btn svg {
     width: 14px;
     height: 14px;
   }
+}
+
+min-width: 0;
+white-space: nowrap;
+letter-spacing: -0.02rem;
+}
+
+.social-btn svg {
+  width: 14px;
+  height: 14px;
+}
 }
