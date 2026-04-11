@@ -297,7 +297,7 @@ export default function Home() {
       </section>
 
       {/* ════ MUSIC ════ */}
-      <section id="music" className="section section-gray2">
+      <section id="music" className="section section-gray2 reveal">
         <div style={{ maxWidth: 1200, margin: '0 auto' }}>
           <div className="reveal-text">
             <Label>Discography</Label>
@@ -335,7 +335,7 @@ export default function Home() {
       </section>
 
       {/* ════ MEMBERS ════ */}
-      <section id="members" className="section section-dark">
+      <section id="members" className="section section-dark reveal">
         <div style={{ maxWidth: 1200, margin: '0 auto', position: 'relative', zIndex: 1 }}>
           <div className="reveal-text">
             <p className="label-dark">The Wild Ones</p>
