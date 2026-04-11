@@ -349,21 +349,25 @@ img {
   border-radius: 999px;
   border: 1px solid rgba(255, 255, 255, 0.1);
   box-shadow: 0 12px 40px rgba(0, 0, 0, 0.5);
-  gap: 0;
-  width: 92vw;
-  max-width: 450px;
+  gap: 2px;
+  width: 94vw;
+  max-width: 480px;
 }
 
 .thumb-btn {
   color: rgba(255, 255, 255, 0.6);
-  padding: 10px 0;
+  padding: 10px 2px;
   border-radius: 999px;
-  font-size: 0.7rem;
+  font-size: clamp(0.55rem, 2.5vw, 0.7rem);
   font-weight: 700;
-  letter-spacing: 0;
+  letter-spacing: -0.03em;
   transition: all 0.2s var(--ease);
   flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   text-align: center;
+  white-space: nowrap;
 }
 
 .thumb-btn.active {
