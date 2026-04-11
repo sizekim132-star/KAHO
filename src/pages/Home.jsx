@@ -2,7 +2,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { FaInstagram, FaYoutube, FaSoundcloud } from 'react-icons/fa';
 import { FiUser, FiPhone, FiMail } from 'react-icons/fi';
-import memberIcons from '../assets/member_icons.png';
+
 
 // ... (YT_BG_IDS and other constants)
 
