@@ -394,7 +394,9 @@ export default function Home() {
                     <h3 style={{ fontSize: '1.5rem', fontWeight: 800, color: 'var(--navy)' }}>{s.name}</h3>
                     <p style={{ fontSize: '.9rem', color: 'var(--text-2)', marginTop: 8 }}>📍 {s.location}</p>
                   </div>
-                  <div style={{ borderLeft: '1px solid rgba(0,0,0,.04)', background: 'rgba(0,0,0,.01)' }}><PhotoBox src={s.img} w="100%" h="100%" label="Show Moment" /></div>
+                  <div style={{ borderLeft: '1px solid rgba(0,0,0,.04)', background: 'rgba(0,0,0,.01)', height: 320 }}>
+                    <PhotoBox src={s.img} w="100%" h="320px" label="Show Moment" />
+                  </div>
                 </div>
               </div>
             ))}
