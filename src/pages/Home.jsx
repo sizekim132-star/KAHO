@@ -1,7 +1,62 @@
 // src/pages/Home.jsx
 import React, { useState, useEffect } from 'react';
 import { FaInstagram, FaYoutube, FaSoundcloud } from 'react-icons/fa';
+import { FiUser, FiPhone, FiMail } from 'react-icons/fi';
 import memberIcons from '../assets/member_icons.png';
+
+// ... (YT_BG_IDS and other constants)
+
+/* ─── BENTO CARD COMPONENT ─── */
+function BentoCard({ label, value, icon: Icon, sizeClass, socials = [] }) {
+  const [copied, setCopied] = useState(false);
+
+  const handleCopy = () => {
+    navigator.clipboard.writeText(value);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
+  };
+
+  return (
+    <div className={`bento-card ${sizeClass} reveal-card`} onClick={handleCopy}>
+      <div className={`copy-toast ${copied ? 'active' : ''}`}>Copied!</div>
+      <div style={{ display: 'flex', height: '100%', justifyContent: 'space-between', alignItems: 'center', paddingRight: '6rem' }}>
+        <div style={{ flex: 1 }}>
+          <div className="icon-box">
+            <Icon size={22} />
+          </div>
+          <p style={{ fontSize: '.75rem', fontWeight: 800, color: 'var(--text-3)', letterSpacing: '.1em', textTransform: 'uppercase', marginBottom: 8 }}>
+            {label}
+          </p>
+          <h4 style={{ fontSize: '1.6rem', fontWeight: 900, color: 'var(--navy)', letterSpacing: '-.02em' }}>
+            {value}
+          </h4>
+        </div>
+
+        {socials.length > 0 && (
+          <div style={{ display: 'flex', gap: '3rem', marginLeft: '3rem' }}>
+            {socials.map((s, idx) => (
+              <a 
+                key={idx} 
+                href={s.url} 
+                target="_blank" 
+                rel="noreferrer" 
+                onClick={(e) => e.stopPropagation()}
+                style={{ color: 'var(--text-3)', transition: 'all 0.2s cubic-bezier(0.4, 0, 0.2, 1)', display: 'flex' }}
+                onMouseEnter={(e) => e.currentTarget.style.color = 'var(--orange)'}
+                onMouseLeave={(e) => e.currentTarget.style.color = 'var(--text-3)'}
+              >
+                <s.icon size={44} />
+              </a>
+            ))}
+          </div>
+        )}
+      </div>
+    </div>
+  );
+}
+
+// ... (rest of the components)
+
 import galleryGuitar from '../assets/gallery_guitar.png';
 import galleryStage from '../assets/gallery_stage.png';
 import galleryCrowd from '../assets/gallery_crowd.png';
@@ -23,16 +78,16 @@ const MEMBERS = [
 ];
 
 const SHOWS = [
-  { name: '까치와호랑이 조우', date: '2025.04.22', location: '서울', desc: '운명적인 첫 만남', status: 'done' },
-  { name: '제23회 허준축제', date: '2025.10.19', location: '서울 마곡중앙로', desc: '100+ 관객, 야외 공연', status: 'done' },
-  { name: '서울청년센터 할로윈축제', date: '2025.10.31', location: '서울청년센터강서', desc: '30+ 관객, 핼러윈 특별공연', status: 'done' },
+  { name: '까치와호랑이 조우', date: '2025.04.29', location: '숲 속', desc: '운명적인 첫 만남', status: 'done' },
+  { name: '제23회 허준축제', date: '2025.10.19', location: '마곡중앙로', desc: '100+ 관객, 야외 공연', status: 'done' },
+  { name: '서울청년센터 할로윈축제', date: '2025.10.31', location: '서울청년센터양천', desc: '30+ 관객, 핼러윈 특별공연', status: 'done' },
   { name: '청년예술인 네트워크 공연', date: '2026.05.07', location: '강서 운전면허시험장 광장', desc: '40~100명 예정', status: 'upcoming' },
 ];
 
 const PHOTOS_GALLERY = [galleryGuitar, galleryStage, galleryCrowd];
 
 /* ─── UTIL COMPONENTS ─── */
-const Label = ({ children }) => <p className="label">{children}</p>;
+const Label = ({ children, style }) => <p className="label" style={style}>{children}</p>;
 const AccentLine = () => <div className="accent-line" />;
 
 function PhotoBox({ w, h, label }) {
@@ -173,7 +228,7 @@ export default function Home() {
               </a>
             </div>
           </div>
-          <div className="reveal-card">
+          <div className="reveal-card" style={{ boxShadow: 'var(--shadow-lg)', borderRadius: 'var(--r-lg)', overflow: 'hidden' }}>
             <PhotoBox w="100%" h="440px" label="밴드 단체사진" />
           </div>
         </div>
@@ -193,7 +248,7 @@ export default function Home() {
               { title: '꽉붙 (Demo)', type: '자작곡', link: SC_URL, isYT: false },
             ].map((t, i) => (
               <div key={i} className="lift reveal-card"
-                style={{ borderRadius: 'var(--r-lg)', overflow: 'hidden', backgroundColor: '#fff', border: '1px solid rgba(0,0,0,0.05)', display: 'flex', flexDirection: 'column' }}>
+                style={{ borderRadius: 'var(--r-lg)', overflow: 'hidden', backgroundColor: '#fff', border: '1px solid rgba(0,0,0,0.05)', display: 'flex', flexDirection: 'column', boxShadow: 'var(--shadow-md)' }}>
                 {t.isYT ? (
                   <div style={{ aspectRatio: '16/9', width: '100%' }}>
                     <iframe width="100%" height="100%" src={`https://www.youtube.com/embed/${t.link}?rel=0`}
@@ -250,12 +305,21 @@ export default function Home() {
           </div>
           <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
             {SHOWS.map((s, i) => (
-              <div key={i} className="lift reveal-card" style={{ borderRadius: 'var(--r-lg)', overflow: 'hidden', backgroundColor: '#fff', border: '1px solid var(--gray-2)' }}>
+              <div key={i} className="lift reveal-card" style={{ borderRadius: 'var(--r-lg)', overflow: 'hidden', backgroundColor: '#fff', border: '1px solid var(--gray-2)', boxShadow: 'var(--shadow-md)' }}>
                 <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', minHeight: 200 }}>
                   <div style={{ padding: '2.5rem 3rem' }}>
                     <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 12 }}>
-                      <span style={{ fontSize: '.7rem', fontWeight: 800, background: s.status === 'upcoming' ? 'var(--orange)' : 'var(--gray-2)', color: s.status === 'upcoming' ? '#fff' : 'var(--text-3)', padding: '4px 12px', borderRadius: 999 }}>{s.status === 'upcoming' ? '🔥 Upcoming' : 'Completed'}</span>
-                      <span style={{ fontSize: '.8rem', color: 'var(--text-3)' }}>{s.date}</span>
+                      <span style={{
+                        fontSize: '.7rem',
+                        fontWeight: 800,
+                        background: s.status === 'upcoming' ? 'var(--orange)' : '#E9F5EB',
+                        color: s.status === 'upcoming' ? '#fff' : '#2D6A4F',
+                        padding: '4px 12px',
+                        borderRadius: 999
+                      }}>
+                        {s.status === 'upcoming' ? '🔥 Upcoming' : '✓ Completed'}
+                      </span>
+                      <span style={{ fontSize: '.8rem', fontWeight: 600, color: '#6B7280' }}>{s.date}</span>
                     </div>
                     <h3 style={{ fontSize: '1.5rem', fontWeight: 800, color: 'var(--navy)' }}>{s.name}</h3>
                     <p style={{ fontSize: '.9rem', color: 'var(--text-2)', marginTop: 8 }}>📍 {s.location}</p>
@@ -269,33 +333,52 @@ export default function Home() {
       </section>
 
       {/* ════ CONTACT ════ */}
-      <section id="contact" className="section section-white" style={{ borderTop: '1px solid var(--gray-2)' }}>
-        <div style={{ maxWidth: 1000, margin: '0 auto' }}>
-          <div className="reveal-text" style={{ textAlign: 'center', marginBottom: '4rem' }}>
-            <h2 className="title" style={{ fontSize: '1rem', letterSpacing: '.4em', opacity: 0.4, marginBottom: '1.5rem' }}>CONTACT</h2>
-            <AccentLine />
+      <section id="contact" className="section section-gray" style={{ borderTop: '1px solid var(--border)', position: 'relative', zIndex: 1 }}>
+        {/* Background Orbs for Premium feel */}
+        <div className="orb" style={{ width: 400, height: 400, background: 'rgba(255, 95, 31, 0.05)', top: '-100px', right: '-100px' }} />
+        <div className="orb" style={{ width: 300, height: 300, background: 'rgba(26, 39, 68, 0.05)', bottom: '0', left: '-50px' }} />
+
+        <div style={{ maxWidth: 900, margin: '0 auto', position: 'relative', zIndex: 2 }}>
+          <div className="reveal-text" style={{ textAlign: 'center', marginBottom: '4.5rem' }}>
+            <Label style={{ color: 'var(--navy)', letterSpacing: '.3em', fontSize: '1.8rem', fontWeight: 900 }}>CONTACT</Label>
+            <p style={{ marginTop: 24, fontSize: '1.05rem', color: 'var(--text-2)' }}>함께 까치와호랑이의 다음 무대를 만들어가요.</p>
           </div>
-          <div className="reveal-card" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '1px', backgroundColor: 'var(--gray-2)', borderRadius: 'var(--r-lg)', overflow: 'hidden', boxShadow: 'var(--shadow-lg)', border: '1px solid var(--gray-2)' }}>
-            {[
-              { label: 'REPRESENTATIVE', val: '김치수 (리더)', icon: '👤' },
-              { label: 'PHONE', val: '010-5532-0456', icon: '📞' },
-              { label: 'EMAIL', val: 'size132@naver.com', icon: '✉️' }
-            ].map((c, idx) => (
-              <div key={idx} style={{ backgroundColor: '#fff', padding: '3rem 2rem', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '1rem' }}>
-                <span style={{ fontSize: '1.5rem', marginBottom: '0.5rem' }}>{c.icon}</span>
-                <p style={{ fontSize: '.65rem', fontWeight: 800, color: 'var(--text-3)', letterSpacing: '.2em' }}>{c.label}</p>
-                <p style={{ fontSize: '1.1rem', fontWeight: 900, color: 'var(--navy)' }}>{c.val}</p>
-              </div>
-            ))}
+
+          <div className="bento-grid">
+            <BentoCard 
+              label="Booking & Inquiries" 
+              value="김치수" 
+              sub="REPRESENTATIVE" 
+              icon={FiUser} 
+              sizeClass="bento-card-large" 
+              socials={[
+                { icon: FaInstagram, url: 'https://www.instagram.com/size.kim/' },
+                { icon: FaYoutube, url: 'https://www.youtube.com/@sizekim' },
+                { icon: FaSoundcloud, url: SC_URL }
+              ]}
+            />
+            <BentoCard
+              label="Official Email"
+              value="size132@naver.com"
+              sub="Click to copy email address"
+              icon={FiMail}
+              sizeClass="bento-card-small"
+            />
+            <BentoCard
+              label="Mobile"
+              value="010-5532-0456"
+              sub="PHONE NUMBER"
+              icon={FiPhone}
+              sizeClass="bento-card-small"
+            />
           </div>
-          <div style={{ textAlign: 'center', marginTop: '4rem' }} className="reveal"><a href={`mailto:size132@naver.com`} className="btn btn-primary" style={{ padding: '18px 48px' }}>공연 제안하기</a></div>
         </div>
       </section>
 
       {/* ════ FOOTER ════ */}
       <footer style={{ background: 'var(--navy)', padding: '80px var(--spacing) 120px' }}>
         <div style={{ maxWidth: 1200, margin: '0 auto', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '2rem' }}>
-          <div><h3 style={{ fontSize: '1rem', fontWeight: 900, color: '#fff' }}>MAGPIENTIGER</h3><p style={{ fontSize: '.85rem', color: 'rgba(255,255,255,.4)', marginTop: 8 }}>© 2025 까치와호랑이 · 서울 기반 인디 밴드</p></div>
+          <div><h3 style={{ fontSize: '1rem', fontWeight: 900, color: '#fff' }}>MAGPIENTIGER</h3><p style={{ fontSize: '.85rem', color: 'rgba(255,255,255,.4)', marginTop: 8 }}>© 까치와호랑이</p></div>
           <div style={{ display: 'flex', gap: 24 }}>
             <a href={IG_URL} target="_blank" rel="noreferrer" style={{ color: 'rgba(255,255,255,.4)' }}><FaInstagram size={22} /></a>
             <a href={YT_CHANNEL} target="_blank" rel="noreferrer" style={{ color: 'rgba(255,255,255,.4)' }}><FaYoutube size={22} /></a>
