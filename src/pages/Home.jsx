@@ -212,6 +212,7 @@ export default function Home() {
           { id: 'home', label: 'Home' },
           { id: 'music', label: 'Music' },
           { id: 'members', label: 'Band' },
+          { id: 'shows', label: 'Shows' },
           { id: 'contact', label: 'Contact' }
         ].map(item => (
           <a key={item.id} href={`#${item.id}`}
