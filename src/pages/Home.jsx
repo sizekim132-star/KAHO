@@ -188,12 +188,15 @@ export default function Home() {
       });
     }, { threshold: 0.1, rootMargin: '0px 0px -60px 0px' });
 
-    document.querySelectorAll('.reveal, .reveal-card, .reveal-text').forEach((el, i) => {
-      // 인라인 스타일로 지연시간이 지정된 경우는 덮어쓰지 않아 About Us와 같은 기본 섹션을 보호합니다.
-      if (!el.style.transitionDelay) {
-        el.style.transitionDelay = `${(i % 5) * 0.1}s`;
-      }
-      observer.observe(el);
+    // 섹션별 요소 그룹화 후 정교한 Stagger Effect 적용 (--stagger-delay)
+    document.querySelectorAll('section, footer').forEach(container => {
+      const elements = container.querySelectorAll('.reveal, .reveal-card, .reveal-text');
+      elements.forEach((el, idx) => {
+        if (!el.style.transitionDelay && !el.style.getPropertyValue('--stagger-delay')) {
+          el.style.setProperty('--stagger-delay', `${idx * 0.15}s`);
+        }
+        observer.observe(el);
+      });
     });
 
     return () => {
