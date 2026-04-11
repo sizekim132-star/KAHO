@@ -69,19 +69,19 @@ const SC_URL = 'https://soundcloud.com/size_kim';
 
 /* ─── DATA ─── */
 const MEMBERS = [
-  { name: '김치수', role: '리더 · 베이스 · 프로듀서', animal: '호랑이', bio: '밴드의 심장. 곡을 만들고, 무대를 지배한다. 묵직한 베이스 그루브가 폭발하는 순간 Magpientiger가 시작된다.' },
-  { name: '심어진', role: '일렉기타 · 엔지니어', animal: '치타', bio: '속도와 정밀함의 화신. 날카로운 픽 워크와 예리한 사운드 디자인으로 밴드의 소리를 조각한다.' },
-  { name: '김태린', role: '메인보컬', animal: '까치', bio: '시선을 단번에 사로잡는 존재감. 선율 위를 자유롭게 날고, 무대 어디서든 빛난다.' },
-  { name: '최민서', role: '일렉기타 · 서브보컬', animal: '고양이', bio: '발칙한 고양이.' },
-  { name: '박어진', role: '건반 · 서기', animal: '참새', bio: '밴드를 지탱하는 섬세한 손. 은은하게 스며드는 건반이 이 팀의 온기다.' },
-  { name: '김민규', role: '드럼 · 편집', animal: '펭귄', bio: '흔들리지 않는 기둥. 묵묵히 팀을 지탱한다.' },
+  { name: '김치수', role: '리더 · 베이스 · 프로듀서', animal: '호랑이', bio: '밴드의 심장. 곡을 만들고, 무대를 지배한다. 묵직한 베이스 그루브가 폭발하는 순간 Magpientiger가 시작된다.', img: '' },
+  { name: '심어진', role: '일렉기타 · 엔지니어', animal: '치타', bio: '속도와 정밀함의 화신. 날카로운 픽 워크와 예리한 사운드 디자인으로 밴드의 소리를 조각한다.', img: '' },
+  { name: '김태린', role: '메인보컬', animal: '까치', bio: '시선을 단번에 사로잡는 존재감. 선율 위를 자유롭게 날고, 무대 어디서든 빛난다.', img: '' },
+  { name: '최민서', role: '일렉기타 · 서브보컬', animal: '고양이', bio: '발칙한 고양이.', img: '' },
+  { name: '박어진', role: '건반 · 서기', animal: '참새', bio: '밴드를 지탱하는 섬세한 손. 은은하게 스며드는 건반이 이 팀의 온기다.', img: '' },
+  { name: '김민규', role: '드럼 · 편집', animal: '펭귄', bio: '흔들리지 않는 기둥. 묵묵히 팀을 지탱한다.', img: '' },
 ];
 
 const SHOWS = [
-  { name: '까치와호랑이 조우', date: '2025.04.29', location: '숲 속', desc: '운명적인 첫 만남', status: 'done' },
-  { name: '제23회 허준축제', date: '2025.10.19', location: '마곡중앙로', desc: '100+ 관객, 야외 공연', status: 'done' },
-  { name: '서울청년센터 할로윈축제', date: '2025.10.31', location: '서울청년센터양천', desc: '30+ 관객, 핼러윈 특별공연', status: 'done' },
-  { name: '청년예술인 네트워크 공연', date: '2026.05.07', location: '강서 운전면허시험장 광장', desc: '40~100명 예정', status: 'upcoming' },
+  { name: '까치와호랑이 조우', date: '2025.04.29', location: '숲 속', desc: '운명적인 첫 만남', status: 'done', img: '' },
+  { name: '제23회 허준축제', date: '2025.10.19', location: '마곡중앙로', desc: '100+ 관객, 야외 공연', status: 'done', img: '' },
+  { name: '서울청년센터 할로윈축제', date: '2025.10.31', location: '서울청년센터양천', desc: '30+ 관객, 핼러윈 특별공연', status: 'done', img: '' },
+  { name: '청년예술인 네트워크 공연', date: '2026.05.07', location: '강서 운전면허시험장 광장', desc: '40~100명 예정', status: 'upcoming', img: '' },
 ];
 
 const PHOTOS_GALLERY = [galleryGuitar, galleryStage, galleryCrowd];
@@ -90,9 +90,20 @@ const PHOTOS_GALLERY = [galleryGuitar, galleryStage, galleryCrowd];
 const Label = ({ children, style }) => <p className="label" style={style}>{children}</p>;
 const AccentLine = () => <div className="accent-line" />;
 
-function PhotoBox({ w, h, label }) {
+function PhotoBox({ src, w, h, label, alt }) {
+  if (src) {
+    return (
+      <div style={{ width: w, height: h, overflow: 'hidden', borderRadius: 'inherit', position: 'relative' }}>
+        <img 
+          src={src} 
+          alt={alt || label} 
+          style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center', display: 'block' }} 
+        />
+      </div>
+    );
+  }
   return (
-    <div className="photo-box" style={{ width: w, height: h }}>
+    <div className="photo-box" style={{ width: w || '100%', height: h || '100%' }}>
       <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
         <rect x="3" y="3" width="18" height="18" rx="3" /><circle cx="8.5" cy="8.5" r="1.5" />
         <polyline points="21,15 16,10 5,21" />
@@ -273,7 +284,7 @@ export default function Home() {
             </div>
           </div>
           <div className="reveal-card" style={{ boxShadow: 'var(--shadow-lg)', borderRadius: 'var(--r-lg)', overflow: 'hidden' }}>
-            <PhotoBox w="100%" h="440px" label="밴드 단체사진" />
+            <PhotoBox src="" w="100%" h="440px" label="밴드 단체사진" />
           </div>
         </div>
       </section>
@@ -325,7 +336,7 @@ export default function Home() {
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(310px, 1fr))', gap: '1.5rem' }}>
             {MEMBERS.map((m, i) => (
               <div key={i} className="lift reveal-card" style={{ overflow: 'hidden', borderRadius: 'var(--r-lg)', backgroundColor: '#fff' }}>
-                <div style={{ height: 260 }}><PhotoBox w="100%" h="260px" label={m.name} /></div>
+                <div style={{ height: 260 }}><PhotoBox src={m.img} w="100%" h="260px" label={m.name} /></div>
                 <div style={{ padding: '1.6rem' }}>
                   <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: 8 }}>
                     <div><h3 style={{ fontSize: '1.4rem', fontWeight: 850, color: 'var(--navy)' }}>{m.name}</h3><p style={{ fontSize: '.72rem', fontWeight: 800, color: 'var(--orange)', marginTop: 4 }}>{m.animal}</p></div>
@@ -368,7 +379,7 @@ export default function Home() {
                     <h3 style={{ fontSize: '1.5rem', fontWeight: 800, color: 'var(--navy)' }}>{s.name}</h3>
                     <p style={{ fontSize: '.9rem', color: 'var(--text-2)', marginTop: 8 }}>📍 {s.location}</p>
                   </div>
-                  <div style={{ borderLeft: '1px solid rgba(0,0,0,.04)', background: 'rgba(0,0,0,.01)' }}><PhotoBox w="100%" h="100%" label="Show Moment" /></div>
+                  <div style={{ borderLeft: '1px solid rgba(0,0,0,.04)', background: 'rgba(0,0,0,.01)' }}><PhotoBox src={s.img} w="100%" h="100%" label="Show Moment" /></div>
                 </div>
               </div>
             ))}
