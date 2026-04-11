@@ -345,22 +345,22 @@ img {
   background: rgba(26, 39, 68, 0.85);
   backdrop-filter: blur(24px) saturate(180%);
   -webkit-backdrop-filter: blur(24px) saturate(180%);
-  padding: 6px;
+  padding: 4px;
   border-radius: 999px;
   border: 1px solid rgba(255, 255, 255, 0.1);
   box-shadow: 0 12px 40px rgba(0, 0, 0, 0.5);
-  gap: 2px;
-  width: 94vw;
-  max-width: 480px;
+  gap: 0;
+  width: 96vw;
+  max-width: 500px;
 }
 
 .thumb-btn {
   color: rgba(255, 255, 255, 0.6);
-  padding: 10px 2px;
+  padding: 10px 0;
   border-radius: 999px;
-  font-size: clamp(0.55rem, 2.5vw, 0.7rem);
+  font-size: clamp(0.5rem, 2vw, 0.65rem);
   font-weight: 700;
-  letter-spacing: -0.03em;
+  letter-spacing: -0.05em;
   transition: all 0.2s var(--ease);
   flex: 1;
   display: flex;
