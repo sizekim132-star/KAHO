@@ -72,6 +72,7 @@ const memDefault = ''; // 누락된 멤버용
 
 import showHeojun from '../assets/show_heojun.jpg';
 import showHalloween from '../assets/show_halloween.jpg';
+import galleryHalloween1 from '../assets/gallery_halloween_party.jpg';
 import galleryHalloween2 from '../assets/gallery_halloween_scene.jpg';
 import galleryHeojun from '../assets/gallery_heojun_scene.jpg';
 
@@ -83,18 +84,18 @@ const SC_URL = 'https://soundcloud.com/size_kim';
 
 /* ─── DATA ─── */
 const MEMBERS = [
-  { name: '김치수', role: '리더 · 베이스 · 프로듀서', animal: '호랑이', bio: '밴드의 심장. 곡을 만들고, 무대를 지배한다. 묵직한 베이스 그루브가 폭발하는 순간 Magpientiger가 시작된다.', img: memChisu },
+  { name: '김치수', role: '리더 · 베이스 · 프로듀서', animal: '호랑이', bio: '곡을 만들고, 무대를 지배한다. 묵직한 그루브가 퍼지는 순간 까치와호랑이가 시작된다.', img: memChisu },
   { name: '심어진', role: '일렉기타 · 엔지니어', animal: '치타', bio: '속도와 정밀함의 화신. 날카로운 픽 워크와 예리한 사운드 디자인으로 밴드의 소리를 조각한다.', img: memEojinS },
   { name: '김태린', role: '메인보컬', animal: '까치', bio: '시선을 단번에 사로잡는 존재감. 선율 위를 자유롭게 날고, 무대 어디서든 빛난다.', img: memTaerin },
   { name: '최민서', role: '일렉기타 · 서브보컬', animal: '고양이', bio: '발칙한 고양이.', img: memMinseo },
   { name: '박어진', role: '건반 · 서기', animal: '참새', bio: '밴드를 지탱하는 섬세한 손. 은은하게 스며드는 건반이 이 팀의 온기다.', img: memUjinP },
-  { name: '김민규', role: '드럼 · 편집', animal: '펭귄', bio: '흔들리지 않는 기둥. 묵묵히 팀을 지탱한다.', img: memDefault },
+  { name: '김민규', role: '드럼 · 편집', animal: '펭귄', bio: '흔들리지 않는 기둥. 심장을 강타하는 드럼으로 묵묵히 팀을 지탱한다.', img: memDefault },
 ];
 
 const SHOWS = [
   { name: '까치와호랑이 조우', date: '2025.04.29', location: '숲 속', desc: '운명적인 첫 만남', status: 'done', img: galleryHeojun },
   { name: '제23회 허준축제', date: '2025.10.19', location: '마곡중앙로', desc: '100+ 관객, 야외 공연', status: 'done', img: showHeojun },
-  { name: '서울청년센터 할로윈축제', date: '2025.10.31', location: '서울청년센터양천', desc: '30+ 관객, 핼러윈 특별공연', status: 'done', img: showHalloween },
+  { name: '서울청년센터 할로윈축제', date: '2025.10.31', location: '서울청년센터양천', desc: '30+ 관객, 특별공연', status: 'done', img: showHalloween },
   { name: '청년예술인 네트워크 공연', date: '2026.05.07', location: '강서 운전면허시험장 광장', desc: '40~100명 예정', status: 'upcoming', img: '' },
 ];
 
@@ -312,9 +313,9 @@ export default function Home() {
           </div>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))', gap: '1.5rem' }}>
             {[
-              { title: '깊은 밤을 날아서', type: '까치와 고양이 커버', desc: '이문세 원곡의 화려한 변신. 까치와 고양이의 포핸즈 피아노와 보컬이 어우러진 버스킹 버전입니다.', link: `WYrJr97nXFA`, isYT: true },
-              { title: '크리스마스 캐롤 메들리', type: '밴드 커버', desc: '허준축제 현장의 열기를 담은 올스타 메들리. 밴드 전 멤버의 에너지를 느낄 수 있습니다.', link: `DS2NMYKaeuo`, isYT: true },
-              { title: '꽉붙 (Demo)', type: '자작곡', desc: '까치와호랑이의 첫 번째 오리지널 자작곡 데모. 묵직한 그루브와 야성적인 보컬의 조화.', link: SC_URL, isYT: false, img: '' },
+              { title: '깊은 밤을 날아서', type: '까치와 고양이 커버', link: `WYrJr97nXFA`, isYT: true },
+              { title: '크리스마스 캐롤 메들리', type: '밴드 커버', link: `DS2NMYKaeuo`, isYT: true },
+              { title: '꽉붙 (Demo)', type: '자작곡', link: SC_URL, isYT: false, img: galleryHalloween1 },
             ].map((t, i) => (
               <div key={i} className="lift reveal-card"
                 style={{ borderRadius: 'var(--r-lg)', overflow: 'hidden', backgroundColor: '#fff', border: '1px solid rgba(0,0,0,0.05)', display: 'flex', flexDirection: 'column', boxShadow: 'var(--shadow-md)' }}>
@@ -329,7 +330,6 @@ export default function Home() {
                 <div style={{ padding: '1.5rem' }}>
                   <p style={{ fontSize: '.7rem', fontWeight: 800, color: 'var(--orange)', marginBottom: 6 }}>{t.type}</p>
                   <h3 style={{ fontSize: '1.2rem', fontWeight: 800, color: 'var(--navy)', marginBottom: 12 }}>{t.title}</h3>
-                  <p style={{ fontSize: '.85rem', color: 'var(--text-2)', marginBottom: 16, lineHeight: 1.5 }}>{t.desc}</p>
                   <a href={t.isYT ? `https://www.youtube.com/watch?v=${t.link}` : t.link} target="_blank" rel="noreferrer"
                     style={{ fontSize: '.8rem', fontWeight: 700, color: 'var(--text-3)', display: 'inline-flex', alignItems: 'center', gap: 4 }}>
                     {t.isYT ? '▶ YouTube에서 보기' : '▶ SoundCloud에서 듣기'}
@@ -387,13 +387,12 @@ export default function Home() {
                         padding: '4px 12px',
                         borderRadius: 999
                       }}>
-                        {s.status === 'upcoming' ? '🔥 Upcoming' : '✅ Completed'}
+                        {s.status === 'upcoming' ? '🔥 Upcoming' : '✓ Completed'}
                       </span>
                       <span style={{ fontSize: '.8rem', fontWeight: 600, color: '#6B7280' }}>{s.date}</span>
                     </div>
                     <h3 style={{ fontSize: '1.5rem', fontWeight: 800, color: 'var(--navy)' }}>{s.name}</h3>
                     <p style={{ fontSize: '.9rem', color: 'var(--text-2)', marginTop: 8 }}>📍 {s.location}</p>
-                    <p style={{ fontSize: '.85rem', color: 'var(--text-3)', marginTop: 4 }}>{s.desc}</p>
                   </div>
                   <div style={{ borderLeft: '1px solid rgba(0,0,0,.04)', background: 'rgba(0,0,0,.01)', height: 320 }}>
                     <PhotoBox src={s.img} w="100%" h="320px" label="Show Moment" />
