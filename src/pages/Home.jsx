@@ -256,7 +256,7 @@ export default function Home() {
             <Label>MAGPIENTIGER · 까치와호랑이</Label>
             <h1 className="reveal-text" style={{ fontSize: 'clamp(3rem,7vw,6.4rem)', fontWeight: 900, letterSpacing: '-0.05em', color: 'var(--navy)', lineHeight: 1.05, marginBottom: '1.5rem' }}>
               WHERE THE<br />
-              <span className="gradient-text">WILDS SING.</span>
+              <span className="gradient-text" style={{ whiteSpace: 'nowrap' }}>WILDS SING.</span>
             </h1>
             <p className="body-text reveal-text" style={{ maxWidth: 520, marginBottom: '2.5rem' }}>
               까치의 목소리와 호랑이의 그루브.<br />
