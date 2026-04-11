@@ -648,29 +648,35 @@ img {
   .bento-card-large,
   .bento-card-small {
     grid-column: span 2;
-    padding: 24px 20px !important; /* 15% 하향 조정 및 여백 최소화 */
+    padding: 24px 20px !important;
+    /* 15% 하향 조정 및 여백 최소화 */
     min-height: auto;
   }
-  
+
   .bento-header {
     display: flex;
     align-items: center;
     gap: 10px;
     margin-bottom: 12px;
   }
-  
+
   .bento-header .icon-box {
     margin-bottom: 0 !important;
   }
-  
+
   .bento-label {
     margin-bottom: 0 !important;
   }
 }
 
-.mobile-only { display: none; }
+.mobile-only {
+  display: none;
+}
+
 @media (max-width: 768px) {
-  .mobile-only { display: inline !important; }
+  .mobile-only {
+    display: inline !important;
+  }
 }
 
 .bento-value {
@@ -716,7 +722,7 @@ img {
     padding-right: 0;
     gap: 14px;
   }
-  
+
   .bento-social-group {
     margin-left: 0;
     gap: 1.25rem;
@@ -775,7 +781,7 @@ img {
   }
 
   /* 강제로 플렉스로 변환 후 모바일에서만 이미지를 위로 (column-reverse 활용) */
-  .grid-shows .reveal-card > div {
+  .grid-shows .reveal-card>div {
     display: flex !important;
     flex-direction: column-reverse;
   }
@@ -787,7 +793,8 @@ img {
   .grid-shows .show-img-container {
     height: 280px !important;
     border-left: none !important;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.05); /* 이미지가 위에 배치되므로 하단 경계선 */
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    /* 이미지가 위에 배치되므로 하단 경계선 */
   }
 }
 
@@ -904,7 +911,7 @@ img {
     white-space: nowrap;
     letter-spacing: -0.02rem;
   }
-  
+
   .social-btn svg {
     width: 14px;
     height: 14px;
