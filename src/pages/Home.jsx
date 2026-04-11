@@ -35,11 +35,11 @@ function BentoCard({ label, value, icon: Icon, sizeClass, socials = [] }) {
         {socials.length > 0 && (
           <div style={{ display: 'flex', gap: '3rem', marginLeft: '3rem' }}>
             {socials.map((s, idx) => (
-              <a
-                key={idx}
-                href={s.url}
-                target="_blank"
-                rel="noreferrer"
+              <a 
+                key={idx} 
+                href={s.url} 
+                target="_blank" 
+                rel="noreferrer" 
                 onClick={(e) => e.stopPropagation()}
                 style={{ color: 'var(--text-3)', transition: 'all 0.2s cubic-bezier(0.4, 0, 0.2, 1)', display: 'flex' }}
                 onMouseEnter={(e) => e.currentTarget.style.color = 'var(--orange)'}
@@ -55,10 +55,6 @@ function BentoCard({ label, value, icon: Icon, sizeClass, socials = [] }) {
   );
 }
 
-// ... (rest of the components)
-
-
-
 /* ─── IMAGE ASSETS (자동 매핑용) ─── */
 import groupPhoto from '../assets/group_photo.jpg';
 import memChisu from '../assets/member_chisu.jpg';
@@ -69,9 +65,6 @@ import memUjinP from '../assets/member_ujin.jpg'; // 박어진
 const memDefault = ''; // 누락된 멤버용
 
 import showHeojun from '../assets/show_heojun.jpg';
-import showHalloween from '../assets/show_halloween.jpg';
-import galleryHalloween1 from '../assets/gallery_halloween_party.jpg';
-import galleryHalloween2 from '../assets/gallery_halloween_scene.jpg';
 import galleryHeojun from '../assets/gallery_heojun_scene.jpg';
 
 /* ── 실제 유튜브 영상들 (브라우저로 직접 확인한 실제 ID) ── */
@@ -93,11 +86,10 @@ const MEMBERS = [
 const SHOWS = [
   { name: '까치와호랑이 조우', date: '2025.04.29', location: '숲 속', desc: '운명적인 첫 만남', status: 'done', img: galleryHeojun },
   { name: '제23회 허준축제', date: '2025.10.19', location: '마곡중앙로', desc: '100+ 관객, 야외 공연', status: 'done', img: showHeojun },
-  { name: '서울청년센터 할로윈축제', date: '2025.10.31', location: '서울청년센터양천', desc: '30+ 관객, 특별공연', status: 'done', img: showHalloween },
   { name: '청년예술인 네트워크 공연', date: '2026.05.07', location: '강서 운전면허시험장 광장', desc: '40~100명 예정', status: 'upcoming', img: '' },
 ];
 
-const PHOTOS_GALLERY = [galleryGuitar, galleryStage, galleryCrowd];
+const PHOTOS_GALLERY = [groupPhoto, galleryHeojun];
 
 /* ─── UTIL COMPONENTS ─── */
 const Label = ({ children, style }) => <p className="label" style={style}>{children}</p>;
@@ -107,10 +99,10 @@ function PhotoBox({ src, w, h, label, alt }) {
   if (src) {
     return (
       <div style={{ width: w, height: h, overflow: 'hidden', borderRadius: 'inherit', position: 'relative' }}>
-        <img
-          src={src}
-          alt={alt || label}
-          style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center', display: 'block' }}
+        <img 
+          src={src} 
+          alt={alt || label} 
+          style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center', display: 'block' }} 
         />
       </div>
     );
@@ -146,7 +138,7 @@ export default function Home() {
     intervalRef.current = setInterval(() => {
       setActiveSlot((prev) => {
         const next = prev === 0 ? 1 : 0;
-
+        
         // 중요: 전환 직후가 아니라, 페이드 아웃이 끝난 3.5초 뒤에 비활성 슬롯의 영상을 교체
         // 이렇게 하면 사라지는 도중에 영상환 휙 바뀌는 현상을 원천 차단
         timeoutRef.current = setTimeout(() => {
@@ -229,22 +221,22 @@ export default function Home() {
       <div className="vbg-container" style={{ opacity: videoOpacity, transition: 'opacity 0.05s linear' }}>
         {/* 물리적 슬롯 0 */}
         <div className="vbg" style={{ opacity: activeSlot === 0 ? 1 : 0, zIndex: activeSlot === 0 ? 1 : 0 }}>
-          <iframe
+          <iframe 
             key={`vbg-s0-${YT_BG_IDS[slotIndices[0]]}`}
             src={`https://www.youtube.com/embed/${YT_BG_IDS[slotIndices[0]]}?autoplay=1&mute=1&controls=0&loop=1&playlist=${YT_BG_IDS[slotIndices[0]]}&rel=0&showinfo=0&iv_load_policy=3&disablekb=1`}
-            allow="autoplay; encrypted-media"
-            style={{ border: 'none' }}
-            title="bg-video-slot-0"
+            allow="autoplay; encrypted-media" 
+            style={{ border: 'none' }} 
+            title="bg-video-slot-0" 
           />
         </div>
         {/* 물리적 슬롯 1 */}
         <div className="vbg" style={{ opacity: activeSlot === 1 ? 1 : 0, zIndex: activeSlot === 1 ? 1 : 0 }}>
-          <iframe
+          <iframe 
             key={`vbg-s1-${YT_BG_IDS[slotIndices[1]]}`}
             src={`https://www.youtube.com/embed/${YT_BG_IDS[slotIndices[1]]}?autoplay=1&mute=1&controls=0&loop=1&playlist=${YT_BG_IDS[slotIndices[1]]}&rel=0&showinfo=0&iv_load_policy=3&disablekb=1`}
-            allow="autoplay; encrypted-media"
-            style={{ border: 'none' }}
-            title="bg-video-slot-1"
+            allow="autoplay; encrypted-media" 
+            style={{ border: 'none' }} 
+            title="bg-video-slot-1" 
           />
         </div>
       </div>
@@ -311,9 +303,9 @@ export default function Home() {
           </div>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))', gap: '1.5rem' }}>
             {[
-              { title: '깊은 밤을 날아서', type: '까치와 고양이 커버', link: `WYrJr97nXFA`, isYT: true },
-              { title: '크리스마스 캐롤 메들리', type: '밴드 커버', link: `DS2NMYKaeuo`, isYT: true },
-              { title: '꽉붙 (Demo)', type: '자작곡', link: SC_URL, isYT: false, img: galleryHalloween1 },
+              { title: '깊은 밤을 날아서', type: '까치와 고양이 커버', desc: '이문세 원곡의 화려한 변신. 보컬과 포핸즈 피아노가 어우러진 버스킹 버전입니다.', link: `WYrJr97nXFA`, isYT: true },
+              { title: '크리스마스 캐롤 메들리', type: '밴드 커버', desc: '허준축제 현장을 들썩이게 한 캐롤 올스타 메들리 라이브.', link: `DS2NMYKaeuo`, isYT: true },
+              { title: '꽉붙 (Demo)', type: '자작곡', desc: '까치와호랑이의 첫 번째 오리지널 자작곡 데모. 묵직한 야성이 느껴지는 사운드.', link: SC_URL, isYT: false, img: '' },
             ].map((t, i) => (
               <div key={i} className="lift reveal-card"
                 style={{ borderRadius: 'var(--r-lg)', overflow: 'hidden', backgroundColor: '#fff', border: '1px solid rgba(0,0,0,0.05)', display: 'flex', flexDirection: 'column', boxShadow: 'var(--shadow-md)' }}>
@@ -328,6 +320,7 @@ export default function Home() {
                 <div style={{ padding: '1.5rem' }}>
                   <p style={{ fontSize: '.7rem', fontWeight: 800, color: 'var(--orange)', marginBottom: 6 }}>{t.type}</p>
                   <h3 style={{ fontSize: '1.2rem', fontWeight: 800, color: 'var(--navy)', marginBottom: 12 }}>{t.title}</h3>
+                  <p style={{ fontSize: '.85rem', color: 'var(--text-3)', marginBottom: 16, lineHeight: 1.5 }}>{t.desc}</p>
                   <a href={t.isYT ? `https://www.youtube.com/watch?v=${t.link}` : t.link} target="_blank" rel="noreferrer"
                     style={{ fontSize: '.8rem', fontWeight: 700, color: 'var(--text-3)', display: 'inline-flex', alignItems: 'center', gap: 4 }}>
                     {t.isYT ? '▶ YouTube에서 보기' : '▶ SoundCloud에서 듣기'}
@@ -385,12 +378,13 @@ export default function Home() {
                         padding: '4px 12px',
                         borderRadius: 999
                       }}>
-                        {s.status === 'upcoming' ? '🔥 Upcoming' : '✓ Completed'}
+                        {s.status === 'upcoming' ? '🔥 Upcoming' : '✅ Completed'}
                       </span>
                       <span style={{ fontSize: '.8rem', fontWeight: 600, color: '#6B7280' }}>{s.date}</span>
                     </div>
                     <h3 style={{ fontSize: '1.5rem', fontWeight: 800, color: 'var(--navy)' }}>{s.name}</h3>
                     <p style={{ fontSize: '.9rem', color: 'var(--text-2)', marginTop: 8 }}>📍 {s.location}</p>
+                    <p style={{ fontSize: '.85rem', color: 'var(--text-3)', marginTop: 12, lineHeight: 1.6 }}>{s.desc}</p>
                   </div>
                   <div style={{ borderLeft: '1px solid rgba(0,0,0,.04)', background: 'rgba(0,0,0,.01)', height: 320 }}>
                     <PhotoBox src={s.img} w="100%" h="320px" label="Show Moment" />
@@ -415,12 +409,12 @@ export default function Home() {
           </div>
 
           <div className="bento-grid">
-            <BentoCard
-              label="Booking & Inquiries"
-              value="김치수"
-              sub="REPRESENTATIVE"
-              icon={FiUser}
-              sizeClass="bento-card-large"
+            <BentoCard 
+              label="Booking & Inquiries" 
+              value="김치수" 
+              sub="REPRESENTATIVE" 
+              icon={FiUser} 
+              sizeClass="bento-card-large" 
               socials={[
                 { icon: FaInstagram, url: 'https://www.instagram.com/size.kim/' },
                 { icon: FaYoutube, url: 'https://www.youtube.com/@sizekim' },
