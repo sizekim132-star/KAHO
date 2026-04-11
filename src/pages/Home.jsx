@@ -184,7 +184,7 @@ export default function Home() {
           entry.target.classList.add('active');
         }
       });
-    }, { threshold: 0.1, rootMargin: '0px 0px -60px 0px' });
+    }, { threshold: 0.15, rootMargin: '0px 0px -100px 0px' });
 
     document.querySelectorAll('.reveal, .reveal-card, .reveal-text').forEach((el, i) => {
       // 인라인 스타일로 지연시간이 지정된 경우는 덮어쓰지 않아 About Us와 같은 기본 섹션을 보호합니다.
