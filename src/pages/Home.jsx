@@ -253,7 +253,7 @@ export default function Home() {
       <section id="home" style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', padding: '80px var(--spacing)' }}>
         <div style={{ maxWidth: 1200, margin: '0 auto', width: '100%' }}>
           <div className="glass reveal float-slow" style={{ padding: 'clamp(40px,6vw,72px)', borderRadius: 28, maxWidth: '100%' }}>
-            <Label>MAGPIENTIGER · 까치와호랑이</Label>
+            <Label>KAHO · 까치와호랑이</Label>
             <h1 className="reveal-text" style={{ fontSize: 'clamp(3rem,7vw,6.4rem)', fontWeight: 900, letterSpacing: '-0.05em', color: 'var(--navy)', lineHeight: 1.05, marginBottom: '1.5rem' }}>
               WHERE THE<br />
               <span className="gradient-text" style={{ whiteSpace: 'nowrap' }}>WILDS SING.</span>
@@ -278,7 +278,7 @@ export default function Home() {
             <h2 className="title">야성이 깨어나는<br />그 순간의 음악.</h2>
             <AccentLine />
             <p className="body-text" style={{ marginBottom: '1.5rem' }}>
-              <strong style={{ color: 'var(--navy)', fontWeight: 700 }}>MAGPIENTIGER(까치와호랑이)</strong>는 2025년 서울 강서구에서 결성된 인디 밴드입니다. 까치의 영리함과 호랑이의 힘을 음악으로 녹여, 날카롭고 역동적인 사운드를 만들어냅니다.
+              <strong style={{ color: 'var(--navy)', fontWeight: 700 }}>KAHO(까치와호랑이)</strong>는 2025년 서울 강서구에서 결성된 인디 밴드입니다. 까치의 영리함과 호랑이의 힘을 음악으로 녹여, 날카롭고 역동적인 사운드를 만들어냅니다.
             </p>
             <p className="body-text" style={{ marginBottom: '2.5rem' }}>
               자작곡과 창의적인 편곡을 통해 우리만의 세계를 구축하고 있으며, 팬들과 함께하는 라이브 무대를 가장 사랑합니다.
@@ -457,7 +457,7 @@ export default function Home() {
       {/* ════ FOOTER ════ */}
       <footer style={{ background: 'var(--navy)', padding: '80px var(--spacing) 120px' }}>
         <div style={{ maxWidth: 1200, margin: '0 auto', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '2rem' }}>
-          <div><h3 style={{ fontSize: '1rem', fontWeight: 900, color: '#fff' }}>MAGPIENTIGER</h3><p style={{ fontSize: '.85rem', color: 'rgba(255,255,255,.4)', marginTop: 8 }}>© 까치와호랑이</p></div>
+          <div><h3 style={{ fontSize: '1rem', fontWeight: 900, color: '#fff' }}>KAHO</h3><p style={{ fontSize: '.85rem', color: 'rgba(255,255,255,.4)', marginTop: 8 }}>© 까치와호랑이</p></div>
           <div style={{ display: 'flex', gap: 24 }}>
             <a href={IG_URL} target="_blank" rel="noreferrer" style={{ color: 'rgba(255,255,255,.4)' }}><FaInstagram size={22} /></a>
             <a href={YT_CHANNEL} target="_blank" rel="noreferrer" style={{ color: 'rgba(255,255,255,.4)' }}><FaYoutube size={22} /></a>
