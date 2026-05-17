@@ -13,18 +13,32 @@ import Footer from '../sections/Footer';
 
 /* ─── PAGE ─── */
 export default function Home() {
-  const [currentVideoIdx, setCurrentVideoIdx] = useState(0);
+  const [activeSlot, setActiveSlot] = useState(0);
+  const [slotIndices, setSlotIndices] = useState([0, 1]);
   const [videoOpacity, setVideoOpacity] = useState(1);
   const [activeSection, setActiveSection] = useState('home');
 
   const intervalRef = useRef(null);
+  const timeoutRef = useRef(null);
 
   useEffect(() => {
     if (intervalRef.current) clearInterval(intervalRef.current);
+    if (timeoutRef.current) clearTimeout(timeoutRef.current);
 
-    // 11초마다 백그라운드 영상 인덱스만 스왑 (아이프레임을 새로 로드하지 않고 CSS 투명도만 부드럽게 페이드 교체)
+    // 11초마다 슬롯을 교환
     intervalRef.current = setInterval(() => {
-      setCurrentVideoIdx((prev) => (prev + 1) % YT_BG_IDS.length);
+      setActiveSlot((prev) => {
+        const next = prev === 0 ? 1 : 0;
+        timeoutRef.current = setTimeout(() => {
+          setSlotIndices((prevIndices) => {
+            const nextIndices = [...prevIndices];
+            const currentGlobalIdx = prevIndices[next];
+            nextIndices[prev] = (currentGlobalIdx + 1) % YT_BG_IDS.length;
+            return nextIndices;
+          });
+        }, 3500);
+        return next;
+      });
     }, 11000);
 
     const handleScroll = () => {
@@ -64,6 +78,7 @@ export default function Home() {
 
     return () => {
       if (intervalRef.current) clearInterval(intervalRef.current);
+      if (timeoutRef.current) clearTimeout(timeoutRef.current);
       window.removeEventListener('scroll', handleScroll);
       observer.disconnect();
     };
@@ -72,7 +87,8 @@ export default function Home() {
   return (
     <div style={{ paddingTop: 60 }}>
       <HeroSection
-        currentVideoIdx={currentVideoIdx}
+        activeSlot={activeSlot}
+        slotIndices={slotIndices}
         videoOpacity={videoOpacity}
         activeSection={activeSection}
       />

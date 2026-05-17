@@ -3,7 +3,7 @@ import React from 'react';
 import { FaInstagram, FaYoutube, FaSoundcloud } from 'react-icons/fa';
 import { YT_BG_IDS, IG_URL, YT_CHANNEL, SC_URL } from '../data/constants';
 
-export default function HeroSection({ currentVideoIdx, videoOpacity, activeSection }) {
+export default function HeroSection({ activeSlot, slotIndices, videoOpacity, activeSection }) {
   return (
     <>
       {/* ── Mobile Thumb Zone ── */}
@@ -26,25 +26,24 @@ export default function HeroSection({ currentVideoIdx, videoOpacity, activeSecti
       </div>
 
       <div className="vbg-container" style={{ opacity: videoOpacity, transition: 'opacity 0.05s linear' }}>
-        {YT_BG_IDS.map((id, index) => (
-          <div
-            key={id}
-            className="vbg"
-            style={{
-              opacity: currentVideoIdx === index ? 1 : 0,
-              zIndex: currentVideoIdx === index ? 1 : -1,
-              transition: 'opacity 2.5s ease-in-out',
-              pointerEvents: 'none'
-            }}
-          >
-            <iframe
-              src={`https://www.youtube.com/embed/${id}?autoplay=1&mute=1&controls=0&loop=1&playlist=${id}&rel=0&showinfo=0&iv_load_policy=3&disablekb=1&modestbranding=1&playsinline=1`}
-              allow="autoplay; encrypted-media"
-              style={{ border: 'none' }}
-              title={`bg-video-${index}`}
-            />
-          </div>
-        ))}
+        <div className="vbg" style={{ opacity: activeSlot === 0 ? 1 : 0, zIndex: activeSlot === 0 ? 1 : 0 }}>
+          <iframe
+            key={`vbg-s0-${YT_BG_IDS[slotIndices[0]]}`}
+            src={`https://www.youtube.com/embed/${YT_BG_IDS[slotIndices[0]]}?autoplay=1&mute=1&controls=0&loop=1&playlist=${YT_BG_IDS[slotIndices[0]]}&rel=0&showinfo=0&iv_load_policy=3&disablekb=1&modestbranding=1&playsinline=1`}
+            allow="autoplay; encrypted-media"
+            style={{ border: 'none' }}
+            title="bg-video-slot-0"
+          />
+        </div>
+        <div className="vbg" style={{ opacity: activeSlot === 1 ? 1 : 0, zIndex: activeSlot === 1 ? 1 : 0 }}>
+          <iframe
+            key={`vbg-s1-${YT_BG_IDS[slotIndices[1]]}`}
+            src={`https://www.youtube.com/embed/${YT_BG_IDS[slotIndices[1]]}?autoplay=1&mute=1&controls=0&loop=1&playlist=${YT_BG_IDS[slotIndices[1]]}&rel=0&showinfo=0&iv_load_policy=3&disablekb=1&modestbranding=1&playsinline=1`}
+            allow="autoplay; encrypted-media"
+            style={{ border: 'none' }}
+            title="bg-video-slot-1"
+          />
+        </div>
       </div>
       <div className="film" style={{ background: 'rgba(26, 39, 68, 0.35)' }} />
 
