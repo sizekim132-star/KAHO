@@ -189,10 +189,12 @@ img {
 }
 
 @media (max-width: 768px) {
+
   /* Restrict background video to 50vh height to reduce cropping on portrait mobile screens */
   .vbg-container {
     position: absolute;
-    top: 60px; /* navbar offset */
+    top: 60px;
+    /* navbar offset */
     left: 0;
     width: 100vw;
     height: 50vh;
@@ -210,7 +212,8 @@ img {
     top: 50%;
     left: 50%;
     width: 120vw !important;
-    height: 67.5vw !important; /* 16:9 ratio */
+    height: 67.5vw !important;
+    /* 16:9 ratio */
     min-height: 50vh !important;
     min-width: 88.8vh !important;
     transform: translate(-50%, -50%) scale(1.35) !important;
@@ -230,16 +233,20 @@ img {
     min-height: 50vh;
     height: 50vh;
     display: flex;
-    align-items: center; /* Center vertically to prevent bottom-cropping */
+    align-items: center;
+    /* Center vertically to prevent bottom-cropping */
     justify-content: center;
-    padding: 24px var(--spacing) 0; /* Balanced padding offset */
+    padding: 24px var(--spacing) 0;
+    /* Balanced padding offset */
     background: transparent;
     position: relative;
-    margin-top: 60px; /* Offset for header navbar */
+    margin-top: 60px;
+    /* Offset for header navbar */
   }
 
   .hero-bottom-content {
-    transform: translateY(85px) !important; /* Shift down even further from center */
+    transform: translateY(85px) !important;
+    /* Shift down even further from center */
     gap: 12px;
   }
 

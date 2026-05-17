@@ -3,7 +3,7 @@ import React from 'react';
 import { FaInstagram, FaYoutube, FaSoundcloud } from 'react-icons/fa';
 import { YT_BG_IDS, IG_URL, YT_CHANNEL, SC_URL } from '../data/constants';
 
-export default function HeroSection({ activeSlot, slotIndices, videoOpacity, activeSection }) {
+export default function HeroSection({ videoOpacity, activeSection }) {
   return (
     <>
       {/* ── Mobile Thumb Zone ── */}
@@ -26,22 +26,13 @@ export default function HeroSection({ activeSlot, slotIndices, videoOpacity, act
       </div>
 
       <div className="vbg-container" style={{ opacity: videoOpacity, transition: 'opacity 0.05s linear' }}>
-        <div className="vbg" style={{ opacity: activeSlot === 0 ? 1 : 0, zIndex: activeSlot === 0 ? 1 : 0 }}>
+        <div className="vbg" style={{ opacity: 1, zIndex: 1 }}>
           <iframe
-            key={`vbg-s0-${YT_BG_IDS[slotIndices[0]]}`}
-            src={`https://www.youtube.com/embed/${YT_BG_IDS[slotIndices[0]]}?autoplay=1&mute=1&controls=0&loop=1&playlist=${YT_BG_IDS[slotIndices[0]]}&rel=0&showinfo=0&iv_load_policy=3&disablekb=1&modestbranding=1&playsinline=1`}
+            key={`vbg-main-${YT_BG_IDS[0]}`}
+            src={`https://www.youtube.com/embed/${YT_BG_IDS[0]}?autoplay=1&mute=1&controls=0&loop=1&playlist=${YT_BG_IDS[0]}&rel=0&showinfo=0&iv_load_policy=3&disablekb=1&modestbranding=1&playsinline=1`}
             allow="autoplay; encrypted-media"
             style={{ border: 'none' }}
-            title="bg-video-slot-0"
-          />
-        </div>
-        <div className="vbg" style={{ opacity: activeSlot === 1 ? 1 : 0, zIndex: activeSlot === 1 ? 1 : 0 }}>
-          <iframe
-            key={`vbg-s1-${YT_BG_IDS[slotIndices[1]]}`}
-            src={`https://www.youtube.com/embed/${YT_BG_IDS[slotIndices[1]]}?autoplay=1&mute=1&controls=0&loop=1&playlist=${YT_BG_IDS[slotIndices[1]]}&rel=0&showinfo=0&iv_load_policy=3&disablekb=1&modestbranding=1&playsinline=1`}
-            allow="autoplay; encrypted-media"
-            style={{ border: 'none' }}
-            title="bg-video-slot-1"
+            title="bg-video"
           />
         </div>
       </div>
@@ -57,10 +48,6 @@ export default function HeroSection({ activeSlot, slotIndices, videoOpacity, act
             <a href={IG_URL} target="_blank" rel="noreferrer" aria-label="Instagram"><FaInstagram size={28} /></a>
             <span className="hero-dot" />
             <a href={SC_URL} target="_blank" rel="noreferrer" aria-label="SoundCloud"><FaSoundcloud size={30} /></a>
-          </div>
-          <div className="hero-actions reveal-text" style={{ transitionDelay: '0.15s' }}>
-            <a href="#music" className="hero-btn hero-btn-outline">Music</a>
-            <a href="#about" className="hero-btn hero-btn-outline">About Us</a>
           </div>
         </div>
       </section>
