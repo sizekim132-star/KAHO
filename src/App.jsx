@@ -6,11 +6,13 @@ import './index.css';
 import Home from './pages/Home';
 import PhotoSorterTool from './pages/PhotoSorterTool';
 
+import logo from './assets/logo.png';
+
 const LINKS = [
   { label: 'About', href: '#about' },
   { label: 'Music', href: '#music' },
   { label: 'Members', href: '#members' },
-  { label: 'Shows', href: '#shows' },
+  { label: 'History', href: '#shows' },
   { label: 'Contact', href: '#contact' },
 ];
 
@@ -27,12 +29,14 @@ function Nav() {
   return (
     <nav className={`nav${scrolled ? ' scrolled' : ''}`}>
       <a href="#home" className="nav-logo">
-        KAHO
+        <img src={logo} alt="KAHO Logo" style={{ height: '90px', width: 'auto', display: 'block', transform: 'translateY(4px)', marginLeft: '-15px', mixBlendMode: 'multiply', transition: 'transform 0.3s var(--ease)' }}
+          onMouseOver={e => e.currentTarget.style.transform = 'translateY(4px) scale(1.05)'}
+          onMouseOut={e => e.currentTarget.style.transform = 'translateY(4px)'} />
       </a>
       <ul className="nav-links">
         {LINKS.map(l => <li key={l.label}><a href={l.href}>{l.label}</a></li>)}
       </ul>
-      <div style={{ display: 'flex', gap: 12, alignItems: 'center' }}>
+      <div style={{ display: 'flex', gap: 12, alignItems: 'center', transform: 'translateY(4px)' }}>
         <a href="https://www.instagram.com/magpientiger/" target="_blank" rel="noreferrer"
           style={{ color: '#9CA3AF', transition: 'color .15s' }}
           onMouseOver={e => e.currentTarget.style.color = '#E1306C'}
@@ -51,9 +55,7 @@ function Nav() {
           onMouseOut={e => e.currentTarget.style.color = '#9CA3AF'}>
           <FaSoundcloud size={20} />
         </a>
-        <a href="https://soundcloud.com/size_kim" target="_blank" rel="noreferrer" className="nav-cta">
-          Listen Now
-        </a>
+
       </div>
     </nav>
   );
