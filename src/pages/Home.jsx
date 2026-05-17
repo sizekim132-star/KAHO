@@ -13,11 +13,19 @@ import Footer from '../sections/Footer';
 
 /* ─── PAGE ─── */
 export default function Home() {
+  const [currentVideoIdx, setCurrentVideoIdx] = useState(0);
   const [videoOpacity, setVideoOpacity] = useState(1);
   const [activeSection, setActiveSection] = useState('home');
 
-  useEffect(() => {
+  const intervalRef = useRef(null);
 
+  useEffect(() => {
+    if (intervalRef.current) clearInterval(intervalRef.current);
+
+    // 11초마다 백그라운드 영상 인덱스만 스왑 (아이프레임을 새로 로드하지 않고 CSS 투명도만 부드럽게 페이드 교체)
+    intervalRef.current = setInterval(() => {
+      setCurrentVideoIdx((prev) => (prev + 1) % YT_BG_IDS.length);
+    }, 11000);
 
     const handleScroll = () => {
       const scrollY = window.scrollY;
@@ -55,6 +63,7 @@ export default function Home() {
     });
 
     return () => {
+      if (intervalRef.current) clearInterval(intervalRef.current);
       window.removeEventListener('scroll', handleScroll);
       observer.disconnect();
     };
@@ -63,6 +72,7 @@ export default function Home() {
   return (
     <div style={{ paddingTop: 60 }}>
       <HeroSection
+        currentVideoIdx={currentVideoIdx}
         videoOpacity={videoOpacity}
         activeSection={activeSection}
       />

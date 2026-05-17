@@ -3,7 +3,7 @@ import React from 'react';
 import { FaInstagram, FaYoutube, FaSoundcloud } from 'react-icons/fa';
 import { YT_BG_IDS, IG_URL, YT_CHANNEL, SC_URL } from '../data/constants';
 
-export default function HeroSection({ videoOpacity, activeSection }) {
+export default function HeroSection({ currentVideoIdx, videoOpacity, activeSection }) {
   return (
     <>
       {/* ── Mobile Thumb Zone ── */}
@@ -26,15 +26,25 @@ export default function HeroSection({ videoOpacity, activeSection }) {
       </div>
 
       <div className="vbg-container" style={{ opacity: videoOpacity, transition: 'opacity 0.05s linear' }}>
-        <div className="vbg" style={{ opacity: 1, zIndex: 1 }}>
-          <iframe
-            key={`vbg-main-${YT_BG_IDS[0]}`}
-            src={`https://www.youtube.com/embed/${YT_BG_IDS[0]}?autoplay=1&mute=1&controls=0&loop=1&playlist=${YT_BG_IDS[0]}&rel=0&showinfo=0&iv_load_policy=3&disablekb=1&modestbranding=1&playsinline=1`}
-            allow="autoplay; encrypted-media"
-            style={{ border: 'none' }}
-            title="bg-video"
-          />
-        </div>
+        {YT_BG_IDS.map((id, index) => (
+          <div
+            key={id}
+            className="vbg"
+            style={{
+              opacity: currentVideoIdx === index ? 1 : 0,
+              zIndex: currentVideoIdx === index ? 1 : -1,
+              transition: 'opacity 2.5s ease-in-out',
+              pointerEvents: 'none'
+            }}
+          >
+            <iframe
+              src={`https://www.youtube.com/embed/${id}?autoplay=1&mute=1&controls=0&loop=1&playlist=${id}&rel=0&showinfo=0&iv_load_policy=3&disablekb=1&modestbranding=1&playsinline=1`}
+              allow="autoplay; encrypted-media"
+              style={{ border: 'none' }}
+              title={`bg-video-${index}`}
+            />
+          </div>
+        ))}
       </div>
       <div className="film" style={{ background: 'rgba(26, 39, 68, 0.35)' }} />
 
