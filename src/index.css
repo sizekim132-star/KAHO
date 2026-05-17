@@ -5,7 +5,7 @@ html {
 }
 
 :root {
-  --navy: #1A2744;
+  --navy: #000000;
   --navy-2: #243358;
   --navy-3: #0D1B35;
   --orange: #FF5F1F;
@@ -1704,41 +1704,42 @@ img {
   }
 }
 
-/* ─── MEMBERS SECTION (LIGHT THEME) ─── */
+/* ─── MEMBERS SECTION (DARK GRAY THEME) ─── */
 .section-members {
-  background: #FAFAFA;
+  background: #1C1C22;
   padding: 120px var(--spacing);
   position: relative;
   overflow: hidden;
 }
 
+.section-members .title {
+  color: #ffffff;
+}
+
 .section-members .member-directory {
-  border-top: 1px solid rgba(0, 0, 0, 0.08);
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
 }
 
 .section-members .member-row {
-  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
 }
 
 .section-members .member-row:hover {
-  background-color: rgba(0, 0, 0, 0.015);
+  background-color: rgba(255, 255, 255, 0.02);
 }
 
 .section-members .member-name {
-  color: var(--navy);
-  /* #1A2744 */
+  color: #ffffff;
 }
 
 .section-members .member-role {
-  color: var(--text-2);
-  /* #4B5563 */
+  color: rgba(255, 255, 255, 0.4);
 }
 
 .section-members .member-bio {
-  color: var(--text-2);
-  /* #4B5563 */
+  color: rgba(255, 255, 255, 0.7);
 }
 
 .section-members .member-photo-wrap {
-  background: rgba(0, 0, 0, 0.05);
+  background: rgba(255, 255, 255, 0.05);
 }

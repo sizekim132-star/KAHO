@@ -13,6 +13,7 @@ const LINKS = [
   { label: 'Music', href: '#music' },
   { label: 'Members', href: '#members' },
   { label: 'History', href: '#shows' },
+  { label: 'Recruit', href: '#recruit' },
   { label: 'Contact', href: '#contact' },
 ];
 

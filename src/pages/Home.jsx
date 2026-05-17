@@ -7,6 +7,7 @@ import HeroSection from '../sections/HeroSection';
 import AboutSection from '../sections/AboutSection';
 import MusicSection from '../sections/MusicSection';
 import MembersSection from '../sections/MembersSection';
+import RecruitSection from '../sections/RecruitSection';
 import ShowsSection from '../sections/ShowsSection';
 import ContactSection from '../sections/ContactSection';
 import Footer from '../sections/Footer';
@@ -48,7 +49,7 @@ export default function Home() {
       const raw = 1 - scrollY / fadeEnd;
       setVideoOpacity(Math.max(0, Math.min(1, raw)));
 
-      const sections = ['home', 'about', 'music', 'members', 'shows', 'contact'];
+      const sections = ['home', 'about', 'music', 'members', 'shows', 'recruit', 'contact'];
       for (const section of sections) {
         const el = document.getElementById(section);
         if (el) {
@@ -96,6 +97,7 @@ export default function Home() {
       <MusicSection />
       <MembersSection />
       <ShowsSection />
+      <RecruitSection />
       <ContactSection />
       <Footer />
     </div>
