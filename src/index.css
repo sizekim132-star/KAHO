@@ -330,6 +330,36 @@ img {
   box-shadow: 0 6px 18px rgba(255, 95, 31, .35);
 }
 
+.nav-logo-img {
+  height: 90px;
+  width: auto;
+  display: block;
+  transform: translateY(4px);
+  margin-left: -15px;
+  mix-blend-mode: multiply;
+  transition: transform 0.3s var(--ease);
+}
+
+.nav-logo-img:hover {
+  transform: translateY(4px) scale(1.05);
+}
+
+.nav-socials {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  transform: translateY(4px);
+}
+
+.nav-social-link {
+  color: #9CA3AF;
+  transition: color .15s;
+}
+
+.nav-social-instagram:hover { color: #E1306C; }
+.nav-social-youtube:hover { color: #FF0000; }
+.nav-social-soundcloud:hover { color: #FF5500; }
+
 /* ════════════════════════════════════════════
    PREMIUM MOTION SYSTEM (Toss/Apple Style)
 ════════════════════════════════════════════ */

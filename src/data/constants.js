@@ -17,12 +17,14 @@ import galleryHeojun from '../assets/gallery_heojun_scene.jpg';
 import showMoyeoya2025 from '../assets/show_moyeoya2025.png';
 import showMoyeoya2026 from '../assets/show_moyeoya2026.png';
 import showCreator6 from '../assets/show_creator6.png';
+import trackClock from '../assets/track_clock.png';
 
 /* ── URL 상수 ── */
 export const YT_BG_IDS = ['WYrJr97nXFA', 'DS2NMYKaeuo', 'NSsgmCNvKk8', 'fCJyKpGrIBI'];
 export const YT_CHANNEL = 'https://www.youtube.com/@magpientiger';
 export const IG_URL = 'https://www.instagram.com/magpientiger/';
 export const SC_URL = 'https://soundcloud.com/size_kim';
+export const RECRUIT_FORM_URL = 'https://forms.gle/gAp6J2BwdECou4mWA';
 
 /* ── 멤버 데이터 ── */
 export const MEMBERS = [
@@ -31,6 +33,13 @@ export const MEMBERS = [
   { name: '최민서', role: '기타', animal: '고양이', bio: '', img: memMinseo },
   { name: '박어진', role: '건반', animal: '참새', bio: '', img: memUjinP },
   // { name: '-', role: '드럼', animal: '-', bio: '-', img: memDefault },
+];
+
+/* ── 트랙 데이터 ── */
+export const TRACKS = [
+  { title: '깊은 밤을 날아서', type: '까치와 고양이 커버', link: 'WYrJr97nXFA', isYT: true },
+  { title: '크리스마스 캐롤 메들리', type: '카호 커버', link: 'DS2NMYKaeuo', isYT: true },
+  { title: '시계 (Demo)', type: '고양이', link: SC_URL, isYT: false, img: trackClock },
 ];
 
 /* ── 공연 데이터 ── */

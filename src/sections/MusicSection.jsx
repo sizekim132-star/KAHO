@@ -1,14 +1,7 @@
 // src/sections/MusicSection.jsx
 import React from 'react';
 import PhotoBox from '../components/PhotoBox';
-import { SC_URL } from '../data/constants';
-import trackClock from '../assets/track_clock.png';
-
-const TRACKS = [
-  { title: '깊은 밤을 날아서', type: '까치와 고양이 커버', link: 'WYrJr97nXFA', isYT: true },
-  { title: '크리스마스 캐롤 메들리', type: '카호 커버', link: 'DS2NMYKaeuo', isYT: true },
-  { title: '시계 (Demo)', type: '고양이', link: SC_URL, isYT: false, img: trackClock },
-];
+import { TRACKS } from '../data/constants';
 
 export default function MusicSection() {
   return (
