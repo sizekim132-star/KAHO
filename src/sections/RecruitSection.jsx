@@ -2,6 +2,7 @@
 import React from 'react';
 import { FiArrowUpRight, FiUsers, FiMusic, FiVideo, FiLayers } from 'react-icons/fi';
 import { RECRUIT_FORM_URL } from '../data/constants';
+import { AccentLine } from '../components/Label';
 
 export default function RecruitSection() {
   const formUrl = RECRUIT_FORM_URL;
@@ -11,10 +12,10 @@ export default function RecruitSection() {
       <div style={{ maxWidth: 1200, margin: '0 auto' }}>
 
         {/* ── 헤더 영역 ── */}
-        <div className="reveal-text" style={{ textAlign: 'center', marginBottom: '4rem' }}>
-          <span className="label">WE ARE HIRING</span>
-          <h2 className="title" style={{ marginTop: '0.5rem', marginBottom: '1.25rem' }}>Join the KAHO</h2>
-          <p className="body-text" style={{ maxWidth: 680, margin: '0 auto' }}>
+        <div className="reveal-text" style={{ marginBottom: '4rem' }}>
+          <h2 className="title">Join the KAHO</h2>
+          <AccentLine />
+          <p className="body-text" style={{ maxWidth: 680 }}>
             카호(KAHO)에서 새로운 여정을 함께할 신규 멤버를 모집합니다.
           </p>
         </div>

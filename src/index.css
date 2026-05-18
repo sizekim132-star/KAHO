@@ -356,9 +356,17 @@ img {
   transition: color .15s;
 }
 
-.nav-social-instagram:hover { color: #E1306C; }
-.nav-social-youtube:hover { color: #FF0000; }
-.nav-social-soundcloud:hover { color: #FF5500; }
+.nav-social-instagram:hover {
+  color: #E1306C;
+}
+
+.nav-social-youtube:hover {
+  color: #FF0000;
+}
+
+.nav-social-soundcloud:hover {
+  color: #FF5500;
+}
 
 /* ════════════════════════════════════════════
    PREMIUM MOTION SYSTEM (Toss/Apple Style)
@@ -1388,8 +1396,11 @@ img {
   background: rgba(255, 255, 255, 0.05);
 }
 
-.member-row:hover .member-photo-wrap {
+.member-row.active .member-photo-wrap {
   filter: grayscale(0%) contrast(1);
+}
+
+.member-row:hover .member-photo-wrap {
   transform: scale(1.05);
 }
 
