@@ -4,11 +4,32 @@ import { FaInstagram, FaYoutube, FaSoundcloud } from 'react-icons/fa';
 import { AccentLine } from '../components/Label';
 import PhotoBox from '../components/PhotoBox';
 import { groupPhoto, IG_URL, YT_CHANNEL, SC_URL } from '../data/constants';
+import backforestVideo from '../assets/backforest.mp4';
 
 export default function AboutSection() {
   return (
-    <section id="about" className="section section-white">
-      <div style={{ maxWidth: 1200, margin: '0 auto', display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '4rem', alignItems: 'center' }}>
+    <section id="about" className="section section-white" style={{ position: 'relative', overflow: 'hidden' }}>
+      <video
+        autoPlay
+        loop
+        muted
+        playsInline
+        style={{
+          position: 'absolute',
+          top: '50%',
+          left: '50%',
+          width: '100%',
+          height: '100%',
+          objectFit: 'cover',
+          transform: 'translate(-50%, -50%)',
+          zIndex: 0,
+          opacity: 0.6
+        }}
+      >
+        <source src={backforestVideo} type="video/mp4" />
+      </video>
+      <div style={{ position: 'absolute', inset: 0, backgroundColor: 'rgba(255, 255, 255, 0.7)', zIndex: 0 }}></div>
+      <div style={{ maxWidth: 1200, margin: '0 auto', display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '4rem', alignItems: 'center', position: 'relative', zIndex: 1 }}>
         <div className="reveal-text">
           <h2 className="title">Play and Create.</h2>
           <AccentLine />

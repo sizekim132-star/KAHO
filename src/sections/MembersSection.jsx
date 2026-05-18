@@ -2,10 +2,31 @@
 import React from 'react';
 import PhotoBox from '../components/PhotoBox';
 import { MEMBERS } from '../data/constants';
+import backwaterVideo from '../assets/Backwater.mp4';
 
 export default function MembersSection() {
   return (
-    <section id="members" className="section section-members">
+    <section id="members" className="section section-members" style={{ position: 'relative', overflow: 'hidden' }}>
+      <video
+        autoPlay
+        loop
+        muted
+        playsInline
+        style={{
+          position: 'absolute',
+          top: '50%',
+          left: '50%',
+          width: '100%',
+          height: '100%',
+          objectFit: 'cover',
+          transform: 'translate(-50%, -50%)',
+          zIndex: 0,
+          opacity: 0.5,
+          filter: 'brightness(0.7)'
+        }}
+      >
+        <source src={backwaterVideo} type="video/mp4" />
+      </video>
       <div style={{ maxWidth: 1200, margin: '0 auto', position: 'relative', zIndex: 1 }}>
         <div className="reveal-text">
           <h2 className="title" style={{ marginBottom: '3.5rem' }}>Members</h2>

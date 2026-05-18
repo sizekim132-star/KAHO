@@ -1784,3 +1784,104 @@ img {
 .section-members .member-photo-wrap {
   background: rgba(255, 255, 255, 0.05);
 }
+
+/* ─── RECRUIT CARDS ─── */
+.recruit-card {
+  background: var(--gray-1);
+  border: 1px solid rgba(0, 0, 0, 0.04);
+  border-radius: var(--r-lg);
+  padding: 2.5rem 2rem;
+  transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: var(--shadow-sm);
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.recruit-card-video {
+  position: absolute;
+  top: 50%; left: 50%;
+  width: 100%; height: 100%;
+  object-fit: cover;
+  transform: translate(-50%, -50%) scale(1.1);
+  z-index: -2;
+  opacity: 0;
+  transition: opacity 0.5s ease, transform 0.8s ease;
+}
+
+.recruit-card:hover .recruit-card-video {
+  opacity: 1;
+  transform: translate(-50%, -50%) scale(1);
+}
+
+.recruit-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(10, 15, 30, 0.4);
+  opacity: 0;
+  transition: opacity 0.5s ease;
+  z-index: -1;
+}
+
+.recruit-card:hover {
+  transform: translateY(-10px);
+  border-color: rgba(255, 255, 255, 0.2);
+  box-shadow: 0 32px 64px rgba(0, 0, 0, 0.3);
+}
+
+.recruit-card:hover::before {
+  opacity: 1;
+}
+
+.recruit-card-icon {
+  background: var(--orange-light);
+  color: var(--orange);
+  width: 64px;
+  height: 64px;
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1.5rem;
+  transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+  position: relative;
+  z-index: 1;
+}
+
+.recruit-card:hover .recruit-card-icon {
+  background: rgba(255, 255, 255, 0.15);
+  color: #ffffff;
+  backdrop-filter: blur(8px);
+  transform: scale(1.15) rotate(-8deg);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.3);
+}
+
+.recruit-card-title {
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: var(--navy);
+  margin-bottom: 0.75rem;
+  transition: color 0.3s ease;
+  position: relative;
+  z-index: 1;
+}
+
+.recruit-card:hover .recruit-card-title {
+  color: #ffffff;
+}
+
+.recruit-card-desc {
+  font-size: 0.95rem;
+  color: var(--text-2);
+  line-height: 1.6;
+  transition: color 0.3s ease;
+  position: relative;
+  z-index: 1;
+}
+
+.recruit-card:hover .recruit-card-desc {
+  color: rgba(255, 255, 255, 0.85);
+}
