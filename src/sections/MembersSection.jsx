@@ -2,7 +2,6 @@
 import React from 'react';
 import PhotoBox from '../components/PhotoBox';
 import { MEMBERS } from '../data/constants';
-import backwaterVideo from '../assets/Backwater.mp4';
 
 export default function MembersSection() {
   return (
@@ -25,7 +24,7 @@ export default function MembersSection() {
           filter: 'brightness(0.7)'
         }}
       >
-        <source src={backwaterVideo} type="video/mp4" />
+        <source src="/Backwater.mp4" type="video/mp4" />
       </video>
       <div style={{ maxWidth: 1200, margin: '0 auto', position: 'relative', zIndex: 1 }}>
         <div className="reveal-text">

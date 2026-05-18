@@ -20,6 +20,22 @@ import showCreator6 from '../assets/show_creator6.png';
 import trackClock from '../assets/track_clock.png';
 
 /* ── URL 상수 ── */
+export const HERO_VIDEOS = [
+  'https://oryr28ocpive2gwg.public.blob.vercel-storage.com/backforest.mp4',
+  'https://oryr28ocpive2gwg.public.blob.vercel-storage.com/Backwater.mp4',
+  'https://oryr28ocpive2gwg.public.blob.vercel-storage.com/join.mp4'
+];
+
+// ── Vercel Blob 클라우딩 고화질 추가 비디오 자산 목록 ──
+export const CLOUD_VIDEOS = {
+  backforest: 'https://oryr28ocpive2gwg.public.blob.vercel-storage.com/backforest.mp4',
+  backwater: 'https://oryr28ocpive2gwg.public.blob.vercel-storage.com/Backwater.mp4',
+  eyes: 'https://oryr28ocpive2gwg.public.blob.vercel-storage.com/eyes.mp4',
+  madlein: 'https://oryr28ocpive2gwg.public.blob.vercel-storage.com/madlein.mp4',
+  night: 'https://oryr28ocpive2gwg.public.blob.vercel-storage.com/night.mkv',
+  when: 'https://oryr28ocpive2gwg.public.blob.vercel-storage.com/when.mp4'
+};
+
 export const YT_BG_IDS = ['WYrJr97nXFA', 'DS2NMYKaeuo', 'NSsgmCNvKk8', 'fCJyKpGrIBI'];
 export const YT_CHANNEL = 'https://www.youtube.com/@magpientiger';
 export const IG_URL = 'https://www.instagram.com/magpientiger/';

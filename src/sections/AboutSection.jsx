@@ -4,7 +4,6 @@ import { FaInstagram, FaYoutube, FaSoundcloud } from 'react-icons/fa';
 import { AccentLine } from '../components/Label';
 import PhotoBox from '../components/PhotoBox';
 import { groupPhoto, IG_URL, YT_CHANNEL, SC_URL } from '../data/constants';
-import backforestVideo from '../assets/backforest.mp4';
 
 export default function AboutSection() {
   return (
@@ -26,7 +25,7 @@ export default function AboutSection() {
           opacity: 0.6
         }}
       >
-        <source src={backforestVideo} type="video/mp4" />
+        <source src="/backforest.mp4" type="video/mp4" />
       </video>
       <div style={{ position: 'absolute', inset: 0, backgroundColor: 'rgba(255, 255, 255, 0.7)', zIndex: 0 }}></div>
       <div style={{ maxWidth: 1200, margin: '0 auto', display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '4rem', alignItems: 'center', position: 'relative', zIndex: 1 }}>
@@ -34,7 +33,7 @@ export default function AboutSection() {
           <h2 className="title">Play and Create.</h2>
           <AccentLine />
           <p className="body-text" style={{ marginBottom: '1.5rem' }}>
-            <strong style={{ color: 'var(--navy)', fontWeight: 700 }}>KAHO</strong>는 2025년 서울 강서구에서 결성된 Creative studio입니다. 이 곳은 상상이 현실이 되는 무대와 문화를 함께 만드는 창작 공간입니다.
+            <strong style={{ color: 'var(--navy)', fontWeight: 700 }}>KAHO</strong>는 2025년 서울 강서구에서 결성된 Creative crew입니다. 상상이 현실이 되는 무대와 문화를 함께 만듭니다.
           </p>
           <p className="body-text">
             각자의 전문 분야를 통해 팀의 성장을 함께 경험하는 곳. 우리는 음악을 넘어 영상, 브랜딩, 콘텐츠까지 직접 빌딩합니다.

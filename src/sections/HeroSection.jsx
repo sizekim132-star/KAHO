@@ -1,9 +1,26 @@
 // src/sections/HeroSection.jsx
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { FaInstagram, FaYoutube, FaSoundcloud } from 'react-icons/fa';
-import { YT_BG_IDS, IG_URL, YT_CHANNEL, SC_URL } from '../data/constants';
+import { IG_URL, YT_CHANNEL, SC_URL } from '../data/constants';
 
-export default function HeroSection({ activeSlot, slotIndices, videoOpacity, activeSection }) {
+const HERO_VIDEOS = [
+  'https://oryr28ocpive2gwg.public.blob.vercel-storage.com/eyes.mp4',
+  'https://oryr28ocpive2gwg.public.blob.vercel-storage.com/madlein.mp4',
+  'https://oryr28ocpive2gwg.public.blob.vercel-storage.com/night.mkv',
+  'https://oryr28ocpive2gwg.public.blob.vercel-storage.com/when.mp4'
+];
+
+export default function HeroSection({ videoOpacity, activeSection }) {
+  const [currentIdx, setCurrentIdx] = useState(0);
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setCurrentIdx((prev) => (prev + 1) % HERO_VIDEOS.length);
+    }, 5000); // 5초 간격으로 전환
+
+    return () => clearInterval(timer);
+  }, []);
+
   return (
     <>
       {/* ── Mobile Thumb Zone ── */}
@@ -25,25 +42,38 @@ export default function HeroSection({ activeSlot, slotIndices, videoOpacity, act
         ))}
       </div>
 
-      <div className="vbg-container" style={{ opacity: videoOpacity, transition: 'opacity 0.05s linear' }}>
-        <div className="vbg" style={{ opacity: activeSlot === 0 ? 1 : 0, zIndex: activeSlot === 0 ? 1 : 0 }}>
-          <iframe
-            key={`vbg-s0-${YT_BG_IDS[slotIndices[0]]}`}
-            src={`https://www.youtube.com/embed/${YT_BG_IDS[slotIndices[0]]}?autoplay=1&mute=1&controls=0&loop=1&playlist=${YT_BG_IDS[slotIndices[0]]}&rel=0&showinfo=0&iv_load_policy=3&disablekb=1&modestbranding=1&playsinline=1`}
-            allow="autoplay; encrypted-media"
-            style={{ border: 'none' }}
-            title="bg-video-slot-0"
-          />
-        </div>
-        <div className="vbg" style={{ opacity: activeSlot === 1 ? 1 : 0, zIndex: activeSlot === 1 ? 1 : 0 }}>
-          <iframe
-            key={`vbg-s1-${YT_BG_IDS[slotIndices[1]]}`}
-            src={`https://www.youtube.com/embed/${YT_BG_IDS[slotIndices[1]]}?autoplay=1&mute=1&controls=0&loop=1&playlist=${YT_BG_IDS[slotIndices[1]]}&rel=0&showinfo=0&iv_load_policy=3&disablekb=1&modestbranding=1&playsinline=1`}
-            allow="autoplay; encrypted-media"
-            style={{ border: 'none' }}
-            title="bg-video-slot-1"
-          />
-        </div>
+      {/* ── 5초 프리미엄 안개식 페이드 순환 비디오 슬라이더 ── */}
+      <div className="vbg-container" style={{ opacity: videoOpacity, transition: 'opacity 0.5s ease-in-out' }}>
+        {HERO_VIDEOS.map((src, idx) => (
+          <div
+            key={idx}
+            className="vbg"
+            style={{
+              opacity: currentIdx === idx ? 1 : 0,
+              zIndex: currentIdx === idx ? 1 : 0,
+              transition: 'opacity 1.5s ease-in-out', // 1.5초 고급스러운 시네마틱 페이드 트랜지션
+              position: 'absolute',
+              inset: 0,
+              width: '100%',
+              height: '100%',
+              overflow: 'hidden'
+            }}
+          >
+            <video
+              autoPlay
+              loop
+              muted
+              playsInline
+              style={{
+                width: '100%',
+                height: '100%',
+                objectFit: 'cover'
+              }}
+            >
+              <source src={src} type={src.endsWith('.mkv') ? 'video/x-matroska' : 'video/mp4'} />
+            </video>
+          </div>
+        ))}
       </div>
       <div className="film" style={{ background: 'rgba(26, 39, 68, 0.35)' }} />
 

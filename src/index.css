@@ -534,6 +534,51 @@ img {
   z-index: 1000;
   display: none;
   background: rgba(26, 39, 68, 0.85);
+  /* ==========================================================================
+   📌 모집 카드 미니멀 비디오 백그라운드 시스템 (네온 배제, 미니멀 호버)
+   ========================================================================== */
+
+.recruit-card-simple {
+  position: relative !important;
+  overflow: hidden !important;
+  z-index: 1 !important;
+}
+
+/* 배경 비디오 스타일 (호버 시에만 싹 노출) */
+.recruit-card-simple-video {
+  position: absolute !important;
+  top: 50% !important;
+  left: 50% !important;
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important;
+  transform: translate(-50%, -50%) scale(1.08) !important;
+  z-index: 0 !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+  transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1), transform 0.5s cubic-bezier(0.16, 1, 0.3, 1) !important;
+}
+
+/* 밝은 필터 레이어 (글자 가독성 100% 방어) */
+.recruit-card-simple-overlay {
+  position: absolute !important;
+  inset: 0 !important;
+  background: rgba(248, 248, 250, 0.76) !important; /* var(--gray-1) 색감 기반 투명 틴트 */
+  z-index: 1 !important;
+  opacity: 0 !important;
+  transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1) !important;
+  pointer-events: none !important;
+}
+
+/* 호버 시 비디오 작동 인터랙션 */
+.recruit-card-simple:hover .recruit-card-simple-video {
+  opacity: 0.85 !important;
+  transform: translate(-50%, -50%) scale(1) !important;
+}
+
+.recruit-card-simple:hover .recruit-card-simple-overlay {
+  opacity: 1 !important;
+}
   backdrop-filter: blur(24px) saturate(180%);
   -webkit-backdrop-filter: blur(24px) saturate(180%);
   padding: 8px;
@@ -1785,103 +1830,92 @@ img {
   background: rgba(255, 255, 255, 0.05);
 }
 
-/* ─── RECRUIT CARDS ─── */
+/* ─── RECRUIT CARDS (미니멀 연회색 & 비디오 백그라운드) ─── */
 .recruit-card {
-  background: var(--gray-1);
-  border: 1px solid rgba(0, 0, 0, 0.04);
-  border-radius: var(--r-lg);
-  padding: 2.5rem 2rem;
-  transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
-  box-shadow: var(--shadow-sm);
-  position: relative;
-  overflow: hidden;
-  z-index: 1;
-  display: flex;
-  flex-direction: column;
+  background: var(--gray-1) !important;
+  border: 1px solid rgba(0, 0, 0, 0.04) !important;
+  border-radius: var(--r-lg) !important;
+  padding: 2rem !important;
+  transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1) !important;
+  box-shadow: var(--shadow-sm) !important;
+  position: relative !important;
+  overflow: hidden !important;
+  z-index: 1 !important;
+  display: flex !important;
+  flex-direction: column !important;
 }
 
-.recruit-card-video {
-  position: absolute;
-  top: 50%; left: 50%;
-  width: 100%; height: 100%;
-  object-fit: cover;
-  transform: translate(-50%, -50%) scale(1.1);
-  z-index: -2;
-  opacity: 0;
-  transition: opacity 0.5s ease, transform 0.8s ease;
-}
-
-.recruit-card:hover .recruit-card-video {
-  opacity: 1;
-  transform: translate(-50%, -50%) scale(1);
-}
-
-.recruit-card::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: rgba(10, 15, 30, 0.4);
-  opacity: 0;
-  transition: opacity 0.5s ease;
-  z-index: -1;
-}
-
+/* 호버 시 부드러운 3D 리프트와 그림자 */
 .recruit-card:hover {
-  transform: translateY(-10px);
-  border-color: rgba(255, 255, 255, 0.2);
-  box-shadow: 0 32px 64px rgba(0, 0, 0, 0.3);
+  transform: translateY(-8px) !important;
+  box-shadow: 0 16px 32px rgba(0, 0, 0, 0.08) !important;
 }
 
-.recruit-card:hover::before {
-  opacity: 1;
+/* 비디오 레이어 (z-index 1로 띄워 부모의 단색 배경 뒤로 숨는 버그 완벽 탈출!) */
+.recruit-card-video {
+  position: absolute !important;
+  top: 50% !important;
+  left: 50% !important;
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important;
+  transform: translate(-50%, -50%) scale(1.08) !important;
+  z-index: 1 !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+  transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1), transform 0.5s cubic-bezier(0.16, 1, 0.3, 1) !important;
+}
+
+/* 연회색 틴트 오버레이 (z-index 2, 글씨의 100% 선명도 및 가독성 확보) */
+.recruit-card-video-overlay {
+  position: absolute !important;
+  inset: 0 !important;
+  background: rgba(248, 248, 250, 0.82) !important; /* var(--gray-1)과 조화로운 밝은 반투명 */
+  z-index: 2 !important;
+  opacity: 0 !important;
+  transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1) !important;
+  pointer-events: none !important;
+}
+
+/* 호버 시 비디오 및 필터 페이드인 활성화 */
+.recruit-card:hover .recruit-card-video {
+  opacity: 0.9 !important;
+  transform: translate(-50%, -50%) scale(1) !important;
+}
+.recruit-card:hover .recruit-card-video-overlay {
+  opacity: 1 !important;
+}
+
+/* 콘텐츠 컨테이너 (z-index 3으로 비디오 및 필터보다 위에 위치해 마우스 이벤트와 선명성 100% 확보!) */
+.recruit-card-content {
+  position: relative !important;
+  z-index: 3 !important;
+  display: flex !important;
+  flex-direction: column !important;
+  height: 100% !important;
 }
 
 .recruit-card-icon {
-  background: var(--orange-light);
-  color: var(--orange);
-  width: 64px;
-  height: 64px;
-  border-radius: 16px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-bottom: 1.5rem;
-  transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
-  position: relative;
-  z-index: 1;
-}
-
-.recruit-card:hover .recruit-card-icon {
-  background: rgba(255, 255, 255, 0.15);
-  color: #ffffff;
-  backdrop-filter: blur(8px);
-  transform: scale(1.15) rotate(-8deg);
-  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.3);
+  background: var(--orange-light) !important;
+  color: var(--orange) !important;
+  width: 48px !important;
+  height: 48px !important;
+  border-radius: 12px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  margin-bottom: 1.5rem !important;
 }
 
 .recruit-card-title {
-  font-size: 1.5rem;
-  font-weight: 800;
-  color: var(--navy);
-  margin-bottom: 0.75rem;
-  transition: color 0.3s ease;
-  position: relative;
-  z-index: 1;
-}
-
-.recruit-card:hover .recruit-card-title {
-  color: #ffffff;
+  font-size: 1.3rem !important;
+  font-weight: 800 !important;
+  color: var(--navy) !important;
+  margin-bottom: 0.75rem !important;
 }
 
 .recruit-card-desc {
-  font-size: 0.95rem;
-  color: var(--text-2);
-  line-height: 1.6;
-  transition: color 0.3s ease;
-  position: relative;
-  z-index: 1;
+  font-size: 0.95rem !important;
+  color: var(--text-2) !important;
+  line-height: 1.6 !important;
 }
-
-.recruit-card:hover .recruit-card-desc {
-  color: rgba(255, 255, 255, 0.85);
-}

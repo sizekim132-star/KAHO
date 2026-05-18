@@ -1,9 +1,6 @@
-// src/pages/Home.jsx
 import React from 'react';
-import { YT_BG_IDS } from '../data/constants';
 
 /* ─── HOOKS ─── */
-import useVideoSlot from '../hooks/useVideoSlot';
 import useScrollSpy from '../hooks/useScrollSpy';
 import useRevealObserver from '../hooks/useRevealObserver';
 
@@ -19,15 +16,12 @@ import Footer from '../sections/Footer';
 
 /* ─── PAGE ─── */
 export default function Home() {
-  const { activeSlot, slotIndices } = useVideoSlot(YT_BG_IDS.length);
   const { activeSection, videoOpacity } = useScrollSpy();
   useRevealObserver();
 
   return (
     <div style={{ paddingTop: 60 }}>
       <HeroSection
-        activeSlot={activeSlot}
-        slotIndices={slotIndices}
         videoOpacity={videoOpacity}
         activeSection={activeSection}
       />

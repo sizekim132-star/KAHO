@@ -2,7 +2,6 @@
 import React from 'react';
 import { FiArrowUpRight, FiUsers, FiMusic, FiVideo, FiLayers } from 'react-icons/fi';
 import { RECRUIT_FORM_URL } from '../data/constants';
-import joinVideo from '../assets/join.mp4';
 
 export default function RecruitSection() {
   const formUrl = RECRUIT_FORM_URL;
@@ -28,7 +27,7 @@ export default function RecruitSection() {
         }}>
 
           {/* 보컬 및 세션 */}
-          <div className="reveal-card" style={{
+          <div className="reveal-card recruit-card" style={{
             background: 'var(--gray-1)',
             border: '1px solid rgba(0, 0, 0, 0.04)',
             borderRadius: 'var(--r-lg)',
@@ -36,27 +35,24 @@ export default function RecruitSection() {
             transition: 'all 0.3s var(--ease)',
             boxShadow: 'var(--shadow-sm)'
           }}>
-            <div style={{
-              background: 'var(--orange-light)',
-              color: 'var(--orange)',
-              width: 48,
-              height: 48,
-              borderRadius: 12,
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              marginBottom: '1.5rem'
-            }}>
-              <FiMusic size={22} />
+            <video className="recruit-card-video" autoPlay loop muted playsInline>
+              <source src="https://oryr28ocpive2gwg.public.blob.vercel-storage.com/player.mp4" type="video/mp4" />
+            </video>
+            <div className="recruit-card-video-overlay" />
+            
+            <div className="recruit-card-content">
+              <div className="recruit-card-icon">
+                <FiMusic size={22} />
+              </div>
+              <h3 className="recruit-card-title">Player</h3>
+              <p className="recruit-card-desc">
+                보컬 및 세션, 카호만의 다채로운 사운드를 라이브 무대에서 함께 완성해갈 멤버
+              </p>
             </div>
-            <h3 style={{ fontSize: '1.3rem', fontWeight: 800, color: 'var(--navy)', marginBottom: '0.75rem' }}>Player</h3>
-            <p style={{ fontSize: '0.95rem', color: 'var(--text-2)', lineHeight: 1.6 }}>
-              보컬 및 세션, 카호만의 다채로운 사운드를 라이브 무대에서 함께 완성해갈 멤버
-            </p>
           </div>
 
           {/* 크리에이터 */}
-          <div className="reveal-card" style={{
+          <div className="reveal-card recruit-card" style={{
             background: 'var(--gray-1)',
             border: '1px solid rgba(0, 0, 0, 0.04)',
             borderRadius: 'var(--r-lg)',
@@ -64,27 +60,24 @@ export default function RecruitSection() {
             transition: 'all 0.3s var(--ease)',
             boxShadow: 'var(--shadow-sm)'
           }}>
-            <div style={{
-              background: 'var(--orange-light)',
-              color: 'var(--orange)',
-              width: 48,
-              height: 48,
-              borderRadius: 12,
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              marginBottom: '1.5rem'
-            }}>
-              <FiVideo size={22} />
+            <video className="recruit-card-video" autoPlay loop muted playsInline>
+              <source src="https://oryr28ocpive2gwg.public.blob.vercel-storage.com/creator.mp4" type="video/mp4" />
+            </video>
+            <div className="recruit-card-video-overlay" />
+            
+            <div className="recruit-card-content">
+              <div className="recruit-card-icon">
+                <FiVideo size={22} />
+              </div>
+              <h3 className="recruit-card-title">Creator</h3>
+              <p className="recruit-card-desc">
+                영상 촬영 및 편집, 쇼츠 제작, 디자인, 비주얼 아트 디렉팅 등 카호의 정체성을 시각적으로 표현할 크리에이터
+              </p>
             </div>
-            <h3 style={{ fontSize: '1.3rem', fontWeight: 800, color: 'var(--navy)', marginBottom: '0.75rem' }}>Creator</h3>
-            <p style={{ fontSize: '0.95rem', color: 'var(--text-2)', lineHeight: 1.6 }}>
-              영상 촬영 및 편집, 쇼츠 제작, 디자인, 비주얼 아트 디렉팅 등 카호의 정체성을 시각적으로 표현할 크리에이터
-            </p>
           </div>
 
           {/* 기획 및 스태프 */}
-          <div className="reveal-card" style={{
+          <div className="reveal-card recruit-card" style={{
             background: 'var(--gray-1)',
             border: '1px solid rgba(0, 0, 0, 0.04)',
             borderRadius: 'var(--r-lg)',
@@ -92,23 +85,20 @@ export default function RecruitSection() {
             transition: 'all 0.3s var(--ease)',
             boxShadow: 'var(--shadow-sm)'
           }}>
-            <div style={{
-              background: 'var(--orange-light)',
-              color: 'var(--orange)',
-              width: 48,
-              height: 48,
-              borderRadius: 12,
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              marginBottom: '1.5rem'
-            }}>
-              <FiLayers size={22} />
+            <video className="recruit-card-video" autoPlay loop muted playsInline>
+              <source src="https://oryr28ocpive2gwg.public.blob.vercel-storage.com/staff.mp4" type="video/mp4" />
+            </video>
+            <div className="recruit-card-video-overlay" />
+            
+            <div className="recruit-card-content">
+              <div className="recruit-card-icon">
+                <FiLayers size={22} />
+              </div>
+              <h3 className="recruit-card-title">Staff</h3>
+              <p className="recruit-card-desc">
+                공연 기획, 대외 브랜딩 제안, 마케팅, 커뮤니케이션 지원 등 카호의 대내외 활동을 총괄하고 서포트할 멤버
+              </p>
             </div>
-            <h3 style={{ fontSize: '1.3rem', fontWeight: 800, color: 'var(--navy)', marginBottom: '0.75rem' }}>Staff</h3>
-            <p style={{ fontSize: '0.95rem', color: 'var(--text-2)', lineHeight: 1.6 }}>
-              공연 기획, 대외 브랜딩 제안, 마케팅, 커뮤니케이션 지원 등 카호의 대내외 활동을 총괄하고 서포트할 멤버
-            </p>
           </div>
 
         </div>
@@ -167,18 +157,18 @@ export default function RecruitSection() {
           boxShadow: 'var(--shadow-lg)'
         }}>
 
-          <video 
+          <video
             className="cta-bg-video"
-            autoPlay loop muted playsInline 
+            autoPlay loop muted playsInline
             style={{
-              position: 'absolute', top: '50%', left: '50%', width: '100%', height: '100%', 
+              position: 'absolute', top: '50%', left: '50%', width: '100%', height: '100%',
               objectFit: 'cover', transform: 'translate(-50%, -50%) scale(1.05)', zIndex: 0,
               opacity: 0, transition: 'all 0.5s cubic-bezier(0.16, 1, 0.3, 1)'
             }}
           >
-            <source src={joinVideo} type="video/mp4" />
+            <source src="https://oryr28ocpive2gwg.public.blob.vercel-storage.com/join.mp4" type="video/mp4" />
           </video>
-          
+
           <div className="cta-overlay" style={{
             position: 'absolute', inset: 0, background: 'linear-gradient(to top, rgba(0,0,0,0.8), rgba(0,0,0,0.1))', zIndex: 1,
             opacity: 0, transition: 'opacity 0.5s ease'
