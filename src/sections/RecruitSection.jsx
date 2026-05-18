@@ -2,7 +2,6 @@
 import React from 'react';
 import { FiArrowUpRight, FiUsers, FiMusic, FiVideo, FiLayers } from 'react-icons/fi';
 import { RECRUIT_FORM_URL } from '../data/constants';
-import { AccentLine } from '../components/Label';
 
 export default function RecruitSection() {
   const formUrl = RECRUIT_FORM_URL;
@@ -12,11 +11,10 @@ export default function RecruitSection() {
       <div style={{ maxWidth: 1200, margin: '0 auto' }}>
 
         {/* ── 헤더 영역 ── */}
-        <div className="reveal-text" style={{ marginBottom: '4rem' }}>
-          <h2 className="title">Join the KAHO</h2>
-          <AccentLine />
-          <p className="body-text" style={{ maxWidth: 680 }}>
-            카호(KAHO)에서 새로운 여정을 함께할 신규 멤버를 모집합니다.
+        <div className="reveal-text" style={{ textAlign: 'center', marginBottom: '4rem' }}>
+          <h2 className="title" style={{ marginBottom: '1.25rem' }}>BEYOND THE SOUND</h2>
+          <p className="body-text" style={{ maxWidth: 680, margin: '0 auto' }}>
+            카호(KAHO)에서 새로운 여정을 함께할 멤버를 모집합니다.
           </p>
         </div>
 
@@ -29,89 +27,37 @@ export default function RecruitSection() {
         }}>
 
           {/* 보컬 및 세션 */}
-          <div className="reveal-card" style={{
-            background: 'var(--gray-1)',
-            border: '1px solid rgba(0, 0, 0, 0.04)',
-            borderRadius: 'var(--r-lg)',
-            padding: '2rem',
-            transition: 'all 0.3s var(--ease)',
-            boxShadow: 'var(--shadow-sm)'
-          }}>
-            <div style={{
-              background: 'var(--orange-light)',
-              color: 'var(--orange)',
-              width: 48,
-              height: 48,
-              borderRadius: 12,
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              marginBottom: '1.5rem'
-            }}>
-              <FiMusic size={22} />
+          <div className="recruit-card reveal-card">
+            <div className="recruit-card-icon">
+              <FiMusic size={24} />
             </div>
-            <h3 style={{ fontSize: '1.3rem', fontWeight: 800, color: 'var(--navy)', marginBottom: '0.75rem' }}>Player</h3>
-            <p style={{ fontSize: '0.95rem', color: 'var(--text-2)', lineHeight: 1.6 }}>
+            <h3 className="recruit-card-title">Player</h3>
+            <p className="recruit-card-desc">
               보컬 및 세션, 카호만의 다채로운 사운드를 라이브 무대에서 함께 완성해갈 멤버
             </p>
           </div>
 
           {/* 크리에이터 */}
-          <div className="reveal-card" style={{
-            background: 'var(--gray-1)',
-            border: '1px solid rgba(0, 0, 0, 0.04)',
-            borderRadius: 'var(--r-lg)',
-            padding: '2rem',
-            transition: 'all 0.3s var(--ease)',
-            boxShadow: 'var(--shadow-sm)'
-          }}>
-            <div style={{
-              background: 'var(--orange-light)',
-              color: 'var(--orange)',
-              width: 48,
-              height: 48,
-              borderRadius: 12,
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              marginBottom: '1.5rem'
-            }}>
-              <FiVideo size={22} />
+          <div className="recruit-card reveal-card">
+            <div className="recruit-card-icon">
+              <FiVideo size={24} />
             </div>
-            <h3 style={{ fontSize: '1.3rem', fontWeight: 800, color: 'var(--navy)', marginBottom: '0.75rem' }}>Creator</h3>
-            <p style={{ fontSize: '0.95rem', color: 'var(--text-2)', lineHeight: 1.6 }}>
+            <h3 className="recruit-card-title">Creator</h3>
+            <p className="recruit-card-desc">
               영상 촬영 및 편집, 쇼츠 제작, 디자인, 비주얼 아트 디렉팅 등 카호의 정체성을 시각적으로 표현할 크리에이터
             </p>
           </div>
 
           {/* 기획 및 스태프 */}
-          <div className="reveal-card" style={{
-            background: 'var(--gray-1)',
-            border: '1px solid rgba(0, 0, 0, 0.04)',
-            borderRadius: 'var(--r-lg)',
-            padding: '2rem',
-            transition: 'all 0.3s var(--ease)',
-            boxShadow: 'var(--shadow-sm)'
-          }}>
-            <div style={{
-              background: 'var(--orange-light)',
-              color: 'var(--orange)',
-              width: 48,
-              height: 48,
-              borderRadius: 12,
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              marginBottom: '1.5rem'
-            }}>
-              <FiLayers size={22} />
+          <div className="recruit-card reveal-card">
+            <div className="recruit-card-icon">
+              <FiLayers size={24} />
             </div>
-            <h3 style={{ fontSize: '1.3rem', fontWeight: 800, color: 'var(--navy)', marginBottom: '0.75rem' }}>Staff</h3>
-            <p style={{ fontSize: '0.95rem', color: 'var(--text-2)', lineHeight: 1.6 }}>
+            <h3 className="recruit-card-title">Staff</h3>
+            <p className="recruit-card-desc">
               공연 기획, 대외 브랜딩 제안, 마케팅, 커뮤니케이션 지원 등 카호의 대내외 활동을 총괄하고 서포트할 멤버
             </p>
           </div>
-
         </div>
 
         {/* ── 지원 안내 CTA 카드 ── */}
