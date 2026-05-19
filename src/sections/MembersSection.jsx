@@ -55,7 +55,7 @@ export default function MembersSection() {
 
   return (
     <section id="members" className="section" style={{
-      background: 'var(--gray-1)',
+      background: 'var(--gray-2)',
       position: 'relative',
       overflow: 'hidden',
       paddingTop: '120px',
@@ -86,7 +86,7 @@ export default function MembersSection() {
             onClick={() => scroll('left')}
             style={{
               position: 'absolute',
-              left: '-32px',
+              left: '4px',
               top: '50%',
               transform: 'translateY(-50%)',
               background: 'none',
@@ -97,9 +97,6 @@ export default function MembersSection() {
               cursor: 'pointer',
               zIndex: 10,
               transition: 'all 0.3s cubic-bezier(0.16, 1, 0.3, 1)',
-              fontSize: '2.5rem',
-              fontWeight: 200,
-              fontFamily: 'system-ui, -apple-system, sans-serif',
               outline: 'none',
               padding: 0,
               display: 'flex',
@@ -116,7 +113,9 @@ export default function MembersSection() {
             }}
             aria-label="Previous member"
           >
-            &lt;
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" style={{ display: 'block' }}>
+              <polyline points="15 18 9 12 15 6" />
+            </svg>
           </button>
 
           {/* 멤버 가로 스크롤 컨테이너 */}
@@ -152,7 +151,7 @@ export default function MembersSection() {
             onClick={() => scroll('right')}
             style={{
               position: 'absolute',
-              right: '-32px',
+              right: '4px',
               top: '50%',
               transform: 'translateY(-50%)',
               background: 'none',
@@ -163,9 +162,6 @@ export default function MembersSection() {
               cursor: 'pointer',
               zIndex: 10,
               transition: 'all 0.3s cubic-bezier(0.16, 1, 0.3, 1)',
-              fontSize: '2.5rem',
-              fontWeight: 200,
-              fontFamily: 'system-ui, -apple-system, sans-serif',
               outline: 'none',
               padding: 0,
               display: 'flex',
@@ -182,7 +178,9 @@ export default function MembersSection() {
             }}
             aria-label="Next member"
           >
-            &gt;
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" style={{ display: 'block' }}>
+              <polyline points="9 18 15 12 9 6" />
+            </svg>
           </button>
         </div>
 
@@ -194,7 +192,9 @@ export default function MembersSection() {
             overflow-x: auto;
             scroll-snap-type: x mandatory;
             scrollbar-width: none; /* 파이어폭스 스크롤바 숨김 */
-            padding: 10px 4px 20px;
+            padding: 30px 20px 40px; /* 그림자 잘림 방지용 충분한 상하 패딩 */
+            margin-top: -20px;
+            margin-bottom: -20px;
             -webkit-overflow-scrolling: touch; /* iOS 탄성 스크롤 활성화 */
             cursor: default;
           }
@@ -208,7 +208,7 @@ export default function MembersSection() {
             min-width: 330px;
             scroll-snap-align: start;
             background: #ffffff;
-            border: 1px solid rgba(0, 0, 0, 0.08);
+            border: 1px solid rgba(0, 0, 0, 0.1);
             border-radius: 28px;
             padding: 24px 20px;
             display: flex;
@@ -218,7 +218,7 @@ export default function MembersSection() {
             transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
             position: relative;
             overflow: hidden;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.06);
+            box-shadow: 0 12px 32px rgba(0, 0, 0, 0.08);
           }
           
           .member-premium-card::before {

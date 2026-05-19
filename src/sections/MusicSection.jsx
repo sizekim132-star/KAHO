@@ -74,7 +74,7 @@ export default function MusicSection() {
             onClick={() => scroll('left')}
             style={{
               position: 'absolute',
-              left: '-32px',
+              left: '4px',
               top: '50%',
               transform: 'translateY(-50%)',
               background: 'none',
@@ -85,9 +85,6 @@ export default function MusicSection() {
               cursor: 'pointer',
               zIndex: 10,
               transition: 'all 0.3s cubic-bezier(0.16, 1, 0.3, 1)',
-              fontSize: '2.5rem',
-              fontWeight: 200,
-              fontFamily: 'system-ui, -apple-system, sans-serif',
               outline: 'none',
               padding: 0,
               display: 'flex',
@@ -104,7 +101,9 @@ export default function MusicSection() {
             }}
             aria-label="Previous track"
           >
-            &lt;
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" style={{ display: 'block' }}>
+              <polyline points="15 18 9 12 15 6" />
+            </svg>
           </button>
 
           {/* 음악 가로 스크롤 컨테이너 */}
@@ -160,7 +159,7 @@ export default function MusicSection() {
             onClick={() => scroll('right')}
             style={{
               position: 'absolute',
-              right: '-32px',
+              right: '4px',
               top: '50%',
               transform: 'translateY(-50%)',
               background: 'none',
@@ -171,9 +170,6 @@ export default function MusicSection() {
               cursor: 'pointer',
               zIndex: 10,
               transition: 'all 0.3s cubic-bezier(0.16, 1, 0.3, 1)',
-              fontSize: '2.5rem',
-              fontWeight: 200,
-              fontFamily: 'system-ui, -apple-system, sans-serif',
               outline: 'none',
               padding: 0,
               display: 'flex',
@@ -190,7 +186,9 @@ export default function MusicSection() {
             }}
             aria-label="Next track"
           >
-            &gt;
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" style={{ display: 'block' }}>
+              <polyline points="9 18 15 12 9 6" />
+            </svg>
           </button>
         </div>
 
@@ -202,7 +200,9 @@ export default function MusicSection() {
             overflow-x: auto;
             scroll-snap-type: x mandatory;
             scrollbar-width: none;
-            padding: 10px 4px 24px;
+            padding: 30px 20px 40px; /* 그림자 잘림 방지용 패딩 */
+            margin-top: -20px;
+            margin-bottom: -20px;
             -webkit-overflow-scrolling: touch;
             cursor: default;
           }
