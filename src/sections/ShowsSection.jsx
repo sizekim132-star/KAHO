@@ -4,10 +4,10 @@ import PhotoBox from '../components/PhotoBox';
 import { SHOWS } from '../data/constants';
 
 export default function ShowsSection() {
-  const [selectedYear, setSelectedYear] = useState(null);
-  const [animate, setAnimate] = useState(false);
+  const [selectedYear, setSelectedYear] = useState('2026');
+  const [animate, setAnimate] = useState(true);
 
-  // 연도 선택 핸들러: 페이드아웃 후 데이터 스왑 & 페이드인 애니메이션 오케스트레이션
+  // 연도 선택 핸자: 페이드아웃 후 데이터 스왑 & 페이드인 애니메이션 오케스트레이션
   const handleYearSelect = (year) => {
     if (selectedYear === year) return;
 
@@ -29,7 +29,7 @@ export default function ShowsSection() {
     }
   };
 
-  // 선택된 연도의 연혁만 필터링
+  // 선택된 연도의 연역만 필터링
   const filteredShows = selectedYear ? SHOWS.filter((s) => s.date.startsWith(selectedYear)) : [];
 
   return (
@@ -96,6 +96,28 @@ export default function ShowsSection() {
           .timeline-transition-wrap.animate-in {
             opacity: 1;
             transform: translateY(0);
+          }
+          
+          /* 카드 제목이 줄바꿈 발생하지 않고 말줄임표 처리되도록 설정 */
+          .timeline-title {
+            white-space: nowrap !important;
+            overflow: hidden !important;
+            text-overflow: ellipsis !important;
+            max-width: 100%;
+          }
+
+          /* 사진 영역 크기 축소 */
+          .timeline-img-container {
+            width: 160px !important;
+            height: 110px !important;
+            flex-shrink: 0;
+          }
+          
+          @media (max-width: 768px) {
+            .timeline-img-container {
+              width: 100% !important;
+              height: 140px !important;
+            }
           }
           
           /* 초기 진입 대기 상태 텍스트 안내 플레이스홀더 */
