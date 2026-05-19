@@ -104,13 +104,13 @@ export default function MembersSection() {
           </div>
           
           {/* 가로 스크롤 버튼 (데스크톱 및 패드 전용) */}
-          <div className="member-nav-buttons" style={{ display: 'flex', gap: '12px' }}>
+          <div className="member-nav-buttons" style={{ display: 'flex', gap: '8px' }}>
             <button 
               onClick={() => scroll('left')}
               disabled={!showLeftArrow}
               style={{
-                width: '48px',
-                height: '48px',
+                width: '36px',
+                height: '36px',
                 borderRadius: '50%',
                 border: '1px solid rgba(255, 255, 255, 0.1)',
                 background: showLeftArrow ? 'rgba(255, 255, 255, 0.08)' : 'rgba(255, 255, 255, 0.02)',
@@ -120,7 +120,7 @@ export default function MembersSection() {
                 alignItems: 'center',
                 justifyContent: 'center',
                 transition: 'all 0.3s cubic-bezier(0.16, 1, 0.3, 1)',
-                fontSize: '1.25rem',
+                fontSize: '1rem',
                 outline: 'none'
               }}
               aria-label="Previous member"
@@ -131,8 +131,8 @@ export default function MembersSection() {
               onClick={() => scroll('right')}
               disabled={!showRightArrow}
               style={{
-                width: '48px',
-                height: '48px',
+                width: '36px',
+                height: '36px',
                 borderRadius: '50%',
                 border: '1px solid rgba(255, 255, 255, 0.1)',
                 background: showRightArrow ? 'rgba(255, 255, 255, 0.08)' : 'rgba(255, 255, 255, 0.02)',
@@ -142,7 +142,7 @@ export default function MembersSection() {
                 alignItems: 'center',
                 justifyContent: 'center',
                 transition: 'all 0.3s cubic-bezier(0.16, 1, 0.3, 1)',
-                fontSize: '1.25rem',
+                fontSize: '1rem',
                 outline: 'none'
               }}
               aria-label="Next member"

@@ -66,13 +66,13 @@ export default function MusicSection() {
           </div>
           
           {/* 가로 스크롤 버튼 (데스크톱 및 태블릿 전용) */}
-          <div className="music-nav-buttons" style={{ display: 'flex', gap: '12px' }}>
+          <div className="music-nav-buttons" style={{ display: 'flex', gap: '8px' }}>
             <button 
               onClick={() => scroll('left')}
               disabled={!showLeftArrow}
               style={{
-                width: '48px',
-                height: '48px',
+                width: '36px',
+                height: '36px',
                 borderRadius: '50%',
                 border: '1px solid rgba(0, 0, 0, 0.08)',
                 background: showLeftArrow ? '#ffffff' : 'rgba(0, 0, 0, 0.02)',
@@ -82,7 +82,7 @@ export default function MusicSection() {
                 alignItems: 'center',
                 justifyContent: 'center',
                 transition: 'all 0.3s cubic-bezier(0.16, 1, 0.3, 1)',
-                fontSize: '1.25rem',
+                fontSize: '1rem',
                 outline: 'none',
                 boxShadow: showLeftArrow ? '0 2px 8px rgba(0, 0, 0, 0.05)' : 'none'
               }}
@@ -94,8 +94,8 @@ export default function MusicSection() {
               onClick={() => scroll('right')}
               disabled={!showRightArrow}
               style={{
-                width: '48px',
-                height: '48px',
+                width: '36px',
+                height: '36px',
                 borderRadius: '50%',
                 border: '1px solid rgba(0, 0, 0, 0.08)',
                 background: showRightArrow ? '#ffffff' : 'rgba(0, 0, 0, 0.02)',
@@ -105,7 +105,7 @@ export default function MusicSection() {
                 alignItems: 'center',
                 justifyContent: 'center',
                 transition: 'all 0.3s cubic-bezier(0.16, 1, 0.3, 1)',
-                fontSize: '1.25rem',
+                fontSize: '1rem',
                 outline: 'none',
                 boxShadow: showRightArrow ? '0 2px 8px rgba(0, 0, 0, 0.05)' : 'none'
               }}

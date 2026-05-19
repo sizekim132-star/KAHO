@@ -106,6 +106,11 @@ export default function ShowsSection() {
             max-width: 100%;
           }
 
+           /* 주황색 날짜 글씨 굵기 완화 */
+          .timeline-date-left {
+            font-weight: 700 !important;
+          }
+
           /* 사진 영역 크기 축소 */
           .timeline-img-container {
             width: 160px !important;
