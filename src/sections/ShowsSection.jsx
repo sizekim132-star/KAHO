@@ -48,7 +48,7 @@ export default function ShowsSection() {
           gap: '48px',
           marginBottom: '4rem'
         }}>
-          {['2026', '2025'].map((year) => {
+          {['2025', '2026'].map((year) => {
             const isActive = selectedYear === year;
             return (
               <button
@@ -98,17 +98,18 @@ export default function ShowsSection() {
             transform: translateY(0);
           }
           
-          /* 카드 제목이 줄바꿈 발생하지 않고 말줄임표 처리되도록 설정 */
+          /* 카드 제목 글자 크기 축소 및 줄바꿈 방지 */
           .timeline-title {
+            font-size: 1.25rem !important;
             white-space: nowrap !important;
             overflow: hidden !important;
             text-overflow: ellipsis !important;
             max-width: 100%;
           }
 
-           /* 주황색 날짜 글씨 굵기 완화 */
+           /* 주황색 날짜 글씨 굵기 추가 완화 */
           .timeline-date-left {
-            font-weight: 700 !important;
+            font-weight: 600 !important;
           }
 
           /* 사진 영역 크기 축소 */

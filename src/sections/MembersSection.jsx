@@ -90,7 +90,7 @@ export default function MembersSection() {
 
       <div style={{ maxWidth: 1200, margin: '0 auto', position: 'relative', zIndex: 1, padding: '0 20px' }}>
         
-        {/* ── 섹션 상단 헤더 & 컨트롤 네비게이션 ── */}
+        {/* ── 섹션 상단 헤더 ── */}
         <div style={{
           display: 'flex',
           justifyContent: 'space-between',
@@ -102,57 +102,119 @@ export default function MembersSection() {
           <div className="reveal-text">
             <h2 className="title-dark" style={{ marginTop: '8px', fontWeight: 800 }}>Members</h2>
           </div>
-          
-          {/* 가로 스크롤 버튼 (데스크톱 및 패드 전용) */}
-          <div className="member-nav-buttons" style={{ display: 'flex', gap: '8px' }}>
-            <button 
-              onClick={() => scroll('left')}
-              disabled={!showLeftArrow}
-              style={{
-                width: '36px',
-                height: '36px',
-                borderRadius: '50%',
-                border: '1px solid rgba(255, 255, 255, 0.1)',
-                background: showLeftArrow ? 'rgba(255, 255, 255, 0.08)' : 'rgba(255, 255, 255, 0.02)',
-                color: showLeftArrow ? '#ffffff' : 'rgba(255, 255, 255, 0.25)',
-                cursor: showLeftArrow ? 'pointer' : 'default',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                transition: 'all 0.3s cubic-bezier(0.16, 1, 0.3, 1)',
-                fontSize: '1rem',
-                outline: 'none'
-              }}
-              aria-label="Previous member"
-            >
-              ←
-            </button>
-            <button 
-              onClick={() => scroll('right')}
-              disabled={!showRightArrow}
-              style={{
-                width: '36px',
-                height: '36px',
-                borderRadius: '50%',
-                border: '1px solid rgba(255, 255, 255, 0.1)',
-                background: showRightArrow ? 'rgba(255, 255, 255, 0.08)' : 'rgba(255, 255, 255, 0.02)',
-                color: showRightArrow ? '#ffffff' : 'rgba(255, 255, 255, 0.25)',
-                cursor: showRightArrow ? 'pointer' : 'default',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                transition: 'all 0.3s cubic-bezier(0.16, 1, 0.3, 1)',
-                fontSize: '1rem',
-                outline: 'none'
-              }}
-              aria-label="Next member"
-            >
-              →
-            </button>
-          </div>
         </div>
 
-        {/* ── 멤버 가로 스크롤 컨테이너 ── */}
+        {/* ── 가로 스크롤 캐러셀 영역 (좌우 플로팅 화살표 버튼 적용) ── */}
+        <div className="members-carousel-relative-container" style={{ position: 'relative', width: '100%' }}>
+          
+          {/* 플로팅 좌측 버튼 */}
+          <button 
+            onClick={() => scroll('left')}
+            style={{
+              position: 'absolute',
+              left: '-20px',
+              top: '50%',
+              transform: 'translateY(-50%)',
+              width: '38px',
+              height: '38px',
+              borderRadius: '50%',
+              background: 'rgba(255, 255, 255, 0.12)',
+              border: '1px solid rgba(255, 255, 255, 0.25)',
+              color: '#ffffff',
+              display: showLeftArrow ? 'flex' : 'none',
+              alignItems: 'center',
+              justifyContent: 'center',
+              cursor: 'pointer',
+              zIndex: 10,
+              boxShadow: '0 4px 16px rgba(0, 0, 0, 0.4)',
+              backdropFilter: 'blur(8px)',
+              WebkitBackdropFilter: 'blur(8px)',
+              transition: 'all 0.3s cubic-bezier(0.16, 1, 0.3, 1)',
+              fontSize: '1rem',
+              outline: 'none'
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.background = 'var(--orange)';
+              e.currentTarget.style.borderColor = 'var(--orange)';
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.background = 'rgba(255, 255, 255, 0.12)';
+              e.currentTarget.style.borderColor = 'rgba(255, 255, 255, 0.25)';
+            }}
+            aria-label="Previous member"
+          >
+            ←
+          </button>
+
+          {/* 멤버 가로 스크롤 컨테이너 */}
+          <div 
+            className="member-scroll-wrapper" 
+            ref={scrollContainerRef}
+          >
+            {MEMBERS.map((m, i) => (
+              <div 
+                key={i} 
+                className={`member-premium-card reveal-card ${m.name === '최민서' ? 'minseo-card' : ''}`} 
+                style={{ transitionDelay: `${i * 0.12}s` }}
+              >
+                <div className="member-card-photo-wrap">
+                  <PhotoBox src={m.img} w="100%" h="100%" label="사진" />
+                </div>
+                <div className="member-card-info">
+                  <h3 className="member-card-name">
+                    <span>{m.name}</span>
+                    <span className="member-card-animal-inline">{m.animal}</span>
+                  </h3>
+                  <div className="member-card-role-group">
+                    <span className="member-card-role">{m.role}</span>
+                  </div>
+                  <p className="member-card-bio">{m.bio || `${m.name}의 멋진 음악적 여정을 함께 지켜봐 주세요.`}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          {/* 플로팅 우측 버튼 */}
+          <button 
+            onClick={() => scroll('right')}
+            style={{
+              position: 'absolute',
+              right: '-20px',
+              top: '50%',
+              transform: 'translateY(-50%)',
+              width: '38px',
+              height: '38px',
+              borderRadius: '50%',
+              background: 'rgba(255, 255, 255, 0.12)',
+              border: '1px solid rgba(255, 255, 255, 0.25)',
+              color: '#ffffff',
+              display: showRightArrow ? 'flex' : 'none',
+              alignItems: 'center',
+              justifyContent: 'center',
+              cursor: 'pointer',
+              zIndex: 10,
+              boxShadow: '0 4px 16px rgba(0, 0, 0, 0.4)',
+              backdropFilter: 'blur(8px)',
+              WebkitBackdropFilter: 'blur(8px)',
+              transition: 'all 0.3s cubic-bezier(0.16, 1, 0.3, 1)',
+              fontSize: '1rem',
+              outline: 'none'
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.background = 'var(--orange)';
+              e.currentTarget.style.borderColor = 'var(--orange)';
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.background = 'rgba(255, 255, 255, 0.12)';
+              e.currentTarget.style.borderColor = 'rgba(255, 255, 255, 0.25)';
+            }}
+            aria-label="Next member"
+          >
+            →
+          </button>
+        </div>
+
+        {/* ── 스타일 시트 ── */}
         <style>{`
           .member-scroll-wrapper {
             display: flex;
@@ -313,9 +375,6 @@ export default function MembersSection() {
               scroll-snap-align: center;
               padding: 32px 24px;
             }
-            .member-nav-buttons {
-              display: none !important; /* 모바일에서는 버튼 배제 */
-            }
             .member-scroll-wrapper {
               scroll-padding: 0 20px;
             }
@@ -380,34 +439,6 @@ export default function MembersSection() {
             }
           }
         `}</style>
-
-        {/* ── 멤버 가로 스크롤 컨테이너 ── */}
-        <div 
-          className="member-scroll-wrapper" 
-          ref={scrollContainerRef}
-        >
-          {MEMBERS.map((m, i) => (
-            <div 
-              key={i} 
-              className={`member-premium-card reveal-card ${m.name === '최민서' ? 'minseo-card' : ''}`} 
-              style={{ transitionDelay: `${i * 0.12}s` }}
-            >
-              <div className="member-card-photo-wrap">
-                <PhotoBox src={m.img} w="100%" h="100%" label="사진" />
-              </div>
-              <div className="member-card-info">
-                <h3 className="member-card-name">
-                  <span>{m.name}</span>
-                  <span className="member-card-animal-inline">{m.animal}</span>
-                </h3>
-                <div className="member-card-role-group">
-                  <span className="member-card-role">{m.role}</span>
-                </div>
-                <p className="member-card-bio">{m.bio || `${m.name}의 멋진 음악적 여정을 함께 지켜봐 주세요.`}</p>
-              </div>
-            </div>
-          ))}
-        </div>
 
         {/* ── 모바일 전용 가로 스크롤 가이드 인디케이터 (단서 제공) ── */}
         <div className="mobile-scroll-cue-bar">

@@ -52,7 +52,7 @@ export default function MusicSection() {
     <section id="music" className="section section-gray2" style={{ padding: '120px 0' }}>
       <div style={{ maxWidth: 1200, margin: '0 auto', padding: '0 20px', position: 'relative' }}>
         
-        {/* 헤더 영역 및 가로 스크롤 버튼 */}
+        {/* 헤더 영역 */}
         <div style={{
           display: 'flex',
           justifyContent: 'space-between',
@@ -64,59 +64,139 @@ export default function MusicSection() {
           <div className="reveal-text">
             <h2 className="title" style={{ fontWeight: 800 }}>Music</h2>
           </div>
-          
-          {/* 가로 스크롤 버튼 (데스크톱 및 태블릿 전용) */}
-          <div className="music-nav-buttons" style={{ display: 'flex', gap: '8px' }}>
-            <button 
-              onClick={() => scroll('left')}
-              disabled={!showLeftArrow}
-              style={{
-                width: '36px',
-                height: '36px',
-                borderRadius: '50%',
-                border: '1px solid rgba(0, 0, 0, 0.08)',
-                background: showLeftArrow ? '#ffffff' : 'rgba(0, 0, 0, 0.02)',
-                color: showLeftArrow ? 'var(--navy)' : 'rgba(0, 0, 0, 0.2)',
-                cursor: showLeftArrow ? 'pointer' : 'default',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                transition: 'all 0.3s cubic-bezier(0.16, 1, 0.3, 1)',
-                fontSize: '1rem',
-                outline: 'none',
-                boxShadow: showLeftArrow ? '0 2px 8px rgba(0, 0, 0, 0.05)' : 'none'
-              }}
-              aria-label="Previous track"
-            >
-              ←
-            </button>
-            <button 
-              onClick={() => scroll('right')}
-              disabled={!showRightArrow}
-              style={{
-                width: '36px',
-                height: '36px',
-                borderRadius: '50%',
-                border: '1px solid rgba(0, 0, 0, 0.08)',
-                background: showRightArrow ? '#ffffff' : 'rgba(0, 0, 0, 0.02)',
-                color: showRightArrow ? 'var(--navy)' : 'rgba(0, 0, 0, 0.2)',
-                cursor: showRightArrow ? 'pointer' : 'default',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                transition: 'all 0.3s cubic-bezier(0.16, 1, 0.3, 1)',
-                fontSize: '1rem',
-                outline: 'none',
-                boxShadow: showRightArrow ? '0 2px 8px rgba(0, 0, 0, 0.05)' : 'none'
-              }}
-              aria-label="Next track"
-            >
-              →
-            </button>
-          </div>
         </div>
 
-        {/* ── 음악 가로 스크롤 컨테이너 ── */}
+        {/* ── 음악 가로 스크롤 캐러셀 영역 (좌우 플로팅 화살표 버튼 적용) ── */}
+        <div className="music-carousel-relative-container" style={{ position: 'relative', width: '100%' }}>
+          
+          {/* 플로팅 좌측 버튼 */}
+          <button 
+            onClick={() => scroll('left')}
+            style={{
+              position: 'absolute',
+              left: '-20px',
+              top: '50%',
+              transform: 'translateY(-50%)',
+              width: '38px',
+              height: '38px',
+              borderRadius: '50%',
+              border: '1px solid rgba(0, 0, 0, 0.08)',
+              background: '#ffffff',
+              color: 'var(--navy)',
+              display: showLeftArrow ? 'flex' : 'none',
+              alignItems: 'center',
+              justifyContent: 'center',
+              cursor: 'pointer',
+              zIndex: 10,
+              boxShadow: '0 4px 16px rgba(0, 0, 0, 0.12)',
+              transition: 'all 0.3s cubic-bezier(0.16, 1, 0.3, 1)',
+              fontSize: '1rem',
+              outline: 'none'
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.background = 'var(--orange)';
+              e.currentTarget.style.color = '#ffffff';
+              e.currentTarget.style.borderColor = 'var(--orange)';
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.background = '#ffffff';
+              e.currentTarget.style.color = 'var(--navy)';
+              e.currentTarget.style.borderColor = 'rgba(0, 0, 0, 0.08)';
+            }}
+            aria-label="Previous track"
+          >
+            ←
+          </button>
+
+          {/* 음악 가로 스크롤 컨테이너 */}
+          <div className="music-scroll-wrapper" ref={scrollContainerRef}>
+            {TRACKS.map((t, i) => (
+              <div 
+                key={i} 
+                className="music-premium-card reveal-card"
+                style={{ transitionDelay: `${i * 0.12}s` }}
+              >
+                {/* 미디어 영역 (YouTube iframe 혹은 앨범아트) */}
+                <div className="music-card-media">
+                  {t.isYT ? (
+                    <div style={{ aspectRatio: '16/9', width: '100%' }}>
+                      <iframe 
+                        width="100%" 
+                        height="100%" 
+                        src={`https://www.youtube.com/embed/${t.link}?rel=0`}
+                        title={t.title} 
+                        frameBorder="0" 
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                        allowFullScreen 
+                      />
+                    </div>
+                  ) : (
+                    <div style={{ background: '#111625', padding: '16px 0', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+                      <PhotoBox src={t.img} w="100%" h="120px" label={t.title} fit="contain" />
+                    </div>
+                  )}
+                </div>
+
+                {/* 텍스트 정보 영역 */}
+                <div className="music-card-body">
+                  <div>
+                    <p className="music-card-badge">{t.type}</p>
+                    <h3 className="music-card-title">{t.title}</h3>
+                  </div>
+                  <a 
+                    href={t.isYT ? `https://www.youtube.com/watch?v=${t.link}` : t.link} 
+                    target="_blank" 
+                    rel="noreferrer"
+                    className="music-card-link"
+                  >
+                    {t.isYT ? '▶ YouTube에서 보기' : '▶ SoundCloud에서 듣기'}
+                  </a>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          {/* 플로팅 우측 버튼 */}
+          <button 
+            onClick={() => scroll('right')}
+            style={{
+              position: 'absolute',
+              right: '-20px',
+              top: '50%',
+              transform: 'translateY(-50%)',
+              width: '38px',
+              height: '38px',
+              borderRadius: '50%',
+              border: '1px solid rgba(0, 0, 0, 0.08)',
+              background: '#ffffff',
+              color: 'var(--navy)',
+              display: showRightArrow ? 'flex' : 'none',
+              alignItems: 'center',
+              justifyContent: 'center',
+              cursor: 'pointer',
+              zIndex: 10,
+              boxShadow: '0 4px 16px rgba(0, 0, 0, 0.12)',
+              transition: 'all 0.3s cubic-bezier(0.16, 1, 0.3, 1)',
+              fontSize: '1rem',
+              outline: 'none'
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.background = 'var(--orange)';
+              e.currentTarget.style.color = '#ffffff';
+              e.currentTarget.style.borderColor = 'var(--orange)';
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.background = '#ffffff';
+              e.currentTarget.style.color = 'var(--navy)';
+              e.currentTarget.style.borderColor = 'rgba(0, 0, 0, 0.08)';
+            }}
+            aria-label="Next track"
+          >
+            →
+          </button>
+        </div>
+
+        {/* ── 스타일 시트 ── */}
         <style>{`
           .music-scroll-wrapper {
             display: flex;
@@ -133,10 +213,10 @@ export default function MusicSection() {
             display: none;
           }
 
-          /* 음악 카드 프리미엄 스타일 */
+          /* 음악 카드 프리미엄 컴팩트 스타일 */
           .music-premium-card {
-            flex: 0 0 380px;
-            min-width: 320px;
+            flex: 0 0 340px;
+            min-width: 300px;
             scroll-snap-align: start;
             border-radius: 24px;
             overflow: hidden;
@@ -160,7 +240,7 @@ export default function MusicSection() {
           }
 
           .music-card-body {
-            padding: 28px 24px;
+            padding: 18px 20px;
             display: flex;
             flex-direction: column;
             flex: 1;
@@ -173,19 +253,19 @@ export default function MusicSection() {
             color: var(--orange);
             text-transform: uppercase;
             letter-spacing: 0.08em;
-            margin-bottom: 8px;
+            margin-bottom: 6px;
           }
 
           .music-card-title {
-            font-size: 1.3rem;
+            font-size: 1.15rem;
             font-weight: 800;
             color: var(--navy);
-            margin-bottom: 20px;
+            margin-bottom: 12px;
             line-height: 1.4;
           }
 
           .music-card-link {
-            font-size: 0.85rem;
+            font-size: 0.82rem;
             font-weight: 700;
             color: var(--text-2);
             display: inline-flex;
@@ -204,11 +284,8 @@ export default function MusicSection() {
           @media (max-width: 991px) {
             .music-premium-card {
               flex: 0 0 78%;
-              min-width: 290px;
+              min-width: 280px;
               scroll-snap-align: center;
-            }
-            .music-nav-buttons {
-              display: none !important;
             }
             .music-scroll-wrapper {
               scroll-padding: 0 20px;
@@ -259,53 +336,6 @@ export default function MusicSection() {
             }
           }
         `}</style>
-
-        <div className="music-scroll-wrapper" ref={scrollContainerRef}>
-          {TRACKS.map((t, i) => (
-            <div 
-              key={i} 
-              className="music-premium-card reveal-card"
-              style={{ transitionDelay: `${i * 0.12}s` }}
-            >
-              {/* 미디어 영역 (YouTube iframe 혹은 앨범아트) */}
-              <div className="music-card-media">
-                {t.isYT ? (
-                  <div style={{ aspectRatio: '16/9', width: '100%' }}>
-                    <iframe 
-                      width="100%" 
-                      height="100%" 
-                      src={`https://www.youtube.com/embed/${t.link}?rel=0`}
-                      title={t.title} 
-                      frameBorder="0" 
-                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                      allowFullScreen 
-                    />
-                  </div>
-                ) : (
-                  <div style={{ background: '#111625', padding: '24px 0', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-                    <PhotoBox src={t.img} w="100%" h="180px" label={t.title} fit="contain" />
-                  </div>
-                )}
-              </div>
-
-              {/* 텍스트 정보 영역 */}
-              <div className="music-card-body">
-                <div>
-                  <p className="music-card-badge">{t.type}</p>
-                  <h3 className="music-card-title">{t.title}</h3>
-                </div>
-                <a 
-                  href={t.isYT ? `https://www.youtube.com/watch?v=${t.link}` : t.link} 
-                  target="_blank" 
-                  rel="noreferrer"
-                  className="music-card-link"
-                >
-                  {t.isYT ? '▶ YouTube에서 보기' : '▶ SoundCloud에서 듣기'}
-                </a>
-              </div>
-            </div>
-          ))}
-        </div>
 
         {/* 모바일 전용 인디케이터 바 */}
         <div className="music-scroll-cue-bar">
