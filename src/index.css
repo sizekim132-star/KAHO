@@ -1231,10 +1231,11 @@ img {
 
 .timeline-line-inner {
   width: 100%;
-  background: var(--orange);
+  background: linear-gradient(to bottom, var(--orange-light), var(--orange));
   height: 0;
-  transition: height 0.1s ease-out;
-  box-shadow: 0 0 8px var(--orange);
+  transition: height 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 0 12px var(--orange), 0 0 20px rgba(255, 95, 31, 0.4);
+  border-radius: 999px;
 }
 
 .timeline-item {
@@ -1310,6 +1311,7 @@ img {
 
 .timeline-text-wrap {
   flex: 1;
+  min-width: 0;
 }
 
 .timeline-content:hover {

@@ -62,7 +62,18 @@ export default function ShowsSection() {
                             🔥 Upcoming
                           </span>
                         )}
-                        <h3 className="timeline-title" style={{ margin: 0, fontSize: 'clamp(1.2rem, 3vw, 1.5rem)' }}>{s.name}</h3>
+                        <h3 
+                          className="timeline-title" 
+                          style={{ 
+                            margin: 0, 
+                            fontSize: 'clamp(1.05rem, 2.8vw, 1.45rem)', 
+                            whiteSpace: 'nowrap', 
+                            overflow: 'hidden', 
+                            textOverflow: 'ellipsis' 
+                          }}
+                        >
+                          {s.name}
+                        </h3>
                       </div>
                       <p className="timeline-location" style={{ margin: '6px 0 0 0', display: 'flex', alignItems: 'center', gap: '4px' }}>
                         📍 {s.location}
