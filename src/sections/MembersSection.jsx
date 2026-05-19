@@ -282,9 +282,9 @@ export default function MembersSection() {
             box-shadow: 0 16px 40px rgba(255, 95, 31, 0.25);
           }
 
-          /* 최민서 사진 180도 회전 적용 */
+          /* 최민서 사진 270도 회전 적용 */
           .minseo-card .member-card-photo-wrap img {
-            transform: rotate(180deg);
+            transform: rotate(270deg) scale(1.3);
             transform-origin: center;
           }
           
