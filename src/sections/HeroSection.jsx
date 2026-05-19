@@ -16,25 +16,6 @@ export default function HeroSection({ videoOpacity, activeSection }) {
 
   return (
     <>
-      {/* ── Mobile Thumb Zone ── */}
-      <div className="mobile-thumb-zone">
-        {[
-          { id: 'music', label: 'Feed' },
-          { id: 'members', label: 'Artists' },
-          { id: 'shows', label: 'History' },
-          { id: 'contact', label: 'Contact' }
-        ].map(item => (
-          <a key={item.id} href={`#${item.id}`}
-            className={`thumb-btn ${activeSection === item.id ? 'active' : ''}`}
-            onClick={(e) => {
-              e.preventDefault();
-              document.getElementById(item.id)?.scrollIntoView({ behavior: 'smooth' });
-            }}>
-            {item.label}
-          </a>
-        ))}
-      </div>
-
       {/* ── 유튜브 4-아이프레임 고급 안개식 페이드 캐러셀 ── */}
       <div className="vbg-container" style={{ opacity: videoOpacity, transition: 'opacity 0.5s ease-in-out' }}>
         {YT_BG_IDS.map((id, idx) => (

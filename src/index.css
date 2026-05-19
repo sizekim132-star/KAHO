@@ -1089,45 +1089,7 @@ img {
   }
 }
 
-/* ─── MOBILE THUMB ZONE POLISH ─── */
-.mobile-thumb-zone {
-  display: none;
-  position: fixed;
-  bottom: 24px;
-  left: 50%;
-  transform: translateX(-50%);
-  background: rgba(255, 255, 255, 0.85);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  padding: 8px;
-  border-radius: 999px;
-  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
-  border: 1px solid rgba(255, 255, 255, 0.5);
-  z-index: 1000;
-  gap: 4px;
-}
 
-@media (max-width: 768px) {
-  .mobile-thumb-zone {
-    display: flex;
-  }
-}
-
-.thumb-btn {
-  padding: 10px 18px;
-  border-radius: 999px;
-  font-size: 0.78rem;
-  font-weight: 700;
-  color: var(--text-2);
-  text-decoration: none;
-  transition: all 0.3s var(--ease);
-}
-
-.thumb-btn.active {
-  background: var(--navy);
-  color: #fff;
-  box-shadow: 0 4px 12px rgba(26, 39, 68, 0.2);
-}
 
 .copy-toast {
   position: absolute;

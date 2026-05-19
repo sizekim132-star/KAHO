@@ -3,9 +3,9 @@ import React from 'react';
 import PhotoBox from '../components/PhotoBox';
 import { TRACKS, CLOUD_VIDEOS } from '../data/constants';
 
-// YouTube 썸네일 URL 생성
+// YouTube 썸네일 URL 생성 (레터박스 없는 고해상도)
 function ytThumb(id) {
-  return `https://img.youtube.com/vi/${id}/hqdefault.jpg`;
+  return `https://img.youtube.com/vi/${id}/maxresdefault.jpg`;
 }
 
 // 피드 아이템 데이터: 트랙 + 클라우드 비디오 합쳐서 그리드 채우기
@@ -29,17 +29,6 @@ function buildFeedItems() {
         title: t.title,
       });
     }
-  });
-
-  // 클라우드 비디오 추가 (mp4만)
-  const videoEntries = Object.entries(CLOUD_VIDEOS).filter(([, url]) => url.endsWith('.mp4'));
-  videoEntries.forEach(([key, url]) => {
-    items.push({
-      type: 'cloud',
-      videoUrl: url,
-      title: key,
-      url: url,
-    });
   });
 
   return items;
@@ -188,7 +177,7 @@ export default function MusicSection() {
 
           @media (max-width: 768px) {
             .feed-grid {
-              grid-template-columns: repeat(3, 1fr);
+              grid-template-columns: repeat(2, 1fr);
               gap: 0;
             }
           }

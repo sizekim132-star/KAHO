@@ -15,7 +15,7 @@ export default function RecruitSection() {
         <div className="reveal-text" style={{ textAlign: 'center', marginBottom: '4rem' }}>
           <h2 className="title" style={{ marginBottom: '1.25rem' }}>BEYOND THE SOUND</h2>
           <p className="body-text" style={{ maxWidth: 680, margin: '0 auto' }}>
-            카호(KAHO)에서 새로운 여정을 함께할 신규 멤버를 모집합니다.
+            새로운 여정을 함께할 신규 멤버를 모집합니다.
           </p>
         </div>
 

@@ -17,6 +17,9 @@ import galleryHeojun from '../assets/gallery_heojun_scene.jpg';
 import showMoyeoya2025 from '../assets/show_moyeoya2025.png';
 import showMoyeoya2026 from '../assets/show_moyeoya2026.png';
 import showCreator6 from '../assets/show_creator6.png';
+import trackEyes from '../assets/track_eyes.png';
+import trackWithoutYou from '../assets/track_newtime.jpg';
+import track20a from '../assets/track_20.JPG';
 import trackClock from '../assets/track_clock.png';
 
 /* ── URL 상수 ── */
@@ -53,6 +56,9 @@ export const MEMBERS = [
 
 /* ── 트랙 데이터 ── */
 export const TRACKS = [
+  { title: 'Eye', type: 'SoundCloud', link: 'https://soundcloud.com/size_kim/eye', isYT: false, img: trackEyes },
+  { title: 'Without You', type: 'SoundCloud', link: 'https://soundcloud.com/size_kim/withoutyou', isYT: false, img: trackWithoutYou },
+  { title: '20a', type: 'SoundCloud', link: 'https://soundcloud.com/size_kim/20a', isYT: false, img: track20a },
   { title: '깊은 밤을 날아서', type: '까치와 고양이 커버', link: 'WYrJr97nXFA', isYT: true },
   { title: '크리스마스 캐롤 메들리', type: '카호 커버', link: 'DS2NMYKaeuo', isYT: true },
   { title: '시계 (Demo)', type: '고양이', link: SC_URL, isYT: false, img: trackClock },
