@@ -173,8 +173,8 @@ export default function MembersSection() {
             flex: 0 0 calc(33.333% - 16px);
             min-width: 320px;
             scroll-snap-align: start;
-            background: linear-gradient(135deg, rgba(20, 28, 52, 0.75) 0%, rgba(9, 13, 26, 0.95) 100%);
-            border: 1px solid rgba(255, 255, 255, 0.12);
+            background: linear-gradient(135deg, rgba(35, 49, 90, 0.95) 0%, rgba(18, 26, 50, 0.98) 100%);
+            border: 1px solid rgba(255, 255, 255, 0.2);
             border-radius: 28px;
             padding: 44px 32px;
             display: flex;
@@ -184,7 +184,7 @@ export default function MembersSection() {
             transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
             position: relative;
             overflow: hidden;
-            box-shadow: 0 20px 48px rgba(0, 0, 0, 0.4);
+            box-shadow: 0 24px 64px rgba(0, 0, 0, 0.55);
             backdrop-filter: blur(20px);
             -webkit-backdrop-filter: blur(20px);
           }
@@ -201,9 +201,9 @@ export default function MembersSection() {
           
           .member-premium-card:hover {
             transform: translateY(-10px);
-            border-color: rgba(255, 95, 31, 0.5);
-            background: linear-gradient(135deg, rgba(28, 38, 70, 0.85) 0%, rgba(13, 19, 38, 0.98) 100%);
-            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.55), 0 0 24px rgba(255, 95, 31, 0.2);
+            border-color: rgba(255, 95, 31, 0.7);
+            background: linear-gradient(135deg, rgba(45, 62, 110, 0.95) 0%, rgba(24, 34, 65, 0.98) 100%);
+            box-shadow: 0 32px 72px rgba(0, 0, 0, 0.65), 0 0 24px rgba(255, 95, 31, 0.25);
           }
           
           .member-premium-card:hover::before {

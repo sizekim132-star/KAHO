@@ -125,8 +125,8 @@ export default function ShowsSection() {
           <div className={`timeline-transition-wrap ${animate ? 'animate-in' : ''}`}>
             <div className="timeline-container">
               {filteredShows.map((s, i) => (
-                <div key={i} className="timeline-item reveal-card" style={{ transitionDelay: `${(i + 1) * 0.12}s` }}>
-                  <div className="timeline-date-left reveal-text" style={{ transitionDelay: `${(i + 1) * 0.12 + 0.08}s` }}>
+                <div key={i} className="timeline-item" style={{ transitionDelay: `${(i + 1) * 0.12}s` }}>
+                  <div className="timeline-date-left" style={{ transitionDelay: `${(i + 1) * 0.12 + 0.08}s` }}>
                     {s.date}
                   </div>
                   <div className="timeline-dot"></div>
