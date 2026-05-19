@@ -36,7 +36,7 @@ export default function RecruitSection() {
             boxShadow: 'var(--shadow-sm)'
           }}>
             <video className="recruit-card-video" autoPlay loop muted playsInline>
-              <source src="https://oryr28ocpive2gwg.public.blob.vercel-storage.com/player.mp4" type="video/mp4" />
+              <source src="/Backwater.mp4" type="video/mp4" />
             </video>
             <div className="recruit-card-video-overlay" />
             
@@ -61,7 +61,7 @@ export default function RecruitSection() {
             boxShadow: 'var(--shadow-sm)'
           }}>
             <video className="recruit-card-video" autoPlay loop muted playsInline>
-              <source src="https://oryr28ocpive2gwg.public.blob.vercel-storage.com/creator.mp4" type="video/mp4" />
+              <source src="/backforest.mp4" type="video/mp4" />
             </video>
             <div className="recruit-card-video-overlay" />
             
@@ -86,7 +86,7 @@ export default function RecruitSection() {
             boxShadow: 'var(--shadow-sm)'
           }}>
             <video className="recruit-card-video" autoPlay loop muted playsInline>
-              <source src="https://oryr28ocpive2gwg.public.blob.vercel-storage.com/staff.mp4" type="video/mp4" />
+              <source src="/join.mp4" type="video/mp4" />
             </video>
             <div className="recruit-card-video-overlay" />
             
@@ -166,7 +166,7 @@ export default function RecruitSection() {
               opacity: 0, transition: 'all 0.5s cubic-bezier(0.16, 1, 0.3, 1)'
             }}
           >
-            <source src="https://oryr28ocpive2gwg.public.blob.vercel-storage.com/join.mp4" type="video/mp4" />
+            <source src="/join.mp4" type="video/mp4" />
           </video>
 
           <div className="cta-overlay" style={{
