@@ -21,9 +21,9 @@ import trackClock from '../assets/track_clock.png';
 
 /* ── URL 상수 ── */
 export const HERO_VIDEOS = [
-  '/Backwater.mp4',
-  '/backforest.mp4',
-  '/join.mp4'
+  'https://files.catbox.moe/d3ip15.mp4',
+  'https://files.catbox.moe/6pis12.mp4',
+  'https://files.catbox.moe/fj8eu8.mp4'
 ];
 
 // ── Vercel Blob 클라우딩 고화질 추가 비디오 자산 목록 ──
