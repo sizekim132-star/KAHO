@@ -24,7 +24,7 @@ export default function MembersSection() {
           filter: 'brightness(0.7)'
         }}
       >
-        <source src="https://raw.githubusercontent.com/sizekim132-star/kaho-assets/main/Backwater.mp4" type="video/mp4" />
+        <source src="https://oryr28ocpive2gwg.public.blob.vercel-storage.com/Backwater.mp4" type="video/mp4" />
       </video>
       <div style={{ maxWidth: 1200, margin: '0 auto', position: 'relative', zIndex: 1 }}>
         <div className="reveal-text">
