@@ -55,7 +55,7 @@ export default function ShowsSection() {
                   style={{ cursor: 'pointer', userSelect: 'none' }}
                 >
                   <div style={{ display: 'flex', width: '100%', alignItems: 'center', justifyContent: 'space-between', gap: '1rem' }}>
-                    <div className="timeline-text-wrap" style={{ flex: 1 }}>
+                    <div className="timeline-text-wrap" style={{ flex: 1, minWidth: 0 }}>
                       <div className="timeline-header" style={{ margin: 0, display: 'flex', alignItems: 'center', gap: '10px' }}>
                         {s.status === 'upcoming' && (
                           <span className={`timeline-status ${s.status}`}>
