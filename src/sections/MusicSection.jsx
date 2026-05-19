@@ -74,38 +74,37 @@ export default function MusicSection() {
             onClick={() => scroll('left')}
             style={{
               position: 'absolute',
-              left: '-20px',
+              left: '-32px',
               top: '50%',
               transform: 'translateY(-50%)',
-              width: '38px',
-              height: '38px',
-              borderRadius: '50%',
-              border: '1px solid rgba(0, 0, 0, 0.08)',
-              background: '#ffffff',
+              background: 'none',
+              border: 'none',
               color: 'var(--navy)',
-              display: showLeftArrow ? 'flex' : 'none',
-              alignItems: 'center',
-              justifyContent: 'center',
+              opacity: showLeftArrow ? 0.35 : 0,
+              pointerEvents: showLeftArrow ? 'auto' : 'none',
               cursor: 'pointer',
               zIndex: 10,
-              boxShadow: '0 4px 16px rgba(0, 0, 0, 0.12)',
               transition: 'all 0.3s cubic-bezier(0.16, 1, 0.3, 1)',
-              fontSize: '1rem',
-              outline: 'none'
+              fontSize: '2.5rem',
+              fontWeight: 200,
+              fontFamily: 'system-ui, -apple-system, sans-serif',
+              outline: 'none',
+              padding: 0,
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center'
             }}
             onMouseEnter={(e) => {
-              e.currentTarget.style.background = 'var(--orange)';
-              e.currentTarget.style.color = '#ffffff';
-              e.currentTarget.style.borderColor = 'var(--orange)';
+              e.currentTarget.style.opacity = '0.95';
+              e.currentTarget.style.color = 'var(--orange)';
             }}
             onMouseLeave={(e) => {
-              e.currentTarget.style.background = '#ffffff';
+              e.currentTarget.style.opacity = '0.35';
               e.currentTarget.style.color = 'var(--navy)';
-              e.currentTarget.style.borderColor = 'rgba(0, 0, 0, 0.08)';
             }}
             aria-label="Previous track"
           >
-            ←
+            &lt;
           </button>
 
           {/* 음악 가로 스크롤 컨테이너 */}
@@ -161,38 +160,37 @@ export default function MusicSection() {
             onClick={() => scroll('right')}
             style={{
               position: 'absolute',
-              right: '-20px',
+              right: '-32px',
               top: '50%',
               transform: 'translateY(-50%)',
-              width: '38px',
-              height: '38px',
-              borderRadius: '50%',
-              border: '1px solid rgba(0, 0, 0, 0.08)',
-              background: '#ffffff',
+              background: 'none',
+              border: 'none',
               color: 'var(--navy)',
-              display: showRightArrow ? 'flex' : 'none',
-              alignItems: 'center',
-              justifyContent: 'center',
+              opacity: showRightArrow ? 0.35 : 0,
+              pointerEvents: showRightArrow ? 'auto' : 'none',
               cursor: 'pointer',
               zIndex: 10,
-              boxShadow: '0 4px 16px rgba(0, 0, 0, 0.12)',
               transition: 'all 0.3s cubic-bezier(0.16, 1, 0.3, 1)',
-              fontSize: '1rem',
-              outline: 'none'
+              fontSize: '2.5rem',
+              fontWeight: 200,
+              fontFamily: 'system-ui, -apple-system, sans-serif',
+              outline: 'none',
+              padding: 0,
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center'
             }}
             onMouseEnter={(e) => {
-              e.currentTarget.style.background = 'var(--orange)';
-              e.currentTarget.style.color = '#ffffff';
-              e.currentTarget.style.borderColor = 'var(--orange)';
+              e.currentTarget.style.opacity = '0.95';
+              e.currentTarget.style.color = 'var(--orange)';
             }}
             onMouseLeave={(e) => {
-              e.currentTarget.style.background = '#ffffff';
+              e.currentTarget.style.opacity = '0.35';
               e.currentTarget.style.color = 'var(--navy)';
-              e.currentTarget.style.borderColor = 'rgba(0, 0, 0, 0.08)';
             }}
             aria-label="Next track"
           >
-            →
+            &gt;
           </button>
         </div>
 

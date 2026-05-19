@@ -100,29 +100,50 @@ export default function ShowsSection() {
           
           /* 카드 제목 글자 크기 축소 및 줄바꿈 방지 */
           .timeline-title {
-            font-size: 1.25rem !important;
+            font-size: 1.2rem !important;
             white-space: nowrap !important;
             overflow: hidden !important;
             text-overflow: ellipsis !important;
             max-width: 100%;
+            margin-bottom: 4px !important;
           }
 
-           /* 주황색 날짜 글씨 굵기 추가 완화 */
+          /* 주황색 날짜 글씨 굵기 추가 완화 */
           .timeline-date-left {
             font-weight: 600 !important;
           }
 
+          /* 카드 전체 높이 및 내부 패딩/간격 축소 */
+          .timeline-content {
+            padding: 16px 20px !important;
+            gap: 20px !important;
+          }
+          
+          .timeline-location {
+            margin-bottom: 6px !important;
+            font-size: 0.85rem !important;
+          }
+          
+          .timeline-desc {
+            font-size: 0.9rem !important;
+            line-height: 1.5 !important;
+          }
+
           /* 사진 영역 크기 축소 */
           .timeline-img-container {
-            width: 160px !important;
-            height: 110px !important;
+            width: 130px !important;
+            height: 90px !important;
             flex-shrink: 0;
           }
           
           @media (max-width: 768px) {
             .timeline-img-container {
               width: 100% !important;
-              height: 140px !important;
+              height: 130px !important;
+            }
+            .timeline-content {
+              padding: 16px !important;
+              gap: 16px !important;
             }
           }
           

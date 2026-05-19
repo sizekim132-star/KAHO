@@ -112,38 +112,37 @@ export default function MembersSection() {
             onClick={() => scroll('left')}
             style={{
               position: 'absolute',
-              left: '-20px',
+              left: '-32px',
               top: '50%',
               transform: 'translateY(-50%)',
-              width: '38px',
-              height: '38px',
-              borderRadius: '50%',
-              background: 'rgba(255, 255, 255, 0.12)',
-              border: '1px solid rgba(255, 255, 255, 0.25)',
+              background: 'none',
+              border: 'none',
               color: '#ffffff',
-              display: showLeftArrow ? 'flex' : 'none',
-              alignItems: 'center',
-              justifyContent: 'center',
+              opacity: showLeftArrow ? 0.35 : 0,
+              pointerEvents: showLeftArrow ? 'auto' : 'none',
               cursor: 'pointer',
               zIndex: 10,
-              boxShadow: '0 4px 16px rgba(0, 0, 0, 0.4)',
-              backdropFilter: 'blur(8px)',
-              WebkitBackdropFilter: 'blur(8px)',
               transition: 'all 0.3s cubic-bezier(0.16, 1, 0.3, 1)',
-              fontSize: '1rem',
-              outline: 'none'
+              fontSize: '2.5rem',
+              fontWeight: 200,
+              fontFamily: 'system-ui, -apple-system, sans-serif',
+              outline: 'none',
+              padding: 0,
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center'
             }}
             onMouseEnter={(e) => {
-              e.currentTarget.style.background = 'var(--orange)';
-              e.currentTarget.style.borderColor = 'var(--orange)';
+              e.currentTarget.style.opacity = '0.95';
+              e.currentTarget.style.color = 'var(--orange)';
             }}
             onMouseLeave={(e) => {
-              e.currentTarget.style.background = 'rgba(255, 255, 255, 0.12)';
-              e.currentTarget.style.borderColor = 'rgba(255, 255, 255, 0.25)';
+              e.currentTarget.style.opacity = '0.35';
+              e.currentTarget.style.color = '#ffffff';
             }}
             aria-label="Previous member"
           >
-            ←
+            &lt;
           </button>
 
           {/* 멤버 가로 스크롤 컨테이너 */}
@@ -179,38 +178,37 @@ export default function MembersSection() {
             onClick={() => scroll('right')}
             style={{
               position: 'absolute',
-              right: '-20px',
+              right: '-32px',
               top: '50%',
               transform: 'translateY(-50%)',
-              width: '38px',
-              height: '38px',
-              borderRadius: '50%',
-              background: 'rgba(255, 255, 255, 0.12)',
-              border: '1px solid rgba(255, 255, 255, 0.25)',
+              background: 'none',
+              border: 'none',
               color: '#ffffff',
-              display: showRightArrow ? 'flex' : 'none',
-              alignItems: 'center',
-              justifyContent: 'center',
+              opacity: showRightArrow ? 0.35 : 0,
+              pointerEvents: showRightArrow ? 'auto' : 'none',
               cursor: 'pointer',
               zIndex: 10,
-              boxShadow: '0 4px 16px rgba(0, 0, 0, 0.4)',
-              backdropFilter: 'blur(8px)',
-              WebkitBackdropFilter: 'blur(8px)',
               transition: 'all 0.3s cubic-bezier(0.16, 1, 0.3, 1)',
-              fontSize: '1rem',
-              outline: 'none'
+              fontSize: '2.5rem',
+              fontWeight: 200,
+              fontFamily: 'system-ui, -apple-system, sans-serif',
+              outline: 'none',
+              padding: 0,
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center'
             }}
             onMouseEnter={(e) => {
-              e.currentTarget.style.background = 'var(--orange)';
-              e.currentTarget.style.borderColor = 'var(--orange)';
+              e.currentTarget.style.opacity = '0.95';
+              e.currentTarget.style.color = 'var(--orange)';
             }}
             onMouseLeave={(e) => {
-              e.currentTarget.style.background = 'rgba(255, 255, 255, 0.12)';
-              e.currentTarget.style.borderColor = 'rgba(255, 255, 255, 0.25)';
+              e.currentTarget.style.opacity = '0.35';
+              e.currentTarget.style.color = '#ffffff';
             }}
             aria-label="Next member"
           >
-            →
+            &gt;
           </button>
         </div>
 
@@ -233,12 +231,12 @@ export default function MembersSection() {
           /* 프리미엄 카드 디자인: 높은 대비와 미묘한 그라데이션 적용 */
           .member-premium-card {
             flex: 0 0 calc(33.333% - 16px);
-            min-width: 320px;
+            min-width: 330px;
             scroll-snap-align: start;
             background: linear-gradient(135deg, rgba(35, 49, 90, 0.95) 0%, rgba(18, 26, 50, 0.98) 100%);
             border: 1px solid rgba(255, 255, 255, 0.2);
             border-radius: 28px;
-            padding: 44px 32px;
+            padding: 24px 20px;
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -272,13 +270,13 @@ export default function MembersSection() {
             opacity: 1;
           }
           
-          /* 이미지 액자 스타일: 원래부터 흑백 필터 제거 (컬러 유지), 크기 키움 (180x226 -> 210x264) */
+          /* 이미지 액자 스타일: 카드 좌우에 거의 꽉 채워 크게 노출 (210x264 -> 290x360) */
           .member-card-photo-wrap {
-            width: 210px;
-            height: 264px;
+            width: 290px;
+            height: 360px;
             border-radius: 20px;
             overflow: hidden;
-            margin-bottom: 28px;
+            margin-bottom: 20px;
             position: relative;
             z-index: 1;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
@@ -373,14 +371,14 @@ export default function MembersSection() {
               flex: 0 0 72%;
               min-width: 290px;
               scroll-snap-align: center;
-              padding: 32px 24px;
+              padding: 20px 16px;
             }
             .member-scroll-wrapper {
               scroll-padding: 0 20px;
             }
             .member-card-photo-wrap {
-              width: 180px;
-              height: 226px;
+              width: 250px;
+              height: 310px;
             }
           }
           
@@ -389,8 +387,8 @@ export default function MembersSection() {
               flex: 0 0 85%;
             }
             .member-card-photo-wrap {
-              width: 160px;
-              height: 200px;
+              width: 240px;
+              height: 300px;
             }
             .member-card-name {
               font-size: 1.65rem;
