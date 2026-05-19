@@ -1,22 +1,15 @@
 // src/sections/HeroSection.jsx
 import React, { useState, useEffect } from 'react';
 import { FaInstagram, FaYoutube, FaSoundcloud } from 'react-icons/fa';
-import { IG_URL, YT_CHANNEL, SC_URL } from '../data/constants';
-
-const HERO_VIDEOS = [
-  'https://oryr28ocpive2gwg.public.blob.vercel-storage.com/eyes.mp4',
-  'https://oryr28ocpive2gwg.public.blob.vercel-storage.com/madlein.mp4',
-  'https://oryr28ocpive2gwg.public.blob.vercel-storage.com/night.mkv',
-  'https://oryr28ocpive2gwg.public.blob.vercel-storage.com/when.mp4'
-];
+import { YT_BG_IDS, IG_URL, YT_CHANNEL, SC_URL } from '../data/constants';
 
 export default function HeroSection({ videoOpacity, activeSection }) {
   const [currentIdx, setCurrentIdx] = useState(0);
 
   useEffect(() => {
     const timer = setInterval(() => {
-      setCurrentIdx((prev) => (prev + 1) % HERO_VIDEOS.length);
-    }, 5000); // 5초 간격으로 전환
+      setCurrentIdx((prev) => (prev + 1) % YT_BG_IDS.length);
+    }, 11000); // 11초 간격으로 전환
 
     return () => clearInterval(timer);
   }, []);
@@ -42,16 +35,17 @@ export default function HeroSection({ videoOpacity, activeSection }) {
         ))}
       </div>
 
-      {/* ── 5초 프리미엄 안개식 페이드 순환 비디오 슬라이더 ── */}
+      {/* ── 유튜브 4-아이프레임 고급 안개식 페이드 캐러셀 ── */}
       <div className="vbg-container" style={{ opacity: videoOpacity, transition: 'opacity 0.5s ease-in-out' }}>
-        {HERO_VIDEOS.map((src, idx) => (
+        {YT_BG_IDS.map((id, idx) => (
           <div
-            key={idx}
+            key={id}
             className="vbg"
             style={{
               opacity: currentIdx === idx ? 1 : 0,
-              zIndex: currentIdx === idx ? 1 : 0,
-              transition: 'opacity 1.5s ease-in-out', // 1.5초 고급스러운 시네마틱 페이드 트랜지션
+              zIndex: currentIdx === idx ? 1 : -1,
+              transition: 'opacity 2.5s ease-in-out', // 2.5초 고급스러운 시네마틱 페이드 트랜지션
+              pointerEvents: 'none',
               position: 'absolute',
               inset: 0,
               width: '100%',
@@ -59,19 +53,18 @@ export default function HeroSection({ videoOpacity, activeSection }) {
               overflow: 'hidden'
             }}
           >
-            <video
-              autoPlay
-              loop
-              muted
-              playsInline
+            <iframe
+              src={`https://www.youtube.com/embed/${id}?autoplay=1&mute=1&controls=0&loop=1&playlist=${id}&rel=0&showinfo=0&iv_load_policy=3&disablekb=1&modestbranding=1&playsinline=1&enablejsapi=1`}
+              allow="autoplay; encrypted-media"
               style={{
+                border: 'none',
                 width: '100%',
                 height: '100%',
-                objectFit: 'cover'
+                objectFit: 'cover',
+                pointerEvents: 'none'
               }}
-            >
-              <source src={src} type={src.endsWith('.mkv') ? 'video/x-matroska' : 'video/mp4'} />
-            </video>
+              title={`bg-video-${idx}`}
+            />
           </div>
         ))}
       </div>

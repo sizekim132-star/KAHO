@@ -35,11 +35,6 @@ export default function RecruitSection() {
             transition: 'all 0.3s var(--ease)',
             boxShadow: 'var(--shadow-sm)'
           }}>
-            <video className="recruit-card-video" autoPlay loop muted playsInline>
-              <source src="https://oryr28ocpive2gwg.public.blob.vercel-storage.com/player.mp4" type="video/mp4" />
-            </video>
-            <div className="recruit-card-video-overlay" />
-            
             <div className="recruit-card-content">
               <div className="recruit-card-icon">
                 <FiMusic size={22} />
@@ -60,11 +55,6 @@ export default function RecruitSection() {
             transition: 'all 0.3s var(--ease)',
             boxShadow: 'var(--shadow-sm)'
           }}>
-            <video className="recruit-card-video" autoPlay loop muted playsInline>
-              <source src="https://oryr28ocpive2gwg.public.blob.vercel-storage.com/creator.mp4" type="video/mp4" />
-            </video>
-            <div className="recruit-card-video-overlay" />
-            
             <div className="recruit-card-content">
               <div className="recruit-card-icon">
                 <FiVideo size={22} />
@@ -85,11 +75,6 @@ export default function RecruitSection() {
             transition: 'all 0.3s var(--ease)',
             boxShadow: 'var(--shadow-sm)'
           }}>
-            <video className="recruit-card-video" autoPlay loop muted playsInline>
-              <source src="https://oryr28ocpive2gwg.public.blob.vercel-storage.com/staff.mp4" type="video/mp4" />
-            </video>
-            <div className="recruit-card-video-overlay" />
-            
             <div className="recruit-card-content">
               <div className="recruit-card-icon">
                 <FiLayers size={22} />
@@ -166,7 +151,7 @@ export default function RecruitSection() {
               opacity: 0, transition: 'all 0.5s cubic-bezier(0.16, 1, 0.3, 1)'
             }}
           >
-            <source src="https://oryr28ocpive2gwg.public.blob.vercel-storage.com/join.mp4" type="video/mp4" />
+            <source src="/join.mp4" type="video/mp4" />
           </video>
 
           <div className="cta-overlay" style={{

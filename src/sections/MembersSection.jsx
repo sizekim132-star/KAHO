@@ -1,52 +1,349 @@
 // src/sections/MembersSection.jsx
-import React from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import PhotoBox from '../components/PhotoBox';
 import { MEMBERS } from '../data/constants';
 
 export default function MembersSection() {
+  const scrollContainerRef = useRef(null);
+  const [showLeftArrow, setShowLeftArrow] = useState(false);
+  const [showRightArrow, setShowRightArrow] = useState(true);
+
+  // 모바일/데스크톱 모두에서 부드러운 가로 스크롤 관리 및 버튼 상태 업데이트
+  const handleScroll = () => {
+    if (scrollContainerRef.current) {
+      const { scrollLeft, scrollWidth, clientWidth } = scrollContainerRef.current;
+      setShowLeftArrow(scrollLeft > 10);
+      setShowRightArrow(scrollLeft < scrollWidth - clientWidth - 10);
+    }
+  };
+
+  useEffect(() => {
+    const container = scrollContainerRef.current;
+    if (container) {
+      container.addEventListener('scroll', handleScroll);
+      // 초기 버튼 활성화 상태 체크
+      handleScroll();
+      
+      // 화면 크기 변화 대응
+      window.addEventListener('resize', handleScroll);
+    }
+    return () => {
+      if (container) {
+        container.removeEventListener('scroll', handleScroll);
+      }
+      window.removeEventListener('resize', handleScroll);
+    };
+  }, []);
+
+  const scroll = (direction) => {
+    if (scrollContainerRef.current) {
+      const { clientWidth } = scrollContainerRef.current;
+      const scrollAmount = direction === 'left' ? -clientWidth * 0.7 : clientWidth * 0.7;
+      scrollContainerRef.current.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+    }
+  };
+
   return (
-    <section id="members" className="section section-members" style={{ position: 'relative', overflow: 'hidden' }}>
-      <video
-        autoPlay
-        loop
-        muted
-        playsInline
-        style={{
-          position: 'absolute',
-          top: '50%',
-          left: '50%',
-          width: '100%',
-          height: '100%',
-          objectFit: 'cover',
-          transform: 'translate(-50%, -50%)',
-          zIndex: 0,
-          opacity: 0.5,
-          filter: 'brightness(0.7)'
-        }}
-      >
-        <source src="/Backwater.mp4" type="video/mp4" />
-      </video>
-      <div style={{ maxWidth: 1200, margin: '0 auto', position: 'relative', zIndex: 1 }}>
-        <div className="reveal-text">
-          <h2 className="title" style={{ marginBottom: '3.5rem' }}>Members</h2>
+    <section id="members" className="section" style={{
+      background: 'linear-gradient(180deg, #070B19 0%, #0D1326 100%)',
+      position: 'relative',
+      overflow: 'hidden',
+      paddingTop: '120px',
+      paddingBottom: '140px',
+      borderBottom: '1px solid rgba(255, 255, 255, 0.05)'
+    }}>
+      {/* ── 백그라운드 프리미엄 소프트 오라 (블러 글로우 오브) ── */}
+      <div style={{
+        position: 'absolute',
+        top: '20%',
+        left: '10%',
+        width: '350px',
+        height: '350px',
+        background: 'var(--orange)',
+        filter: 'blur(160px)',
+        opacity: 0.06,
+        pointerEvents: 'none',
+        zIndex: 0
+      }} />
+      <div style={{
+        position: 'absolute',
+        bottom: '10%',
+        right: '5%',
+        width: '400px',
+        height: '400px',
+        background: 'var(--navy-2)',
+        filter: 'blur(180px)',
+        opacity: 0.12,
+        pointerEvents: 'none',
+        zIndex: 0
+      }} />
+
+      <div style={{ maxWidth: 1200, margin: '0 auto', position: 'relative', zIndex: 1, padding: '0 20px' }}>
+        
+        {/* ── 섹션 상단 헤더 & 컨트롤 네비게이션 ── */}
+        <div style={{
+          display: 'flex',
+          justifyContent: 'space-between',
+          alignItems: 'flex-end',
+          marginBottom: '4rem',
+          flexWrap: 'wrap',
+          gap: '20px'
+        }}>
+          <div className="reveal-text">
+            <span className="label-dark" style={{ textTransform: 'uppercase', letterSpacing: '0.22em', fontSize: '0.8rem' }}>CO-CREATORS</span>
+            <h2 className="title-dark" style={{ marginTop: '8px', fontWeight: 800 }}>Members</h2>
+          </div>
+          
+          {/* 가로 스크롤 버튼 (데스크톱 및 패드 전용) */}
+          <div className="member-nav-buttons" style={{ display: 'flex', gap: '12px' }}>
+            <button 
+              onClick={() => scroll('left')}
+              disabled={!showLeftArrow}
+              style={{
+                width: '48px',
+                height: '48px',
+                borderRadius: '50%',
+                border: '1px solid rgba(255, 255, 255, 0.1)',
+                background: showLeftArrow ? 'rgba(255, 255, 255, 0.08)' : 'rgba(255, 255, 255, 0.02)',
+                color: showLeftArrow ? '#ffffff' : 'rgba(255, 255, 255, 0.25)',
+                cursor: showLeftArrow ? 'pointer' : 'default',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                transition: 'all 0.3s cubic-bezier(0.16, 1, 0.3, 1)',
+                fontSize: '1.25rem',
+                outline: 'none'
+              }}
+              aria-label="Previous member"
+            >
+              ←
+            </button>
+            <button 
+              onClick={() => scroll('right')}
+              disabled={!showRightArrow}
+              style={{
+                width: '48px',
+                height: '48px',
+                borderRadius: '50%',
+                border: '1px solid rgba(255, 255, 255, 0.1)',
+                background: showRightArrow ? 'rgba(255, 255, 255, 0.08)' : 'rgba(255, 255, 255, 0.02)',
+                color: showRightArrow ? '#ffffff' : 'rgba(255, 255, 255, 0.25)',
+                cursor: showRightArrow ? 'pointer' : 'default',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                transition: 'all 0.3s cubic-bezier(0.16, 1, 0.3, 1)',
+                fontSize: '1.25rem',
+                outline: 'none'
+              }}
+              aria-label="Next member"
+            >
+              →
+            </button>
+          </div>
         </div>
-        <div className="member-directory">
+
+        {/* ── 멤버 가로 드래그/스크롤 컨테이너 ── */}
+        <style>{`
+          .member-scroll-wrapper {
+            display: flex;
+            gap: 24px;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            scrollbar-width: none; /* 파이어폭스 스크롤바 숨김 */
+            padding: 10px 4px 40px;
+            -webkit-overflow-scrolling: touch; /* iOS 탄성 스크롤 활성화 */
+          }
+          .member-scroll-wrapper::-webkit-scrollbar {
+            display: none; /* 크롬, 사파리, 엣지 스크롤바 숨김 */
+          }
+          
+          /* 프리미엄 카드 디자인 */
+          .member-premium-card {
+            flex: 0 0 calc(33.333% - 16px);
+            min-width: 320px;
+            scroll-snap-align: start;
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 28px;
+            padding: 40px 32px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 12px 36px rgba(0, 0, 0, 0.25);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+          }
+          
+          .member-premium-card::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(180deg, rgba(255, 95, 31, 0.12) 0%, transparent 100%);
+            opacity: 0;
+            transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+            z-index: 0;
+          }
+          
+          .member-premium-card:hover {
+            transform: translateY(-10px);
+            border-color: rgba(255, 95, 31, 0.35);
+            background: rgba(255, 255, 255, 0.04);
+            box-shadow: 0 24px 50px rgba(0, 0, 0, 0.45), 0 0 24px rgba(255, 95, 31, 0.15);
+          }
+          
+          .member-premium-card:hover::before {
+            opacity: 1;
+          }
+          
+          /* 이미지 액자 스타일 */
+          .member-card-photo-wrap {
+            width: 150px;
+            height: 188px;
+            border-radius: 20px;
+            overflow: hidden;
+            margin-bottom: 28px;
+            position: relative;
+            z-index: 1;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+            filter: grayscale(100%) contrast(1.05);
+            transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+            background: rgba(255, 255, 255, 0.03);
+          }
+          
+          .member-premium-card:hover .member-card-photo-wrap {
+            filter: grayscale(0%) contrast(1);
+            transform: scale(1.04);
+            box-shadow: 0 16px 40px rgba(255, 95, 31, 0.25);
+          }
+          
+          .member-card-info {
+            position: relative;
+            z-index: 1;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+          }
+          
+          .member-card-name {
+            font-size: 1.9rem;
+            font-weight: 800;
+            color: #ffffff;
+            margin-bottom: 8px;
+            letter-spacing: -0.03em;
+            transition: color 0.3s ease;
+          }
+          
+          .member-premium-card:hover .member-card-name {
+            color: var(--orange);
+          }
+          
+          .member-card-role-group {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 18px;
+          }
+          
+          .member-card-role {
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: rgba(255, 255, 255, 0.45);
+            letter-spacing: 0.05em;
+          }
+          
+          .member-card-dot {
+            width: 4px;
+            height: 4px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.2);
+          }
+          
+          .member-card-animal {
+            font-size: 0.8rem;
+            font-weight: 700;
+            color: var(--orange);
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+          }
+          
+          .member-card-bio {
+            font-size: 0.98rem;
+            line-height: 1.65;
+            color: rgba(255, 255, 255, 0.6);
+            margin: 0;
+            height: 66px;
+            overflow: hidden;
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+            transition: color 0.3s ease;
+          }
+          
+          .member-premium-card:hover .member-card-bio {
+            color: rgba(255, 255, 255, 0.85);
+          }
+
+          /* 모바일/태블릿 반응형 좌우 드래그 터치 슬라이더 활성화 */
+          @media (max-width: 991px) {
+            .member-premium-card {
+              flex: 0 0 72%;
+              min-width: 290px;
+              scroll-snap-align: center;
+              padding: 32px 24px;
+            }
+            .member-nav-buttons {
+              display: none !important; /* 모바일에서는 내장 좌우 스크롤바 제어기 배제 */
+            }
+            .member-scroll-wrapper {
+              scroll-padding: 0 20px;
+            }
+          }
+          
+          @media (max-width: 480px) {
+            .member-premium-card {
+              flex: 0 0 85%;
+            }
+            .member-card-photo-wrap {
+              width: 130px;
+              height: 163px;
+              margin-bottom: 24px;
+            }
+            .member-card-name {
+              font-size: 1.65rem;
+            }
+            .member-card-bio {
+              font-size: 0.92rem;
+              height: 60px;
+            }
+          }
+        `}</style>
+
+        {/* ── 멤버 가로 드래그 스크롤 컨테이너 ── */}
+        <div className="member-scroll-wrapper" ref={scrollContainerRef}>
           {MEMBERS.map((m, i) => (
-            <div key={i} className="member-row reveal-text" style={{ transitionDelay: `${(i) * 0.1}s` }}>
-              <div className="member-photo-wrap">
+            <div key={i} className="member-premium-card reveal-card" style={{ transitionDelay: `${i * 0.12}s` }}>
+              <div className="member-card-photo-wrap">
                 <PhotoBox src={m.img} w="100%" h="100%" label="사진" />
               </div>
-              <div className="member-info">
-                <div className="member-name-group">
-                  <h3 className="member-name">{m.name}</h3>
-                  <span className="member-animal">{m.animal}</span>
+              <div className="member-card-info">
+                <h3 className="member-card-name">{m.name}</h3>
+                <div className="member-card-role-group">
+                  <span className="member-card-role">{m.role}</span>
+                  <span className="member-card-dot" />
+                  <span className="member-card-animal">{m.animal}</span>
                 </div>
-                <div className="member-role">{m.role}</div>
-                <p className="member-bio">{m.bio}</p>
+                <p className="member-card-bio">{m.bio || `${m.name}의 멋진 음악적 여정을 함께 지켜봐 주세요.`}</p>
               </div>
             </div>
           ))}
         </div>
+
       </div>
     </section>
   );
