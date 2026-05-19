@@ -1682,6 +1682,14 @@ img {
   gap: 2rem;
 }
 
+.contact-unified-row {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1.25rem;
+  flex-wrap: nowrap;
+}
+
 .contact-social-link {
   display: flex;
   align-items: center;
@@ -1692,6 +1700,22 @@ img {
   color: rgba(255, 255, 255, 0.5);
   border: 1px solid rgba(255, 255, 255, 0.1);
   transition: all 0.3s var(--ease);
+  background: transparent;
+  cursor: pointer;
+  padding: 0;
+}
+
+@media (max-width: 480px) {
+  .contact-unified-row {
+    gap: 0.6rem;
+  }
+  .contact-social-link {
+    width: 44px;
+    height: 44px;
+  }
+  .contact-separator {
+    height: 20px !important;
+  }
 }
 
 .contact-social-link:hover {

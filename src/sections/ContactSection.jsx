@@ -15,22 +15,10 @@ function ContactIcon({ text, icon: Icon }) {
     <button
       onClick={handleCopy}
       title={`${text} 복사`}
+      className="contact-social-link"
       style={{
-        background: 'transparent',
-        border: 'none',
-        padding: 0,
-        margin: 0,
-        cursor: 'pointer',
-        outline: 'none',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        width: '52px',
-        height: '52px',
-        borderRadius: '50%',
-        border: '1px solid rgba(255,255,255,0.1)',
         color: copied ? 'var(--orange)' : 'rgba(255,255,255,0.5)',
-        transition: 'all 0.3s var(--ease)',
+        borderColor: copied ? 'var(--orange)' : 'rgba(255,255,255,0.1)',
       }}
       onMouseEnter={e => {
         if (!copied) {
@@ -49,7 +37,7 @@ function ContactIcon({ text, icon: Icon }) {
         e.currentTarget.style.boxShadow = 'none';
       }}
     >
-      {copied ? <FiCheck size={22} /> : <Icon size={22} />}
+      {copied ? <FiCheck size={20} /> : <Icon size={20} />}
     </button>
   );
 }
@@ -72,26 +60,20 @@ export default function ContactSection() {
 
         {/* ── 아이콘 그리드: SNS + 연락처 통합 ── */}
         <div className="reveal-text" style={{ transitionDelay: '0.2s' }}>
-          <div style={{
-            display: 'flex',
-            justifyContent: 'center',
-            alignItems: 'center',
-            gap: '1.25rem',
-            flexWrap: 'wrap',
-          }}>
+          <div className="contact-unified-row">
             {/* SNS */}
             <a href={YT_CHANNEL} target="_blank" rel="noreferrer" className="contact-social-link" aria-label="YouTube">
-              <FaYoutube size={24} />
+              <FaYoutube size={22} />
             </a>
             <a href={IG_URL} target="_blank" rel="noreferrer" className="contact-social-link" aria-label="Instagram">
-              <FaInstagram size={24} />
+              <FaInstagram size={22} />
             </a>
             <a href={SC_URL} target="_blank" rel="noreferrer" className="contact-social-link" aria-label="SoundCloud">
-              <FaSoundcloud size={26} />
+              <FaSoundcloud size={24} />
             </a>
 
             {/* 세퍼레이터 */}
-            <div style={{ width: 1, height: 28, background: 'rgba(255,255,255,0.12)', margin: '0 4px' }} />
+            <div className="contact-separator" style={{ width: 1, height: 28, background: 'rgba(255,255,255,0.12)', margin: '0 4px' }} />
 
             {/* 연락처 (클릭 시 복사) */}
             <ContactIcon text="size132@naver.com" icon={FiMail} />
