@@ -36,7 +36,7 @@ export default function RecruitSection() {
             boxShadow: 'var(--shadow-sm)'
           }}>
             <video className="recruit-card-video" autoPlay loop muted playsInline>
-              <source src="https://files.catbox.moe/d3ip15.mp4" type="video/mp4" />
+              <source src="https://cdn.jsdelivr.net/gh/sizekim132-star/kaho-assets@main/Backwater.mp4" type="video/mp4" />
             </video>
             <div className="recruit-card-video-overlay" />
             
@@ -61,7 +61,7 @@ export default function RecruitSection() {
             boxShadow: 'var(--shadow-sm)'
           }}>
             <video className="recruit-card-video" autoPlay loop muted playsInline>
-              <source src="https://files.catbox.moe/6pis12.mp4" type="video/mp4" />
+              <source src="https://cdn.jsdelivr.net/gh/sizekim132-star/kaho-assets@main/backforest.mp4" type="video/mp4" />
             </video>
             <div className="recruit-card-video-overlay" />
             
@@ -86,7 +86,7 @@ export default function RecruitSection() {
             boxShadow: 'var(--shadow-sm)'
           }}>
             <video className="recruit-card-video" autoPlay loop muted playsInline>
-              <source src="https://files.catbox.moe/fj8eu8.mp4" type="video/mp4" />
+              <source src="https://cdn.jsdelivr.net/gh/sizekim132-star/kaho-assets@main/join.mp4" type="video/mp4" />
             </video>
             <div className="recruit-card-video-overlay" />
             
@@ -166,7 +166,7 @@ export default function RecruitSection() {
               opacity: 0, transition: 'all 0.5s cubic-bezier(0.16, 1, 0.3, 1)'
             }}
           >
-            <source src="https://files.catbox.moe/fj8eu8.mp4" type="video/mp4" />
+            <source src="https://cdn.jsdelivr.net/gh/sizekim132-star/kaho-assets@main/join.mp4" type="video/mp4" />
           </video>
 
           <div className="cta-overlay" style={{
