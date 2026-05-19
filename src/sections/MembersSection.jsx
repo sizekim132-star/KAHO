@@ -9,11 +9,6 @@ export default function MembersSection() {
   const [showRightArrow, setShowRightArrow] = useState(true);
   const [activeIndex, setActiveIndex] = useState(0);
 
-  // 마우스 드래그 가로 스크롤 상태관리
-  const [isMouseDown, setIsMouseDown] = useState(false);
-  const [startX, setStartX] = useState(0);
-  const [scrollLeftState, setScrollLeftState] = useState(0);
-
   // 모바일/데스크톱 모두에서 부드러운 가로 스크롤 관리 및 버튼 상태 업데이트
   const handleScroll = () => {
     if (scrollContainerRef.current) {
@@ -56,46 +51,6 @@ export default function MembersSection() {
       const scrollAmount = direction === 'left' ? -clientWidth * 0.7 : clientWidth * 0.7;
       scrollContainerRef.current.scrollBy({ left: scrollAmount, behavior: 'smooth' });
     }
-  };
-
-  // 마우스 드래그 이벤트 핸들러
-  const onMouseDown = (e) => {
-    if (!scrollContainerRef.current) return;
-    // 버튼 클릭 등의 이벤트는 드래그 시작을 방해하지 않도록 처리
-    if (e.target.closest('button')) return;
-    
-    setIsMouseDown(true);
-    scrollContainerRef.current.style.scrollSnapType = 'none'; // 드래그하는 중에는 snap 기능 일시 해제
-    scrollContainerRef.current.style.scrollBehavior = 'auto'; // 드래그 중인 모션의 동기화를 위해 부드러운 스크롤 잠시 해제
-    
-    setStartX(e.pageX - scrollContainerRef.current.offsetLeft);
-    setScrollLeftState(scrollContainerRef.current.scrollLeft);
-  };
-
-  const onMouseLeave = () => {
-    if (!isMouseDown) return;
-    setIsMouseDown(false);
-    if (scrollContainerRef.current) {
-      scrollContainerRef.current.style.scrollSnapType = 'x mandatory'; // snap 기능 복구
-      scrollContainerRef.current.style.scrollBehavior = '';
-    }
-  };
-
-  const onMouseUp = () => {
-    if (!isMouseDown) return;
-    setIsMouseDown(false);
-    if (scrollContainerRef.current) {
-      scrollContainerRef.current.style.scrollSnapType = 'x mandatory'; // snap 기능 복구
-      scrollContainerRef.current.style.scrollBehavior = '';
-    }
-  };
-
-  const onMouseMove = (e) => {
-    if (!isMouseDown || !scrollContainerRef.current) return;
-    e.preventDefault();
-    const x = e.pageX - scrollContainerRef.current.offsetLeft;
-    const walk = (x - startX) * 1.5; // 스크롤 감도 배율 조정 (1.5배)
-    scrollContainerRef.current.scrollLeft = scrollLeftState - walk;
   };
 
   return (
@@ -197,7 +152,7 @@ export default function MembersSection() {
           </div>
         </div>
 
-        {/* ── 멤버 가로 드래그/스크롤 컨테이너 ── */}
+        {/* ── 멤버 가로 스크롤 컨테이너 ── */}
         <style>{`
           .member-scroll-wrapper {
             display: flex;
@@ -207,11 +162,7 @@ export default function MembersSection() {
             scrollbar-width: none; /* 파이어폭스 스크롤바 숨김 */
             padding: 10px 4px 20px;
             -webkit-overflow-scrolling: touch; /* iOS 탄성 스크롤 활성화 */
-            cursor: grab;
-            user-select: none; /* 드래그 중 텍스트 선택 방지 */
-          }
-          .member-scroll-wrapper:active {
-            cursor: grabbing;
+            cursor: default;
           }
           .member-scroll-wrapper::-webkit-scrollbar {
             display: none; /* 크롬, 사파리, 엣지 스크롤바 숨김 */
@@ -236,8 +187,6 @@ export default function MembersSection() {
             box-shadow: 0 12px 36px rgba(0, 0, 0, 0.25);
             backdrop-filter: blur(20px);
             -webkit-backdrop-filter: blur(20px);
-            user-select: none;
-            -webkit-user-drag: none; /* 이미지/카드 드래그 방지 */
           }
           
           .member-premium-card::before {
@@ -271,10 +220,8 @@ export default function MembersSection() {
             position: relative;
             z-index: 1;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
-            /* filter: grayscale(100%) 제거 -> 컬러 그대로 출력 */
             transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
             background: rgba(255, 255, 255, 0.03);
-            pointer-events: none; /* 이미지 클릭 드래그 간섭 방지 */
           }
           
           .member-premium-card:hover .member-card-photo-wrap {
@@ -358,7 +305,7 @@ export default function MembersSection() {
             color: rgba(255, 255, 255, 0.85);
           }
 
-          /* 모바일/태블릿 반응형 좌우 드래그 터치 슬라이더 활성화 */
+          /* 모바일/태블릿 반응형 좌우 터치 슬라이더 활성화 */
           @media (max-width: 991px) {
             .member-premium-card {
               flex: 0 0 72%;
@@ -367,11 +314,10 @@ export default function MembersSection() {
               padding: 32px 24px;
             }
             .member-nav-buttons {
-              display: none !important; /* 모바일에서는 내장 좌우 스크롤바 제어기 배제 */
+              display: none !important; /* 모바일에서는 버튼 배제 */
             }
             .member-scroll-wrapper {
               scroll-padding: 0 20px;
-              cursor: grab;
             }
             .member-card-photo-wrap {
               width: 150px;
@@ -431,14 +377,10 @@ export default function MembersSection() {
           }
         `}</style>
 
-        {/* ── 멤버 가로 드래그 스크롤 컨테이너 ── */}
+        {/* ── 멤버 가로 스크롤 컨테이너 ── */}
         <div 
           className="member-scroll-wrapper" 
           ref={scrollContainerRef}
-          onMouseDown={onMouseDown}
-          onMouseLeave={onMouseLeave}
-          onMouseUp={onMouseUp}
-          onMouseMove={onMouseMove}
         >
           {MEMBERS.map((m, i) => (
             <div 
