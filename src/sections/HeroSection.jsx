@@ -1,7 +1,14 @@
 // src/sections/HeroSection.jsx
 import React, { useState, useEffect } from 'react';
 import { FaInstagram, FaYoutube, FaSoundcloud } from 'react-icons/fa';
-import { HERO_VIDEOS, IG_URL, YT_CHANNEL, SC_URL } from '../data/constants';
+import { IG_URL, YT_CHANNEL, SC_URL } from '../data/constants';
+
+const HERO_VIDEOS = [
+  'https://oryr28ocpive2gwg.public.blob.vercel-storage.com/eyes.mp4',
+  'https://oryr28ocpive2gwg.public.blob.vercel-storage.com/madlein.mp4',
+  'https://oryr28ocpive2gwg.public.blob.vercel-storage.com/night.mkv',
+  'https://oryr28ocpive2gwg.public.blob.vercel-storage.com/when.mp4'
+];
 
 export default function HeroSection({ videoOpacity, activeSection }) {
   const [currentIdx, setCurrentIdx] = useState(0);
