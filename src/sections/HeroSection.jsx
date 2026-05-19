@@ -19,8 +19,8 @@ export default function HeroSection({ videoOpacity, activeSection }) {
       {/* ── Mobile Thumb Zone ── */}
       <div className="mobile-thumb-zone">
         {[
-          { id: 'music', label: 'Music' },
-          { id: 'members', label: 'Members' },
+          { id: 'music', label: 'Feed' },
+          { id: 'members', label: 'Artists' },
           { id: 'shows', label: 'History' },
           { id: 'contact', label: 'Contact' }
         ].map(item => (

@@ -62,7 +62,7 @@ export default function MembersSection() {
       paddingBottom: '140px',
       borderBottom: '1px solid rgba(0, 0, 0, 0.05)'
     }}>
-      <div style={{ maxWidth: 1200, margin: '0 auto', position: 'relative', zIndex: 1, padding: '0 20px' }}>
+      <div style={{ maxWidth: 1200, margin: '0 auto', position: 'relative', zIndex: 1 }}>
         
         {/* ── 섹션 상단 헤더 ── */}
         <div style={{
@@ -74,7 +74,7 @@ export default function MembersSection() {
           gap: '20px'
         }}>
           <div className="reveal-text">
-            <h2 className="title" style={{ marginTop: '8px', fontWeight: 800 }}>Members</h2>
+            <h2 className="title" style={{ marginTop: '8px', fontWeight: 800 }}>Artists</h2>
           </div>
         </div>
 
@@ -93,15 +93,13 @@ export default function MembersSection() {
                 <div className="member-card-photo-wrap">
                   <PhotoBox src={m.img} w="100%" h="100%" label="사진" />
                 </div>
+                <div className="member-card-overlay" />
                 <div className="member-card-info">
-                  <h3 className="member-card-name">
-                    <span>{m.name}</span>
-                    <span className="member-card-animal-inline">{m.animal}</span>
-                  </h3>
+                  <h3 className="member-card-name">{m.name}</h3>
                   <div className="member-card-role-group">
                     <span className="member-card-role">{m.role}</span>
                   </div>
-                  <p className="member-card-bio">{m.bio || `${m.name}의 멋진 음악적 여정을 함께 지켜봐 주세요.`}</p>
+                  {m.bio && <p className="member-card-bio">{m.bio}</p>}
                 </div>
               </div>
             ))}
@@ -159,181 +157,149 @@ export default function MembersSection() {
             scroll-snap-type: x mandatory;
             scrollbar-width: none; /* 파이어폭스 스크롤바 숨김 */
             padding: 16px 20px 24px; /* 마일드한 그림자 맞춤 패딩 */
-            margin-top: -12px;
-            margin-bottom: -12px;
-            -webkit-overflow-scrolling: touch; /* iOS 탄성 스크롤 활성화 */
-            cursor: default;
+            margin-left: -20px;
+            margin-right: -20px;
+            -webkit-overflow-scrolling: touch;
           }
           .member-scroll-wrapper::-webkit-scrollbar {
-            display: none; /* 크롬, 사파리, 엣지 스크롤바 숨김 */
+            display: none;
           }
-          
-          /* 프리미엄 카드 디자인: 밝은 톤의 정갈한 대비 및 마일드 그림자(좌우 잘림 해결) 적용 */
           .member-premium-card {
             flex: 0 0 calc(33.333% - 16px);
             min-width: 330px;
+            height: 480px;
             scroll-snap-align: start;
             background: #ffffff;
-            border: 1px solid rgba(0, 0, 0, 0.1);
-            border-radius: 28px;
-            padding: 24px 20px;
+            border: 1px solid rgba(0, 0, 0, 0.08);
+            border-radius: 0px;
             display: flex;
             flex-direction: column;
-            align-items: center;
-            text-align: center;
-            transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+            align-items: stretch;
             position: relative;
             overflow: hidden;
             box-shadow: 0 4px 16px rgba(0, 0, 0, 0.03);
-          }
-          
-          .member-premium-card::before {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background: linear-gradient(180deg, rgba(255, 95, 31, 0.04) 0%, transparent 100%);
-            opacity: 0;
-            transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1);
-            z-index: 0;
+            transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
           }
           
           .member-premium-card:hover {
             transform: translateY(-6px);
-            border-color: rgba(255, 95, 31, 0.3);
-            background: #ffffff;
-            box-shadow: 0 10px 24px rgba(0, 0, 0, 0.06);
+            border-color: rgba(255, 95, 31, 0.4);
+            box-shadow: 0 12px 30px rgba(255, 95, 31, 0.15);
           }
           
-          .member-premium-card:hover::before {
+          /* 카드 이미지 100% 꽉 채우기 */
+          .member-card-photo-wrap {
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            position: absolute;
+            inset: 0;
+            z-index: 1;
+            background: rgba(0, 0, 0, 0.02);
+            transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+          }
+          
+          .member-card-photo-wrap img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1) !important;
+          }
+
+          .member-premium-card:hover .member-card-photo-wrap img {
+            transform: scale(1.08);
+          }
+          
+
+
+          /* 주황빛 그라데이션 오버레이 */
+          .member-card-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(180deg, transparent 30%, rgba(255, 95, 31, 0.3) 60%, rgba(0, 0, 0, 0.9) 100%);
+            opacity: 0;
+            z-index: 2;
+            transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+            pointer-events: none;
+          }
+          
+          .member-premium-card:hover .member-card-overlay {
             opacity: 1;
           }
           
-          /* 이미지 액자 스타일: 카드 좌우에 거의 꽉 채워 크게 노출 */
-          .member-card-photo-wrap {
-            width: 290px;
-            height: 360px;
-            border-radius: 20px;
-            overflow: hidden;
-            margin-bottom: 20px;
-            position: relative;
-            z-index: 1;
-            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
-            transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
-            background: rgba(0, 0, 0, 0.02);
-          }
-          
-          .member-premium-card:hover .member-card-photo-wrap {
-            transform: scale(1.04);
-            box-shadow: 0 12px 30px rgba(255, 95, 31, 0.12);
-          }
-
-          /* 최민서 사진 270도 회전 적용 */
-          .minseo-card .member-card-photo-wrap img {
-            transform: rotate(270deg) scale(1.3);
-            transform-origin: center;
-          }
-          
+          /* 정보 오버레이 (카드 위에 떠오름) */
           .member-card-info {
-            position: relative;
-            z-index: 1;
-            width: 100%;
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            z-index: 3;
+            padding: 30px 24px;
             display: flex;
             flex-direction: column;
             align-items: center;
+            text-align: center;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1), transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+            pointer-events: none;
+          }
+          
+          .member-premium-card:hover .member-card-info {
+            opacity: 1;
+            transform: translateY(0);
           }
           
           .member-card-name {
-            font-size: 1.9rem;
+            font-size: 2.1rem;
             font-weight: 800;
-            color: var(--navy);
-            margin-bottom: 8px;
-            letter-spacing: -0.03em;
-            transition: color 0.3s ease;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-          }
-          
-          .member-premium-card:hover .member-card-name {
-            color: var(--orange);
-          }
-
-          /* 동물이름 인라인 스타일 */
-          .member-card-animal-inline {
-            font-size: 0.95rem;
-            font-weight: 700;
-            color: var(--orange);
-            letter-spacing: 0.05em;
-            vertical-align: middle;
-            background: rgba(255, 95, 31, 0.08);
-            padding: 2px 8px;
-            border-radius: 6px;
-            display: inline-block;
+            color: #ffffff;
+            margin-bottom: 4px;
+            letter-spacing: -0.02em;
+            text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
           }
           
           .member-card-role-group {
             display: flex;
             align-items: center;
             justify-content: center;
-            margin-bottom: 18px;
+            margin-bottom: 0;
           }
           
           .member-card-role {
-            font-size: 0.9rem;
+            font-size: 1rem;
             font-weight: 600;
-            color: var(--text-3);
+            color: rgba(255, 255, 255, 0.85);
             letter-spacing: 0.05em;
+            text-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
           }
           
           .member-card-bio {
-            font-size: 0.98rem;
-            line-height: 1.65;
-            color: var(--text-2);
-            margin: 0;
-            height: 66px;
-            overflow: hidden;
-            display: -webkit-box;
-            -webkit-line-clamp: 3;
-            -webkit-box-orient: vertical;
-            transition: color 0.3s ease;
+            display: none;
           }
           
-          .member-premium-card:hover .member-card-bio {
-            color: var(--navy);
-          }
-
           /* 모바일/태블릿 반응형 좌우 터치 슬라이더 활성화 */
           @media (max-width: 991px) {
             .member-premium-card {
               flex: 0 0 72%;
               min-width: 290px;
+              height: 420px;
               scroll-snap-align: center;
-              padding: 20px 16px;
             }
             .member-scroll-wrapper {
               scroll-padding: 0 20px;
             }
-            .member-card-photo-wrap {
-              width: 250px;
-              height: 310px;
-            }
           }
-          
           @media (max-width: 480px) {
             .member-premium-card {
               flex: 0 0 85%;
-            }
-            .member-card-photo-wrap {
-              width: 240px;
-              height: 300px;
+              height: 380px;
             }
             .member-card-name {
-              font-size: 1.65rem;
+              font-size: 1.8rem;
             }
-            .member-card-bio {
-              font-size: 0.92rem;
-              height: 60px;
+            .member-card-role {
+              font-size: 0.95rem;
             }
           }
 

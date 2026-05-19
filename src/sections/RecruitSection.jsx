@@ -1,6 +1,7 @@
 // src/sections/RecruitSection.jsx
 import React from 'react';
-import { FiArrowUpRight, FiUsers, FiMusic, FiVideo, FiLayers } from 'react-icons/fi';
+import { FiArrowUpRight } from 'react-icons/fi';
+import { LuMusic, LuSparkles, LuCompass } from 'react-icons/lu';
 import { RECRUIT_FORM_URL } from '../data/constants';
 
 export default function RecruitSection() {
@@ -30,16 +31,18 @@ export default function RecruitSection() {
           <div className="reveal-card recruit-card" style={{
             background: 'var(--gray-1)',
             border: '1px solid rgba(0, 0, 0, 0.04)',
-            borderRadius: 'var(--r-lg)',
+            borderRadius: '0px',
             padding: '2rem',
             transition: 'all 0.3s var(--ease)',
             boxShadow: 'var(--shadow-sm)'
           }}>
             <div className="recruit-card-content">
-              <div className="recruit-card-icon">
-                <FiMusic size={22} />
+              <div className="recruit-card-header">
+                <div className="recruit-card-icon">
+                  <LuMusic size={22} />
+                </div>
+                <h3 className="recruit-card-title">Player</h3>
               </div>
-              <h3 className="recruit-card-title">Player</h3>
               <p className="recruit-card-desc">
                 보컬 및 세션, 카호만의 다채로운 사운드를 라이브 무대에서 함께 완성해갈 멤버
               </p>
@@ -50,16 +53,18 @@ export default function RecruitSection() {
           <div className="reveal-card recruit-card" style={{
             background: 'var(--gray-1)',
             border: '1px solid rgba(0, 0, 0, 0.04)',
-            borderRadius: 'var(--r-lg)',
+            borderRadius: '0px',
             padding: '2rem',
             transition: 'all 0.3s var(--ease)',
             boxShadow: 'var(--shadow-sm)'
           }}>
             <div className="recruit-card-content">
-              <div className="recruit-card-icon">
-                <FiVideo size={22} />
+              <div className="recruit-card-header">
+                <div className="recruit-card-icon">
+                  <LuSparkles size={22} />
+                </div>
+                <h3 className="recruit-card-title">Creator</h3>
               </div>
-              <h3 className="recruit-card-title">Creator</h3>
               <p className="recruit-card-desc">
                 영상 촬영 및 편집, 쇼츠 제작, 디자인, 비주얼 아트 디렉팅 등 카호의 정체성을 시각적으로 표현할 크리에이터
               </p>
@@ -70,16 +75,18 @@ export default function RecruitSection() {
           <div className="reveal-card recruit-card" style={{
             background: 'var(--gray-1)',
             border: '1px solid rgba(0, 0, 0, 0.04)',
-            borderRadius: 'var(--r-lg)',
+            borderRadius: '0px',
             padding: '2rem',
             transition: 'all 0.3s var(--ease)',
             boxShadow: 'var(--shadow-sm)'
           }}>
             <div className="recruit-card-content">
-              <div className="recruit-card-icon">
-                <FiLayers size={22} />
+              <div className="recruit-card-header">
+                <div className="recruit-card-icon">
+                  <LuCompass size={22} />
+                </div>
+                <h3 className="recruit-card-title">Staff</h3>
               </div>
-              <h3 className="recruit-card-title">Staff</h3>
               <p className="recruit-card-desc">
                 공연 기획, 대외 브랜딩 제안, 마케팅, 커뮤니케이션 지원 등 카호의 대내외 활동을 총괄하고 서포트할 멤버
               </p>
@@ -134,7 +141,7 @@ export default function RecruitSection() {
         `}</style>
         <div className="reveal-card cta-card-interactive" style={{
           background: 'linear-gradient(135deg, var(--navy) 0%, var(--navy-2) 100%)',
-          borderRadius: 'var(--r-lg)',
+          borderRadius: '0px',
           padding: '5rem 2rem',
           textAlign: 'center',
           position: 'relative',

@@ -33,8 +33,8 @@ export default function ShowsSection() {
   const filteredShows = selectedYear ? SHOWS.filter((s) => s.date.startsWith(selectedYear)) : [];
 
   return (
-    <section id="shows" className="section section-gray2 reveal" style={{ padding: '120px 0' }}>
-      <div style={{ maxWidth: 1200, margin: '0 auto', padding: '0 20px' }}>
+    <section id="shows" className="section section-gray2 reveal" style={{ paddingTop: '120px', paddingBottom: '120px' }}>
+      <div style={{ maxWidth: 1200, margin: '0 auto' }}>
         
         {/* 섹션 타이틀 */}
         <div className="reveal-text">
@@ -57,6 +57,7 @@ export default function ShowsSection() {
                 style={{
                   background: 'none',
                   border: 'none',
+                  fontFamily: 'inherit',
                   fontSize: '1.45rem',
                   fontWeight: 800,
                   letterSpacing: '0.12em',
@@ -66,7 +67,8 @@ export default function ShowsSection() {
                   padding: '10px 16px',
                   position: 'relative',
                   transition: 'all 0.4s cubic-bezier(0.16, 1, 0.3, 1)',
-                  outline: 'none'
+                  outline: 'none',
+                  transform: isActive ? 'scale(1.05)' : 'scale(1)'
                 }}
               >
                 {year}
@@ -113,10 +115,10 @@ export default function ShowsSection() {
             font-weight: 600 !important;
           }
 
-          /* 카드 전체 높이 및 내부 패딩/간격 축소 */
+          /* 카드 전체 레이아웃 */
           .timeline-content {
-            padding: 16px 20px !important;
-            gap: 20px !important;
+            padding: 0 !important;
+            gap: 0 !important;
           }
           
           .timeline-location {
@@ -129,21 +131,23 @@ export default function ShowsSection() {
             line-height: 1.5 !important;
           }
 
-          /* 사진 영역 크기 축소 */
+          /* 사진 영역 크기 */
           .timeline-img-container {
-            width: 130px !important;
-            height: 90px !important;
+            width: 220px !important;
             flex-shrink: 0;
           }
           
           @media (max-width: 768px) {
             .timeline-img-container {
               width: 100% !important;
-              height: 130px !important;
+              height: 180px !important;
             }
             .timeline-content {
+              padding: 0 !important;
+              gap: 0 !important;
+            }
+            .timeline-text-wrap {
               padding: 16px !important;
-              gap: 16px !important;
             }
           }
           

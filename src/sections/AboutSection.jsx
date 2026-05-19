@@ -39,7 +39,7 @@ export default function AboutSection() {
             각자의 전문 분야를 통해 팀의 성장을 함께 경험하는 곳. 우리는 음악을 넘어 영상, 브랜딩, 콘텐츠까지 직접 빌딩합니다.
           </p>
         </div>
-        <div className="reveal-card" style={{ boxShadow: 'var(--shadow-lg)', borderRadius: 'var(--r-lg)', overflow: 'hidden' }}>
+        <div className="reveal-card" style={{ boxShadow: 'var(--shadow-lg)', borderRadius: '0px', overflow: 'hidden' }}>
           <PhotoBox src={groupPhoto} w="100%" h="440px" label="밴드 단체사진" />
         </div>
       </div>

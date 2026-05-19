@@ -7,8 +7,8 @@ import logo from '../assets/logo.png';
 
 const LINKS = [
   { label: 'About', href: '#about' },
-  { label: 'Music', href: '#music' },
-  { label: 'Members', href: '#members' },
+  { label: 'Feed', href: '#music' },
+  { label: 'Artists', href: '#members' },
   { label: 'History', href: '#shows' },
   { label: 'Recruit', href: '#recruit' },
   { label: 'Contact', href: '#contact' },
