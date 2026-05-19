@@ -168,13 +168,13 @@ export default function MembersSection() {
             display: none; /* 크롬, 사파리, 엣지 스크롤바 숨김 */
           }
           
-          /* 프리미엄 카드 디자인: 미묘한 그라데이션 적용 */
+          /* 프리미엄 카드 디자인: 높은 대비와 미묘한 그라데이션 적용 */
           .member-premium-card {
             flex: 0 0 calc(33.333% - 16px);
             min-width: 320px;
             scroll-snap-align: start;
-            background: linear-gradient(135deg, rgba(255, 255, 255, 0.04) 0%, rgba(255, 255, 255, 0.01) 100%);
-            border: 1px solid rgba(255, 255, 255, 0.05);
+            background: linear-gradient(135deg, rgba(20, 28, 52, 0.75) 0%, rgba(9, 13, 26, 0.95) 100%);
+            border: 1px solid rgba(255, 255, 255, 0.12);
             border-radius: 28px;
             padding: 44px 32px;
             display: flex;
@@ -184,7 +184,7 @@ export default function MembersSection() {
             transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
             position: relative;
             overflow: hidden;
-            box-shadow: 0 12px 36px rgba(0, 0, 0, 0.25);
+            box-shadow: 0 20px 48px rgba(0, 0, 0, 0.4);
             backdrop-filter: blur(20px);
             -webkit-backdrop-filter: blur(20px);
           }
@@ -193,7 +193,7 @@ export default function MembersSection() {
             content: '';
             position: absolute;
             inset: 0;
-            background: linear-gradient(180deg, rgba(255, 95, 31, 0.12) 0%, transparent 100%);
+            background: linear-gradient(180deg, rgba(255, 95, 31, 0.15) 0%, transparent 100%);
             opacity: 0;
             transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1);
             z-index: 0;
@@ -201,19 +201,19 @@ export default function MembersSection() {
           
           .member-premium-card:hover {
             transform: translateY(-10px);
-            border-color: rgba(255, 95, 31, 0.35);
-            background: linear-gradient(135deg, rgba(255, 255, 255, 0.06) 0%, rgba(255, 255, 255, 0.02) 100%);
-            box-shadow: 0 24px 50px rgba(0, 0, 0, 0.45), 0 0 24px rgba(255, 95, 31, 0.15);
+            border-color: rgba(255, 95, 31, 0.5);
+            background: linear-gradient(135deg, rgba(28, 38, 70, 0.85) 0%, rgba(13, 19, 38, 0.98) 100%);
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.55), 0 0 24px rgba(255, 95, 31, 0.2);
           }
           
           .member-premium-card:hover::before {
             opacity: 1;
           }
           
-          /* 이미지 액자 스타일: 원래부터 흑백 필터 제거 (컬러 유지), 크기 Enlarge (150x188 -> 180x226) */
+          /* 이미지 액자 스타일: 원래부터 흑백 필터 제거 (컬러 유지), 크기 키움 (180x226 -> 210x264) */
           .member-card-photo-wrap {
-            width: 180px;
-            height: 226px;
+            width: 210px;
+            height: 264px;
             border-radius: 20px;
             overflow: hidden;
             margin-bottom: 28px;
@@ -320,14 +320,18 @@ export default function MembersSection() {
               scroll-padding: 0 20px;
             }
             .member-card-photo-wrap {
-              width: 150px;
-              height: 188px;
+              width: 180px;
+              height: 226px;
             }
           }
           
           @media (max-width: 480px) {
             .member-premium-card {
               flex: 0 0 85%;
+            }
+            .member-card-photo-wrap {
+              width: 160px;
+              height: 200px;
             }
             .member-card-name {
               font-size: 1.65rem;
