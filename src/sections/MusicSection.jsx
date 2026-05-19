@@ -66,46 +66,9 @@ export default function MusicSection() {
           </div>
         </div>
 
-        {/* ── 음악 가로 스크롤 캐러셀 영역 (좌우 플로팅 화살표 버튼 적용) ── */}
+        {/* ── 음악 가로 스크롤 캐러셀 영역 ── */}
         <div className="music-carousel-relative-container" style={{ position: 'relative', width: '100%' }}>
           
-          {/* 플로팅 좌측 버튼 */}
-          <button 
-            onClick={() => scroll('left')}
-            style={{
-              position: 'absolute',
-              left: '4px',
-              top: '50%',
-              transform: 'translateY(-50%)',
-              background: 'none',
-              border: 'none',
-              color: 'var(--navy)',
-              opacity: showLeftArrow ? 0.35 : 0,
-              pointerEvents: showLeftArrow ? 'auto' : 'none',
-              cursor: 'pointer',
-              zIndex: 10,
-              transition: 'all 0.3s cubic-bezier(0.16, 1, 0.3, 1)',
-              outline: 'none',
-              padding: 0,
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center'
-            }}
-            onMouseEnter={(e) => {
-              e.currentTarget.style.opacity = '0.95';
-              e.currentTarget.style.color = 'var(--orange)';
-            }}
-            onMouseLeave={(e) => {
-              e.currentTarget.style.opacity = '0.35';
-              e.currentTarget.style.color = 'var(--navy)';
-            }}
-            aria-label="Previous track"
-          >
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" style={{ display: 'block' }}>
-              <polyline points="15 18 9 12 15 6" />
-            </svg>
-          </button>
-
           {/* 음악 가로 스크롤 컨테이너 */}
           <div className="music-scroll-wrapper" ref={scrollContainerRef}>
             {TRACKS.map((t, i) => (
@@ -153,40 +116,45 @@ export default function MusicSection() {
               </div>
             ))}
           </div>
+        </div>
 
-          {/* 플로팅 우측 버튼 */}
+        {/* ── 컨트롤러 및 인디케이터 바 (답답하지 않게 조그맣고 고급스럽게 통합) ── */}
+        <div className="carousel-control-bar">
+          <button 
+            onClick={() => scroll('left')}
+            className="control-arrow-btn"
+            style={{ opacity: showLeftArrow ? 0.6 : 0.15, pointerEvents: showLeftArrow ? 'auto' : 'none' }}
+            aria-label="Previous track"
+          >
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+              <polyline points="15 18 9 12 15 6" />
+            </svg>
+          </button>
+          
+          <div className="control-dots">
+            {TRACKS.map((_, idx) => (
+              <div 
+                key={idx} 
+                className={`control-dot ${activeIndex === idx ? 'active' : ''}`}
+                onClick={() => {
+                  if (scrollContainerRef.current) {
+                    const cards = scrollContainerRef.current.querySelectorAll('.music-premium-card');
+                    if (cards[idx]) {
+                      cards[idx].scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+                    }
+                  }
+                }}
+              />
+            ))}
+          </div>
+
           <button 
             onClick={() => scroll('right')}
-            style={{
-              position: 'absolute',
-              right: '4px',
-              top: '50%',
-              transform: 'translateY(-50%)',
-              background: 'none',
-              border: 'none',
-              color: 'var(--navy)',
-              opacity: showRightArrow ? 0.35 : 0,
-              pointerEvents: showRightArrow ? 'auto' : 'none',
-              cursor: 'pointer',
-              zIndex: 10,
-              transition: 'all 0.3s cubic-bezier(0.16, 1, 0.3, 1)',
-              outline: 'none',
-              padding: 0,
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center'
-            }}
-            onMouseEnter={(e) => {
-              e.currentTarget.style.opacity = '0.95';
-              e.currentTarget.style.color = 'var(--orange)';
-            }}
-            onMouseLeave={(e) => {
-              e.currentTarget.style.opacity = '0.35';
-              e.currentTarget.style.color = 'var(--navy)';
-            }}
+            className="control-arrow-btn"
+            style={{ opacity: showRightArrow ? 0.6 : 0.15, pointerEvents: showRightArrow ? 'auto' : 'none' }}
             aria-label="Next track"
           >
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" style={{ display: 'block' }}>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
               <polyline points="9 18 15 12 9 6" />
             </svg>
           </button>
@@ -200,9 +168,9 @@ export default function MusicSection() {
             overflow-x: auto;
             scroll-snap-type: x mandatory;
             scrollbar-width: none;
-            padding: 30px 20px 40px; /* 그림자 잘림 방지용 패딩 */
-            margin-top: -20px;
-            margin-bottom: -20px;
+            padding: 16px 20px 24px; /* 마일드한 그림자 맞춤 패딩 */
+            margin-top: -12px;
+            margin-bottom: -12px;
             -webkit-overflow-scrolling: touch;
             cursor: default;
           }
@@ -211,7 +179,7 @@ export default function MusicSection() {
             display: none;
           }
 
-          /* 음악 카드 프리미엄 컴팩트 스타일 */
+          /* 음악 카드 프리미엄 컴팩트 스타일: 그림자 약화로 경계선이 안 잘리게 함 */
           .music-premium-card {
             flex: 0 0 340px;
             min-width: 300px;
@@ -219,16 +187,17 @@ export default function MusicSection() {
             border-radius: 24px;
             overflow: hidden;
             background-color: #ffffff;
-            border: 1px solid rgba(0, 0, 0, 0.06);
+            border: 1px solid rgba(0, 0, 0, 0.08);
             display: flex;
             flex-direction: column;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.06);
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.03);
             transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
           }
 
           .music-premium-card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.12), 0 0 0 1px var(--orange);
+            transform: translateY(-6px);
+            box-shadow: 0 10px 24px rgba(0, 0, 0, 0.06);
+            border-color: rgba(255, 95, 31, 0.3);
           }
 
           .music-card-media {
@@ -296,55 +265,53 @@ export default function MusicSection() {
             }
           }
 
-          /* 모바일 전용 가로 스크롤 가이드 */
-          .music-scroll-cue-bar {
-            display: none;
+          /* 컨트롤 툴바 디자인 */
+          .carousel-control-bar {
+            display: flex;
             justify-content: center;
             align-items: center;
-            gap: 8px;
-            margin-top: 16px;
+            gap: 16px;
+            margin-top: 32px;
           }
 
-          .music-cue-dot {
+          .control-arrow-btn {
+            background: none;
+            border: none;
+            color: var(--navy);
+            cursor: pointer;
+            padding: 8px;
+            display: flex;
+            align-items: center;
+            justifyContent: center;
+            transition: all 0.3s ease;
+          }
+
+          .control-arrow-btn:hover {
+            color: var(--orange);
+            transform: scale(1.15);
+          }
+
+          .control-dots {
+            display: flex;
+            gap: 8px;
+            align-items: center;
+          }
+
+          .control-dot {
             width: 8px;
             height: 8px;
             border-radius: 50%;
             background: rgba(0, 0, 0, 0.08);
+            cursor: pointer;
             transition: all 0.3s ease;
           }
 
-          .music-cue-dot.active {
+          .control-dot.active {
             width: 24px;
             border-radius: 4px;
             background: var(--orange);
           }
-
-          .music-cue-text {
-            font-size: 0.72rem;
-            color: rgba(0, 0, 0, 0.3);
-            letter-spacing: 0.08em;
-            text-transform: uppercase;
-            margin-right: 8px;
-            font-weight: 700;
-          }
-
-          @media (max-width: 991px) {
-            .music-scroll-cue-bar {
-              display: flex;
-            }
-          }
         `}</style>
-
-        {/* 모바일 전용 인디케이터 바 */}
-        <div className="music-scroll-cue-bar">
-          <span className="music-cue-text">SWIPE ↔</span>
-          {TRACKS.map((_, idx) => (
-            <div 
-              key={idx} 
-              className={`music-cue-dot ${activeIndex === idx ? 'active' : ''}`} 
-            />
-          ))}
-        </div>
 
       </div>
     </section>

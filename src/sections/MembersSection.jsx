@@ -78,47 +78,8 @@ export default function MembersSection() {
           </div>
         </div>
 
-        {/* ── 가로 스크롤 캐러셀 영역 (좌우 플로팅 화살표 버튼 적용) ── */}
+        {/* ── 멤버 가로 스크롤 캐러셀 영역 ── */}
         <div className="members-carousel-relative-container" style={{ position: 'relative', width: '100%' }}>
-          
-          {/* 플로팅 좌측 버튼 */}
-          <button 
-            onClick={() => scroll('left')}
-            style={{
-              position: 'absolute',
-              left: '4px',
-              top: '50%',
-              transform: 'translateY(-50%)',
-              background: 'none',
-              border: 'none',
-              color: 'var(--navy)',
-              opacity: showLeftArrow ? 0.35 : 0,
-              pointerEvents: showLeftArrow ? 'auto' : 'none',
-              cursor: 'pointer',
-              zIndex: 10,
-              transition: 'all 0.3s cubic-bezier(0.16, 1, 0.3, 1)',
-              outline: 'none',
-              padding: 0,
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center'
-            }}
-            onMouseEnter={(e) => {
-              e.currentTarget.style.opacity = '0.95';
-              e.currentTarget.style.color = 'var(--orange)';
-            }}
-            onMouseLeave={(e) => {
-              e.currentTarget.style.opacity = '0.35';
-              e.currentTarget.style.color = 'var(--navy)';
-            }}
-            aria-label="Previous member"
-          >
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" style={{ display: 'block' }}>
-              <polyline points="15 18 9 12 15 6" />
-            </svg>
-          </button>
-
-          {/* 멤버 가로 스크롤 컨테이너 */}
           <div 
             className="member-scroll-wrapper" 
             ref={scrollContainerRef}
@@ -145,40 +106,45 @@ export default function MembersSection() {
               </div>
             ))}
           </div>
+        </div>
 
-          {/* 플로팅 우측 버튼 */}
+        {/* ── 컨트롤러 및 인디케이터 바 (답답하지 않게 조그맣고 고급스럽게 통합) ── */}
+        <div className="carousel-control-bar">
+          <button 
+            onClick={() => scroll('left')}
+            className="control-arrow-btn"
+            style={{ opacity: showLeftArrow ? 0.6 : 0.15, pointerEvents: showLeftArrow ? 'auto' : 'none' }}
+            aria-label="Previous member"
+          >
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+              <polyline points="15 18 9 12 15 6" />
+            </svg>
+          </button>
+          
+          <div className="control-dots">
+            {MEMBERS.map((_, idx) => (
+              <div 
+                key={idx} 
+                className={`control-dot ${activeIndex === idx ? 'active' : ''}`}
+                onClick={() => {
+                  if (scrollContainerRef.current) {
+                    const cards = scrollContainerRef.current.querySelectorAll('.member-premium-card');
+                    if (cards[idx]) {
+                      cards[idx].scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+                    }
+                  }
+                }}
+              />
+            ))}
+          </div>
+
           <button 
             onClick={() => scroll('right')}
-            style={{
-              position: 'absolute',
-              right: '4px',
-              top: '50%',
-              transform: 'translateY(-50%)',
-              background: 'none',
-              border: 'none',
-              color: 'var(--navy)',
-              opacity: showRightArrow ? 0.35 : 0,
-              pointerEvents: showRightArrow ? 'auto' : 'none',
-              cursor: 'pointer',
-              zIndex: 10,
-              transition: 'all 0.3s cubic-bezier(0.16, 1, 0.3, 1)',
-              outline: 'none',
-              padding: 0,
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center'
-            }}
-            onMouseEnter={(e) => {
-              e.currentTarget.style.opacity = '0.95';
-              e.currentTarget.style.color = 'var(--orange)';
-            }}
-            onMouseLeave={(e) => {
-              e.currentTarget.style.opacity = '0.35';
-              e.currentTarget.style.color = 'var(--navy)';
-            }}
+            className="control-arrow-btn"
+            style={{ opacity: showRightArrow ? 0.6 : 0.15, pointerEvents: showRightArrow ? 'auto' : 'none' }}
             aria-label="Next member"
           >
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" style={{ display: 'block' }}>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
               <polyline points="9 18 15 12 9 6" />
             </svg>
           </button>
@@ -192,9 +158,9 @@ export default function MembersSection() {
             overflow-x: auto;
             scroll-snap-type: x mandatory;
             scrollbar-width: none; /* 파이어폭스 스크롤바 숨김 */
-            padding: 30px 20px 40px; /* 그림자 잘림 방지용 충분한 상하 패딩 */
-            margin-top: -20px;
-            margin-bottom: -20px;
+            padding: 16px 20px 24px; /* 마일드한 그림자 맞춤 패딩 */
+            margin-top: -12px;
+            margin-bottom: -12px;
             -webkit-overflow-scrolling: touch; /* iOS 탄성 스크롤 활성화 */
             cursor: default;
           }
@@ -202,7 +168,7 @@ export default function MembersSection() {
             display: none; /* 크롬, 사파리, 엣지 스크롤바 숨김 */
           }
           
-          /* 프리미엄 카드 디자인: 밝은 톤의 정갈한 대비 적용 */
+          /* 프리미엄 카드 디자인: 밝은 톤의 정갈한 대비 및 마일드 그림자(좌우 잘림 해결) 적용 */
           .member-premium-card {
             flex: 0 0 calc(33.333% - 16px);
             min-width: 330px;
@@ -218,7 +184,7 @@ export default function MembersSection() {
             transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
             position: relative;
             overflow: hidden;
-            box-shadow: 0 12px 32px rgba(0, 0, 0, 0.08);
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.03);
           }
           
           .member-premium-card::before {
@@ -232,10 +198,10 @@ export default function MembersSection() {
           }
           
           .member-premium-card:hover {
-            transform: translateY(-10px);
-            border-color: rgba(255, 95, 31, 0.4);
+            transform: translateY(-6px);
+            border-color: rgba(255, 95, 31, 0.3);
             background: #ffffff;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.12), 0 0 24px rgba(255, 95, 31, 0.08);
+            box-shadow: 0 10px 24px rgba(0, 0, 0, 0.06);
           }
           
           .member-premium-card:hover::before {
@@ -251,14 +217,14 @@ export default function MembersSection() {
             margin-bottom: 20px;
             position: relative;
             z-index: 1;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
             transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
             background: rgba(0, 0, 0, 0.02);
           }
           
           .member-premium-card:hover .member-card-photo-wrap {
             transform: scale(1.04);
-            box-shadow: 0 16px 40px rgba(255, 95, 31, 0.15);
+            box-shadow: 0 12px 30px rgba(255, 95, 31, 0.12);
           }
 
           /* 최민서 사진 270도 회전 적용 */
@@ -371,55 +337,53 @@ export default function MembersSection() {
             }
           }
 
-          /* 모바일 전용 프리미엄 스크롤 가이드 라인 */
-          .mobile-scroll-cue-bar {
-            display: none;
+          /* 컨트롤 툴바 디자인 */
+          .carousel-control-bar {
+            display: flex;
             justify-content: center;
             align-items: center;
-            gap: 8px;
-            margin-top: 24px;
+            gap: 16px;
+            margin-top: 32px;
           }
 
-          .mobile-cue-dot {
+          .control-arrow-btn {
+            background: none;
+            border: none;
+            color: var(--navy);
+            cursor: pointer;
+            padding: 8px;
+            display: flex;
+            align-items: center;
+            justifyContent: center;
+            transition: all 0.3s ease;
+          }
+
+          .control-arrow-btn:hover {
+            color: var(--orange);
+            transform: scale(1.15);
+          }
+
+          .control-dots {
+            display: flex;
+            gap: 8px;
+            align-items: center;
+          }
+
+          .control-dot {
             width: 8px;
             height: 8px;
             border-radius: 50%;
             background: rgba(0, 0, 0, 0.08);
+            cursor: pointer;
             transition: all 0.3s ease;
           }
 
-          .mobile-cue-dot.active {
+          .control-dot.active {
             width: 24px;
             border-radius: 4px;
             background: var(--orange);
           }
-
-          .mobile-cue-text {
-            font-size: 0.72rem;
-            color: rgba(0, 0, 0, 0.3);
-            letter-spacing: 0.08em;
-            text-transform: uppercase;
-            margin-right: 8px;
-            font-weight: 700;
-          }
-
-          @media (max-width: 991px) {
-            .mobile-scroll-cue-bar {
-              display: flex;
-            }
-          }
         `}</style>
-
-        {/* ── 모바일 전용 가로 스크롤 가이드 인디케이터 (단서 제공) ── */}
-        <div className="mobile-scroll-cue-bar">
-          <span className="mobile-cue-text">SWIPE ↔</span>
-          {MEMBERS.map((_, idx) => (
-            <div 
-              key={idx} 
-              className={`mobile-cue-dot ${activeIndex === idx ? 'active' : ''}`} 
-            />
-          ))}
-        </div>
 
       </div>
     </section>
