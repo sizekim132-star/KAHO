@@ -55,39 +55,13 @@ export default function MembersSection() {
 
   return (
     <section id="members" className="section" style={{
-      background: 'linear-gradient(180deg, #070B19 0%, #0D1326 100%)',
+      background: 'var(--gray-1)',
       position: 'relative',
       overflow: 'hidden',
       paddingTop: '120px',
       paddingBottom: '140px',
-      borderBottom: '1px solid rgba(255, 255, 255, 0.05)'
+      borderBottom: '1px solid rgba(0, 0, 0, 0.05)'
     }}>
-      {/* ── 백그라운드 프리미엄 소프트 오라 (블러 글로우 오브) ── */}
-      <div style={{
-        position: 'absolute',
-        top: '20%',
-        left: '10%',
-        width: '350px',
-        height: '350px',
-        background: 'var(--orange)',
-        filter: 'blur(160px)',
-        opacity: 0.06,
-        pointerEvents: 'none',
-        zIndex: 0
-      }} />
-      <div style={{
-        position: 'absolute',
-        bottom: '10%',
-        right: '5%',
-        width: '400px',
-        height: '400px',
-        background: 'var(--navy-2)',
-        filter: 'blur(180px)',
-        opacity: 0.12,
-        pointerEvents: 'none',
-        zIndex: 0
-      }} />
-
       <div style={{ maxWidth: 1200, margin: '0 auto', position: 'relative', zIndex: 1, padding: '0 20px' }}>
         
         {/* ── 섹션 상단 헤더 ── */}
@@ -100,7 +74,7 @@ export default function MembersSection() {
           gap: '20px'
         }}>
           <div className="reveal-text">
-            <h2 className="title-dark" style={{ marginTop: '8px', fontWeight: 800 }}>Members</h2>
+            <h2 className="title" style={{ marginTop: '8px', fontWeight: 800 }}>Members</h2>
           </div>
         </div>
 
@@ -117,7 +91,7 @@ export default function MembersSection() {
               transform: 'translateY(-50%)',
               background: 'none',
               border: 'none',
-              color: '#ffffff',
+              color: 'var(--navy)',
               opacity: showLeftArrow ? 0.35 : 0,
               pointerEvents: showLeftArrow ? 'auto' : 'none',
               cursor: 'pointer',
@@ -138,7 +112,7 @@ export default function MembersSection() {
             }}
             onMouseLeave={(e) => {
               e.currentTarget.style.opacity = '0.35';
-              e.currentTarget.style.color = '#ffffff';
+              e.currentTarget.style.color = 'var(--navy)';
             }}
             aria-label="Previous member"
           >
@@ -183,7 +157,7 @@ export default function MembersSection() {
               transform: 'translateY(-50%)',
               background: 'none',
               border: 'none',
-              color: '#ffffff',
+              color: 'var(--navy)',
               opacity: showRightArrow ? 0.35 : 0,
               pointerEvents: showRightArrow ? 'auto' : 'none',
               cursor: 'pointer',
@@ -204,7 +178,7 @@ export default function MembersSection() {
             }}
             onMouseLeave={(e) => {
               e.currentTarget.style.opacity = '0.35';
-              e.currentTarget.style.color = '#ffffff';
+              e.currentTarget.style.color = 'var(--navy)';
             }}
             aria-label="Next member"
           >
@@ -228,13 +202,13 @@ export default function MembersSection() {
             display: none; /* 크롬, 사파리, 엣지 스크롤바 숨김 */
           }
           
-          /* 프리미엄 카드 디자인: 높은 대비와 미묘한 그라데이션 적용 */
+          /* 프리미엄 카드 디자인: 밝은 톤의 정갈한 대비 적용 */
           .member-premium-card {
             flex: 0 0 calc(33.333% - 16px);
             min-width: 330px;
             scroll-snap-align: start;
-            background: linear-gradient(135deg, rgba(35, 49, 90, 0.95) 0%, rgba(18, 26, 50, 0.98) 100%);
-            border: 1px solid rgba(255, 255, 255, 0.2);
+            background: #ffffff;
+            border: 1px solid rgba(0, 0, 0, 0.08);
             border-radius: 28px;
             padding: 24px 20px;
             display: flex;
@@ -244,16 +218,14 @@ export default function MembersSection() {
             transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
             position: relative;
             overflow: hidden;
-            box-shadow: 0 24px 64px rgba(0, 0, 0, 0.55);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.06);
           }
           
           .member-premium-card::before {
             content: '';
             position: absolute;
             inset: 0;
-            background: linear-gradient(180deg, rgba(255, 95, 31, 0.15) 0%, transparent 100%);
+            background: linear-gradient(180deg, rgba(255, 95, 31, 0.04) 0%, transparent 100%);
             opacity: 0;
             transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1);
             z-index: 0;
@@ -261,16 +233,16 @@ export default function MembersSection() {
           
           .member-premium-card:hover {
             transform: translateY(-10px);
-            border-color: rgba(255, 95, 31, 0.7);
-            background: linear-gradient(135deg, rgba(45, 62, 110, 0.95) 0%, rgba(24, 34, 65, 0.98) 100%);
-            box-shadow: 0 32px 72px rgba(0, 0, 0, 0.65), 0 0 24px rgba(255, 95, 31, 0.25);
+            border-color: rgba(255, 95, 31, 0.4);
+            background: #ffffff;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.12), 0 0 24px rgba(255, 95, 31, 0.08);
           }
           
           .member-premium-card:hover::before {
             opacity: 1;
           }
           
-          /* 이미지 액자 스타일: 카드 좌우에 거의 꽉 채워 크게 노출 (210x264 -> 290x360) */
+          /* 이미지 액자 스타일: 카드 좌우에 거의 꽉 채워 크게 노출 */
           .member-card-photo-wrap {
             width: 290px;
             height: 360px;
@@ -279,14 +251,14 @@ export default function MembersSection() {
             margin-bottom: 20px;
             position: relative;
             z-index: 1;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
             transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
-            background: rgba(255, 255, 255, 0.03);
+            background: rgba(0, 0, 0, 0.02);
           }
           
           .member-premium-card:hover .member-card-photo-wrap {
             transform: scale(1.04);
-            box-shadow: 0 16px 40px rgba(255, 95, 31, 0.25);
+            box-shadow: 0 16px 40px rgba(255, 95, 31, 0.15);
           }
 
           /* 최민서 사진 270도 회전 적용 */
@@ -307,7 +279,7 @@ export default function MembersSection() {
           .member-card-name {
             font-size: 1.9rem;
             font-weight: 800;
-            color: #ffffff;
+            color: var(--navy);
             margin-bottom: 8px;
             letter-spacing: -0.03em;
             transition: color 0.3s ease;
@@ -328,7 +300,7 @@ export default function MembersSection() {
             color: var(--orange);
             letter-spacing: 0.05em;
             vertical-align: middle;
-            background: rgba(255, 95, 31, 0.12);
+            background: rgba(255, 95, 31, 0.08);
             padding: 2px 8px;
             border-radius: 6px;
             display: inline-block;
@@ -344,14 +316,14 @@ export default function MembersSection() {
           .member-card-role {
             font-size: 0.9rem;
             font-weight: 600;
-            color: rgba(255, 255, 255, 0.45);
+            color: var(--text-3);
             letter-spacing: 0.05em;
           }
           
           .member-card-bio {
             font-size: 0.98rem;
             line-height: 1.65;
-            color: rgba(255, 255, 255, 0.6);
+            color: var(--text-2);
             margin: 0;
             height: 66px;
             overflow: hidden;
@@ -362,7 +334,7 @@ export default function MembersSection() {
           }
           
           .member-premium-card:hover .member-card-bio {
-            color: rgba(255, 255, 255, 0.85);
+            color: var(--navy);
           }
 
           /* 모바일/태블릿 반응형 좌우 터치 슬라이더 활성화 */
@@ -412,7 +384,7 @@ export default function MembersSection() {
             width: 8px;
             height: 8px;
             border-radius: 50%;
-            background: rgba(255, 255, 255, 0.15);
+            background: rgba(0, 0, 0, 0.08);
             transition: all 0.3s ease;
           }
 
@@ -424,7 +396,7 @@ export default function MembersSection() {
 
           .mobile-cue-text {
             font-size: 0.72rem;
-            color: rgba(255, 255, 255, 0.35);
+            color: rgba(0, 0, 0, 0.3);
             letter-spacing: 0.08em;
             text-transform: uppercase;
             margin-right: 8px;
