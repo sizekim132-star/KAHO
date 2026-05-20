@@ -6,9 +6,9 @@ import groupPhoto from '../assets/group_photo.jpg';
 import memChisu from '../assets/member_chisu.jpg';
 import memMinseo from '../assets/member_minseo.jpg';
 import memUjinP from '../assets/member_ujin.jpg'; // 박어진
-const memDefault = ''; // 누락된 멤버용
-const memTaerin = ''; // 사진 없음
-const memEojinS = ''; // 사진 없음
+// const memDefault = ''; // 누락된 멤버용
+// const memTaerin = ''; // 사진 없음
+// const memEojinS = ''; // 사진 없음
 
 import showHeojun from '../assets/show_heojun.jpg';
 import showHalloween from '../assets/show_halloween.jpg';
@@ -47,9 +47,9 @@ export const RECRUIT_FORM_URL = 'https://forms.gle/gAp6J2BwdECou4mWA';
 
 /* ── 멤버 데이터 ── */
 export const MEMBERS = [
-  { name: '김치수', role: '리더 · 베이스', animal: '호랑이', bio: '', img: memChisu },
+  { name: '치수', role: '리더 · 베이스', animal: '호랑이', bio: '', img: memChisu },
   // { name: '-', role: '보컬', animal: '-', bio: '-', img: memTaerin },
-  { name: '최민서', role: '기타', animal: '고양이', bio: '', img: memMinseo },
+  { name: '알렉산더 11세 과카몰리 레전더리 토쿄스타일 닭갈비', role: '기타', animal: '고양이', bio: '', img: memMinseo },
   { name: '박어진', role: '건반', animal: '참새', bio: '', img: memUjinP },
   // { name: '-', role: '드럼', animal: '-', bio: '-', img: memDefault },
 ];

@@ -16,14 +16,13 @@ import Footer from '../sections/Footer';
 
 /* ─── PAGE ─── */
 export default function Home() {
-  const { activeSection, videoOpacity } = useScrollSpy();
+  const { videoOpacity } = useScrollSpy();
   useRevealObserver();
 
   return (
     <div style={{ paddingTop: 60 }}>
       <HeroSection
         videoOpacity={videoOpacity}
-        activeSection={activeSection}
       />
       <AboutSection />
       <MusicSection />

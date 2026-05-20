@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { FaInstagram, FaYoutube, FaSoundcloud } from 'react-icons/fa';
 import { YT_BG_IDS, IG_URL, YT_CHANNEL, SC_URL } from '../data/constants';
 
-export default function HeroSection({ videoOpacity, activeSection }) {
+export default function HeroSection({ videoOpacity }) {
   const [currentIdx, setCurrentIdx] = useState(0);
 
   useEffect(() => {
