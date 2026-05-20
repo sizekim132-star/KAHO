@@ -49,7 +49,7 @@ export const RECRUIT_FORM_URL = 'https://forms.gle/gAp6J2BwdECou4mWA';
 export const MEMBERS = [
   { name: '치수', role: '리더 · 베이스', animal: '호랑이', bio: '', img: memChisu },
   // { name: '-', role: '보컬', animal: '-', bio: '-', img: memTaerin },
-  { name: '알렉산더 11세 과카몰리 레전더리 토쿄스타일 닭갈비', role: '기타', animal: '고양이', bio: '', img: memMinseo },
+  { name: '최민서', role: '기타', animal: '고양이', bio: '', img: memMinseo },
   { name: '박어진', role: '건반', animal: '참새', bio: '', img: memUjinP },
   // { name: '-', role: '드럼', animal: '-', bio: '-', img: memDefault },
 ];

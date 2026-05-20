@@ -87,7 +87,7 @@ export default function MembersSection() {
             {MEMBERS.map((m, i) => (
               <div 
                 key={i} 
-                className={`member-premium-card reveal-card ${m.name === '알렉산더 11세 과카몰리 레전더리 토쿄스타일 닭갈비' ? 'minseo-card' : ''}`} 
+                className={`member-premium-card reveal-card ${m.name === '최민서' ? 'minseo-card' : ''}`} 
                 style={{ transitionDelay: `${i * 0.12}s` }}
               >
                 <div className="member-card-photo-wrap">
