@@ -1,5 +1,5 @@
 // src/components/Nav.jsx
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useLocation } from 'react-router-dom';
 import { FaInstagram, FaYoutube, FaSoundcloud } from 'react-icons/fa';
 import { IG_URL, YT_CHANNEL, SC_URL } from '../data/constants';
@@ -17,17 +17,32 @@ const LINKS = [
 export default function Nav() {
   const { pathname } = useLocation();
   const [scrolled, setScrolled] = useState(false);
+  const [hidden, setHidden] = useState(false);
+  const lastScrollY = useRef(0);
 
   useEffect(() => {
-    const fn = () => setScrolled(window.scrollY > 10);
-    window.addEventListener('scroll', fn);
+    const fn = () => {
+      const y = window.scrollY;
+      setScrolled(y > 10);
+
+      if (y <= 60) {
+        setHidden(false);
+      } else if (y > lastScrollY.current + 8) {
+        setHidden(true);
+      } else if (y < lastScrollY.current - 8) {
+        setHidden(false);
+      }
+      lastScrollY.current = y;
+    };
+    fn();
+    window.addEventListener('scroll', fn, { passive: true });
     return () => window.removeEventListener('scroll', fn);
   }, []);
 
   if (pathname === '/sorter') return null;
 
   return (
-    <nav className={`nav${scrolled ? ' scrolled' : ''}`}>
+    <nav className={`nav${scrolled ? ' scrolled' : ''}${hidden ? ' nav-hidden' : ''}`}>
       <a href="#home" className="nav-logo">
         <img src={logo} alt="KAHO Logo" className="nav-logo-img" />
       </a>

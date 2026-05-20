@@ -17,7 +17,10 @@ export default function HeroSection({ videoOpacity }) {
   return (
     <>
       {/* ── 유튜브 4-아이프레임 고급 안개식 페이드 캐러셀 ── */}
-      <div className="vbg-container" style={{ opacity: videoOpacity, transition: 'opacity 0.5s ease-in-out' }}>
+      <div
+        className={`vbg-container${videoOpacity <= 0 ? ' vbg-hidden' : ''}`}
+        style={{ opacity: videoOpacity, transition: 'opacity 0.5s ease-in-out' }}
+      >
         {YT_BG_IDS.map((id, idx) => (
           <div
             key={id}
@@ -49,7 +52,14 @@ export default function HeroSection({ videoOpacity }) {
           </div>
         ))}
       </div>
-      <div className="film" style={{ background: 'rgba(26, 39, 68, 0.35)' }} />
+      <div
+        className={`film${videoOpacity <= 0 ? ' vbg-hidden' : ''}`}
+        style={{
+          background: 'rgba(26, 39, 68, 0.35)',
+          opacity: videoOpacity,
+          transition: 'opacity 0.5s ease-in-out',
+        }}
+      />
 
       {/* ════ HERO ════ */}
       <section id="home" className="hero-fullscreen">
