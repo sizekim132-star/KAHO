@@ -66,11 +66,11 @@ export default function Footer() {
             gap: 20,
             alignItems: 'center',
           }}>
-            <a href={IG_URL} target="_blank" rel="noreferrer" style={{ color: 'rgba(255,255,255,.4)' }} aria-label="Instagram">
-              <FaInstagram size={18} />
-            </a>
             <a href={YT_CHANNEL} target="_blank" rel="noreferrer" style={{ color: 'rgba(255,255,255,.4)' }} aria-label="YouTube">
               <FaYoutube size={18} />
+            </a>
+            <a href={IG_URL} target="_blank" rel="noreferrer" style={{ color: 'rgba(255,255,255,.4)' }} aria-label="Instagram">
+              <FaInstagram size={18} />
             </a>
             <a href={SC_URL} target="_blank" rel="noreferrer" style={{ color: 'rgba(255,255,255,.4)' }} aria-label="SoundCloud">
               <FaSoundcloud size={20} />

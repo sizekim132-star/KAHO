@@ -1,14 +1,14 @@
 // src/components/PhotoBox.jsx
 import React from 'react';
 
-export default function PhotoBox({ src, w, h, label, alt, fit = 'cover' }) {
+export default function PhotoBox({ src, w, h, label, alt, fit = 'cover', position = 'center' }) {
   if (src) {
     return (
       <div style={{ width: w, height: h, overflow: 'hidden', borderRadius: 'inherit', position: 'relative' }}>
         <img
           src={src}
           alt={alt || label}
-          style={{ width: '100%', height: '100%', objectFit: fit, objectPosition: 'center', display: 'block' }}
+          style={{ width: '100%', height: '100%', objectFit: fit, objectPosition: position, display: 'block' }}
         />
       </div>
     );

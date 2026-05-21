@@ -1443,9 +1443,10 @@ img {
   pointer-events: none;
   background: linear-gradient(
     to top,
-    rgba(10, 14, 26, 0.9) 0%,
-    rgba(10, 14, 26, 0.45) 42%,
-    transparent 72%
+    rgba(10, 14, 26, 0.98) 0%,
+    rgba(10, 14, 26, 0.7) 25%,
+    rgba(10, 14, 26, 0.15) 50%,
+    transparent 65%
   );
   transition: opacity 0.35s ease;
 }
@@ -1458,13 +1459,18 @@ img {
   z-index: 3;
   padding: 14px 18px 16px;
   color: #fff;
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.8), 0 0 2px rgba(0, 0, 0, 0.5);
 }
 
 .history-card-meta {
   display: flex;
   align-items: center;
   gap: 10px;
-  margin-bottom: 6px;
+  margin-bottom: 0;
+  max-height: 0;
+  opacity: 0;
+  overflow: hidden;
+  transition: max-height 0.35s ease, opacity 0.3s ease, margin-bottom 0.35s ease;
 }
 
 .history-card-date {
@@ -1489,37 +1495,16 @@ img {
   font-size: 1.05rem;
   font-weight: 800;
   line-height: 1.3;
-  margin: 0 0 4px;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-.history-card-location {
-  font-size: 0.8rem;
-  font-weight: 500;
-  color: rgba(255, 255, 255, 0.72);
   margin: 0;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
 }
 
-.history-card-desc {
-  font-size: 0.82rem;
-  line-height: 1.5;
-  color: rgba(255, 255, 255, 0.78);
-  margin: 0;
-  max-height: 0;
-  opacity: 0;
-  overflow: hidden;
-  transition: max-height 0.35s ease, opacity 0.3s ease, margin-top 0.3s ease;
-}
-
-.history-card.is-expanded .history-card-desc {
-  max-height: 4.5em;
+.history-card.is-expanded .history-card-meta {
+  max-height: 2em;
   opacity: 1;
-  margin-top: 8px;
+  margin-bottom: 6px;
 }
 
 @media (hover: hover) and (pointer: fine) {
@@ -1529,10 +1514,10 @@ img {
     border-color: rgba(255, 95, 31, 0.25);
   }
 
-  .history-card:hover .history-card-desc {
-    max-height: 4.5em;
+  .history-card:hover .history-card-meta {
+    max-height: 2em;
     opacity: 1;
-    margin-top: 8px;
+    margin-bottom: 6px;
   }
 
   .history-card:hover .history-card-gradient {
@@ -2140,4 +2125,94 @@ img {
   transform: translateY(-8px) !important;
   box-shadow: var(--shadow-lg) !important;
   border-color: rgba(255, 95, 31, 0.2) !important;
+}
+
+/* ─── LIGHTBOX MODAL ─── */
+.lightbox-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background: rgba(10, 14, 26, 0.9);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  animation: fadeIn 0.3s var(--ease);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+.lightbox-content {
+  position: relative;
+  max-width: 90vw;
+  max-height: 85vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: zoomIn 0.3s var(--ease);
+}
+
+.lightbox-img {
+  max-width: 100%;
+  max-height: 85vh;
+  object-fit: contain;
+  border-radius: 8px;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+}
+
+.lightbox-close {
+  position: absolute;
+  top: 24px;
+  right: 24px;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: #fff;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  z-index: 10000;
+}
+
+.lightbox-close:hover {
+  background: rgba(255, 255, 255, 0.2);
+  transform: scale(1.05);
+}
+
+/* ─── ZOOM OVERLAY ON IMAGE ─── */
+.history-card-img-click {
+  position: absolute;
+  inset: 0;
+  cursor: zoom-in;
+}
+
+.zoom-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(10, 14, 26, 0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  z-index: 3;
+  color: #fff;
+}
+
+.history-card:hover .zoom-overlay {
+  opacity: 1;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes zoomIn {
+  from { transform: scale(0.95); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
 }

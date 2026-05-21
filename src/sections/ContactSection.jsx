@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 import { FaInstagram, FaYoutube, FaSoundcloud } from 'react-icons/fa';
 import { FiMail, FiPhone, FiCheck } from 'react-icons/fi';
-import { SC_URL, IG_URL, YT_CHANNEL } from '../data/constants';
+import { SC_URL, IG_REPRESENTATIVE_URL, YT_CHANNEL } from '../data/constants';
 
 function ContactIcon({ text, icon: Icon }) {
   const [copied, setCopied] = useState(false);
@@ -65,7 +65,7 @@ export default function ContactSection() {
             <a href={YT_CHANNEL} target="_blank" rel="noreferrer" className="contact-social-link" aria-label="YouTube">
               <FaYoutube size={22} />
             </a>
-            <a href={IG_URL} target="_blank" rel="noreferrer" className="contact-social-link" aria-label="Instagram">
+            <a href={IG_REPRESENTATIVE_URL} target="_blank" rel="noreferrer" className="contact-social-link" aria-label="Instagram">
               <FaInstagram size={22} />
             </a>
             <a href={SC_URL} target="_blank" rel="noreferrer" className="contact-social-link" aria-label="SoundCloud">
