@@ -309,6 +309,8 @@ img {
   display: flex;
   gap: 2rem;
   list-style: none;
+  margin: 0 auto;
+  padding: 0;
 }
 
 .nav-links a {
@@ -358,13 +360,19 @@ img {
   transform: translateY(4px) scale(1.05);
 }
 
+/* PC: 햄버거·드로어 숨김 / 모바일만 표시 */
+.nav-menu-toggle,
+.nav-drawer-backdrop,
+.nav-drawer {
+  display: none;
+}
+
 /* 햄버거 → X (우측 메뉴) */
 .nav-menu-toggle {
   position: relative;
   width: 44px;
   height: 44px;
   flex-shrink: 0;
-  display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
@@ -481,6 +489,10 @@ img {
 .nav-drawer-links a:hover {
   color: var(--orange);
   padding-left: 6px;
+}
+
+.nav-drawer-link-text.is-active {
+  color: var(--orange);
 }
 
 /* ════════════════════════════════════════════
@@ -750,7 +762,16 @@ img {
   }
 
   .nav-menu-toggle {
+    display: flex;
     transform: translateY(2px);
+  }
+
+  .nav-drawer-backdrop {
+    display: block;
+  }
+
+  .nav-drawer {
+    display: block;
   }
 
   /* 모바일에서는 하단 바로 대체 */
@@ -1940,6 +1961,19 @@ img {
 }
 
 /* ─── RECRUIT CARDS (미니멀 연회색 & 비디오 백그라운드) ─── */
+.recruit-cards-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+  margin-bottom: 4rem;
+}
+
+@media (min-width: 769px) {
+  .recruit-cards-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
 .recruit-card {
   background: var(--gray-1) !important;
   border: 1px solid rgba(0, 0, 0, 0.04) !important;

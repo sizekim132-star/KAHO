@@ -20,12 +20,7 @@ export default function RecruitSection() {
         </div>
 
         {/* ── 모집 분야 bento grid ── */}
-        <div style={{
-          display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))',
-          gap: '1.5rem',
-          marginBottom: '4rem'
-        }}>
+        <div className="recruit-cards-grid">
 
           {/* 보컬 및 세션 */}
           <div className="reveal-card recruit-card" style={{

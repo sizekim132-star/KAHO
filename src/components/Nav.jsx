@@ -12,11 +12,14 @@ const LINKS = [
   { label: 'Contact', href: '#contact' },
 ];
 
+const MOBILE_MQ = '(max-width: 768px)';
+
 export default function Nav() {
   const { pathname } = useLocation();
   const [scrolled, setScrolled] = useState(false);
   const [hidden, setHidden] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
+  const [activeHref, setActiveHref] = useState('#home');
   const lastScrollY = useRef(0);
 
   useEffect(() => {
@@ -36,6 +39,50 @@ export default function Nav() {
     fn();
     window.addEventListener('scroll', fn, { passive: true });
     return () => window.removeEventListener('scroll', fn);
+  }, []);
+
+  useEffect(() => {
+    const mq = window.matchMedia(MOBILE_MQ);
+    const onChange = () => {
+      if (!mq.matches) setMenuOpen(false);
+    };
+    mq.addEventListener('change', onChange);
+    return () => mq.removeEventListener('change', onChange);
+  }, []);
+
+  useEffect(() => {
+    let rafId = 0;
+    const updateActive = () => {
+      const viewportAnchor = window.innerHeight * 0.4;
+      let bestHref = '#home';
+      let bestDistance = Number.POSITIVE_INFINITY;
+      LINKS.forEach((l) => {
+        const id = l.href.replace('#', '');
+        const el = document.getElementById(id);
+        if (!el) return;
+        const rect = el.getBoundingClientRect();
+        if (rect.bottom < 0 || rect.top > window.innerHeight) return;
+        const distance = Math.abs(rect.top - viewportAnchor);
+        if (distance < bestDistance) {
+          bestDistance = distance;
+          bestHref = l.href;
+        }
+      });
+      setActiveHref(bestHref);
+    };
+    const onScroll = () => {
+      cancelAnimationFrame(rafId);
+      rafId = requestAnimationFrame(updateActive);
+    };
+
+    updateActive();
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('hashchange', updateActive);
+    return () => {
+      cancelAnimationFrame(rafId);
+      window.removeEventListener('scroll', onScroll);
+      window.removeEventListener('hashchange', updateActive);
+    };
   }, []);
 
   useEffect(() => {
@@ -67,7 +114,9 @@ export default function Nav() {
         <ul className="nav-links">
           {LINKS.map((l) => (
             <li key={l.label}>
-              <a href={l.href}>{l.label}</a>
+              <a href={l.href} onClick={closeMenu}>
+                {l.label}
+              </a>
             </li>
           ))}
         </ul>
@@ -99,7 +148,9 @@ export default function Nav() {
           {LINKS.map((l) => (
             <li key={l.label}>
               <a href={l.href} onClick={closeMenu}>
-                {l.label}
+                <span className={`nav-drawer-link-text${activeHref === l.href ? ' is-active' : ''}`}>
+                  {l.label}
+                </span>
               </a>
             </li>
           ))}
