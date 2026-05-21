@@ -154,12 +154,14 @@ export default function MembersSection() {
             display: flex;
             gap: 24px;
             overflow-x: auto;
+            overflow-y: hidden;
             scroll-snap-type: x mandatory;
             scrollbar-width: none; /* 파이어폭스 스크롤바 숨김 */
             padding: 16px 20px 24px; /* 마일드한 그림자 맞춤 패딩 */
             margin-left: -20px;
             margin-right: -20px;
             -webkit-overflow-scrolling: touch;
+            overscroll-behavior-y: contain;
           }
           .member-scroll-wrapper::-webkit-scrollbar {
             display: none;
@@ -285,9 +287,11 @@ export default function MembersSection() {
               min-width: 290px;
               height: 420px;
               scroll-snap-align: center;
+              touch-action: pan-x;
             }
             .member-scroll-wrapper {
               scroll-padding: 0 20px;
+              touch-action: pan-x;
             }
           }
           @media (max-width: 480px) {
