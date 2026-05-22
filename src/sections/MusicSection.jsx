@@ -56,15 +56,18 @@ export default function MusicSection() {
         </div>
 
         {/* ── 인스타그램 스타일 3열 그리드 ── */}
-        <div className="feed-grid reveal-card">
+        <div className="feed-grid">
           {feedItems.map((item, i) => (
             <a
               key={i}
               href={item.url}
               target="_blank"
               rel="noreferrer"
-              className="feed-grid-item"
-              style={{ animationDelay: `${i * 0.06}s` }}
+              className="feed-grid-item reveal-card"
+              style={{ 
+                // 각각의 피드 아이템이 0s ~ 0.5s 사이의 무작위 딜레이로 나타나도록 설정
+                animationDelay: `${Math.random() * 0.5}s` 
+              }}
             >
               {/* 썸네일 or 비디오 */}
               {item.type === 'cloud' ? (

@@ -98,8 +98,6 @@ export default function Nav() {
     };
   }, [menuOpen]);
 
-  if (pathname === '/sorter') return null;
-
   const closeMenu = () => setMenuOpen(false);
   const toggleMenu = () => setMenuOpen((o) => !o);
 

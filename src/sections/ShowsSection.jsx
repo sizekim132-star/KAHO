@@ -90,16 +90,29 @@ export default function ShowsSection() {
 
         {/* 애니메이션 트랜지션용 CSS 선언 */}
         <style>{`
-          .timeline-transition-wrap {
+          /* 개별 타임라인 아이템 순차적 애니메이션 */
+          .timeline-item-anim {
             opacity: 0;
             transform: translateY(30px);
             transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1), transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
           }
-          .timeline-transition-wrap.animate-in {
+          
+          /* 연도 변경 시 부모의 animate-in 클래스에 반응 */
+          .timeline-wrapper.animate-in .timeline-item-anim {
             opacity: 1;
             transform: translateY(0);
           }
           
+          /* 스크롤 시 reveal 클래스 결합 처리 (기존 애니메이션 복구) */
+          .reveal .timeline-item-anim {
+            opacity: 0;
+            transform: translateY(30px);
+          }
+          .reveal.is-visible .timeline-wrapper.animate-in .timeline-item-anim {
+            opacity: 1;
+            transform: translateY(0);
+          }
+
           /* 카드 제목 글자 크기 축소 및 줄바꿈 방지 */
           .timeline-title {
             font-size: 1.2rem !important;
@@ -119,11 +132,6 @@ export default function ShowsSection() {
           .timeline-content {
             padding: 0 !important;
             gap: 0 !important;
-          }
-          
-          .timeline-location {
-            margin-bottom: 6px !important;
-            font-size: 0.85rem !important;
           }
           
           .timeline-desc {
@@ -175,11 +183,15 @@ export default function ShowsSection() {
             — Select a year to unfold the history —
           </div>
         ) : (
-          <div className={`timeline-transition-wrap ${animate ? 'animate-in' : ''}`}>
+          <div className={`timeline-wrapper ${animate ? 'animate-in' : ''}`}>
             <div className="timeline-container">
               {filteredShows.map((s, i) => (
-                <div key={i} className="timeline-item" style={{ transitionDelay: `${(i + 1) * 0.12}s` }}>
-                  <div className="timeline-date-left" style={{ transitionDelay: `${(i + 1) * 0.12 + 0.08}s` }}>
+                <div 
+                  key={i} 
+                  className="timeline-item timeline-item-anim" 
+                  style={{ transitionDelay: `${i * 0.15}s` }}
+                >
+                  <div className="timeline-date-left">
                     {s.date}
                   </div>
                   <div className="timeline-dot"></div>
@@ -193,7 +205,6 @@ export default function ShowsSection() {
                         )}
                       </div>
                       <h3 className="timeline-title">{s.name}</h3>
-                      <p className="timeline-location">📍 {s.location}</p>
                       <p className="timeline-desc">{s.desc}</p>
                     </div>
                     {s.img && (

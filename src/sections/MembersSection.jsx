@@ -1,9 +1,12 @@
 // src/sections/MembersSection.jsx
 import React, { useRef, useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import PhotoBox from '../components/PhotoBox';
-import { MEMBERS } from '../data/constants';
+import { useData } from '../contexts/DataContext';
 
 export default function MembersSection() {
+  const navigate = useNavigate();
+  const { members } = useData();
   const scrollContainerRef = useRef(null);
   const [showLeftArrow, setShowLeftArrow] = useState(false);
   const [showRightArrow, setShowRightArrow] = useState(true);
@@ -22,7 +25,8 @@ export default function MembersSection() {
         const cardWidth = cards[0].clientWidth;
         const gap = 24;
         const index = Math.round(scrollLeft / (cardWidth + gap));
-        setActiveIndex(Math.max(0, Math.min(index, MEMBERS.length - 1)));
+        // members 배열 길이를 사용하도록 변경
+        setActiveIndex(Math.max(0, Math.min(index, cards.length - 1)));
       }
     }
   };
@@ -84,11 +88,12 @@ export default function MembersSection() {
             className="member-scroll-wrapper" 
             ref={scrollContainerRef}
           >
-            {MEMBERS.map((m, i) => (
+            {members.map((m, i) => (
               <div 
                 key={i} 
                 className={`member-premium-card reveal-card ${m.name === '최민서' ? 'minseo-card' : ''}`} 
                 style={{ transitionDelay: `${i * 0.12}s` }}
+                // onClick={() => navigate(`/member/${m.name}`)} // TODO: 상세페이지 완성 후 복구
               >
                 <div className="member-card-photo-wrap">
                   <PhotoBox src={m.img} w="100%" h="100%" label="사진" />
@@ -120,7 +125,7 @@ export default function MembersSection() {
           </button>
           
           <div className="control-dots">
-            {MEMBERS.map((_, idx) => (
+            {members.map((_, idx) => (
               <div 
                 key={idx} 
                 className={`control-dot ${activeIndex === idx ? 'active' : ''}`}

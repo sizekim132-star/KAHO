@@ -4,17 +4,22 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import './index.css';
 import Nav from './components/Nav';
 import Home from './pages/Home';
-import PhotoSorterTool from './pages/PhotoSorterTool';
+import MemberDetail from './pages/MemberDetail';
+import Admin from './pages/Admin';
+import { DataProvider } from './contexts/DataContext';
 
 function App() {
   return (
-    <Router>
-      <Nav />
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/sorter" element={<PhotoSorterTool onBack={() => window.history.back()} />} />
-      </Routes>
-    </Router>
+    <DataProvider>
+      <Router>
+        <Nav />
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/member/:name" element={<MemberDetail />} />
+          <Route path="/admin" element={<Admin />} />
+        </Routes>
+      </Router>
+    </DataProvider>
   );
 }
 export default App;
