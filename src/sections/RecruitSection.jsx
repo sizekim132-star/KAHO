@@ -98,7 +98,30 @@ export default function RecruitSection() {
           .cta-card-interactive:hover .cta-glow { opacity: 0 !important; }
           .cta-card-interactive:hover .cta-overlay { opacity: 1 !important; }
           
-          /* 뛰어들기 버튼 호버 인터랙션 */
+          /* 뛰어들기 버튼 맥박/쉬머 애니메이션 정의 */
+          @keyframes cta-pulse-breathing {
+            0%, 100% {
+              transform: scale(1);
+              box-shadow: 0 8px 24px rgba(255, 95, 31, 0.3);
+            }
+            50% {
+              transform: scale(1.04) translateY(-1px);
+              box-shadow: 0 12px 28px rgba(255, 95, 31, 0.65);
+            }
+          }
+          @keyframes cta-shimmer-sweep {
+            0% {
+              left: -150%;
+            }
+            25% {
+              left: 150%;
+            }
+            100% {
+              left: 150%;
+            }
+          }
+
+          /* 뛰어들기 버튼 기본 스타일 및 평소 매력적인 모션 */
           .cta-submit-btn {
             position: relative;
             overflow: hidden;
@@ -109,23 +132,29 @@ export default function RecruitSection() {
             box-shadow: 0 8px 24px rgba(255, 95, 31, 0.3);
             z-index: 1;
             border: 1px solid rgba(255, 255, 255, 0.1);
+            animation: cta-pulse-breathing 2.5s infinite ease-in-out;
           }
           .cta-submit-btn::before {
             content: "";
             position: absolute;
-            top: 0; left: -100%;
+            top: 0; left: -150%;
             width: 100%; height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
-            transition: left 0.6s ease;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.45), transparent);
             z-index: -1;
+            animation: cta-shimmer-sweep 4s infinite ease-in-out;
           }
+          
+          /* 마우스 호버 시 인터랙션 (호버가 우선 적용되도록 애니메이션 일시 해제) */
           .cta-submit-btn:hover {
-            transform: scale(1.05) translateY(-3px);
-            box-shadow: 0 16px 32px rgba(255, 95, 31, 0.5);
+            animation: none;
+            transform: scale(1.07) translateY(-3px);
+            box-shadow: 0 16px 32px rgba(255, 95, 31, 0.7);
             background: #ff7222;
           }
           .cta-submit-btn:hover::before {
-            left: 100%;
+            animation: none;
+            left: 150%;
+            transition: left 0.6s ease;
           }
           .cta-submit-btn .icon-arrow {
             transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
@@ -150,7 +179,7 @@ export default function RecruitSection() {
             style={{
               position: 'absolute', top: '50%', left: '50%', width: '100%', height: '100%',
               objectFit: 'cover', transform: 'translate(-50%, -50%) scale(1.05)', zIndex: 0,
-              opacity: 0, transition: 'all 0.5s cubic-bezier(0.16, 1, 0.3, 1)'
+              opacity: 0.18, transition: 'all 0.5s cubic-bezier(0.16, 1, 0.3, 1)'
             }}
           >
             <source src="/join.mp4" type="video/mp4" />

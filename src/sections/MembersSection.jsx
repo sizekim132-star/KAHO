@@ -1,11 +1,9 @@
 // src/sections/MembersSection.jsx
 import React, { useRef, useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
 import PhotoBox from '../components/PhotoBox';
 import { useData } from '../contexts/DataContext';
 
 export default function MembersSection() {
-  const navigate = useNavigate();
   const { members } = useData();
   const scrollContainerRef = useRef(null);
   const [showLeftArrow, setShowLeftArrow] = useState(false);

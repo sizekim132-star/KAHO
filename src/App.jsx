@@ -5,7 +5,6 @@ import './index.css';
 import Nav from './components/Nav';
 import Home from './pages/Home';
 import MemberDetail from './pages/MemberDetail';
-import Admin from './pages/Admin';
 import { DataProvider } from './contexts/DataContext';
 
 function App() {
@@ -16,7 +15,6 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/member/:name" element={<MemberDetail />} />
-          <Route path="/admin" element={<Admin />} />
         </Routes>
       </Router>
     </DataProvider>

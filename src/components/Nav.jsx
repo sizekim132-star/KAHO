@@ -1,6 +1,5 @@
 // src/components/Nav.jsx
 import React, { useState, useEffect, useRef } from 'react';
-import { useLocation } from 'react-router-dom';
 import logo from '../assets/logo.png';
 
 const LINKS = [
@@ -15,7 +14,6 @@ const LINKS = [
 const MOBILE_MQ = '(max-width: 768px)';
 
 export default function Nav() {
-  const { pathname } = useLocation();
   const [scrolled, setScrolled] = useState(false);
   const [hidden, setHidden] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);

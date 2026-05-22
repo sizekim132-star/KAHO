@@ -65,8 +65,8 @@ export default function MusicSection() {
               rel="noreferrer"
               className="feed-grid-item reveal-card"
               style={{ 
-                // 각각의 피드 아이템이 0s ~ 0.5s 사이의 무작위 딜레이로 나타나도록 설정
-                animationDelay: `${Math.random() * 0.5}s` 
+                // 각각의 피드 아이템이 순차적인 딜레이로 나타나도록 설정 (순수 함수 규칙 준수)
+                animationDelay: `${(i % 6) * 0.08}s` 
               }}
             >
               {/* 썸네일 or 비디오 */}

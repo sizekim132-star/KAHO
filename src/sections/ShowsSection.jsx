@@ -155,7 +155,7 @@ export default function ShowsSection() {
               gap: 0 !important;
             }
             .timeline-text-wrap {
-              padding: 16px !important;
+              padding: 0px 16px 16px 16px !important; /* 카드 내부 상단 패딩 0으로 설정 */
             }
           }
           
