@@ -39,7 +39,7 @@ export default function RecruitSection() {
                 <h3 className="recruit-card-title">Player</h3>
               </div>
               <p className="recruit-card-desc">
-                카호만의 다채로운 사운드를 라이브 무대에서 함께 완성해갈 보컬 및 세션.
+                다채로운 사운드를 라이브 무대에서 함께 완성해갈 보컬 및 세션.
               </p>
             </div>
           </div>
@@ -61,7 +61,7 @@ export default function RecruitSection() {
                 <h3 className="recruit-card-title">Creator</h3>
               </div>
               <p className="recruit-card-desc">
-                카호의 정체성을 시각적으로 표현할 영상, 디자인, 비주얼 아트 디렉터.
+                정체성을 시각적으로 표현할 영상, 디자인, 비주얼 아트 디렉터.
               </p>
             </div>
           </div>
@@ -83,7 +83,7 @@ export default function RecruitSection() {
                 <h3 className="recruit-card-title">Staff</h3>
               </div>
               <p className="recruit-card-desc">
-                카호의 원활한 활동을 위해 기획·행정 및 예산·일정 관리를 총괄할 매니저.
+                원활한 활동을 위해 기획·행정 및 예산·일정 관리를 총괄할 매니저.
               </p>
             </div>
           </div>
