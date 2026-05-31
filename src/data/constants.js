@@ -62,7 +62,7 @@ export const TRACKS = [
   { title: '20a', type: 'SoundCloud', link: 'https://soundcloud.com/size_kim/20a', isYT: false, img: track20a },
   { title: '깊은 밤을 날아서', type: '까치와 고양이 커버', link: 'WYrJr97nXFA', isYT: true },
   { title: '크리스마스 캐롤 메들리', type: '카호 커버', link: 'DS2NMYKaeuo', isYT: true },
-  { title: '시계 (Demo)', type: '고양이', link: SC_URL, isYT: false, img: trackClock },
+  { title: '시계 (Demo)', type: '고양이', link: 'https://soundcloud.com/size_kim/demo', isYT: false, img: trackClock },
 ];
 
 /* ── 공연 데이터 ── */
