@@ -265,13 +265,13 @@ export default function ShowsSection() {
                       style={{ cursor: clickable ? 'pointer' : 'default' }}
                     >
                       <div className={`timeline-text-wrap ${clickable ? '' : 'no-chevron'}`}>
-                        <div className="timeline-header">
-                          {s.status === 'upcoming' && (
+                        {s.status === 'upcoming' && (
+                          <div className="timeline-header">
                             <span className={`timeline-status ${s.status}`}>
                               🔥 Upcoming
                             </span>
-                          )}
-                        </div>
+                          </div>
+                        )}
                         <h3 className="timeline-title">{s.name}</h3>
                         <p className="timeline-desc">{s.desc}</p>
                         {clickable && (
