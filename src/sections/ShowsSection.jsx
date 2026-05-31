@@ -184,7 +184,7 @@ export default function ShowsSection() {
             to { opacity: 1; transform: translateY(0); }
           }
 
-          /* 카드 박스 레이아웃 글로벌 제거 */
+          /* 카드 박스 레이아웃 글로벌 제거 및 세로 배열 통일 */
           .timeline-content {
             padding: 0 !important;
             gap: 0 !important;
@@ -194,6 +194,9 @@ export default function ShowsSection() {
             box-shadow: none !important;
             -webkit-tap-highlight-color: transparent !important;
             outline: none !important;
+            display: flex !important;
+            flex-direction: column !important;
+            align-items: flex-start !important;
           }
 
           .timeline-text-wrap {
