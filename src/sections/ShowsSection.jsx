@@ -1,15 +1,25 @@
 // src/sections/ShowsSection.jsx
 import React, { useState } from 'react';
+import { FiChevronDown } from 'react-icons/fi';
 import PhotoBox from '../components/PhotoBox';
 import { SHOWS } from '../data/constants';
 
 export default function ShowsSection() {
   const [selectedYear, setSelectedYear] = useState('2026');
   const [animate, setAnimate] = useState(true);
+  const [expandedItems, setExpandedItems] = useState({});
+
+  const toggleItem = (index) => {
+    setExpandedItems((prev) => ({
+      ...prev,
+      [index]: !prev[index],
+    }));
+  };
 
   // 연도 선택 핸들러: 페이드아웃 후 데이터 스왑 & 페이드인 애니메이션 오케스트레이션
   const handleYearSelect = (year) => {
     if (selectedYear === year) return;
+    setExpandedItems({}); // 연도 변경 시 펼침 상태 초기화
 
     if (!selectedYear) {
       // 최초 선택 시 즉시 로드 후 애니메이션
@@ -113,13 +123,11 @@ export default function ShowsSection() {
             transform: translateY(0);
           }
 
-          /* 카드 제목 글자 크기 축소 및 줄바꿈 방지 */
+          /* 카드 제목 글자 크기 축소 및 줄바꿈 허용 */
           .timeline-title {
             font-size: 1.2rem !important;
-            white-space: nowrap !important;
-            overflow: hidden !important;
-            text-overflow: ellipsis !important;
-            max-width: 100%;
+            white-space: normal !important;
+            word-break: keep-all;
             margin-bottom: 4px !important;
           }
 
@@ -144,18 +152,72 @@ export default function ShowsSection() {
             width: 220px !important;
             flex-shrink: 0;
           }
+
+          /* 쉐브론 기본 비활성화 (데스크톱) */
+          .timeline-chevron {
+            display: none;
+          }
           
           @media (max-width: 768px) {
-            .timeline-img-container {
+            /* 모바일에서만 쉐브론 표시 */
+            .timeline-chevron {
+              display: flex !important;
+              align-items: center;
+              justify-content: center;
+              position: absolute;
+              right: 8px; /* 텍스트 우측 정렬에 맞춰 이동 */
+              top: 4px; /* 첫 줄 타이틀 높이에 맞춤 */
+              color: var(--text-3);
+              transition: transform 0.3s ease, color 0.3s ease;
+            }
+
+            .timeline-item.is-expanded .timeline-chevron {
+              transform: rotate(180deg);
+              color: var(--orange);
+            }
+
+            /* 모바일에서는 본문 설명을 완전히 숨김 */
+            .timeline-desc {
+              display: none !important;
+            }
+
+            /* 기본적으로 모바일에서 이미지를 숨김 */
+            .timeline-item:not(.is-expanded) .timeline-img-container {
+              display: none !important;
+            }
+
+            /* 펼쳐졌을 때 이미지 노출 및 애니메이션 */
+            .timeline-item.is-expanded .timeline-img-container {
+              display: block !important;
               width: 100% !important;
               height: 180px !important;
+              margin-top: 12px !important;
+              animation: fadeIn 0.3s ease forwards;
             }
+
+            @keyframes fadeIn {
+              from { opacity: 0; transform: translateY(-4px); }
+              to { opacity: 1; transform: translateY(0); }
+            }
+
             .timeline-content {
               padding: 0 !important;
               gap: 0 !important;
+              position: relative;
+              background: transparent !important;
+              border: none !important;
+              box-shadow: none !important;
+              -webkit-tap-highlight-color: transparent !important;
+              outline: none !important;
             }
+
             .timeline-text-wrap {
-              padding: 0px 16px 16px 16px !important; /* 카드 내부 상단 패딩 0으로 설정 */
+              /* 카드 박스가 없어졌으므로 좌우 패딩을 제거하고 chevron 공간만 확보 */
+              padding: 0px 40px 0px 0px !important;
+            }
+            
+            .timeline-text-wrap.no-chevron {
+              padding-right: 0px !important;
             }
           }
           
@@ -185,36 +247,48 @@ export default function ShowsSection() {
         ) : (
           <div className={`timeline-wrapper ${animate ? 'animate-in' : ''}`}>
             <div className="timeline-container">
-              {filteredShows.map((s, i) => (
-                <div 
-                  key={i} 
-                  className="timeline-item timeline-item-anim" 
-                  style={{ transitionDelay: `${i * 0.15}s` }}
-                >
-                  <div className="timeline-date-left">
-                    {s.date}
-                  </div>
-                  <div className="timeline-dot"></div>
-                  <div className="timeline-content">
-                    <div className="timeline-text-wrap">
-                      <div className="timeline-header">
-                        {s.status === 'upcoming' && (
-                          <span className={`timeline-status ${s.status}`}>
-                            🔥 Upcoming
-                          </span>
+              {filteredShows.map((s, i) => {
+                const clickable = !(s.name.includes('모여야지원') || s.name.includes('크리에이터'));
+                return (
+                  <div 
+                    key={i} 
+                    className={`timeline-item timeline-item-anim ${expandedItems[i] && clickable ? 'is-expanded' : ''}`} 
+                    style={{ transitionDelay: `${i * 0.15}s` }}
+                  >
+                    <div className="timeline-date-left">
+                      {s.date}
+                    </div>
+                    <div className="timeline-dot"></div>
+                    <div 
+                      className="timeline-content"
+                      onClick={() => clickable && toggleItem(i)}
+                      style={{ cursor: clickable ? 'pointer' : 'default' }}
+                    >
+                      <div className={`timeline-text-wrap ${clickable ? '' : 'no-chevron'}`}>
+                        <div className="timeline-header">
+                          {s.status === 'upcoming' && (
+                            <span className={`timeline-status ${s.status}`}>
+                              🔥 Upcoming
+                            </span>
+                          )}
+                        </div>
+                        <h3 className="timeline-title">{s.name}</h3>
+                        <p className="timeline-desc">{s.desc}</p>
+                        {clickable && (
+                          <div className="timeline-chevron">
+                            <FiChevronDown size={18} />
+                          </div>
                         )}
                       </div>
-                      <h3 className="timeline-title">{s.name}</h3>
-                      <p className="timeline-desc">{s.desc}</p>
+                      {s.img && (
+                        <div className="timeline-img-container">
+                          <PhotoBox src={s.img} w="100%" h="100%" label="Show Moment" />
+                        </div>
+                      )}
                     </div>
-                    {s.img && (
-                      <div className="timeline-img-container">
-                        <PhotoBox src={s.img} w="100%" h="100%" label="Show Moment" />
-                      </div>
-                    )}
                   </div>
-                </div>
-              ))}
+                );
+              })}
             </div>
           </div>
         )}

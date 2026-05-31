@@ -1,6 +1,8 @@
 // src/components/Nav.jsx
 import React, { useState, useEffect, useRef } from 'react';
+import { FaInstagram, FaYoutube, FaSoundcloud } from 'react-icons/fa';
 import logo from '../assets/logo.png';
+import { YT_CHANNEL, IG_URL, SC_URL } from '../data/constants';
 
 const LINKS = [
   { label: 'About', href: '#about' },
@@ -151,6 +153,17 @@ export default function Nav() {
             </li>
           ))}
         </ul>
+        <div className="nav-drawer-socials">
+          <a href={YT_CHANNEL} target="_blank" rel="noreferrer" aria-label="YouTube">
+            <FaYoutube size={22} />
+          </a>
+          <a href={IG_URL} target="_blank" rel="noreferrer" aria-label="Instagram">
+            <FaInstagram size={22} />
+          </a>
+          <a href={SC_URL} target="_blank" rel="noreferrer" aria-label="SoundCloud">
+            <FaSoundcloud size={22} />
+          </a>
+        </div>
       </aside>
     </>
   );
