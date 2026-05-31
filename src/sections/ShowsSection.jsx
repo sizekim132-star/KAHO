@@ -136,89 +136,73 @@ export default function ShowsSection() {
             font-weight: 600 !important;
           }
 
-          /* 카드 전체 레이아웃 */
+          /* 쉐브론 표시 (글로벌) */
+          .timeline-chevron {
+            display: flex !important;
+            align-items: center;
+            justify-content: center;
+            position: absolute;
+            right: 8px; /* 텍스트 우측 정렬에 맞춰 이동 */
+            top: 4px; /* 첫 줄 타이틀 높이에 맞춤 */
+            color: var(--text-3);
+            transition: transform 0.3s ease, color 0.3s ease;
+          }
+
+          .timeline-item.is-expanded .timeline-chevron {
+            transform: rotate(180deg);
+            color: var(--orange);
+          }
+
+          /* 본문 설명을 글로벌하게 숨김 (사진만 보이도록) */
+          .timeline-desc {
+            display: none !important;
+          }
+
+          /* 기본적으로 이미지를 숨김 */
+          .timeline-item:not(.is-expanded) .timeline-img-container {
+            display: none !important;
+          }
+
+          /* 펼쳐졌을 때 이미지 노출 및 애니메이션 */
+          .timeline-item.is-expanded .timeline-img-container {
+            display: block !important;
+            width: 100% !important;
+            max-width: 480px !important; /* PC 버전 이미지 크기 제한 */
+            height: 280px !important; /* PC 버전 고해상도 크기 */
+            margin-top: 12px !important;
+            animation: fadeIn 0.3s ease forwards;
+          }
+
+          @media (max-width: 768px) {
+            .timeline-item.is-expanded .timeline-img-container {
+              height: 180px !important; /* 모바일 버전 크기 축소 */
+            }
+          }
+
+          @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-4px); }
+            to { opacity: 1; transform: translateY(0); }
+          }
+
+          /* 카드 박스 레이아웃 글로벌 제거 */
           .timeline-content {
             padding: 0 !important;
             gap: 0 !important;
+            position: relative;
+            background: transparent !important;
+            border: none !important;
+            box-shadow: none !important;
+            -webkit-tap-highlight-color: transparent !important;
+            outline: none !important;
+          }
+
+          .timeline-text-wrap {
+            /* 카드 박스가 없어졌으므로 좌우 패딩을 제거하고 chevron 공간만 확보 */
+            padding: 0px 40px 0px 0px !important;
           }
           
-          .timeline-desc {
-            font-size: 0.9rem !important;
-            line-height: 1.5 !important;
-          }
-
-          /* 사진 영역 크기 */
-          .timeline-img-container {
-            width: 220px !important;
-            flex-shrink: 0;
-          }
-
-          /* 쉐브론 기본 비활성화 (데스크톱) */
-          .timeline-chevron {
-            display: none;
-          }
-          
-          @media (max-width: 768px) {
-            /* 모바일에서만 쉐브론 표시 */
-            .timeline-chevron {
-              display: flex !important;
-              align-items: center;
-              justify-content: center;
-              position: absolute;
-              right: 8px; /* 텍스트 우측 정렬에 맞춰 이동 */
-              top: 4px; /* 첫 줄 타이틀 높이에 맞춤 */
-              color: var(--text-3);
-              transition: transform 0.3s ease, color 0.3s ease;
-            }
-
-            .timeline-item.is-expanded .timeline-chevron {
-              transform: rotate(180deg);
-              color: var(--orange);
-            }
-
-            /* 모바일에서는 본문 설명을 완전히 숨김 */
-            .timeline-desc {
-              display: none !important;
-            }
-
-            /* 기본적으로 모바일에서 이미지를 숨김 */
-            .timeline-item:not(.is-expanded) .timeline-img-container {
-              display: none !important;
-            }
-
-            /* 펼쳐졌을 때 이미지 노출 및 애니메이션 */
-            .timeline-item.is-expanded .timeline-img-container {
-              display: block !important;
-              width: 100% !important;
-              height: 180px !important;
-              margin-top: 12px !important;
-              animation: fadeIn 0.3s ease forwards;
-            }
-
-            @keyframes fadeIn {
-              from { opacity: 0; transform: translateY(-4px); }
-              to { opacity: 1; transform: translateY(0); }
-            }
-
-            .timeline-content {
-              padding: 0 !important;
-              gap: 0 !important;
-              position: relative;
-              background: transparent !important;
-              border: none !important;
-              box-shadow: none !important;
-              -webkit-tap-highlight-color: transparent !important;
-              outline: none !important;
-            }
-
-            .timeline-text-wrap {
-              /* 카드 박스가 없어졌으므로 좌우 패딩을 제거하고 chevron 공간만 확보 */
-              padding: 0px 40px 0px 0px !important;
-            }
-            
-            .timeline-text-wrap.no-chevron {
-              padding-right: 0px !important;
-            }
+          .timeline-text-wrap.no-chevron {
+            padding-right: 0px !important;
           }
           
           /* 초기 진입 대기 상태 텍스트 안내 플레이스홀더 */
