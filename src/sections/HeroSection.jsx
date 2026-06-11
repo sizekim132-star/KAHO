@@ -61,6 +61,60 @@ export default function HeroSection({ videoOpacity }) {
         }}
       />
 
+      {/* ── 글래스모피즘 Recruit 버튼 및 애니메이션 스타일 ── */}
+      <style>{`
+        @keyframes glass-pulse {
+          0%, 100% {
+            border-color: rgba(255, 255, 255, 0.2);
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+          }
+          50% {
+            border-color: rgba(255, 95, 31, 0.45);
+            box-shadow: 0 8px 32px 0 rgba(255, 95, 31, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.25);
+          }
+        }
+
+        .glass-btn-recruit {
+          font-size: 0.85rem;
+          letter-spacing: 0.08em;
+          padding: 12px 32px;
+          border-radius: 999px;
+          display: inline-flex;
+          align-items: center;
+          gap: 8px;
+          border: 1px solid rgba(255, 255, 255, 0.2);
+          background: rgba(255, 255, 255, 0.12);
+          color: #ffffff;
+          backdrop-filter: blur(12px);
+          -webkit-backdrop-filter: blur(12px);
+          font-weight: 700;
+          cursor: pointer;
+          transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+          animation: glass-pulse 3s infinite ease-in-out;
+          text-decoration: none;
+          margin-bottom: 8px;
+          position: relative;
+        }
+
+        .glass-btn-recruit:hover {
+          transform: translateY(-3px) scale(1.04);
+          background: rgba(255, 95, 31, 0.18);
+          border-color: rgba(255, 95, 31, 0.85);
+          box-shadow: 0 15px 35px rgba(255, 95, 31, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.3);
+          color: #ffffff;
+        }
+
+        .glass-btn-recruit .arrow-icon {
+          transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+          display: inline-block;
+        }
+
+        .glass-btn-recruit:hover .arrow-icon {
+          transform: translate(3px, -3px);
+          color: #ff7a3d;
+        }
+      `}</style>
+
       {/* ════ HERO ════ */}
       <section id="home" className="hero-fullscreen">
         {/* 하단 중앙: 소셜 아이콘 + 버튼 */}
@@ -69,26 +123,10 @@ export default function HeroSection({ videoOpacity }) {
             href={RECRUIT_FORM_URL}
             target="_blank"
             rel="noreferrer"
-            className="hero-btn hero-btn-outline reveal-text"
-            style={{
-              fontSize: '0.82rem',
-              letterSpacing: '0.06em',
-              padding: '10px 28px',
-              borderRadius: '999px',
-              display: 'inline-flex',
-              alignItems: 'center',
-              gap: '6px',
-              border: '1px solid rgba(255, 255, 255, 0.2)',
-              background: 'rgba(255, 255, 255, 0.08)',
-              backdropFilter: 'blur(10px)',
-              WebkitBackdropFilter: 'blur(10px)',
-              boxShadow: '0 8px 32px 0 rgba(0, 0, 0, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.15)',
-              marginBottom: '4px',
-              fontWeight: 700
-            }}
+            className="glass-btn-recruit reveal-text"
           >
             <span>지원하기!</span>
-            <span style={{ fontSize: '0.85rem', color: 'rgba(255, 255, 255, 0.65)', marginLeft: '2px' }}>↗</span>
+            <span className="arrow-icon">↗</span>
           </a>
 
           <div className="hero-socials reveal-text">
