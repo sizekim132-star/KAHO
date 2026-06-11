@@ -1,7 +1,7 @@
 // src/sections/HeroSection.jsx
 import React, { useState, useEffect } from 'react';
 import { FaInstagram, FaYoutube, FaSoundcloud } from 'react-icons/fa';
-import { YT_BG_IDS, IG_URL, YT_CHANNEL, SC_URL } from '../data/constants';
+import { YT_BG_IDS, IG_URL, YT_CHANNEL, SC_URL, RECRUIT_FORM_URL } from '../data/constants';
 
 export default function HeroSection({ videoOpacity }) {
   const [currentIdx, setCurrentIdx] = useState(0);
@@ -65,6 +65,28 @@ export default function HeroSection({ videoOpacity }) {
       <section id="home" className="hero-fullscreen">
         {/* 하단 중앙: 소셜 아이콘 + 버튼 */}
         <div className="hero-bottom-content">
+          <a
+            href={RECRUIT_FORM_URL}
+            target="_blank"
+            rel="noreferrer"
+            className="hero-btn hero-btn-outline reveal-text"
+            style={{
+              fontSize: '0.8rem',
+              letterSpacing: '0.15em',
+              padding: '9px 24px',
+              borderRadius: '999px',
+              display: 'inline-flex',
+              alignItems: 'center',
+              gap: '6px',
+              border: '1px solid rgba(255, 255, 255, 0.25)',
+              textTransform: 'uppercase',
+              marginBottom: '4px'
+            }}
+          >
+            <span>JOIN THE CREW</span>
+            <span style={{ fontSize: '0.85rem', color: 'rgba(255, 255, 255, 0.65)', marginLeft: '2px' }}>↗</span>
+          </a>
+
           <div className="hero-socials reveal-text">
             <a href={YT_CHANNEL} target="_blank" rel="noreferrer" aria-label="YouTube"><FaYoutube size={28} /></a>
             <span className="hero-dot" />
