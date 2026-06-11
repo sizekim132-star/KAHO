@@ -71,19 +71,23 @@ export default function HeroSection({ videoOpacity }) {
             rel="noreferrer"
             className="hero-btn hero-btn-outline reveal-text"
             style={{
-              fontSize: '0.8rem',
-              letterSpacing: '0.15em',
-              padding: '9px 24px',
+              fontSize: '0.82rem',
+              letterSpacing: '0.06em',
+              padding: '10px 28px',
               borderRadius: '999px',
               display: 'inline-flex',
               alignItems: 'center',
               gap: '6px',
-              border: '1px solid rgba(255, 255, 255, 0.25)',
-              textTransform: 'uppercase',
-              marginBottom: '4px'
+              border: '1px solid rgba(255, 255, 255, 0.2)',
+              background: 'rgba(255, 255, 255, 0.08)',
+              backdropFilter: 'blur(10px)',
+              WebkitBackdropFilter: 'blur(10px)',
+              boxShadow: '0 8px 32px 0 rgba(0, 0, 0, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.15)',
+              marginBottom: '4px',
+              fontWeight: 700
             }}
           >
-            <span>JOIN THE CREW</span>
+            <span>지원하기!</span>
             <span style={{ fontSize: '0.85rem', color: 'rgba(255, 255, 255, 0.65)', marginLeft: '2px' }}>↗</span>
           </a>
 
