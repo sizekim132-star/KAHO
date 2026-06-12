@@ -233,11 +233,11 @@ img {
     min-height: 50vh;
     height: 50vh;
     display: flex;
-    align-items: center;
-    /* Center vertically to prevent bottom-cropping */
+    align-items: flex-end;
+    /* Center horizontally, align to bottom to prevent bottom-cropping */
     justify-content: center;
-    padding: 24px var(--spacing) 0;
-    /* Balanced padding offset */
+    padding: 0 var(--spacing) 20px;
+    /* Safe bottom padding */
     background: transparent;
     position: relative;
     margin-top: 60px;
@@ -245,8 +245,8 @@ img {
   }
 
   .hero-bottom-content {
-    transform: translateY(85px) !important;
-    /* Shift down even further from center */
+    transform: translateY(0) !important;
+    /* Remove translateY to keep it safely within bounds */
     gap: 12px;
   }
 
