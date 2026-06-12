@@ -1,56 +1,56 @@
 // src/sections/HeroSection.jsx
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { FaInstagram, FaYoutube, FaSoundcloud } from 'react-icons/fa';
 import { YT_BG_IDS, IG_URL, YT_CHANNEL, SC_URL, RECRUIT_FORM_URL } from '../data/constants';
+import useVideoSlot from '../hooks/useVideoSlot';
 
 export default function HeroSection({ videoOpacity }) {
-  const [currentIdx, setCurrentIdx] = useState(0);
-
-  useEffect(() => {
-    const timer = setInterval(() => {
-      setCurrentIdx((prev) => (prev + 1) % YT_BG_IDS.length);
-    }, 11000); // 11초 간격으로 전환
-
-    return () => clearInterval(timer);
-  }, []);
+  const { activeSlot, slotIndices } = useVideoSlot(YT_BG_IDS.length, 11000, 3500);
 
   return (
     <>
-      {/* ── 유튜브 4-아이프레임 고급 안개식 페이드 캐러셀 ── */}
+      {/* ── 유튜브 듀얼 슬롯 버퍼링 최적화 페이드 캐러셀 ── */}
       <div
         className={`vbg-container${videoOpacity <= 0 ? ' vbg-hidden' : ''}`}
         style={{ opacity: videoOpacity, transition: 'opacity 0.5s ease-in-out' }}
       >
-        {YT_BG_IDS.map((id, idx) => (
-          <div
-            key={id}
-            className="vbg"
-            style={{
-              opacity: currentIdx === idx ? 1 : 0,
-              zIndex: currentIdx === idx ? 1 : -1,
-              transition: 'opacity 2.5s ease-in-out', // 2.5초 고급스러운 시네마틱 페이드 트랜지션
-              pointerEvents: 'none',
-              position: 'absolute',
-              inset: 0,
-              width: '100%',
-              height: '100%',
-              overflow: 'hidden'
-            }}
-          >
-            <iframe
-              src={`https://www.youtube.com/embed/${id}?autoplay=1&mute=1&controls=0&loop=1&playlist=${id}&rel=0&showinfo=0&iv_load_policy=3&disablekb=1&modestbranding=1&playsinline=1&enablejsapi=1`}
-              allow="autoplay; encrypted-media"
+        {[0, 1].map((slotIdx) => {
+          const globalIdx = slotIndices[slotIdx];
+          const id = YT_BG_IDS[globalIdx];
+          const isActive = activeSlot === slotIdx;
+
+          return (
+            <div
+              key={slotIdx}
+              className="vbg"
               style={{
-                border: 'none',
+                opacity: isActive ? 1 : 0,
+                zIndex: isActive ? 1 : -1,
+                transition: 'opacity 2.5s ease-in-out', // 2.5초 고급스러운 시네마틱 페이드 트랜지션
+                pointerEvents: 'none',
+                position: 'absolute',
+                inset: 0,
                 width: '100%',
                 height: '100%',
-                objectFit: 'cover',
-                pointerEvents: 'none'
+                overflow: 'hidden'
               }}
-              title={`bg-video-${idx}`}
-            />
-          </div>
-        ))}
+            >
+              <iframe
+                key={id}
+                src={`https://www.youtube.com/embed/${id}?autoplay=1&mute=1&controls=0&loop=1&playlist=${id}&rel=0&showinfo=0&iv_load_policy=3&disablekb=1&modestbranding=1&playsinline=1&enablejsapi=1`}
+                allow="autoplay; encrypted-media"
+                style={{
+                  border: 'none',
+                  width: '100%',
+                  height: '100%',
+                  objectFit: 'cover',
+                  pointerEvents: 'none'
+                }}
+                title={`bg-video-slot-${slotIdx}`}
+              />
+            </div>
+          );
+        })}
       </div>
       <div
         className={`film${videoOpacity <= 0 ? ' vbg-hidden' : ''}`}
