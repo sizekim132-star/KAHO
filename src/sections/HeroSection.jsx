@@ -65,14 +65,14 @@ export default function HeroSection({ videoOpacity }) {
       <style>{`
         @keyframes glass-pulse {
           0%, 100% {
-            transform: translateY(0) scale(1);
+            transform: scale(1);
             border-color: rgba(255, 255, 255, 0.2);
             box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.1);
           }
           50% {
-            transform: translateY(-4px) scale(1.02);
+            transform: scale(1.03);
             border-color: rgba(255, 95, 31, 0.45);
-            box-shadow: 0 12px 36px 0 rgba(255, 95, 31, 0.15), inset 0 1px 0 rgba(255, 255, 255, 0.2);
+            box-shadow: 0 12px 36px 0 rgba(255, 95, 31, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.2);
           }
         }
 
