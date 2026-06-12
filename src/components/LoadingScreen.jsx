@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from 'react';
+import logo from '../assets/logo.png';
 
 export default function LoadingScreen({ onFinished }) {
   const [progress, setProgress] = useState(0);
   const [fadeOut, setFadeOut] = useState(false);
 
   useEffect(() => {
-    const duration = 1200; // 1.2s logic duration
-    const intervalTime = 30;
+    const duration = 600; // 0.6s progress duration
+    const intervalTime = 20;
     const step = 100 / (duration / intervalTime);
 
     const timer = setInterval(() => {
@@ -28,9 +29,9 @@ export default function LoadingScreen({ onFinished }) {
         setFadeOut(true);
         const finishTimer = setTimeout(() => {
           if (onFinished) onFinished();
-        }, 600);
+        }, 300); // 0.3s fadeout
         return () => clearTimeout(finishTimer);
-      }, 300);
+      }, 100); // 0.1s delay
 
       return () => clearTimeout(delayTimer);
     }
@@ -49,7 +50,7 @@ export default function LoadingScreen({ onFinished }) {
         justifyContent: 'center',
         opacity: fadeOut ? 0 : 1,
         visibility: fadeOut && progress === 100 ? 'hidden' : 'visible',
-        transition: 'opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.6s',
+        transition: 'opacity 0.3s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.3s',
         color: '#FFFFFF',
         fontFamily: "'Pretendard', sans-serif",
       }}
@@ -77,7 +78,7 @@ export default function LoadingScreen({ onFinished }) {
           WebkitBackdropFilter: 'blur(20px)',
           boxShadow: '0 24px 64px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.1)',
           transform: fadeOut ? 'scale(0.96) translateY(-10px)' : 'scale(1)',
-          transition: 'transform 0.6s cubic-bezier(0.16, 1, 0.3, 1)',
+          transition: 'transform 0.3s cubic-bezier(0.16, 1, 0.3, 1)',
           position: 'relative',
           maxWidth: '90%',
           textAlign: 'center',
@@ -98,33 +99,19 @@ export default function LoadingScreen({ onFinished }) {
           }}
         />
 
-        <h1
+        {/* 로고 이미지 */}
+        <img
+          src={logo}
+          alt="KAHO Logo"
           style={{
-            fontSize: '2.5rem',
-            fontWeight: 800,
-            letterSpacing: '0.2em',
-            margin: '0 0 8px 0',
-            textIndent: '0.2em',
-            background: 'linear-gradient(135deg, #FFFFFF 0%, #B0BAC9 100%)',
-            WebkitBackgroundClip: 'text',
-            WebkitTextFillColor: 'transparent',
+            height: '80px',
+            width: 'auto',
+            marginBottom: '32px',
+            filter: 'invert(1)',
+            mixBlendMode: 'screen',
+            display: 'block',
           }}
-        >
-          KAHO
-        </h1>
-
-        <p
-          style={{
-            fontSize: '0.85rem',
-            fontWeight: 500,
-            letterSpacing: '0.15em',
-            color: '#FF5F1F',
-            margin: '0 0 32px 0',
-            textTransform: 'uppercase',
-          }}
-        >
-          Magpie & Tiger
-        </p>
+        />
 
         <div
           style={{
