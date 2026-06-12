@@ -240,8 +240,8 @@ img {
     /* Safe bottom padding */
     background: transparent;
     position: relative;
-    margin-top: 60px;
-    /* Offset for header navbar */
+    margin-top: 0;
+    /* Remove duplicate margin-top offset so it aligns with background layers */
   }
 
   .hero-bottom-content {
