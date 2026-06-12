@@ -9,11 +9,19 @@ import LoadingScreen from './components/LoadingScreen';
 import { DataProvider } from './contexts/DataContext';
 
 function App() {
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(() => {
+    // 세션 스토리지를 확인하여 이미 방문했는지 검사 (새로고침 시 로딩 생략)
+    return !sessionStorage.getItem('kaho-visited');
+  });
+
+  const handleLoadingFinished = () => {
+    setIsLoading(false);
+    sessionStorage.setItem('kaho-visited', 'true');
+  };
 
   return (
     <DataProvider>
-      {isLoading && <LoadingScreen onFinished={() => setIsLoading(false)} />}
+      {isLoading && <LoadingScreen onFinished={handleLoadingFinished} />}
       <Router>
         <Nav />
         <Routes>
