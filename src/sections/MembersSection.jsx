@@ -9,7 +9,6 @@ export default function MembersSection() {
   const [showLeftArrow, setShowLeftArrow] = useState(false);
   const [showRightArrow, setShowRightArrow] = useState(true);
   const [activeIndex, setActiveIndex] = useState(0);
-  const [activeMemberIndex, setActiveMemberIndex] = useState(null);
 
   // 모바일/데스크톱 모두에서 부드러운 가로 스크롤 관리 및 버튼 상태 업데이트
   const handleScroll = () => {
@@ -45,19 +44,6 @@ export default function MembersSection() {
         container.removeEventListener('scroll', handleScroll);
       }
       window.removeEventListener('resize', handleScroll);
-    };
-  }, []);
-
-  // 외부 클릭 시 활성화된 멤버 카드 닫기
-  useEffect(() => {
-    const handleOutsideClick = (e) => {
-      if (!e.target.closest('.member-premium-card')) {
-        setActiveMemberIndex(null);
-      }
-    };
-    document.addEventListener('click', handleOutsideClick);
-    return () => {
-      document.removeEventListener('click', handleOutsideClick);
     };
   }, []);
 
@@ -103,12 +89,9 @@ export default function MembersSection() {
             {members.map((m, i) => (
               <div 
                 key={i} 
-                className={`member-premium-card reveal-card ${m.name === '최민서' ? 'minseo-card' : ''} ${activeMemberIndex === i ? 'active' : ''}`} 
+                className={`member-premium-card reveal-card ${m.name === '최민서' ? 'minseo-card' : ''}`} 
                 style={{ transitionDelay: `${i * 0.12}s` }}
-                onClick={(e) => {
-                  e.stopPropagation();
-                  setActiveMemberIndex(prev => prev === i ? null : i);
-                }}
+                // onClick={() => navigate(`/member/${m.name}`)} // TODO: 상세페이지 완성 후 복구
               >
                 <div className="member-card-photo-wrap">
                   <PhotoBox src={m.img} w="100%" h="100%" label="사진" />
@@ -181,6 +164,7 @@ export default function MembersSection() {
             margin-left: -20px;
             margin-right: -20px;
             -webkit-overflow-scrolling: touch;
+            overscroll-behavior-y: contain;
           }
           .member-scroll-wrapper::-webkit-scrollbar {
             display: none;
@@ -200,11 +184,9 @@ export default function MembersSection() {
             overflow: hidden;
             box-shadow: 0 4px 16px rgba(0, 0, 0, 0.03);
             transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
-            cursor: pointer; /* 데스크톱 호버 지시 및 모바일 터치 대응 */
           }
           
-          .member-premium-card:hover,
-          .member-premium-card.active {
+          .member-premium-card:hover {
             transform: translateY(-6px);
             border-color: rgba(255, 95, 31, 0.4);
             box-shadow: 0 12px 30px rgba(255, 95, 31, 0.15);
@@ -229,8 +211,7 @@ export default function MembersSection() {
             transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1) !important;
           }
 
-          .member-premium-card:hover .member-card-photo-wrap img,
-          .member-premium-card.active .member-card-photo-wrap img {
+          .member-premium-card:hover .member-card-photo-wrap img {
             transform: scale(1.08);
           }
           
@@ -247,8 +228,7 @@ export default function MembersSection() {
             pointer-events: none;
           }
           
-          .member-premium-card:hover .member-card-overlay,
-          .member-premium-card.active .member-card-overlay {
+          .member-premium-card:hover .member-card-overlay {
             opacity: 1;
           }
           
@@ -270,8 +250,7 @@ export default function MembersSection() {
             pointer-events: none;
           }
           
-          .member-premium-card:hover .member-card-info,
-          .member-premium-card.active .member-card-info {
+          .member-premium-card:hover .member-card-info {
             opacity: 1;
             transform: translateY(0);
           }
@@ -311,9 +290,11 @@ export default function MembersSection() {
               min-width: 290px;
               height: 420px;
               scroll-snap-align: center;
+              touch-action: pan-x;
             }
             .member-scroll-wrapper {
               scroll-padding: 0 20px;
+              touch-action: pan-x;
             }
           }
           @media (max-width: 480px) {
