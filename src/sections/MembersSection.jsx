@@ -91,7 +91,7 @@ export default function MembersSection() {
                 key={i} 
                 className={`member-premium-card reveal-card ${m.name === '최민서' ? 'minseo-card' : ''}`} 
                 style={{ transitionDelay: `${i * 0.12}s` }}
-                // onClick={() => navigate(`/member/${m.name}`)} // TODO: 상세페이지 완성 후 복구
+                onClick={() => {}} /* 모바일 터치 이벤트 수신 및 피드백 활성화 */
               >
                 <div className="member-card-photo-wrap">
                   <PhotoBox src={m.img} w="100%" h="100%" label="사진" />
@@ -183,6 +183,7 @@ export default function MembersSection() {
             overflow: hidden;
             box-shadow: 0 4px 16px rgba(0, 0, 0, 0.03);
             transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+            cursor: pointer; /* 데스크톱 호버 지시 및 모바일 터치 대응 */
           }
           
           .member-premium-card:hover {
