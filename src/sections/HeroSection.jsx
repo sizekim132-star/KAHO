@@ -77,9 +77,9 @@ export default function HeroSection({ videoOpacity }) {
         }
 
         .glass-btn-recruit {
-          font-size: 0.9rem; /* 폰트 크기 미세 상향 */
+          font-size: 0.8rem; /* 폰트 크기 소폭 축소 */
           letter-spacing: 0.08em;
-          padding: 12px 36px; /* 패딩 확장 */
+          padding: 10px 30px; /* 패딩 축소 */
           border-radius: 999px;
           display: inline-flex;
           align-items: center;
