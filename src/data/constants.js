@@ -73,7 +73,7 @@ export const SHOWS = [
   { name: '강서구청 “모여야지원” 연속 선정', date: '2026.03.01', location: '강서구청', desc: '2년 연속 청년 커뮤니티 지원사업 선정', status: 'done', img: showMoyeoya2026, imgPosition: 'top' },
   { name: '제6기 강서영상크리에이터 선정', date: '2026.03.24', location: '강서구청', desc: '강서구 유튜브 채널 영상 크리에이터 선정', status: 'done', img: showCreator6, imgPosition: 'top' },
   { name: '청년예술인 네트워크 공연', date: '2026.05.07', location: '강서운전면허시험장', desc: '50+ 관객, 실내 공연', status: 'done', img: showNetwork, imgPosition: 'center 80%' },
-  { name: '2026년 서울시 대학생 동아리 ON 선정', date: '2026.06.08', location: '서울시', desc: '대학생 동아리 지원사업', status: 'done' },
+  { name: '서울시 대학생 동아리 ON 선정', date: '2026.06.08', location: '서울시', desc: '대학생 동아리 지원사업', status: 'done' },
 ];
 
 /* ── 갤러리 사진 ── */
