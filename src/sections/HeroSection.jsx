@@ -121,8 +121,10 @@ export default function HeroSection({ videoOpacity }) {
 
       {/* ════ HERO ════ */}
       <section id="home" className="hero-fullscreen">
-        {/* 하단 중앙: 소셜 아이콘 + 버튼 */}
-        <div className="hero-bottom-content">
+        <div
+          className={`hero-bottom-content${videoOpacity <= 0 ? ' vbg-hidden' : ''}`}
+          style={{ opacity: videoOpacity, transition: 'opacity 0.5s ease-in-out' }}
+        >
           <a
             href={RECRUIT_FORM_URL}
             target="_blank"
