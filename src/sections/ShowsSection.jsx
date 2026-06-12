@@ -235,7 +235,7 @@ export default function ShowsSection() {
           <div className={`timeline-wrapper ${animate ? 'animate-in' : ''}`}>
             <div className="timeline-container">
               {filteredShows.map((s, i) => {
-                const clickable = !(s.name.includes('모여야지원') || s.name.includes('크리에이터'));
+                const clickable = !s.name.includes('선정');
                 return (
                   <div 
                     key={i} 
