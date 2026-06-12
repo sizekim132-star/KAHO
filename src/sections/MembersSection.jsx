@@ -9,6 +9,7 @@ export default function MembersSection() {
   const [showLeftArrow, setShowLeftArrow] = useState(false);
   const [showRightArrow, setShowRightArrow] = useState(true);
   const [activeIndex, setActiveIndex] = useState(0);
+  const [activeMemberIndex, setActiveMemberIndex] = useState(null);
 
   // 모바일/데스크톱 모두에서 부드러운 가로 스크롤 관리 및 버튼 상태 업데이트
   const handleScroll = () => {
@@ -44,6 +45,19 @@ export default function MembersSection() {
         container.removeEventListener('scroll', handleScroll);
       }
       window.removeEventListener('resize', handleScroll);
+    };
+  }, []);
+
+  // 외부 클릭 시 활성화된 멤버 카드 닫기
+  useEffect(() => {
+    const handleOutsideClick = (e) => {
+      if (!e.target.closest('.member-premium-card')) {
+        setActiveMemberIndex(null);
+      }
+    };
+    document.addEventListener('click', handleOutsideClick);
+    return () => {
+      document.removeEventListener('click', handleOutsideClick);
     };
   }, []);
 
@@ -89,9 +103,12 @@ export default function MembersSection() {
             {members.map((m, i) => (
               <div 
                 key={i} 
-                className={`member-premium-card reveal-card ${m.name === '최민서' ? 'minseo-card' : ''}`} 
+                className={`member-premium-card reveal-card ${m.name === '최민서' ? 'minseo-card' : ''} ${activeMemberIndex === i ? 'active' : ''}`} 
                 style={{ transitionDelay: `${i * 0.12}s` }}
-                onClick={() => {}} /* 모바일 터치 이벤트 수신 및 피드백 활성화 */
+                onClick={(e) => {
+                  e.stopPropagation();
+                  setActiveMemberIndex(prev => prev === i ? null : i);
+                }}
               >
                 <div className="member-card-photo-wrap">
                   <PhotoBox src={m.img} w="100%" h="100%" label="사진" />
@@ -186,7 +203,8 @@ export default function MembersSection() {
             cursor: pointer; /* 데스크톱 호버 지시 및 모바일 터치 대응 */
           }
           
-          .member-premium-card:hover {
+          .member-premium-card:hover,
+          .member-premium-card.active {
             transform: translateY(-6px);
             border-color: rgba(255, 95, 31, 0.4);
             box-shadow: 0 12px 30px rgba(255, 95, 31, 0.15);
@@ -211,7 +229,8 @@ export default function MembersSection() {
             transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1) !important;
           }
 
-          .member-premium-card:hover .member-card-photo-wrap img {
+          .member-premium-card:hover .member-card-photo-wrap img,
+          .member-premium-card.active .member-card-photo-wrap img {
             transform: scale(1.08);
           }
           
@@ -228,7 +247,8 @@ export default function MembersSection() {
             pointer-events: none;
           }
           
-          .member-premium-card:hover .member-card-overlay {
+          .member-premium-card:hover .member-card-overlay,
+          .member-premium-card.active .member-card-overlay {
             opacity: 1;
           }
           
@@ -250,7 +270,8 @@ export default function MembersSection() {
             pointer-events: none;
           }
           
-          .member-premium-card:hover .member-card-info {
+          .member-premium-card:hover .member-card-info,
+          .member-premium-card.active .member-card-info {
             opacity: 1;
             transform: translateY(0);
           }
