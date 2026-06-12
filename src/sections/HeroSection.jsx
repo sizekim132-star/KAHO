@@ -65,12 +65,14 @@ export default function HeroSection({ videoOpacity }) {
       <style>{`
         @keyframes glass-pulse {
           0%, 100% {
+            transform: translateY(0) scale(1);
             border-color: rgba(255, 255, 255, 0.2);
             box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.1);
           }
           50% {
+            transform: translateY(-4px) scale(1.02);
             border-color: rgba(255, 95, 31, 0.45);
-            box-shadow: 0 8px 32px 0 rgba(255, 95, 31, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.25);
+            box-shadow: 0 12px 36px 0 rgba(255, 95, 31, 0.15), inset 0 1px 0 rgba(255, 255, 255, 0.2);
           }
         }
 
@@ -83,7 +85,7 @@ export default function HeroSection({ videoOpacity }) {
           align-items: center;
           gap: 8px;
           border: 1px solid rgba(255, 255, 255, 0.2);
-          background: rgba(255, 255, 255, 0.12);
+          background: rgba(255, 255, 255, 0.06); /* 투명도 높임 (0.12 -> 0.06) */
           color: #ffffff;
           backdrop-filter: blur(12px);
           -webkit-backdrop-filter: blur(12px);
@@ -97,7 +99,8 @@ export default function HeroSection({ videoOpacity }) {
         }
 
         .glass-btn-recruit:hover {
-          transform: translateY(-3px) scale(1.04);
+          animation: none; /* 호버 시에는 평소 애니메이션 정지 */
+          transform: translateY(-6px) scale(1.05); /* 조금 더 위로 뜨고 크게 */
           background: rgba(255, 95, 31, 0.18);
           border-color: rgba(255, 95, 31, 0.85);
           box-shadow: 0 15px 35px rgba(255, 95, 31, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.3);
