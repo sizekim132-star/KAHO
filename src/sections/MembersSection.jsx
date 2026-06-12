@@ -164,7 +164,6 @@ export default function MembersSection() {
             margin-left: -20px;
             margin-right: -20px;
             -webkit-overflow-scrolling: touch;
-            overscroll-behavior-y: contain;
           }
           .member-scroll-wrapper::-webkit-scrollbar {
             display: none;
@@ -290,11 +289,9 @@ export default function MembersSection() {
               min-width: 290px;
               height: 420px;
               scroll-snap-align: center;
-              touch-action: pan-x;
             }
             .member-scroll-wrapper {
               scroll-padding: 0 20px;
-              touch-action: pan-x;
             }
           }
           @media (max-width: 480px) {
