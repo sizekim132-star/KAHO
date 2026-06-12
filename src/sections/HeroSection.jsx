@@ -127,13 +127,13 @@ export default function HeroSection({ videoOpacity }) {
             href={RECRUIT_FORM_URL}
             target="_blank"
             rel="noreferrer"
-            className="glass-btn-recruit reveal-text"
+            className="glass-btn-recruit"
           >
             <span>지원하기!</span>
             <span className="arrow-icon">↗</span>
           </a>
 
-          <div className="hero-socials reveal-text">
+          <div className="hero-socials">
             <a href={YT_CHANNEL} target="_blank" rel="noreferrer" aria-label="YouTube"><FaYoutube size={28} /></a>
             <span className="hero-dot" />
             <a href={IG_URL} target="_blank" rel="noreferrer" aria-label="Instagram"><FaInstagram size={28} /></a>
