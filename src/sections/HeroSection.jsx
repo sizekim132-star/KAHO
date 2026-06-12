@@ -85,7 +85,7 @@ export default function HeroSection({ videoOpacity }) {
           align-items: center;
           gap: 8px;
           border: 1px solid rgba(255, 255, 255, 0.2);
-          background: rgba(255, 255, 255, 0.06); /* 투명도 높임 (0.12 -> 0.06) */
+          background: rgba(255, 255, 255, 0.02); /* 투명도 추가 상향 (0.06 -> 0.02) */
           color: #ffffff;
           backdrop-filter: blur(12px);
           -webkit-backdrop-filter: blur(12px);
