@@ -87,8 +87,8 @@ export default function HeroSection({ videoOpacity }) {
           border: 1px solid rgba(255, 255, 255, 0.25);
           background: rgba(255, 255, 255, 0.04); /* 약간의 불투명도 부여 */
           color: #ffffff;
-          backdrop-filter: none; /* 뒷배경 흐림 제거 */
-          -webkit-backdrop-filter: none;
+          backdrop-filter: blur(4px); /* 미세한 블러 추가 */
+          -webkit-backdrop-filter: blur(4px);
           font-weight: 700;
           cursor: pointer;
           transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
