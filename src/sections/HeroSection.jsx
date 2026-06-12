@@ -84,11 +84,11 @@ export default function HeroSection({ videoOpacity }) {
           display: inline-flex;
           align-items: center;
           gap: 8px;
-          border: 1px solid rgba(255, 255, 255, 0.2);
-          background: rgba(255, 255, 255, 0.02); /* 투명도 추가 상향 (0.06 -> 0.02) */
+          border: 1px solid rgba(255, 255, 255, 0.25);
+          background: rgba(255, 255, 255, 0); /* 투명 배경 */
           color: #ffffff;
-          backdrop-filter: blur(12px);
-          -webkit-backdrop-filter: blur(12px);
+          backdrop-filter: none; /* 뒷배경 흐림 제거 */
+          -webkit-backdrop-filter: none;
           font-weight: 700;
           cursor: pointer;
           transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
