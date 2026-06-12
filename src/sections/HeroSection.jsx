@@ -84,13 +84,13 @@ export default function HeroSection({ videoOpacity }) {
           display: inline-flex;
           align-items: center;
           gap: 8px;
-          border: 1px solid rgba(255, 255, 255, 0.4); /* 테두리 투명도 보완 */
-          background: rgba(255, 255, 255, 0.08); /* 배경 불투명도 보완 */
+          border: 1px solid rgba(255, 255, 255, 0.5); /* 테두리 미세 강화 */
+          background: rgba(255, 255, 255, 0.12); /* 배경 채움 정도 미세 상향 */
           color: #ffffff;
-          backdrop-filter: blur(6px); /* 블러 값 약간 강화 */
-          -webkit-backdrop-filter: blur(6px);
-          font-weight: 700;
-          text-shadow: 0 1px 4px rgba(0, 0, 0, 0.3); /* 텍스트 섀도우로 흰 배경 동영상 속 가독성 확보 */
+          backdrop-filter: blur(8px); /* 블러 값 미세 강화 */
+          -webkit-backdrop-filter: blur(8px);
+          font-weight: 800; /* 글씨 굵기 강조 */
+          text-shadow: 0 1px 4px rgba(0, 0, 0, 0.35); /* 텍스트 섀도우 미세 강화 */
           cursor: pointer;
           transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
           animation: glass-pulse 3s infinite ease-in-out;
