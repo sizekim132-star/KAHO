@@ -100,9 +100,10 @@ export default function LoadingScreen({ onFinished }) {
             height: '80px',
             width: 'auto',
             marginBottom: '32px',
-            filter: 'invert(1)',
+            filter: `invert(1) blur(${Math.max(12 - (progress / 100) * 12, 0)}px)`, // 로딩 진행률에 따라 블러가 걷힘
             mixBlendMode: 'screen',
             display: 'block',
+            transition: 'filter 0.1s linear',
           }}
         />
 
