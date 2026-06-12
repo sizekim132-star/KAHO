@@ -100,10 +100,9 @@ export default function LoadingScreen({ onFinished }) {
             height: '80px',
             width: 'auto',
             marginBottom: '32px',
-            filter: `invert(1) blur(${Math.max(4 - (progress / 25) * 4, 0)}px)`, // 블러 약화 (최대 4px) 및 극초반(25%)에 빠른 제거
+            filter: 'invert(1)',
             mixBlendMode: 'screen',
             display: 'block',
-            transition: 'filter 0.05s linear',
           }}
         />
 
