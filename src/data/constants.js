@@ -41,10 +41,10 @@ export const CLOUD_VIDEOS = {
 
 export const YT_BG_IDS = ['WYrJr97nXFA', 'DS2NMYKaeuo', 'NSsgmCNvKk8', 'fCJyKpGrIBI'];
 export const YT_CHANNEL = 'https://www.youtube.com/@magpientiger';
-export const IG_URL = 'https://www.instagram.com/kaho_crew/';
+export const IG_URL = 'https://www.instagram.com/kaho_band/';
 export const IG_REPRESENTATIVE_URL = 'https://www.instagram.com/size.kim';
 export const SC_URL = 'https://soundcloud.com/size_kim';
-export const RECRUIT_FORM_URL = 'https://forms.gle/gAp6J2BwdECou4mWA';
+export const RECRUIT_FORM_URL = 'https://forms.gle/RLAR5keZLdZ89r9R6';
 
 /* ── 멤버 데이터 ── */
 export const MEMBERS = [
